@@ -15,7 +15,7 @@ export default class AboutItem extends Component {
         this.cmil = this.cmil.bind(this)
     }
 
-    isShop(i) {
+    isShop(i) {                //判断是否为预售票
         let n = Date.now().valueOf();
         let m = new Date(i).valueOf();
         if (n < m) {
