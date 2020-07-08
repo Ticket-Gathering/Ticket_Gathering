@@ -6,16 +6,34 @@
     float: left;
   }
   .format{
-    width: 1200px;
-    margin: 0 auto;
-    margin-top: 10px;
+    --animate-duration: 1s;
+    --animate-delay: 1s;
+    --animate-repeat: 1;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: 300;
+    line-height: 1.5em;
+    color: #3c4858;
+    font-size: 1rem;
+    text-align: left;
+    letter-spacing: normal!important;
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    z-index: 3;
+    position: relative;
+    background: #FFF;
+    margin: 20px 30px 0;
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px ;
+    padding-left: 70px;
+    padding-right: 70px;
   }
-  
+
   .box{
     width: 100px;
     height: 30px;
     color: white;
-    background-color: #DE106F;
+    background-color: #ff3366;
     text-align: center;
     font-size: 12px;
     line-height: 30px;
@@ -23,20 +41,19 @@
     font-weight: 700;
   }
   .line{
-    width: 700px;
     height: 3px;
-    background-color: #DE106F;
+    background-color: #ff3366;
     margin-top: -3px;
   }
 .myinput{
-  width: 200px;
+  width: 300px;
   margin-top: 15px;
   margin-left: 5px;
 }
 .myinput1{
-  width: 200px;
+  width: 300px;
   margin-top: 15px;
-  margin-left: 32px;
+  margin-left: 37px;
 }
 .myradio{
   margin-top: 15px;
@@ -47,6 +64,8 @@
 }
 .mybutton{
   margin-top: 15px;
+  background-color: #ff3366;
+  border:none;
 }
 .table-operations {
   margin-bottom: 16px;

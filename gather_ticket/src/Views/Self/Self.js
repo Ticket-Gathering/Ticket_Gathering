@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Navtwo from "../../Components/Navtwo";
+import Nav from "../../Components/Nav";
 import Bottom from "../../Components/Bottom";
 import { Layout, Menu, Breadcrumb, Icon, Radio, DatePicker, Input, Button, Collapse, Table, Divider, Tag, List, Avatar, Result } from 'antd';
 import 'antd/dist/antd.css';
@@ -192,7 +192,7 @@ export default class Self extends Component {
     changecontent2(i) {
         switch (i) {
             case "1":
-                return <Content style={{ padding: '0 24px', minHeight: 280 }} className={selfstyle.content}>
+                return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
                     <div className={selfstyle.box}>基本资料</div>
                     <div className={selfstyle.line}></div>
                     <div>
@@ -202,14 +202,14 @@ export default class Self extends Component {
                             <Radio value={1}>男</Radio>
                             <Radio value={2}>女</Radio>
                         </Radio.Group><br />
-                        出生日期： <DatePicker defaultValue={moment('2019/08/03', dateFormat)} format={dateFormat} className={selfstyle.mydate} /><br />
+                        出生日期： <DatePicker style={{width: '300px'}} defaultValue={moment('2019/08/03', dateFormat)} format={dateFormat} className={selfstyle.mydate} /><br />
                         身份证号：<Input placeholder="Id number" className={selfstyle.myinput} /><br />
                         <Button type="primary" className={selfstyle.mybutton}>保存</Button>
                     </div>
                 </Content>
                 break;
             case "2":
-                return <Content style={{ padding: '0 24px', minHeight: 280 }} className={selfstyle.content}>
+                return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
                     <div className={selfstyle.box}>账号设置</div>
                     <div className={selfstyle.line}></div>
                     <div>
@@ -228,7 +228,7 @@ export default class Self extends Component {
                 </Content>
                 break;
             case "3":
-                return <Content style={{ padding: '0 24px', minHeight: 280 }} className={selfstyle.content}>
+                return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
                     <div className={selfstyle.box}>地址管理</div>
                     <div className={selfstyle.line}></div>
                     <div>
@@ -237,7 +237,7 @@ export default class Self extends Component {
                 </Content>
                 break;
             case "4":
-                return <Content style={{ padding: '0 24px', minHeight: 280 }} className={selfstyle.content}>
+                return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
                     <div className={selfstyle.box}>常用购票人管理</div>
                     <div className={selfstyle.line}></div>
                     <div>
@@ -258,7 +258,7 @@ export default class Self extends Component {
                 </Content>
                 break;
             case "5":
-                return <Content style={{ padding: '0 24px', minHeight: 280 }} className={selfstyle.content}>
+                return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
                     <div className={selfstyle.box}>订单管理</div>
                     <div className={selfstyle.line}></div>
                     <div>
@@ -271,7 +271,7 @@ export default class Self extends Component {
                 </Content>
                 break;
             case "6":
-                return <Content style={{ padding: '0 24px', minHeight: 280 }} className={selfstyle.content}>
+                return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
                     <div className={selfstyle.box}>我的优惠券</div>
                     <div className={selfstyle.line}></div>
                     <div>
@@ -284,13 +284,12 @@ export default class Self extends Component {
     render() {
         return (
             <div>
-                <Navtwo></Navtwo>
+                <Nav></Nav>
                 <div className={selfstyle.format}>
-                    <Layout>
+                    <Layout style={{background: '#fff'}}>
                         <Content style={{ padding: '0 50px' }}>
                             <Breadcrumb style={{ margin: '16px 0' }}>
                                 <Breadcrumb.Item>首页</Breadcrumb.Item>
-                                <Breadcrumb.Item>注册</Breadcrumb.Item>
                                 <Breadcrumb.Item>个人中心</Breadcrumb.Item>
                             </Breadcrumb>
                             <Layout style={{ padding: '24px 0', background: '#fff' }}>
@@ -335,7 +334,7 @@ export default class Self extends Component {
 
                             </Layout>
                         </Content>
-                        <Footer style={{ textAlign: 'center' }}>You are very welcome</Footer>
+                        <Footer style={{ textAlign: 'center', background: '#fff' }}>You are very welcome</Footer>
                     </Layout>
                 </div>
                 <Bottom></Bottom>

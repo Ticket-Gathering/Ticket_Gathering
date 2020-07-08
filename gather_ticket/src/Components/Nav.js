@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import navstyle from './Nav.module.css'
 import { Link } from 'react-router-dom';
+import search from '../Assets/images/ico/search2.png'
 
 export default class nav extends Component {
 

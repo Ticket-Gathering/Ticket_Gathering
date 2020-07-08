@@ -6,6 +6,7 @@ import about from "./About.module.css";
 import Poster from "../../Components/Poster";
 import Axios from "../../Module/Axios";
 
+const Data = {timelist:['2020.08.02 周六 20:00','2020.08.02 周日 20:00' ],pricelist:['100票面 预售票','120票面 全价票','188票面 双人票'],billtype:{chooice:1,getter:1,type:1}};
 
 export default class About extends Component {
     constructor(props) {
@@ -31,27 +32,24 @@ export default class About extends Component {
         //     .catch(err => {
         //         console.log(err);
         //     })
+        this.setState({data:Data});
     }
 
-    getIntroduce() {
-        let i = this.state.data.address;
-        console.log(i);
-        Axios.get("/about/getIntroduce", {
-            params:
-                { address: i }
-        }).then((res) => {
-            this.setState({
-                introduce: res.data
-            })
-        })
-            .catch(err => {
-                console.log(err);
-            })
-    }
-
-
-
-
+    // getIntroduce() {
+    //     let i = this.state.data.address;
+    //     console.log(i);
+    //     Axios.get("/about/getIntroduce", {
+    //         params:
+    //             { address: i }
+    //     }).then((res) => {
+    //         this.setState({
+    //             introduce: res.data
+    //         })
+    //     })
+    //         .catch(err => {
+    //             console.log(err);
+    //         })
+    // }
 
     render() {
         return (
@@ -62,7 +60,6 @@ export default class About extends Component {
 
                         <AboutItem aboutitem={this.state.data}></AboutItem>
                         <div className={about.leftb}>
-
                             <div className={about.leftbt}>
                                 <div className={about.leftbtb}>
                                     <a href="#xmxq">项目详情</a>
@@ -140,7 +137,6 @@ export default class About extends Component {
                         <div className={about.rightb}>
                             <div className={about.rightbt}>为你推荐</div>
                             <div className={about.rightbb}>
-
                                 {
                                     this.state.introduce.map((p, ind) => {
                                         return <Poster poster={p} key={ind}></Poster>
