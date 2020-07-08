@@ -1,7 +1,7 @@
 .father{
     width: 100%;
     height: 320px;
-    background-color: #17073D;
+    background-color: #28282a;
     margin-top: 15px;
 }
 .son{
@@ -13,10 +13,10 @@
     text-align: center;
     height: 160px;
     line-height: 160px;
-    background: #364d79;
+    background: #28282a;
     overflow: hidden;
   }
-  
+
   .ant-carousel .slick-slide img {
     width: 100%;
     height: 330px;
