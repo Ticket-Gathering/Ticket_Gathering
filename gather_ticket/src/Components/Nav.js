@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import navstyle from './Nav.module.css'
 import { Link } from 'react-router-dom';
-import search from '../Assets/images/ico/search2.png'
 
 export default class nav extends Component {
 
@@ -15,7 +14,7 @@ export default class nav extends Component {
             <div className={navstyle.nav}>
                 <div className={navstyle.navson}>
                     <div className={navstyle.logo}>
-                        {/*<img src={require('../ImgAssets/logo.png')} ></img>*/}
+                        <img src={require('../ImgAssets/logo.png')} ></img>
                     </div>
                     <div className={navstyle.global}>
                         <div className={navstyle.globalt}>
@@ -31,10 +30,9 @@ export default class nav extends Component {
                         <div className={navstyle.page}><Link to={{pathname:'/page',state:{typeID:'0'}}}>分类</Link></div>
                     </div>
                     <div className={navstyle.search}>
+                        <img src={require('../ImgAssets/search.png')} className={navstyle.searchimg}></img>
                         <input type="text" className={navstyle.input} placeholder="搜索明星、演出、体育赛事">
                         </input>
-                        <img src={require('../ImgAssets/search.png')} className={navstyle.searchimg}></img>
-                        <div className={navstyle.inputnext}>搜索</div>
                     </div>
                     <div className={navstyle.loginbox}>
                         <img src={require('../ImgAssets/login.png')} className={navstyle.loginimg}></img>
