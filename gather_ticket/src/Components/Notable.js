@@ -10,22 +10,22 @@ export default class Notable extends Component {
                 <div className={notablestyle.son}>
                     <Carousel autoplay>
                         <div>
-                            <img src='http://localhost:8081/images/home1.jpg'></img>
+                            <img src={require('../ImgAssets/testCarousel/home1.jpg')}></img>
                         </div>
                         <div>
-                            <img src='http://localhost:8081/images/home2.jpg'></img>
+                            <img src={require('../ImgAssets/testCarousel/home2.jpg')}></img>
                         </div>
                         <div>
-                            <img src='http://localhost:8081/images/home3.jpg'></img>
+                            <img src={require('../ImgAssets/testCarousel/home3.jpg')}></img>
                         </div>
                         <div>
-                            <img src='http://localhost:8081/images/home4.jpg'></img>
+                            <img src={require('../ImgAssets/testCarousel/home4.jpg')}></img>
                         </div>
                         <div>
-                            <img src='http://localhost:8081/images/home5.jpg'></img>
+                            <img src={require('../ImgAssets/testCarousel/home5.jpg')}></img>
                         </div>
                         <div>
-                            <img src='http://localhost:8081/images/home6.jpg'></img>
+                            <img src={require('../ImgAssets/testCarousel/home6.jpg')}></img>
                         </div>
                     </Carousel>
 
