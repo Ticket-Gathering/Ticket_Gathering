@@ -38,8 +38,8 @@ export default class Home extends Component {
         return (
             <div>
                 <Nav></Nav>
-                <Notable></Notable>
                 <NavList></NavList>
+                <Notable></Notable>
                 <Posters title={"演唱会"}></Posters>
                 <Posters title={"话剧歌剧"}></Posters>
                 <Posters title={"体育比赛"}></Posters>
