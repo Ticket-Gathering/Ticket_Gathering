@@ -10,12 +10,12 @@ export default class Page extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tid: 0,
+            tid: this.props.location.state.typeID,
             cid: 0,
             tid1: 0,
             sid: 1,
             citys: ["全国", "上海", "北京", "杭州", "深圳", "成都", "广州", "武汉", "南京"],
-            types: ["全部", "音乐会", "话剧", "演唱会", "曲苑", "歌剧", "舞蹈", "体育", "亲子"],
+            types: ["全部", "演唱会", "话剧歌剧", "体育", "儿童亲子","展览休闲","音乐会","曲苑杂坛", "舞蹈芭蕾" ],
             times: ["全部", "今天", "明天", "本周末", "一个月内"],
             sorts: ["相关度排序", "推荐排序", "最近开场", "最新上架"],
             data: [],

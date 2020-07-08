@@ -27,7 +27,7 @@ export default class nav extends Component {
                     </div>
                     <div className={navstyle.navbar}>
                         <div className={navstyle.index}>首页</div>
-                        <div className={navstyle.page}><Link to="/page">分类</Link></div>
+                        <div className={navstyle.page}><Link to={{pathname:'/page',state:{typeID:'0'}}}>分类</Link></div>
                     </div>
                     <div className={navstyle.search}>
                         <input type="text" className={navstyle.input} placeholder="搜索明星、演出、体育赛事">
