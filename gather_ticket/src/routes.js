@@ -3,6 +3,7 @@ import Login from './Views/Login/Login';
 import Self from './Views/Self/Self';
 import Page from './Views/Page/Page';
 import About from './Views/About/About';
+import Auction from './Views/auction/auction';
 
 const routes = [
     {
@@ -27,6 +28,11 @@ const routes = [
     {
         path: '/about/:aid',
         component: About
+
+    },
+    {
+        path: '/auction/:aid',
+        component: Auction
 
     }
 ];
