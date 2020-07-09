@@ -105,8 +105,9 @@ export default class auctionItem extends Component {
         return (
             <div className={abouti.abouti}>
                 <div className={abouti.left}>
+                    <div className={abouti.righttop}>      【杭州】「初夏人生」嘻哈派对</div>
                     <div className={abouti.leftt}>
-                        <img className={abouti.leftti} src={this.props.aboutitem.imgurl} />
+                        <img className={abouti.leftti} src={require('./try1.webp')} />
                         <div className={abouti.leftts}>
                             <Sign></Sign>
                         </div>
@@ -115,13 +116,16 @@ export default class auctionItem extends Component {
                 </div>
 
                 <div className={abouti.right}>
-                    <Row gutter={16}>
+                    <div className={abouti.rightbtime}>
+                    <Row gutter={24}>
                         <Col span={24} style={{ marginTop: 32 }}>
                             <Countdown title="拍卖倒计时" value={deadline} format="D 天 H 时 m 分 s 秒" />
                         </Col>
-                    </Row>
-                    <div className={abouti.righttop}>{this.props.aboutitem.name}</div>
 
+                    </Row>
+                        <img className={abouti.clock} src={require('./闹钟.png')}></img>
+                        |设置提醒
+                    </div>
                     <div className={abouti.rightbtime}>
                         <div className={abouti.rightbtimel}>当前价</div>
                         <div className={abouti.sum}>

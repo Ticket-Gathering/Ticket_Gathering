@@ -18,6 +18,10 @@
     width: 270px;
     height: 360px;
 }
+.clock {
+    width: 50px;
+    height: 50px;
+}
 .leftts {
     position: absolute;
     top:0;
@@ -79,7 +83,7 @@
     color:white;
 }
 .rightbtime {
-    width: 520px;
+    width: 2400px;
     display: flex;
     margin-bottom: 12px;
 }

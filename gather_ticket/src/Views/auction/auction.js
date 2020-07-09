@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Navtwo from "../../Components/Navtwo";
+import Nav from "../../Components/Nav";
 import AboutItem from "./auctionItem";
 import Paper from "./Paper";
 import about from "./auction.module.css";
@@ -54,7 +54,7 @@ export default class auction extends Component {
     render() {
         return (
             <div className={about.about}>
-                <Navtwo></Navtwo>
+                <Nav></Nav>
                 <div className={about.all}>
                     <div className={about.left}>
 
@@ -132,19 +132,19 @@ export default class auction extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className={about.right}>
-                        <Paper paper={this.state.data.billtype}></Paper>
-                        <div className={about.rightb}>
-                            <div className={about.rightbt}>为你推荐</div>
-                            <div className={about.rightbb}>
-                                {
-                                    this.state.introduce.map((p, ind) => {
-                                        return <Poster poster={p} key={ind}></Poster>
-                                    })
-                                }
-                            </div>
-                        </div>
-                    </div >
+                    {/*<div className={about.right}>*/}
+                    {/*    <Paper paper={this.state.data.billtype}></Paper>*/}
+                    {/*    <div className={about.rightb}>*/}
+                    {/*        <div className={about.rightbt}>为你推荐</div>*/}
+                    {/*        <div className={about.rightbb}>*/}
+                    {/*            {*/}
+                    {/*                this.state.introduce.map((p, ind) => {*/}
+                    {/*                    return <Poster poster={p} key={ind}></Poster>*/}
+                    {/*                })*/}
+                    {/*            }*/}
+                    {/*        </div>*/}
+                    {/*    </div>*/}
+                    {/*</div >*/}
                 </div>
             </div>
         )
