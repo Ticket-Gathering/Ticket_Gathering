@@ -124,9 +124,10 @@ export default class auctionItem extends Component {
                                     <Countdown title="拍卖倒计时" value={deadline} format="D 天 H 时 m 分 s 秒" />
                                 </Col>
                             </Row>
+                            <Divider type="vertical" style={{marginTop: '30px', height:"64px"}}/>
                             <Row style={{ marginLeft: 10}}>
                                 <Col span={24} style={{ marginTop: 32 }}>
-                                    |设置提醒
+                                    设置提醒
                                 </Col>
                                 <Col>
                                     <img className={abouti.clock} src={require('./闹钟.png')}/>
