@@ -2,72 +2,26 @@ import React, { Component } from 'react';
 import abouti from "./auctionItem.module.css";
 import Sign from "./Sign";
 import { Statistic, Row, Col } from 'antd';
-import { Divider } from 'antd';
+import { Divider ,Button} from 'antd';
 
 const { Countdown } = Statistic;
-const deadline = Date.now() + 1000 * 30; // Moment is also OK
+const deadline = Date.now() + 1000 * 60 * 60;
+
 function onFinish() {
     console.log('finished!');
 }
+
 export default class auctionItem extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            count: 1000,
-            nowprice:1000,
-            step: 10,
-            num: 0,
-            pricelist: [],
-            timelist: []
+            count: 1000,     //出价
+            nowprice:1000,   //当前拍卖价
+            step: 10,        //加价幅度
+            ifcheck:0,       //当前用户是否交了保证金
         }
         this.cadd = this.cadd.bind(this);
-        this.cmil = this.cmil.bind(this)
-    }
-
-    isShop(i) {                //判断是否为预售票
-        let n = Date.now().valueOf();
-        let m = new Date(i).valueOf();
-        if (n < m) {
-            return <div className={abouti.rightremind}>
-                <div className={abouti.rightremindl}>预售|</div>
-                <div className={abouti.rightremindr}>
-                    <div className={abouti.rightremindrt}>
-                        本商品为预售商品，正式开票后将在第一时间为您配送
-                            </div>
-                    <div className={abouti.rightremindrb}>
-                        预售期间，由于主办未正式开票，下单后无法立即配送票品。一般演出前2-6周出票，待正式开票后将在第一时间为您配送，请耐心等待。纸质票购票后可在订单详情页查看物流信息
-                            </div>
-                </div>
-            </div>
-        }
-    }
-
-    cTime(e) {
-        let n = this.state.timelist;
-        for (let a = 0; a < n.length; a++) {
-            n[a] = 0;
-        }
-        n[e] = 1;
-        this.setState({
-            timelist: n
-        })
-        n = "";
-    }
-
-    cPrice(e) {
-        let n = this.state.pricelist;
-        let m = 0;
-        for (let a = 0; a < n.length; a++) {
-            n[a].state = 0;
-        }
-        n[e].state = 1;
-        m = n[e].price;
-        this.setState({
-            pricelist: n,
-            num: m
-        })
-        n = "";
-        m = "";
+        this.cmil = this.cmil.bind(this);
     }
 
     cmil() {
@@ -100,20 +54,49 @@ export default class auctionItem extends Component {
         return e * n;
     }
 
+    pay = () => {
+        console.log('test');
+        this.setState({ifcheck:1})
+    }
 
+    bid = (e) => {
+        this.setState({nowprice:e})
+    }
+
+    renderButtton = () =>  {
+        if (!this.state.ifcheck) {
+            return(
+                <Button className={abouti.sub} disabled>出价</Button>
+            );
+        }
+        return (
+            <Button className={abouti.sub} onClick={this.bid(1010)}>出价</Button>
+        );
+    };
+
+    renderRemind = () =>  {
+        if (!this.state.ifcheck) {
+            return(
+                <div>
+                    <img className={abouti.chuizi} src={require('./提醒.png')} />
+                    提醒：请先报名交保证金再出价。
+                </div>
+            );
+        }
+        return null;
+    };
 
     render() {
         return (
             <div className={abouti.format}>
                 <div className={abouti.abouti}>
                     <div className={abouti.left}>
-                        <div className={abouti.righttop}>      【杭州】「初夏人生」嘻哈派对</div>
+                        <div className={abouti.righttop}>【杭州】「初夏人生」嘻哈派对</div>
                         <div className={abouti.leftt}>
                             <img className={abouti.leftti} src={require('./try1.webp')} />
                             <div className={abouti.leftts}>
                                 <Sign/>
                             </div>
-
                         </div>
                     </div>
 
@@ -125,8 +108,8 @@ export default class auctionItem extends Component {
                                 </Col>
                             </Row>
                             <Row style={{ marginLeft: 10}}>
-                                <Col span={24} style={{ marginTop: 32 }}>
-                                    |设置提醒
+                                <Col span={24} style={{ marginTop: 32 }} >
+                                    设置提醒
                                 </Col>
                                 <Col>
                                     <img className={abouti.clock} src={require('./闹钟.png')}></img>
@@ -151,47 +134,48 @@ export default class auctionItem extends Component {
                                 </div >
                             </div>
                         </div>
-<<<<<<< Updated upstream:gather_ticket/src/Views/Auction/auctionItem.js
-
-                        <div className={abouti.sub}>
-                            报名交保证金
+                        <div className={abouti.rightbtime}>
+                            <Button className={abouti.sub} onClick={this.pay}>报名交保证金</Button>
+                            {this.renderButtton()}
                         </div>
-                        <div className={abouti.sub}>
-                            立即购买
+                        <div className={abouti.rightbtime}>
+                            {this.renderRemind()}
                         </div>
-
-
-=======
-                    </div>
-                    <div className={abouti.rightbtime}>
-                       <div className={abouti.sub}>
-                          报名交保证金
-                       </div>
-                       <div className={abouti.sub}>
-                           立即购买
-                       </div>
-                    </div>
-                    <Divider />
-                    <div className={abouti.rightbtime}>
-                        <img className={abouti.chuizi} src={require('./锤子.png')}></img>
-                        <div>大麦拍卖</div>
+                        <Divider />
+                        <div className={abouti.rightbtime}>
+                            <img className={abouti.chuizi} src={require('./锤子.png')}></img>
+                            <div>大麦拍卖</div>
+                            <Divider type="vertical" />
+                            <div>当前 18 人 报名</div>
+                            <Divider type="vertical" />
+                            <div> 717 人 设置提醒</div>
+                            <Divider type="vertical" />
+                            <div> 25399 次 围观</div>
+                        </div>
+                        <Divider />
+                        <div className={abouti.rightbtime}>
+                            <div>起拍价: 1000 元</div>
+                            <Divider type="vertical" />
+                            <div>加价幅度： 10 元</div>
+                            <Divider type="vertical" />
+                            <div>类 型： 拍卖</div>
+                        </div>
+                        <div className={abouti.rightbtime}>
+                            <div>保证金: 200 元</div>
+                            <Divider type="vertical" />
+                            <div>竞价周期： 3 天</div>
+                            <Divider type="vertical" />
+                            <div>优先购买权人： 无</div>
+                        </div>
+                        <div className={abouti.rightbtime}>
+                            <div>评估价: 1200 元</div>
+                            <Divider type="vertical" />
+                            <div>延时周期： 5 分钟</div>
+                        </div>
+                        <div>竞价规则： 至少一人报名且出价不低于起拍价，方可成交 </div>
+                        <div>尾款支付方式： 查看竞买公告中的说明  </div>
+                        <div>尾款线上支付截止： 按竞买公告中的截止时间及时支付 </div>
                         <Divider type="vertical" />
-                        <div>当前 18 人 报名</div>
-                        <Divider type="vertical" />
-                        <div> 717 人 设置提醒</div>
-                        <Divider type="vertical" />
-                        <div> 25399 次 围观</div>
-                    </div>
-                    <Divider />
-                    <div className={abouti.rightbtime}>
-                        <div>起拍价: 1000 元</div>
-                        <Divider type="vertical" />
-                        <div>当前 18 人 报名</div>
-                        <Divider type="vertical" />
-                        <div> 717 人 设置提醒</div>
-                        <Divider type="vertical" />
-                        <div> 25399 次 围观</div>
->>>>>>> Stashed changes:gather_ticket/src/Views/auction/auctionItem.js
                     </div>
                 </div>
             </div>

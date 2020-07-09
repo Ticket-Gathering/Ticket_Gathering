@@ -16,8 +16,8 @@
     position: relative;
 }
 .leftti {
-    width: 270px;
-    height: 360px;
+    width: 360px;
+    height: 480px;
     border-radius: 6px;
     box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
@@ -43,7 +43,7 @@
     margin-left: 144px;
 }
 .righttop {
-    width: 520px;
+    width: 320px;
     font-size: 22px;
     font-weight: 700;
     margin-bottom: 32px;
