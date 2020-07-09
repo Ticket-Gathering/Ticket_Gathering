@@ -129,7 +129,7 @@ export default class auctionItem extends Component {
                                     |设置提醒
                                 </Col>
                                 <Col>
-                                    <img className={abouti.clock} src={require('./闹钟.png')}></img>
+                                    <img className={abouti.clock} src={require('./闹钟.png')}/>
                                 </Col>
                             </Row>
 
@@ -151,7 +151,6 @@ export default class auctionItem extends Component {
                                 </div >
                             </div>
                         </div>
-<<<<<<< Updated upstream:gather_ticket/src/Views/Auction/auctionItem.js
 
                         <div className={abouti.sub}>
                             报名交保证金
@@ -159,40 +158,30 @@ export default class auctionItem extends Component {
                         <div className={abouti.sub}>
                             立即购买
                         </div>
+                        <div style={{justifyContent: 'none'}}>
+                            <Divider />
+                            <div className={abouti.rightbtime}>
+                                <img className={abouti.chuizi} src={require('./锤子.png')}/>
+                                <div>大麦拍卖</div>
+                                <Divider type="vertical" />
+                                <div>当前 18 人 报名</div>
+                                <Divider type="vertical" />
+                                <div> 717 人 设置提醒</div>
+                                <Divider type="vertical" />
+                                <div> 25399 次 围观</div>
+                            </div>
+                            <div className={abouti.rightbtime}>
+                                <div>起拍价: 1000 元</div>
+                                <Divider type="vertical" />
+                                <div>当前 18 人 报名</div>
+                                <Divider type="vertical" />
+                                <div> 717 人 设置提醒</div>
+                                <Divider type="vertical" />
+                                <div> 25399 次 围观</div>
+                            </div>
+                        </div>
+                    </div>
 
-
-=======
-                    </div>
-                    <div className={abouti.rightbtime}>
-                       <div className={abouti.sub}>
-                          报名交保证金
-                       </div>
-                       <div className={abouti.sub}>
-                           立即购买
-                       </div>
-                    </div>
-                    <Divider />
-                    <div className={abouti.rightbtime}>
-                        <img className={abouti.chuizi} src={require('./锤子.png')}></img>
-                        <div>大麦拍卖</div>
-                        <Divider type="vertical" />
-                        <div>当前 18 人 报名</div>
-                        <Divider type="vertical" />
-                        <div> 717 人 设置提醒</div>
-                        <Divider type="vertical" />
-                        <div> 25399 次 围观</div>
-                    </div>
-                    <Divider />
-                    <div className={abouti.rightbtime}>
-                        <div>起拍价: 1000 元</div>
-                        <Divider type="vertical" />
-                        <div>当前 18 人 报名</div>
-                        <Divider type="vertical" />
-                        <div> 717 人 设置提醒</div>
-                        <Divider type="vertical" />
-                        <div> 25399 次 围观</div>
->>>>>>> Stashed changes:gather_ticket/src/Views/auction/auctionItem.js
-                    </div>
                 </div>
             </div>
 

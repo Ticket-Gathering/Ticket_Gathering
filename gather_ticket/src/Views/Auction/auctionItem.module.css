@@ -16,8 +16,8 @@
     position: relative;
 }
 .leftti {
-    width: 270px;
-    height: 360px;
+    width: 320px;
+    height: auto;
     border-radius: 6px;
     box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
@@ -36,6 +36,7 @@
 }
 .right {
     width: 530px;
+    height: 500px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -93,7 +94,7 @@
 .rightbtime {
     width: 640px;
     display: flex;
-    margin-bottom: 12px;
+    margin-bottom: 6px;
 }
 .rightbtimel {
     width: 80px;
