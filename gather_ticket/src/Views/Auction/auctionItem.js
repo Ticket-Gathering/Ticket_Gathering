@@ -98,8 +98,8 @@ export default class auctionItem extends Component {
         let n = this.state.count;
         return e * n;
     }
-    
-  
+
+
 
     render() {
         return (
@@ -117,14 +117,20 @@ export default class auctionItem extends Component {
 
                 <div className={abouti.right}>
                     <div className={abouti.rightbtime}>
-                    <Row gutter={24}>
-                        <Col span={24} style={{ marginTop: 32 }}>
-                            <Countdown title="拍卖倒计时" value={deadline} format="D 天 H 时 m 分 s 秒" />
-                        </Col>
+                        <Row gutter={24}>
+                            <Col span={24} style={{ marginTop: 32 }}>
+                                <Countdown title="拍卖倒计时" value={deadline} format="D 天 H 时 m 分 s 秒" />
+                            </Col>
+                        </Row>
+                        <Row style={{ marginLeft: 10}}>
+                            <Col span={24} style={{ marginTop: 32 }}>
+                                |设置提醒
+                            </Col>
+                            <Col>
+                                <img className={abouti.clock} src={require('./闹钟.png')}></img>
+                            </Col>
+                        </Row>
 
-                    </Row>
-                        <img className={abouti.clock} src={require('./闹钟.png')}></img>
-                        |设置提醒
                     </div>
                     <div className={abouti.rightbtime}>
                         <div className={abouti.rightbtimel}>当前价</div>
