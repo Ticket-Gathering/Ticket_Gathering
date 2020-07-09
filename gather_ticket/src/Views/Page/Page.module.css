@@ -1,8 +1,7 @@
 .title{
     width: 900px;
     border: 1px solid #E9E9E9;
-    margin-top: 10px;
-    margin-left: 170px;
+    margin: 10px auto;
 }
 .titleone{
     margin-top: 18px;
@@ -33,8 +32,7 @@
 .showbox{
     width: 900px;
     border: 1px solid #E9E9E9;
-    margin-top: 10px;
-    margin-left: 170px;
+    margin: 10px auto;
 }
 .showbox1{
     width: 100%;

@@ -3,6 +3,7 @@ import navstyle from './Nav.module.css'
 import { Link } from 'react-router-dom';
 import {Cascader,Select} from "antd";
 import addressData from "./CityData";
+import Axios from "../Module/Axios";
 const children = [];
 const { Option } = Select;
 for (let i = 0;i<addressData.length;i++) {
@@ -13,7 +14,8 @@ export default class nav extends Component {
     constructor(props) {
         super(props);
         this.state={
-            cityValue:[]
+            cityValue:[],
+            username: ''
         }
     };
     cityPick=(e)=>{
@@ -28,6 +30,19 @@ export default class nav extends Component {
             cityValue:[e[0]]
         })
     };
+    componentDidMount() {
+        Axios.get("/user/getAccount")
+            .then(res => {
+                this.setState({
+                    username: res.data.account
+                })
+
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
     render() {
         return (
             <div className={navstyle.nav}>
@@ -67,6 +82,9 @@ export default class nav extends Component {
                         <img src={require('../ImgAssets/login.png')} className={navstyle.loginimg}></img>
                         <div className={navstyle.logintext}><Link to="/login">登录</Link></div>
                     </div>
+                    {/*<div className={navstyle.loginbox}>*/}
+                    {/*    欢迎您！{this.state.username}*/}
+                    {/*</div>*/}
                     <div className={navstyle.downbox}>
                         <img src={require('../ImgAssets/download.png')} className={navstyle.loginimg}></img>
                         <div className={navstyle.logintext}>下载</div>

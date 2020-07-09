@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Navtwo from "../../Components/Navtwo";
 import AboutItem from "./auctionItem";
 import Paper from "./Paper";
+import Nav from "../../Components/Nav";
 import about from "./auction.module.css";
 import Poster from "../../Components/Poster";
 import Axios from "../../Module/Axios";
@@ -54,7 +54,7 @@ export default class auction extends Component {
     render() {
         return (
             <div className={about.about}>
-                <Navtwo></Navtwo>
+                <Nav pageIdent="page"></Nav>
                 <div className={about.all}>
                     <div className={about.left}>
 

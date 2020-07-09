@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Navtwo from "../../Components/Navtwo";
 import AboutItem from "./AboutItem";
 import Paper from "./Paper";
 import about from "./About.module.css";
 import Poster from "../../Components/Poster";
+import Nav from "../../Components/Nav";
 import Axios from "../../Module/Axios";
 
 const Data = {timelist:['2020.08.02 周六 20:00','2020.08.02 周日 20:00' ],pricelist:['100票面 预售票','120票面 全价票','188票面 双人票'],billtype:{chooice:1,getter:1,type:1}};
@@ -54,7 +54,7 @@ export default class About extends Component {
     render() {
         return (
             <div className={about.about}>
-                <Navtwo></Navtwo>
+                <Nav pageIdent="page"></Nav>
                 <div className={about.all}>
                     <div className={about.left}>
 

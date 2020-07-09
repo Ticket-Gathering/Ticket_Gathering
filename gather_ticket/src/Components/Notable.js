@@ -8,7 +8,7 @@ export default class Notable extends Component {
         return (
             <div className={notablestyle.father}>
                 <div className={notablestyle.son}>
-                    <Carousel autoplay>
+                    <Carousel autoplay swipeToSlide>
                         <div>
                             <img src={require('../ImgAssets/testCarousel/home1.jpg')}></img>
                         </div>
