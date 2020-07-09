@@ -65,16 +65,14 @@ export default class Login extends Component {
             case 1:
                 return <div className={login.last}>
                     <input type="text" placeholder="请输入手机号或邮箱" className={login.input} onChange={this.inputChange3}></input>
-                    <div className={login.input_underline}/>
                     <div className={login.logo}>
-                        <img src={require('../../Assets/images/ico/user.png')}></img>
+                        <img src={require('../../Assets/images/ico/user2.png')}></img>
                     </div>
                     <input type="password" placeholder="请输入登录密码" className={login.input} onChange={this.inputChange4}></input>
-                    <div className={login.input_underline}/>
                     <div className={login.logo1}>
                         <img src={require('../../Assets/images/ico/lock2.png')}></img>
                     </div>
-                    <div className={login.dl} onClick={this.submitForm1}>登录</div>
+                    <div className={login.dl} onClick={this.submitForm1}>LOGIN</div>
                     <div className={login.every}>
                         <div className={login.everyson}>
                             <img src={require('../../Assets/images/ico/xin.png')}></img>
@@ -181,6 +179,7 @@ export default class Login extends Component {
     render() {
         return (
             <div className={login.bg}>
+                <div className={login.bg_mask}/>
                 <div className={login.firstbox}>
                     <div className={login.imgbox}>
                         <img src={require('../../Assets/images/logo.png')}></img>
@@ -188,11 +187,11 @@ export default class Login extends Component {
                 </div>
                 <div className={login.secondbox}>
                     <div className={login.loginbox}>
-                        <div className={login.loginboxfirst}>
-                            <div className={this.state.cardInfo ? login.loginboxfirstson1 : login.loginboxfirstson} onClick={this.changeStyle}>密码登录</div>
-                            <div className={this.state.cardInfo1 ? login.loginboxfirstson1 : login.loginboxfirstson} onClick={this.changeStyle1}>用户注册</div>
-                            <div className={this.state.cardInfo2 ? login.loginboxfirstson1 : login.loginboxfirstson} onClick={this.changeStyle2}>扫码登录</div>
-                        </div>
+                        {/*<div className={login.loginboxfirst}>*/}
+                        {/*    <div className={this.state.cardInfo ? login.loginboxfirstson1 : login.loginboxfirstson} onClick={this.changeStyle}>密码登录</div>*/}
+                        {/*    <div className={this.state.cardInfo1 ? login.loginboxfirstson1 : login.loginboxfirstson} onClick={this.changeStyle1}>用户注册</div>*/}
+                        {/*    <div className={this.state.cardInfo2 ? login.loginboxfirstson1 : login.loginboxfirstson} onClick={this.changeStyle2}>扫码登录</div>*/}
+                        {/*</div>*/}
                         {this.display()}
                     </div>
                 </div>
