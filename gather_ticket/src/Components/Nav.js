@@ -4,18 +4,15 @@ import { Link } from 'react-router-dom';
 import {Cascader,Select} from "antd";
 import addressData from "./CityData";
 import Axios from "../Module/Axios";
-const children = [];
 const { Option } = Select;
-for (let i = 0;i<addressData.length;i++) {
-    children.push(<Option key={addressData[i].value}>{addressData[i].value}</Option>);
-}
 export default class nav extends Component {
 
     constructor(props) {
         super(props);
         this.state={
             cityValue:[],
-            username: ''
+            username: 'test',
+            isLoggedIn:false
         }
     };
     cityPick=(e)=>{
@@ -30,17 +27,26 @@ export default class nav extends Component {
             cityValue:[e[0]]
         })
     };
-    componentDidMount() {
-        Axios.get("/user/getAccount")
-            .then(res => {
-                this.setState({
-                    username: res.data.account
-                })
+    componentWillMount() {
+        if(sessionStorage.getItem('token')) {
+            Axios.get("/user/getAccount")
+                .then(res => {
+                    this.setState({
+                        username: res.data.account
+                    })
 
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+            this.setState({
+                isLoggedIn:true
             })
-            .catch(err => {
-                console.log(err);
-            });
+        }else{
+            this.setState({
+                isLoggedIn:false
+            })
+        }
     }
 
     render() {
@@ -56,18 +62,25 @@ export default class nav extends Component {
                                     <div className={navstyle.position}>
                                         <img src={require('../ImgAssets/location.png')}></img>
                                     </div>
-                                    <div style={{backgroundColor: "#28282a", marginLeft: 5 + "px"}}>
+                                    <div style={{marginLeft: 5 + "px"}}>
                                         <Select style={{width: 144 + "px", color: "#999999"}}
-                                                placeholder={'请选择所在城市'}>
-                                            {children}
+                                                showSearch
+                                                defaultValue="全国"
+                                                optionFilterProp="children"
+                                                filterOption={(input, option) =>
+                                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                                }
+                                        >
+                                            {addressData.map((item,index)=>{
+                                                return <Option key={addressData[index].value}>{addressData[index].value}</Option>
+                                            })}
                                         </Select>
                                     </div>
-                                    {/*<div className={navstyle.text}>全国</div>*/}
                                     {/*<img src={require('../ImgAssets/down.png')} className={navstyle.downarrow}></img>*/}
                                 </div>
                             </div>
                         ) :
-                            (<div/>)
+                            (<div style={{width:144+'px'}}/>)
                         }
                     <div className={navstyle.navbar}>
                         <div className={navstyle.index}><Link to='/'>首页</Link></div>
@@ -78,19 +91,26 @@ export default class nav extends Component {
                         <input type="text" className={navstyle.input} placeholder="搜索明星、演出、体育赛事">
                         </input>
                     </div>
+                    {this.state.isLoggedIn
+                        ?
+                        <div className={navstyle.loginbox}>
+                            <div className={navstyle.logintext}>
+                                欢迎您！{this.state.username}
+                            </div>
+                        </div>
+                        :
+                        <div className={navstyle.loginbox}>
+                            <img src={require('../ImgAssets/login.png')}></img>
+                            <div className={navstyle.logintext}><Link to="/login">登录</Link></div>
+                        </div>
+
+                    }
                     <div className={navstyle.loginbox}>
-                        <img src={require('../ImgAssets/login.png')} className={navstyle.loginimg}></img>
-                        <div className={navstyle.logintext}><Link to="/login">登录</Link></div>
-                    </div>
-                    {/*<div className={navstyle.loginbox}>*/}
-                    {/*    欢迎您！{this.state.username}*/}
-                    {/*</div>*/}
-                    <div className={navstyle.downbox}>
-                        <img src={require('../ImgAssets/download.png')} className={navstyle.loginimg}></img>
+                        <img src={require('../ImgAssets/download.png')} ></img>
                         <div className={navstyle.logintext}>下载</div>
                     </div>
-                    <div className={navstyle.downbox}>
-                        <img src={require('../ImgAssets/english.png')} className={navstyle.loginimg}></img>
+                    <div className={navstyle.loginbox}>
+                        <img src={require('../ImgAssets/english.png')} ></img>
                         <div className={navstyle.logintext}>English</div>
                     </div>
                 </div>

@@ -86,7 +86,9 @@ export default class Page extends Component {
     render() {
         return (
             <div>
-                <Nav pageIdent="page"></Nav>
+                <div >
+                    <Nav pageIdent="page"></Nav>
+                </div>
                 <div>
 
                     <div className={page.title}>
