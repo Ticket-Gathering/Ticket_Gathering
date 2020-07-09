@@ -1,5 +1,5 @@
 .abouti {
-    width: 960px;
+    width: 860px;
     display: flex;
     padding: 25px;
     margin-top: 16px;
@@ -16,8 +16,8 @@
     position: relative;
 }
 .leftti {
-    width: 320px;
-    height: auto;
+    width: 360px;
+    height: 480px;
     border-radius: 6px;
     box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
@@ -36,7 +36,6 @@
 }
 .right {
     width: 530px;
-    height: 500px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -44,7 +43,7 @@
     margin-left: 144px;
 }
 .righttop {
-    width: 520px;
+    width: 320px;
     font-size: 22px;
     font-weight: 700;
     margin-bottom: 32px;
@@ -94,7 +93,7 @@
 .rightbtime {
     width: 640px;
     display: flex;
-    margin-bottom: 6px;
+    margin-bottom: 12px;
 }
 .rightbtimel {
     width: 80px;
