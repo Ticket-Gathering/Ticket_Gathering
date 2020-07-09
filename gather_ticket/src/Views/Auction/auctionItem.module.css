@@ -1,7 +1,8 @@
 .abouti {
     width: 860px;
     display: flex;
-    padding:25px;
+    padding: 25px;
+    margin-top: 16px;
 }
 .left {
     width: 290px;
@@ -17,6 +18,8 @@
 .leftti {
     width: 270px;
     height: 360px;
+    border-radius: 6px;
+    box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
 .clock {
     width: 36px;
@@ -33,12 +36,13 @@
     flex-direction: column;
     justify-content: space-between;
     margin-bottom: 12px;
+    margin-left: 144px;
 }
 .righttop {
     width: 520px;
     font-size: 22px;
     font-weight: 700;
-    margin-bottom: 6px;
+    margin-bottom: 32px;
 }
 .rightmid {
     width: 350px;
@@ -146,19 +150,23 @@
      line-height: 28px;
 }
 .sub {
-    width: 200px;
+    width: 240px;
     height: 38px;
+    border-radius: 30px;
     text-align: center;
     line-height:  38px;
     color: white;
-    background-color: purple;
+    background-color: #ff3366;
+}
+.sub:hover{
+    background-color: #FF668C;
 }
 .sum {
     width: 180px;
     height: 40px;
     font-size: 26px;
     font-weight: 666;
-    color:deeppink;
+    color:#ff3366;
     text-align: center;
     line-height: 40px;
 }

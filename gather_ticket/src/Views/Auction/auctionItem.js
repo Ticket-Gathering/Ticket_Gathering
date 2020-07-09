@@ -103,63 +103,66 @@ export default class auctionItem extends Component {
 
     render() {
         return (
-            <div className={abouti.abouti}>
-                <div className={abouti.left}>
-                    <div className={abouti.righttop}>      【杭州】「初夏人生」嘻哈派对</div>
-                    <div className={abouti.leftt}>
-                        <img className={abouti.leftti} src={require('./try1.webp')} />
-                        <div className={abouti.leftts}>
-                            <Sign></Sign>
-                        </div>
+            <div className={abouti.format}>
+                <div className={abouti.abouti}>
+                    <div className={abouti.left}>
+                        <div className={abouti.righttop}>      【杭州】「初夏人生」嘻哈派对</div>
+                        <div className={abouti.leftt}>
+                            <img className={abouti.leftti} src={require('./try1.webp')} />
+                            <div className={abouti.leftts}>
+                                <Sign/>
+                            </div>
 
-                    </div>
-                </div>
-
-                <div className={abouti.right}>
-                    <div className={abouti.rightbtime}>
-                        <Row gutter={24}>
-                            <Col span={24} style={{ marginTop: 32 }}>
-                                <Countdown title="拍卖倒计时" value={deadline} format="D 天 H 时 m 分 s 秒" />
-                            </Col>
-                        </Row>
-                        <Row style={{ marginLeft: 10}}>
-                            <Col span={24} style={{ marginTop: 32 }}>
-                                |设置提醒
-                            </Col>
-                            <Col>
-                                <img className={abouti.clock} src={require('./闹钟.png')}></img>
-                            </Col>
-                        </Row>
-
-                    </div>
-                    <div className={abouti.rightbtime}>
-                        <div className={abouti.rightbtimel}>当前价</div>
-                        <div className={abouti.sum}>
-                            ￥1000
-                        </div>
-                        <div className={abouti.rightbremindl}>出价人:cjx12138</div>
-                    </div>
-                    <div className={abouti.rightbtime}>
-                        <div className={abouti.rightbtimel}>出价</div>
-                        <div className={abouti.rightbtimer}>
-                            <div className={abouti.rightnumber}>
-                                <div className={this.state.count <= 1000 ? abouti.rightnumberolim : abouti.rightnumbero} onClick={this.cmil}>-</div>
-                                <div className={abouti.rightnumberi}>{this.state.count}</div>
-                                <div className={abouti.rightnumbero} onClick={this.cadd}>+</div>
-                            </div >
                         </div>
                     </div>
 
-                    <div className={abouti.sub}>
-                        报名交保证金
-                    </div>
-                    <div className={abouti.sub}>
-                        立即购买
-                    </div>
+                    <div className={abouti.right}>
+                        <div className={abouti.rightbtime}>
+                            <Row gutter={24}>
+                                <Col span={24} style={{ marginTop: 32 }}>
+                                    <Countdown title="拍卖倒计时" value={deadline} format="D 天 H 时 m 分 s 秒" />
+                                </Col>
+                            </Row>
+                            <Row style={{ marginLeft: 10}}>
+                                <Col span={24} style={{ marginTop: 32 }}>
+                                    |设置提醒
+                                </Col>
+                                <Col>
+                                    <img className={abouti.clock} src={require('./闹钟.png')}></img>
+                                </Col>
+                            </Row>
+
+                        </div>
+                        <div className={abouti.rightbtime}>
+                            <div className={abouti.rightbtimel}>当前价</div>
+                            <div className={abouti.sum}>
+                                ￥1000
+                            </div>
+                            <div className={abouti.rightbremindl}>出价人:cjx12138</div>
+                        </div>
+                        <div className={abouti.rightbtime}>
+                            <div className={abouti.rightbtimel}>出价</div>
+                            <div className={abouti.rightbtimer}>
+                                <div className={abouti.rightnumber}>
+                                    <div className={this.state.count <= 1000 ? abouti.rightnumberolim : abouti.rightnumbero} onClick={this.cmil}>-</div>
+                                    <div className={abouti.rightnumberi}>{this.state.count}</div>
+                                    <div className={abouti.rightnumbero} onClick={this.cadd}>+</div>
+                                </div >
+                            </div>
+                        </div>
+
+                        <div className={abouti.sub}>
+                            报名交保证金
+                        </div>
+                        <div className={abouti.sub}>
+                            立即购买
+                        </div>
 
 
+                    </div>
                 </div>
             </div>
+
         )
     }
 }
