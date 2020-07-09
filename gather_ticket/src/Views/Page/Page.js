@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import Navtwo from "../../Components/Navtwo";
+import React, { Component } from 'react';
+import Nav from "../../Components/Nav";
 import Bottom from "../../Components/Bottom";
 import page from "./Page.module.css";
 import Axios from '../../Module/Axios';
@@ -86,7 +86,7 @@ export default class Page extends Component {
     render() {
         return (
             <div>
-                <Navtwo></Navtwo>
+                <Nav pageIdent="page"></Nav>
                 <div className={page.title}>
                     <div className={page.titleone}>
                         <span>城 市：</span>
