@@ -11,10 +11,10 @@ export default class Page extends Component {
         super(props);
         this.state = {
             tid: this.props.location.state.typeID,
-            cid: 0,
+            cid: this.props.location.state.cityID?this.props.location.state.cityID:0,
             tid1: 0,
             sid: 1,
-            citys: ["全国", "上海", "北京", "杭州", "深圳", "成都", "广州", "武汉", "南京"],
+            citys: ["全国", "上海", "北京", "浙江", "四川", "广东", "江苏", "湖北", "天津"],
             types: ["全部", "演唱会", "话剧歌剧", "体育", "儿童亲子","展览休闲","音乐会","曲苑杂坛", "舞蹈芭蕾" ],
             times: ["全部", "今天", "明天", "本周末", "一个月内"],
             sorts: ["相关度排序", "推荐排序", "最近开场", "最新上架"],
@@ -93,6 +93,8 @@ export default class Page extends Component {
 
                     <div className={page.title}>
                         <div className={page.titleone}>
+                            <span>当 前 选 中 城 市：</span>
+                            <br/>
                             <span>城 市：</span>
                             <div className={page.titlebox}>
                                 {this.state.citys.map((i, ind) => {

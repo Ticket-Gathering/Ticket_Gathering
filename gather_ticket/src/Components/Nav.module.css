@@ -94,7 +94,7 @@
     filter:contrast(100%);
 }
 .search{
-    margin: auto 0 auto 50px;
+    margin: auto;
     position: relative;
     display: flex;
 }
