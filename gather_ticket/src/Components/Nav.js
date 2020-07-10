@@ -54,7 +54,7 @@ export default class nav extends Component {
                                         <Select style={{width: 144 + "px", color: "#999999"}}
                                                 defaultValue="全国"
                                                 value={this.state.cityValue}
-                                                onChange={(newValue)=>{this.setState({cityValue:newValue})}}
+                                                onChange={(newValue)=>{this.setState({cityValue:newValue});this.props.setCityValue(newValue)}}
                                         >
                                             {addressData.map((item,index)=>{
                                                 return <Option key={index} >{addressData[index].value}</Option>
