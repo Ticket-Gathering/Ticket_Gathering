@@ -3,7 +3,7 @@ import Login from './Views/Login/Login';
 import Self from './Views/Self/Self';
 import Page from './Views/Page/Page';
 import About from './Views/About/About';
-import Auction from './Views/auction/auction';
+import Auction from './Views/Auction/auction';
 
 const routes = [
     {

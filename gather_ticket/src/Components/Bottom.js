@@ -10,16 +10,16 @@ export default class Bottom extends Component {
                 <div className={bottom.son}>
                     <Carousel autoplay>
                         <div>
-                            <img src='http://localhost:8081/images/1.jpg'></img>
+                            <img src={require('../Assets/images/1.jpg')}></img>
                         </div>
                         <div>
-                            <img src='http://localhost:8081/images/2.jpg'></img>
+                            <img src={require('../Assets/images/2.jpg')}></img>
                         </div>
                         <div>
-                            <img src='http://localhost:8081/images/3.jpg'></img>
+                            <img src={require('../Assets/images/3.jpg')}></img>
                         </div>
                         <div>
-                            <img src='http://localhost:8081/images/4.jpg'></img>
+                            <img src={require('../Assets/images/4.jpg')}></img>
                         </div>
                     </Carousel>
 

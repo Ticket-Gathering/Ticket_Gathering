@@ -204,7 +204,7 @@ export default class Self extends Component {
                         </Radio.Group><br />
                         出生日期： <DatePicker style={{width: '300px'}} defaultValue={moment('2019/08/03', dateFormat)} format={dateFormat} className={selfstyle.mydate} /><br />
                         身份证号：<Input placeholder="Id number" className={selfstyle.myinput} /><br />
-                        <Button type="primary" className={selfstyle.mybutton}>保存</Button>
+                        <Button type="primary" className={selfstyle.mybutton} style={{backgroundColor: '#ff3366'}}>保存</Button>
                     </div>
                 </Content>
                 break;

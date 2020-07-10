@@ -33,7 +33,7 @@
     width: 100px;
     height: 30px;
     color: white;
-    background-color: #ff3366;
+    background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
     text-align: center;
     font-size: 12px;
     line-height: 30px;
@@ -42,7 +42,7 @@
   }
   .line{
     height: 3px;
-    background-color: #ff3366;
+    background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
     margin-top: -3px;
   }
 .myinput{

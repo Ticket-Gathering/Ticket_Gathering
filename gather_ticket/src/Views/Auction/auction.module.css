@@ -9,10 +9,33 @@
     justify-content: center;
     margin-top: 50px;
 }
+.format{
+    width: 95%;
+    --animate-duration: 1s;
+    --animate-delay: 1s;
+    --animate-repeat: 1;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: 300;
+    line-height: 1.5em;
+    color: #3c4858;
+    font-size: 1rem;
+    letter-spacing: normal!important;
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    z-index: 3;
+    position: relative;
+    background: #FFF;
+    margin: 20px 30px 50px;
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px ;
+    text-align: center;
+}
 .left {
-    width: 880px;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 .leftb {
     width: 880px;
@@ -30,9 +53,15 @@
     font-size: 20px;
     margin-left: 15px;
 }
+a:link{
+    color: #ff3366;
+}
+a:visited{
+    color: #ff3366;
+}
 .leftbb {
-    width: 880px;
-    border: 1px solid #EBEBEB;
+    width: 840px;
+    margin-bottom: 20px;
 }
 .right {
     width: 320px;
@@ -58,38 +87,33 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex:0,0,auto;
+    flex:0 0 auto;
 }
-.mytext{
-    font-size: 18px;
+.subtitle{
+    font-size: 22px;
+    font-weight: bold;
     color: black;
-    margin-top: 50px;
-    margin-left: 20px;
+    margin-top: 70px;
 }
 .line{
-    width: 800px;
-    height: 1px;
-    background-color: #E2E2E2;
-    margin-left: 20px;
-    margin-top: 10px;
+    width: 160px;
+    height: 5px;
+    background-color: #ff3366;
+    margin: 10px auto;
 }
-.mytext1{
-    color: #4A4A4A;
-    font-size: 18px;
-    margin-left: 20px;
+.mytext{
+    color: #555;
+    font-size: 15px;
     margin-top: 20px;
-    font-weight: 700;
 }
 .mytext2{
     color:#4A4A4A;
     font-size: 15px;
-    margin-left: 20px;
     margin-top: 20px;
     margin-right: 20px;
 }
 .img1{
     width: 600px;
-    margin-left: 20px;
     margin-top: 40px;
     margin-bottom: 20px;
 }
@@ -102,12 +126,10 @@
 .textg{
     color: #999999;
     font-size: 12px;
-    margin-left: 20px;
     margin-top: 20px;
 }
 .textgs{
     color: #4A4A4A;
     font-size: 16px;
-    margin-left: 20px;
     margin-top: 10px;
 }
