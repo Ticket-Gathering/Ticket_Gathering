@@ -69,6 +69,14 @@
     color: #E7E7E7;
     filter:contrast(100%);
 }
+.index a{
+    color: #E7E7E7;
+    filter:contrast(100%);
+}
+.index a:hover{
+    color: #E7E7E7;
+    filter:contrast(100%);
+}
 .page{
     margin-left: 20px;
     filter:contrast(10%);
@@ -86,7 +94,7 @@
     filter:contrast(100%);
 }
 .search{
-    margin: auto 0 auto 170px;
+    margin: auto 0 auto 50px;
     position: relative;
     display: flex;
 }
@@ -112,7 +120,7 @@ input::-webkit-input-placeholder {
 
 .input:focus{
     border: none;
-    border-bottom: 2px solid #ff3366;
+    border-bottom: 2px solid #999999;
 }
 .searchimg{
     /*position: absolute;*/
@@ -141,22 +149,11 @@ input::-webkit-input-placeholder {
 .loginbox{
     height:30px;
     margin: auto 0;
-    margin-left: 47px;
+    margin-left: 30px;
     display: flex;
 }
 .loginbox img{
     filter:contrast(10%);
-}
-.downbox{
-    height:30px;
-    margin: auto 0;
-    margin-left: 20px;
-    display: flex;
-}
-.downbox img{
-    filter:contrast(10%);
-}
-.loginimg{
     width: 30px;
     height: 30px;
 }

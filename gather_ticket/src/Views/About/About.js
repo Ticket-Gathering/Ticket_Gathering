@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Nav from "../../Components/Nav";
 import AboutItem from "./AboutItem";
 import Paper from "./Paper";
 import about from "./About.module.css";
 import Poster from "../../Components/Poster";
+import Nav from "../../Components/Nav";
 import Axios from "../../Module/Axios";
 
 const Data = {timelist:['2020.08.02 周六 20:00','2020.08.02 周日 20:00' ],pricelist:['100票面 预售票','120票面 全价票','188票面 双人票'],billtype:{chooice:1,getter:1,type:1}};
@@ -54,7 +54,7 @@ export default class About extends Component {
     render() {
         return (
             <div className={about.about}>
-                <Nav></Nav>
+                <Nav pageIdent="page"></Nav>
                 <div className={about.all}>
                     <div className={about.left}>
 
@@ -78,17 +78,17 @@ export default class About extends Component {
                                 <span className={about.mytext2}>本项目不支持使用优惠券购票，敬请理解</span>
                                 <div className={about.mytext1}>演出介绍</div>
                                 <div className={about.mytext2}>他说，做音乐是件很帅的事情。</div>
-                                <img src={require('../../Assets/images/li.webp')} className={about.img1}></img>
+                                <img src='http://localhost:8081/images/li.webp' className={about.img1}></img>
                                 <div className={about.mytext2}>自2013年出道以来，李荣浩专注音乐潜心创作，一年一张专辑的频率被誉为"音乐圈劳模"，而2018年新专辑《耳朵》一经推出就取得了相当可观的成绩，多首歌曲长期处于"霸榜"状态，亿万播放量更是霸气成各大榜单赢家。而在互联网时代，数字单曲是大趋势的情况下，李荣浩一直坚持做实体专辑，不随波逐流，用自己的脚踏实地去回报音乐，致敬音乐。
 
 一年一张专辑，一年几首HitSong，已然成了李荣浩发片常态。前几张专辑里，经典曲目层出不穷，其代表作就有《模特》《李白》《老街》《不将就》《喜剧之王》《作曲家》《戒烟》等，成众多人歌单里的单曲循环，素有百听不厌之势。如果说首专是李荣浩音乐生涯的一座高峰，那2018年新专辑《耳朵》就是其职业生涯的另一座高峰，引发全民狂欢的《贝贝》，同名大热主打歌《耳朵》，刮起复古都市风的《王牌冤家》，以及引发群体共鸣的《成长之重量》，都为成就这张"神专"添砖加瓦，而网络爆款《年少有为》则为这张专辑添了浓墨重彩的一笔，直戳亿万网友内心，让每一个有故事的人珍惜身边所拥有的。</div>
-                                <img src={require('../../Assets/images/li1.webp')} className={about.img2}></img>
+                                <img src='http://localhost:8081/images/li1.webp' className={about.img2}></img>
                                 <div className={about.mytext2}>李荣浩2019「年少有为」巡回演唱会
 
 李荣浩「年少有为」巡回演唱会于2019年3月16日上海正式开跑，这也是继「天生李荣浩亚洲巡回演唱会」和「李荣浩有理想世界巡回演唱会」之后，职业生涯的第三轮巡演，也是第五张专辑发行后众多新歌首秀舞台，当然，前几张专辑的经典曲目也将进行重新编曲再演绎，争取让歌迷们享受到一次全新的音乐之旅。
 
 作为本次演唱会的总导演之一及总策划，李荣浩事事亲力亲为，严格把关各个关卡，从主视觉海报拍摄、到曲目编排，再到舞美灯光，事无巨细，极尽所能做好最好，意在给歌迷一个独特的演唱会体验，这无疑不体现对于本次巡演重视之程度。而以「年少有为」作为本次巡演的主题，也是希望大家能够珍惜身边所有，不负热望。</div>
-                                <img src={require('../../Assets/images/li2.webp')} className={about.img2}></img>
+                                <img src='http://localhost:8081/images/li2.webp' className={about.img2}></img>
                             </div>
                             <div className={about.leftbb} id="gpxz">
                                 <div className={about.mytext}>购票须知</div>

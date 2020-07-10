@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import Navtwo from "../../Components/Navtwo";
+import React, { Component } from 'react';
+import Nav from "../../Components/Nav";
 import Bottom from "../../Components/Bottom";
 import page from "./Page.module.css";
 import Axios from '../../Module/Axios';
@@ -86,46 +86,51 @@ export default class Page extends Component {
     render() {
         return (
             <div>
-                <Navtwo></Navtwo>
-                <div className={page.title}>
-                    <div className={page.titleone}>
-                        <span>城 市：</span>
-                        <div className={page.titlebox}>
-                            {this.state.citys.map((i, ind) => {
-                                return <div className={page.titleevery + (this.state.cid == ind ? (' ' + page.titleevery1) : '')} key={ind} onClick={this.changestyle.bind(this, ind, i)} city={i}>{i}</div>
-                            })}
-                        </div>
-                    </div>
-                    <div className={page.line}></div>
-                    <div className={page.titleone}>
-                        <span>分 类：</span>
-                        <div className={page.titlebox}>
-                            {this.state.types.map((i, ind) => {
-                                return <div className={page.titleevery + (this.state.tid == ind ? (' ' + page.titleevery1) : '')} key={ind} onClick={this.changestyle1.bind(this, ind)} type={i}>{i}</div>
-                            })}
-                        </div>
-                    </div>
-                    <div className={page.line}></div>
-                    <div className={page.titleone}>
-                        <span>时 间：</span>
-                        <div className={page.titlebox}>
-                            {this.state.times.map((i, ind) => {
-                                return <div className={page.titleevery + (this.state.tid1 == ind ? (' ' + page.titleevery1) : '')} key={ind} onClick={this.changestyle2.bind(this, ind)} >{i}</div>
-                            })}
-                        </div>
-                    </div>
+                <div >
+                    <Nav pageIdent="page"></Nav>
                 </div>
-                <div className={page.showbox}>
-                    <div className={page.showbox1}>
-                        {this.state.sorts.map((i, ind) => {
-                            return <div className={page.showevery + (this.state.sid == ind ? (' ' + page.showevery1) : '')} key={ind} onClick={this.changestyle3.bind(this, ind)} >{i}</div>
-                        })}
+                <div>
+
+                    <div className={page.title}>
+                        <div className={page.titleone}>
+                            <span>城 市：</span>
+                            <div className={page.titlebox}>
+                                {this.state.citys.map((i, ind) => {
+                                    return <div className={page.titleevery + (this.state.cid == ind ? (' ' + page.titleevery1) : '')} key={ind} onClick={this.changestyle.bind(this, ind, i)} city={i}>{i}</div>
+                                })}
+                            </div>
+                        </div>
+                        <div className={page.line}></div>
+                        <div className={page.titleone}>
+                            <span>分 类：</span>
+                            <div className={page.titlebox}>
+                                {this.state.types.map((i, ind) => {
+                                    return <div className={page.titleevery + (this.state.tid == ind ? (' ' + page.titleevery1) : '')} key={ind} onClick={this.changestyle1.bind(this, ind)} type={i}>{i}</div>
+                                })}
+                            </div>
+                        </div>
+                        <div className={page.line}></div>
+                        <div className={page.titleone}>
+                            <span>时 间：</span>
+                            <div className={page.titlebox}>
+                                {this.state.times.map((i, ind) => {
+                                    return <div className={page.titleevery + (this.state.tid1 == ind ? (' ' + page.titleevery1) : '')} key={ind} onClick={this.changestyle2.bind(this, ind)} >{i}</div>
+                                })}
+                            </div>
+                        </div>
                     </div>
-                    {this.getPosterb(this.state.data)}
-                    <Pagination defaultCurrent={1} total={50} className={page.paging} />
-                </div>
-                <Bottom></Bottom>
-            </div >
+                    <div className={page.showbox}>
+                        <div className={page.showbox1}>
+                            {this.state.sorts.map((i, ind) => {
+                                return <div className={page.showevery + (this.state.sid == ind ? (' ' + page.showevery1) : '')} key={ind} onClick={this.changestyle3.bind(this, ind)} >{i}</div>
+                            })}
+                        </div>
+                        {this.getPosterb(this.state.data)}
+                        <Pagination defaultCurrent={1} total={50} className={page.paging} />
+                    </div>
+                    <Bottom></Bottom>
+                </div >
+            </div>
         )
     }
 }

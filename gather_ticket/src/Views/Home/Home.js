@@ -37,7 +37,7 @@ export default class Home extends Component {
     render() {
         return (
             <div>
-                <Nav></Nav>
+                <Nav pageIdent="home"></Nav>
                 <NavList></NavList>
                 <Notable></Notable>
                 <Posters title={"演唱会"}></Posters>

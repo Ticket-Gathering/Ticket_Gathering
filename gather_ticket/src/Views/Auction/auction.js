@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Nav from "../../Components/Nav";
 import AboutItem from "./auctionItem";
 import Paper from "./Paper";
+import Nav from "../../Components/Nav";
 import about from "./auction.module.css";
 import Poster from "../../Components/Poster";
 import Axios from "../../Module/Axios";
@@ -54,8 +54,8 @@ export default class auction extends Component {
     render() {
         return (
             <div className={about.about}>
-                <Nav></Nav>
-                <div className={about.format}>
+                <Nav pageIdent="page"></Nav>
+                <div className={about.all}>
                     <div className={about.left}>
 
                         <AboutItem aboutitem={this.state.data}></AboutItem>
@@ -72,18 +72,18 @@ export default class auction extends Component {
                                 </div>
                             </div>
                             <div className={about.leftbb} id="xmxq">
-                                <div className={about.subtitle}>温馨提示</div>
-                                <div className={about.line}/>
-                                <span className={about.mytext}>本项目不支持使用优惠券购票，敬请理解</span>
-                                <div className={about.subtitle}>演出介绍</div>
-                                <div className={about.line}/>
-                                <div className={about.mytext}>他说，做音乐是件很帅的事情。</div>
-                                <img src='http://localhost:8081/images/li.webp' className={about.img1}/>
-                                <div className={about.mytext}>自2013年出道以来，李荣浩专注音乐潜心创作，一年一张专辑的频率被誉为"音乐圈劳模"，而2018年新专辑《耳朵》一经推出就取得了相当可观的成绩，多首歌曲长期处于"霸榜"状态，亿万播放量更是霸气成各大榜单赢家。而在互联网时代，数字单曲是大趋势的情况下，李荣浩一直坚持做实体专辑，不随波逐流，用自己的脚踏实地去回报音乐，致敬音乐。
+                                <div className={about.mytext}>演出介绍</div>
+                                <div className={about.line}></div>
+                                <div className={about.mytext1}>温馨提示</div>
+                                <span className={about.mytext2}>本项目不支持使用优惠券购票，敬请理解</span>
+                                <div className={about.mytext1}>演出介绍</div>
+                                <div className={about.mytext2}>他说，做音乐是件很帅的事情。</div>
+                                <img src='http://localhost:8081/images/li.webp' className={about.img1}></img>
+                                <div className={about.mytext2}>自2013年出道以来，李荣浩专注音乐潜心创作，一年一张专辑的频率被誉为"音乐圈劳模"，而2018年新专辑《耳朵》一经推出就取得了相当可观的成绩，多首歌曲长期处于"霸榜"状态，亿万播放量更是霸气成各大榜单赢家。而在互联网时代，数字单曲是大趋势的情况下，李荣浩一直坚持做实体专辑，不随波逐流，用自己的脚踏实地去回报音乐，致敬音乐。
 
 一年一张专辑，一年几首HitSong，已然成了李荣浩发片常态。前几张专辑里，经典曲目层出不穷，其代表作就有《模特》《李白》《老街》《不将就》《喜剧之王》《作曲家》《戒烟》等，成众多人歌单里的单曲循环，素有百听不厌之势。如果说首专是李荣浩音乐生涯的一座高峰，那2018年新专辑《耳朵》就是其职业生涯的另一座高峰，引发全民狂欢的《贝贝》，同名大热主打歌《耳朵》，刮起复古都市风的《王牌冤家》，以及引发群体共鸣的《成长之重量》，都为成就这张"神专"添砖加瓦，而网络爆款《年少有为》则为这张专辑添了浓墨重彩的一笔，直戳亿万网友内心，让每一个有故事的人珍惜身边所拥有的。</div>
-                                <img src='http://localhost:8081/images/li1.webp' className={about.img2}/>
-                                <div className={about.mytext}>李荣浩2019「年少有为」巡回演唱会
+                                <img src='http://localhost:8081/images/li1.webp' className={about.img2}></img>
+                                <div className={about.mytext2}>李荣浩2019「年少有为」巡回演唱会
 
 李荣浩「年少有为」巡回演唱会于2019年3月16日上海正式开跑，这也是继「天生李荣浩亚洲巡回演唱会」和「李荣浩有理想世界巡回演唱会」之后，职业生涯的第三轮巡演，也是第五张专辑发行后众多新歌首秀舞台，当然，前几张专辑的经典曲目也将进行重新编曲再演绎，争取让歌迷们享受到一次全新的音乐之旅。
 
@@ -91,8 +91,8 @@ export default class auction extends Component {
                                 <img src='http://localhost:8081/images/li2.webp' className={about.img2}></img>
                             </div>
                             <div className={about.leftbb} id="gpxz">
-                                <div className={about.subtitle}>购票须知</div>
-                                <div className={about.line}/>
+                                <div className={about.mytext}>购票须知</div>
+                                <div className={about.line}></div>
                                 <div className={about.textg}>限购说明</div>
                                 <div className={about.textgs}>每个账号最多购买4张</div>
                                 <div className={about.textg}>实名制</div>
@@ -113,8 +113,8 @@ export default class auction extends Component {
                                 <div className={about.textgs}>对于异常订购行为，大麦网有权在订单成立或者生效之后取消相应订单。异常订购行为包括但不限于以下情形： （1）通过同一ID订购超出限购张数的订单； （2）经合理判断认为非真实消费者的下单行为，包括但不限于通过批量相同或虚构的支付账号、收货地址（包括下单时填写及最终实际收货地址）、收件人、电话号码订购超出限购张数的订单</div>
                             </div>
                             <div className={about.leftbb} id="gyxz">
-                                <div className={about.subtitle}>观演须知</div>
-                                <div className={about.line}/>
+                                <div className={about.mytext}>购票须知</div>
+                                <div className={about.line}></div>
                                 <div className={about.textg}>入场时间</div>
                                 <div className={about.textgs}>演出前约90分钟</div>
                                 <div className={about.textg}>禁止携带物品</div>
@@ -132,19 +132,19 @@ export default class auction extends Component {
                             </div>
                         </div>
                     </div>
-                    {/*<div className={about.right}>*/}
-                    {/*    <Paper paper={this.state.data.billtype}></Paper>*/}
-                    {/*    <div className={about.rightb}>*/}
-                    {/*        <div className={about.rightbt}>为你推荐</div>*/}
-                    {/*        <div className={about.rightbb}>*/}
-                    {/*            {*/}
-                    {/*                this.state.introduce.map((p, ind) => {*/}
-                    {/*                    return <Poster poster={p} key={ind}></Poster>*/}
-                    {/*                })*/}
-                    {/*            }*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*</div >*/}
+                    <div className={about.right}>
+                        <Paper paper={this.state.data.billtype}></Paper>
+                        <div className={about.rightb}>
+                            <div className={about.rightbt}>为你推荐</div>
+                            <div className={about.rightbb}>
+                                {
+                                    this.state.introduce.map((p, ind) => {
+                                        return <Poster poster={p} key={ind}></Poster>
+                                    })
+                                }
+                            </div>
+                        </div>
+                    </div >
                 </div>
             </div>
         )
