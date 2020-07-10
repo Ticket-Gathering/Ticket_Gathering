@@ -67,15 +67,15 @@
 }
 .index:hover{
     color: #E7E7E7;
-    filter:contrast(100%);
+    filter:contrast(10%);
 }
 .index a{
     color: #E7E7E7;
-    filter:contrast(100%);
+    filter:contrast(10%);
 }
 .index a:hover{
     color: #E7E7E7;
-    filter:contrast(100%);
+    filter:contrast(10%);
 }
 .page{
     margin-left: 20px;
@@ -83,15 +83,15 @@
 }
 .page:hover{
     color: #E7E7E7;
-    filter:contrast(100%);
+    filter:contrast(10%);
 }
 .page a{
     color: #E7E7E7;
-    filter:contrast(100%);
+    filter:contrast(10%);
 }
 .page a:hover{
     color: #E7E7E7;
-    filter:contrast(100%);
+    filter:contrast(10%);
 }
 .search{
     margin: auto;
@@ -133,7 +133,7 @@ input::-webkit-input-placeholder {
 .inputtext{
     width: 50px;
     height: 48px;
-    background-color: #ff3366;
+    background-color: #E7E7E7;
     border-radius: 50px 50px 50px 50px;
     color: white;
     text-align: center;
@@ -142,7 +142,7 @@ input::-webkit-input-placeholder {
 }
 
 .inputtext:hover{
-    background-color: #e62958;
+    background-color: #E7E7E7;
     box-shadow: 0 2px 4px -1px rgba(0,0,0,0.2), 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12)
 }
 
@@ -165,12 +165,13 @@ input::-webkit-input-placeholder {
 .logintext a{
    color:white;
    text-decoration: none;
+    filter:contrast(10%);
  }
 .logintext a:hover{
     color: #E7E7E7;
-
+    filter:contrast(10%);
 }
 .logintext:hover{
     color: #E7E7E7;
-    filter:contrast(100%);
+    filter:contrast(10%);
 }

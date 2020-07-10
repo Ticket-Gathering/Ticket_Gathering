@@ -10,8 +10,8 @@ export default class Page extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tid: this.props.location.state.typeID,
-            cid: this.props.location.state.cityID?this.props.location.state.cityID:0,
+            tid: (typeof (this.props.location.state)!="undefined")?0:0,
+            cid: (typeof (this.props.location.state)!="undefined")?this.props.location.state.cityID:0,
             tid1: 0,
             sid: 1,
             citys: ["全国", "上海", "北京", "浙江", "四川", "广东", "江苏", "湖北", "天津"],
