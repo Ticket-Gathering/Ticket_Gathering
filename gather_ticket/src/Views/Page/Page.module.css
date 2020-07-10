@@ -13,12 +13,12 @@
     margin-top: 5px;
     margin-left: 20px;
 }
-.titleevery{
+.titleUnselected{
     width: 80px;
     text-align: center;
     margin-left:15px;
 }
-.titleevery1{
+.titleSelected{
     background-color: #0088D6;
     color:white;
 }

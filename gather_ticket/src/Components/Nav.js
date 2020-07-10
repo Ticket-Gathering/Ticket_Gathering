@@ -69,7 +69,7 @@ export default class nav extends Component {
                         }
                     <div className={navstyle.navbar}>
                         <div className={navstyle.index}><Link to='/'>首页</Link></div>
-                        <div className={navstyle.page}><Link to={{pathname:'/page',state:{typeID:'0',cityID:this.state.cityValue}}}>分类</Link></div>
+                        <div className={navstyle.page}><Link to={{pathname:'/page',state:{typeID:0,cityID:this.state.cityValue}}}>分类</Link></div>
                     </div>
                     <div className={navstyle.search}>
                         <img src={require('../ImgAssets/search.png')} className={navstyle.searchimg}></img>
