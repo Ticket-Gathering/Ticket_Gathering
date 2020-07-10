@@ -10,7 +10,7 @@ export default class Page extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tid: (typeof (this.props.location.state)!="undefined")?0:0,
+            tid: (typeof (this.props.location.state)!="undefined")?this.props.location.state.typeID:0,
             cid: (typeof (this.props.location.state)!="undefined")?this.props.location.state.cityID:0,
             tid1: 0,
             sid: 1,
