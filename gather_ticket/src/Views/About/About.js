@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
+import Nav from "../../Components/Nav";
 import AboutItem from "./AboutItem";
 import Paper from "./Paper";
 import about from "./About.module.css";
 import Poster from "../../Components/Poster";
 import Axios from "../../Module/Axios";
 
-const Data = {timelist:['2020.08.02 周六 20:00','2020.08.02 周日 20:00' ],pricelist:['100票面 预售票','120票面 全价票','188票面 双人票'],billtype:{chooice:1,getter:1,type:1}};
+const Data = {timelist:['2020.08.01 周六 20:00','2020.08.02 周日 20:00' ],pricelist:['100','120','188'],billtype:{chooice:1,getter:1,type:1},name:'李荣浩2019「年少有为」巡回演唱会',showtime:'2020.08.01-2020.08.02' ,address:'上海市 | 珍珠剧场The Pearl '};
 
 export default class About extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: { timelist: [], pricelist: [], billtype: {} },
-            introduce: []
-        }
+            data: { timelist: [], pricelist: [], billtype: {} ,name:'',showtime:'',address:''},
+            introduce: [],
+    }
 
     }
     componentDidMount() {

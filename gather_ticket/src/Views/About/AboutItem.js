@@ -101,6 +101,7 @@ export default class AboutItem extends Component {
             <div className={abouti.abouti}>
                 <div className={abouti.left}>
                     <div className={abouti.leftt}>
+                        {/*<img className={abouti.leftti} src={this.props.aboutitem.imgurl} />*/}
                         <img className={abouti.leftti} src={this.props.aboutitem.imgurl} />
                         <div className={abouti.leftts}>
                             <Sign></Sign>

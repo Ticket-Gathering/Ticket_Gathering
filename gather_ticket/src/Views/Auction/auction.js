@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Nav from "../../Components/Nav";
 import AboutItem from "./auctionItem";
 import Paper from "./Paper";
 import about from "./auction.module.css";
