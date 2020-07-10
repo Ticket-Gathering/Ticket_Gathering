@@ -10,22 +10,10 @@ export default class nav extends Component {
     constructor(props) {
         super(props);
         this.state={
-            cityValue:[],
+            cityValue:'全国',
             username: 'test',
             isLoggedIn:false
         }
-    };
-    cityPick=(e)=>{
-        console.log(e)
-        if(e.length<=0){
-            this.setState({
-                cityValue:["全国"]
-            })
-            return;
-        }
-        this.setState({
-            cityValue:[e[0]]
-        })
     };
     componentWillMount() {
         if(sessionStorage.getItem('token')) {
@@ -64,15 +52,12 @@ export default class nav extends Component {
                                     </div>
                                     <div style={{marginLeft: 5 + "px"}}>
                                         <Select style={{width: 144 + "px", color: "#999999"}}
-                                                showSearch
                                                 defaultValue="全国"
-                                                optionFilterProp="children"
-                                                filterOption={(input, option) =>
-                                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                                }
+                                                value={this.state.cityValue}
+                                                onChange={(newValue)=>{this.setState({cityValue:newValue})}}
                                         >
                                             {addressData.map((item,index)=>{
-                                                return <Option key={addressData[index].value}>{addressData[index].value}</Option>
+                                                return <Option key={index} >{addressData[index].value}</Option>
                                             })}
                                         </Select>
                                     </div>
@@ -80,11 +65,11 @@ export default class nav extends Component {
                                 </div>
                             </div>
                         ) :
-                            (<div style={{width:144+'px'}}/>)
+                            (<div/>)
                         }
                     <div className={navstyle.navbar}>
                         <div className={navstyle.index}><Link to='/'>首页</Link></div>
-                        <div className={navstyle.page}><Link to={{pathname:'/page',state:{typeID:'0'}}}>分类</Link></div>
+                        <div className={navstyle.page}><Link to={{pathname:'/page',state:{typeID:'0',cityID:this.state.cityValue}}}>分类</Link></div>
                     </div>
                     <div className={navstyle.search}>
                         <img src={require('../ImgAssets/search.png')} className={navstyle.searchimg}></img>
