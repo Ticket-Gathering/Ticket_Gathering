@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
 }
-.all {
+.base {
     width: 95%;
     --animate-duration: 1s;
     --animate-delay: 1s;
@@ -25,14 +25,14 @@
     border-radius: 10px ;
     text-align: center;
 }
-.brief{
+.briefInfo{
     width: 84%;
     text-align: center;
     margin: 10px auto 30px;
     display: flex;
     flex-direction: row;
 }
-.left {
+.showInfo {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -43,12 +43,12 @@
     display: flex;
     flex-direction: column;
 }
-.leftbt {
+.subNavs {
     width: 100%;
     display: flex;
     justify-content: center;
 }
-.leftbtb {
+.subNav {
     height: 40px;
     text-align: center;
     line-height: 30px;
@@ -56,41 +56,16 @@
     margin-left: 20px;
     margin-right: 20px;
 }
-.leftbb {
+.showDetails {
     width: 60%;
     margin: 20px auto;
 }
-.right {
+.ticketInfo {
     margin-top: 10px;
     width: 320px;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.rightb {
-    width: 320px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.rightbt {
-    width: 320px;
-    height: 30px;
-    text-align: center;
-    line-height: 30px;
-    font-size: 20px;
-}
-.rightb {
-    width: 320px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex:0 0 auto;
-}
-.mytext{
-    font-size: 18px;
-    color: black;
-    margin-top: 50px;
 }
 .line{
     width: 160px;
@@ -104,7 +79,7 @@
     margin-top: 20px;
     font-weight: 700;
 }
-.mytext2{
+.detailText{
     color:#4A4A4A;
     font-size: 15px;
     margin-top: 20px;
@@ -117,12 +92,12 @@
     border-radius: 5px;
     box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
-.textg{
+.tipTitle{
     color: #999999;
     font-size: 12px;
     margin-top: 20px;
 }
-.textgs{
+.tip{
     color: #4A4A4A;
     font-size: 16px;
     margin-top: 10px;

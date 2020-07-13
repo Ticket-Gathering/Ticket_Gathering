@@ -14,12 +14,12 @@
     content: "";
     background-color: rgba(0,0,0,.55);
 }
-.firstbox{
+.headerBox{
     width: 100%;
     height: 100px;
     padding: 1px;
 }
-.imgbox{
+.imgBox{
     width: 110px;
     height: 50px;
     margin-left: 160px;
@@ -27,23 +27,23 @@
     float: top;
     z-index: 1;
 }
-.imgbox img{
+.imgBox img{
     width: 110px;
     height: 50px;
 }
-.secondbox{
+.mainBox{
     width: 100%;
     height: 760px;
     display: flex;
 }
-.secondbox img{
+.mainBox img{
     width: 100%;
     height: auto;
     margin-top: -100px;
     margin-left: 0;
     z-index: 1;
 }
-.loginbox{
+.loginBox{
     width: 330px;
     height: 380px;
 
@@ -53,31 +53,7 @@
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
     z-index: 1;
 }
-.loginboxfirst{
-    width: 100%;
-    height: 42px;
-    display: flex;
-}
-.loginboxfirstson{
-    width: 110px;
-    height: 42px;
-    text-align: center;
-    background-color: #E7E7E7;
-    line-height: 42px;
-    border-radius: 5px 5px 0 0;
-}
-.loginboxfirstson1{
-    width: 110px;
-    height: 42px;
-    text-align: center;
-    background-color: #FFFFFF;
-    line-height: 42px;
-    color: #ff3366;
-    border-top: 2px solid #ff3366;
-    box-sizing: border-box;
-    border-radius: 5px 5px 0 0;
-}
-.last{
+.base{
     width: 330px;
     position: relative;
 }
@@ -105,33 +81,33 @@
 .input::-webkit-input-placeholder {
     font-size: 15px;
 }
-.logo{
+.logoUsr{
     position: absolute;
     width: 40px;
     height: 40px;
     top: 27px;
     left: 26px;
 }
-.logo img{
+.logoUsr img{
     width: 20px;
     height: 20px;
     margin-top: 10px;
     margin-left: 10px;
 }
-.logo1{
+.logoLock{
     position: absolute;
     width: 40px;
     height: 40px;
     top: 92px;
     left: 26px;
 }
-.logo1 img{
+.logoLock img{
     width: 20px;
     height: 20px;
     margin-top: 10px;
     margin-left: 10px;
 }
-.dl{
+.loginBtn{
     width: 320px;
     height: 48px;
     margin-top: 64px;
@@ -144,10 +120,10 @@
     border-radius: 30px;
     font-size: 20px;
 }
-.dl:hover{
+.loginBtn:hover{
     background: #FF1D76;
 }
-.every{
+.logoPlatforms{
     width: 110px;
     height: 22px;
     margin-top: 15px;
@@ -155,30 +131,27 @@
     display: flex;
     justify-content: space-between;
 }
-.everyson{
+.logoPlatform{
     width: 22px;
     height: 22px;
 }
-.everyson img{
+.logoPlatform img{
     width: 22px;
     height: 22px;
-    margin-top: 0px;
-    margin-left: 0px;
+    margin-top: 0;
+    margin-left: 0;
 }
-.bottom{
-    width: 130px;
+.bottomOptions{
+    width: 330px;
     margin-top: 15px;
-    margin-left: 175px;
-    display: flex;
-    justify-content: space-between;
+    margin-left: 25px;
 }
-.bottomson{
+.bottomOption{
     font-size: 15px;
+    float: right;
+    margin-left: 20px;
+    color: #ff3366;
 }
-.bottomson a{
-    text-decoration: none;
-    color: #0088D6;
-}
-.bottomson Link{
+.bottomOption Link{
     text-decoration: none;
 }

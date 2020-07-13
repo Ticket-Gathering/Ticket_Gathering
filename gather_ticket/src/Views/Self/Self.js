@@ -172,9 +172,9 @@ export default class Self extends Component {
         super(props);
         this.state = {
             value: 1,
-            cv: "1"
+            content: "1"
         };
-        this.changecontent = this.changecontent.bind(this)
+        this.changeContent = this.changeContent.bind(this)
 
     }
     onChange = e => {
@@ -183,35 +183,35 @@ export default class Self extends Component {
             value: e.target.value,
         });
     };
-    changecontent(e) {
+    changeContent(e) {
         this.setState({
-            cv: e.key
+            content: e.key
         })
 
     }
-    changecontent2(i) {
+    SwitchTab(i) {
         switch (i) {
             case "1":
-                return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
-                    <div className={selfstyle.box}>基本资料</div>
-                    <div className={selfstyle.line}></div>
+                return <Content style={{ padding: '0 80px', minHeight: 280 }}>
+                    <div className={selfstyle.tabBox}>基本资料</div>
+                    <div className={selfstyle.line}/>
                     <div>
-                        昵称：<Input placeholder="nickname" className={selfstyle.myinput1} /><br />
-                        真实姓名：<Input placeholder="Real name" className={selfstyle.myinput} /><br />
-                        性别： <Radio.Group onChange={this.onChange} value={this.state.value} className={selfstyle.myradio}>
+                        昵称：<Input placeholder="nickname" className={selfstyle.input} style={{marginLeft: '37px'}}/><br />
+                        真实姓名：<Input placeholder="Real name" className={selfstyle.input} /><br />
+                        性别： <Radio.Group onChange={this.onChange} value={this.state.value} className={selfstyle.genderSelect}>
                             <Radio value={1}>男</Radio>
                             <Radio value={2}>女</Radio>
                         </Radio.Group><br />
-                        出生日期： <DatePicker style={{width: '300px'}} defaultValue={moment('2019/08/03', dateFormat)} format={dateFormat} className={selfstyle.mydate} /><br />
-                        身份证号：<Input placeholder="Id number" className={selfstyle.myinput} /><br />
-                        <Button type="primary" className={selfstyle.mybutton} style={{backgroundColor: '#ff3366'}}>保存</Button>
+                        出生日期： <DatePicker style={{width: '300px'}} defaultValue={moment('2019/08/03', dateFormat)} format={dateFormat} className={selfstyle.dateSelect} /><br />
+                        身份证号：<Input placeholder="Id number" className={selfstyle.input} /><br />
+                        <Button type="primary" className={selfstyle.button} style={{backgroundColor: '#ff3366'}}>保存</Button>
                     </div>
-                </Content>
+                </Content>;
                 break;
             case "2":
                 return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
-                    <div className={selfstyle.box}>账号设置</div>
-                    <div className={selfstyle.line}></div>
+                    <div className={selfstyle.tabBox}>账号设置</div>
+                    <div className={selfstyle.line}/>
                     <div>
                         <Collapse accordion>
                             <Panel header="登录密码" key="1">
@@ -225,21 +225,21 @@ export default class Self extends Component {
                             </Panel>
                         </Collapse>,
                     </div>
-                </Content>
+                </Content>;
                 break;
             case "3":
                 return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
-                    <div className={selfstyle.box}>地址管理</div>
-                    <div className={selfstyle.line}></div>
+                    <div className={selfstyle.tabBox}>地址管理</div>
+                    <div className={selfstyle.line}/>
                     <div>
                         <Table columns={columns} dataSource={data} />
                     </div>
-                </Content>
+                </Content>;
                 break;
             case "4":
                 return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
-                    <div className={selfstyle.box}>常用购票人管理</div>
-                    <div className={selfstyle.line}></div>
+                    <div className={selfstyle.tabBox}>常用购票人管理</div>
+                    <div className={selfstyle.line}/>
                     <div>
                         <List
                             itemLayout="horizontal"
@@ -255,12 +255,12 @@ export default class Self extends Component {
                             )}
                         />
                     </div>
-                </Content>
+                </Content>;
                 break;
             case "5":
                 return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
-                    <div className={selfstyle.box}>订单管理</div>
-                    <div className={selfstyle.line}></div>
+                    <div className={selfstyle.tabBox}>订单管理</div>
+                    <div className={selfstyle.line}/>
                     <div>
                         <Result
                             icon={<Icon type="smile" theme="twoTone" />}
@@ -268,23 +268,23 @@ export default class Self extends Component {
                             extra={<Button type="primary">Next</Button>}
                         />
                     </div>
-                </Content>
+                </Content>;
                 break;
             case "6":
                 return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
-                    <div className={selfstyle.box}>我的优惠券</div>
-                    <div className={selfstyle.line}></div>
+                    <div className={selfstyle.tabBox}>我的优惠券</div>
+                    <div className={selfstyle.line}/>
                     <div>
                         <Table columns={columns1} dataSource={data2} />
                     </div>
-                </Content>
+                </Content>;
                 break;
         }
     }
     render() {
         return (
             <div>
-                <Nav></Nav>
+                <Nav/>
                 <div className={selfstyle.format}>
                     <Layout style={{background: '#fff'}}>
                         <Content style={{ padding: '0 50px' }}>
@@ -306,14 +306,13 @@ export default class Self extends Component {
                                                 <span>
                                                     <Icon type="user" />
                                                     账户中心
-                </span>
+                                                </span>
                                             }
-
                                         >
-                                            <Menu.Item key="1" onClick={this.changecontent}>个人信息</Menu.Item>
-                                            <Menu.Item key="2" onClick={this.changecontent}>账号设置</Menu.Item>
-                                            <Menu.Item key="3" onClick={this.changecontent}>收货地址</Menu.Item>
-                                            <Menu.Item key="4" onClick={this.changecontent}>常用购票人</Menu.Item>
+                                            <Menu.Item key="1" onClick={this.changeContent}>个人信息</Menu.Item>
+                                            <Menu.Item key="2" onClick={this.changeContent}>账号设置</Menu.Item>
+                                            <Menu.Item key="3" onClick={this.changeContent}>收货地址</Menu.Item>
+                                            <Menu.Item key="4" onClick={this.changeContent}>常用购票人</Menu.Item>
                                         </SubMenu>
                                         <SubMenu
                                             key="sub2"
@@ -321,23 +320,21 @@ export default class Self extends Component {
                                                 <span>
                                                     <Icon type="laptop" />
                                                     交易中心
-                </span>
+                                                </span>
                                             }
                                         >
-                                            <Menu.Item key="5" onClick={this.changecontent}>订单管理</Menu.Item>
-                                            <Menu.Item key="6" onClick={this.changecontent}>我的优惠券</Menu.Item>
+                                            <Menu.Item key="5" onClick={this.changeContent}>订单管理</Menu.Item>
+                                            <Menu.Item key="6" onClick={this.changeContent}>我的优惠券</Menu.Item>
                                         </SubMenu>
                                     </Menu>
                                 </Sider>
-
-                                {this.changecontent2(this.state.cv)}
-
+                                {this.SwitchTab(this.state.content)}
                             </Layout>
                         </Content>
                         <Footer style={{ textAlign: 'center', background: '#fff' }}>You are very welcome</Footer>
                     </Layout>
                 </div>
-                <Bottom></Bottom>
+                <Bottom/>
             </div>
         )
     }

@@ -28,8 +28,7 @@
     padding-left: 70px;
     padding-right: 70px;
   }
-
-  .box{
+  .tabBox{
     width: 100px;
     height: 30px;
     color: white;
@@ -45,32 +44,27 @@
     background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
     margin-top: -3px;
   }
-.myinput{
-  width: 300px;
-  margin-top: 15px;
-  margin-left: 5px;
-}
-.myinput1{
-  width: 300px;
-  margin-top: 15px;
-  margin-left: 37px;
-}
-.myradio{
-  margin-top: 15px;
-  margin-left: 30px;
-}
-.mydate{
-  margin-top: 15px;
-}
-.mybutton{
-  margin-top: 15px;
-  background-color: #ff3366;
-  border:none;
-}
-.table-operations {
-  margin-bottom: 16px;
-}
+  .input{
+    width: 300px;
+    margin-top: 15px;
+    margin-left: 5px;
+  }
+  .genderSelect{
+    margin-top: 15px;
+    margin-left: 30px;
+  }
+  .dateSelect{
+    margin-top: 15px;
+  }
+  .button{
+    margin-top: 15px;
+    background-color: #ff3366;
+    border:none;
+  }
+  .table-operations {
+    margin-bottom: 16px;
+  }
 
-.table-operations > button {
-  margin-right: 8px;
-}
+  .table-operations > button {
+    margin-right: 8px;
+  }
