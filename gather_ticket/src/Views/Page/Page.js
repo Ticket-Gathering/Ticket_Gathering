@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import Navtwo from "../../Components/Navtwo";
+import React, { Component } from 'react';
+import Nav from "../../Components/Nav";
 import Bottom from "../../Components/Bottom";
 import page from "./Page.module.css";
 import Axios from '../../Module/Axios';
@@ -10,11 +10,11 @@ export default class Page extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tid: this.props.location.state.typeID,
-            cid: 0,
-            tid1: 0,
+            typeID: (typeof (this.props.location.state)!="undefined")?this.props.location.state.typeID:0,
+            cityID: (typeof (this.props.location.state)!="undefined")?(this.props.location.state.cityID=="全国"?0:this.props.location.state.cityID):0,
+            timeID: 0,
             sid: 1,
-            citys: ["全国", "上海", "北京", "杭州", "深圳", "成都", "广州", "武汉", "南京"],
+            citys: ["全国", "上海", "北京", "浙江", "四川", "广东", "江苏", "湖北", "天津"],
             types: ["全部", "演唱会", "话剧歌剧", "体育", "儿童亲子","展览休闲","音乐会","曲苑杂坛", "舞蹈芭蕾" ],
             times: ["全部", "今天", "明天", "本周末", "一个月内"],
             sorts: ["相关度排序", "推荐排序", "最近开场", "最新上架"],
@@ -23,23 +23,24 @@ export default class Page extends Component {
             type: ''
         }
     }
-    changestyle(cid, city) {
+    changeCity=(newCityID, newCity)=>{
         this.setState({
-            cid,
-            city
+            cityID:newCityID,
+            city:newCity
         });
         this.getData();
     }
-    changestyle1(tid) {
+    changeType=(newTypeID,newType)=>{
         this.setState({
-            tid
+            typeID:newTypeID,
+            type:newType
         });
         this.getData();
 
     }
-    changestyle2(tid1) {
+    changeTime=(newTimeID) =>{
         this.setState({
-            tid1
+            timeID:newTimeID
 
         })
     }
@@ -86,46 +87,60 @@ export default class Page extends Component {
     render() {
         return (
             <div>
-                <Navtwo></Navtwo>
-                <div className={page.title}>
-                    <div className={page.titleone}>
-                        <span>城 市：</span>
-                        <div className={page.titlebox}>
-                            {this.state.citys.map((i, ind) => {
-                                return <div className={page.titleevery + (this.state.cid == ind ? (' ' + page.titleevery1) : '')} key={ind} onClick={this.changestyle.bind(this, ind, i)} city={i}>{i}</div>
-                            })}
-                        </div>
-                    </div>
-                    <div className={page.line}></div>
-                    <div className={page.titleone}>
-                        <span>分 类：</span>
-                        <div className={page.titlebox}>
-                            {this.state.types.map((i, ind) => {
-                                return <div className={page.titleevery + (this.state.tid == ind ? (' ' + page.titleevery1) : '')} key={ind} onClick={this.changestyle1.bind(this, ind)} type={i}>{i}</div>
-                            })}
-                        </div>
-                    </div>
-                    <div className={page.line}></div>
-                    <div className={page.titleone}>
-                        <span>时 间：</span>
-                        <div className={page.titlebox}>
-                            {this.state.times.map((i, ind) => {
-                                return <div className={page.titleevery + (this.state.tid1 == ind ? (' ' + page.titleevery1) : '')} key={ind} onClick={this.changestyle2.bind(this, ind)} >{i}</div>
-                            })}
-                        </div>
-                    </div>
+                <div >
+                    <Nav pageIdent="page"></Nav>
                 </div>
-                <div className={page.showbox}>
-                    <div className={page.showbox1}>
-                        {this.state.sorts.map((i, ind) => {
-                            return <div className={page.showevery + (this.state.sid == ind ? (' ' + page.showevery1) : '')} key={ind} onClick={this.changestyle3.bind(this, ind)} >{i}</div>
-                        })}
+                <div>
+
+                    <div className={page.title}>
+                        <div className={page.titleone}>
+                            <span>当 前 选 中 城 市：</span>
+                            <br/>
+                            <span>城 市：</span>
+                            <div className={page.titlebox}>
+                                {
+                                    this.state.citys.map((item, index) => {
+                                        console.log(this.state.cityID)
+                                        return <div className={page.titleUnselected + (this.state.cityID == index ? (' ' + page.titleSelected) : '')} onClick={()=>this.changeCity(index,item)} >{item}</div>
+                                    })
+                                }
+                            </div>
+                        </div>
+                        <div className={page.line}></div>
+                        <div className={page.titleone}>
+                            <span>分 类：</span>
+                            <div className={page.titlebox}>
+                                {
+                                    this.state.types.map((item, index) => {
+                                        return <div className={page.titleUnselected + (this.state.typeID == index ? (' ' + page.titleSelected) : '')}  onClick={()=>this.changeType(index,item)} >{item}</div>
+                                    })
+                                }
+                            </div>
+                        </div>
+                        <div className={page.line}></div>
+                        <div className={page.titleone}>
+                            <span>时 间：</span>
+                            <div className={page.titlebox}>
+                                {
+                                    this.state.times.map((item, index) => {
+                                        return <div className={page.titleUnselected + (this.state.timeID == index ? (' ' + page.titleSelected) : '')} onClick={()=>this.changeTime(index)} >{item}</div>
+                                    })
+                                }
+                            </div>
+                        </div>
                     </div>
-                    {this.getPosterb(this.state.data)}
-                    <Pagination defaultCurrent={1} total={50} className={page.paging} />
-                </div>
-                <Bottom></Bottom>
-            </div >
+                    <div className={page.showbox}>
+                        <div className={page.showbox1}>
+                            {this.state.sorts.map((item, index) => {
+                                return <div className={page.showevery + (this.state.sid == index ? (' ' + page.showevery1) : '')} key={index} onClick={()=>this.changestyle3.bind(this, index)} >{item}</div>
+                            })}
+                        </div>
+                        {this.getPosterb(this.state.data)}
+                        <Pagination defaultCurrent={1} total={50} className={page.paging} />
+                    </div>
+                    <Bottom></Bottom>
+                </div >
+            </div>
         )
     }
 }
