@@ -9,7 +9,7 @@ export default class NavList extends Component {
                 <div className={liststyle.son}>
                     <Link to={
                             {pathname:"/page",
-                            state:{typeID:`1`}}
+                            state:{typeID:`1`,cityID:this.props.cityValue}}
                           }>
                         <div className={liststyle.sonimg}>
                             <img src={require('../ImgAssets/vocal.png')} alt="定位图片"></img>
@@ -20,7 +20,7 @@ export default class NavList extends Component {
                 <div className={liststyle.son}>
                     <Link to={
                         {pathname:"/page",
-                            state:{typeID:`2`}}
+                            state:{typeID:`2`,cityID:this.props.cityValue}}
                     }>
                         <div className={liststyle.sonimg}>
                             <img src={require('../ImgAssets/drama.png')} ></img>
@@ -31,7 +31,7 @@ export default class NavList extends Component {
                 <div className={liststyle.son}>
                     <Link to={
                         {pathname:"/page",
-                            state:{typeID:`3`}}
+                            state:{typeID:`3`,cityID:this.props.cityValue}}
                     }>
                         <div className={liststyle.sonimg}>
                             <img src={require('../ImgAssets/sports.png')} ></img>
@@ -42,7 +42,7 @@ export default class NavList extends Component {
                 <div className={liststyle.son}>
                     <Link to={
                         {pathname:"/page",
-                            state:{typeID:`4`}}
+                            state:{typeID:`4`,cityID:this.props.cityValue}}
                     }>
                         <div className={liststyle.sonimg}>
                             <img src={require('../ImgAssets/children.png')} ></img>
@@ -53,7 +53,7 @@ export default class NavList extends Component {
                 <div className={liststyle.son}>
                     <Link to={
                         {pathname:"/page",
-                            state:{typeID:`5`}}
+                            state:{typeID:`5`,cityID:this.props.cityValue}}
                     }>
                         <div className={liststyle.sonimg}>
                             <img src={require('../ImgAssets/img.png')}></img>
@@ -64,7 +64,7 @@ export default class NavList extends Component {
                 <div className={liststyle.son}>
                     <Link to={
                         {pathname:"/page",
-                            state:{typeID:`6`}}
+                            state:{typeID:`6`,cityID:this.props.cityValue}}
                     }>
                         <div className={liststyle.sonimg}>
                             <img src={require('../ImgAssets/concert.png')} ></img>
@@ -75,7 +75,7 @@ export default class NavList extends Component {
                 <div className={liststyle.son}>
                     <Link to={
                         {pathname:"/page",
-                            state:{typeID:`7`}}
+                            state:{typeID:`7`,cityID:this.props.cityValue}}
                     }>
                         <div className={liststyle.sonimg}>
                             <img src={require('../ImgAssets/opera.png')}></img>
@@ -86,7 +86,7 @@ export default class NavList extends Component {
                 <div className={liststyle.son}>
                     <Link to={
                         {pathname:"/page",
-                            state:{typeID:`8`}}
+                            state:{typeID:`8`,cityID:this.props.cityValue}}
                     }>
                         <div className={liststyle.sonimg}>
                             <img src={require('../ImgAssets/ballet.png')}></img>
@@ -97,7 +97,7 @@ export default class NavList extends Component {
                 <div className={liststyle.son}>
                     <Link to={
                         {pathname:"/page",
-                            state:{typeID:`0`}}
+                            state:{typeID:`0`,cityID:this.props.cityValue}}
                     }>
                         <div className={liststyle.sonimg}>
                             <img src={require('../ImgAssets/cartoon.png')} ></img>
@@ -108,7 +108,7 @@ export default class NavList extends Component {
                 <div className={liststyle.son}>
                     <Link to={
                         {pathname:"/page",
-                            state:{typeID:`0`}}
+                            state:{typeID:`0`,cityID:this.props.cityValue}}
                     }>
                         <div className={liststyle.sonimg}>
                             <img src={require('../ImgAssets/travel.png')}></img>
