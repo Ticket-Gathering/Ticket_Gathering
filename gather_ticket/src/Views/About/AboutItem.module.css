@@ -1,22 +1,22 @@
 .abouti {
-    width: 860px;
+    width: 880px;
     display: flex;
     padding:25px;
 }
 .left {
-    width: 290px;
+    width: 340px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .leftt {
-    width: 270px;
-    height: 360px;
+    width: 320px;
     position: relative;
 }
 .leftti {
-    width: 270px;
-    height: 360px;
+    width: 320px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
 .leftts {
     position: absolute;
@@ -24,27 +24,30 @@
     left:0;
 }
 .right {
-    width: 530px;
+    width: 500px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin-left: 40px;
     margin-bottom: 12px;
 }
 .righttop {
     width: 520px;
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 6px;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: left;
 }
 .rightmid {
     width: 350px;
     font-size: 16px;
-    margin-bottom: 6px;
+    margin-bottom: 3px;
+    text-align: left;
 }
 .rightmidf {
     width: 520px;
     display: flex;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
 }
 .rightremind {
     width: 520px;
@@ -96,16 +99,23 @@
     flex-wrap: wrap;
 }
 .rightbtimeri {
-   padding: 12px;
+   padding: 10px;
+   color: lightgray;
    border: 1px solid lightgray;
+   border-radius: 5px;
    font-size: 12px;
    margin-left:12px;
    margin-bottom:6px;
 }
+.rightbtimeri:hover{
+    border: 1px solid #FF668C;
+    color: white;
+    background-color: #FF668C;
+}
 .rightbtimericli {
-    padding: 12px;
-    border: 1px solid pink;
-    background-color: pink;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #ff3366;
     color:white;
     font-size: 12px;
     margin-left:12px;
@@ -142,19 +152,23 @@
      line-height: 28px;
 }
 .sub {
-    width: 200px;
+    width: 240px;
     height: 38px;
     text-align: center;
     line-height:  38px;
     color: white;
-    background-color: purple;
+    border-radius: 5px;
+    background-color: #ff3366;
+}
+.sub:hover{
+    background-color: #FF668C;
 }
 .sum {
     width: 180px;
     height: 40px;
     font-size: 26px;
     font-weight: 666;
-    color:deeppink;
+    color:#ff3366;
     text-align: center;
     line-height: 40px;
 }
