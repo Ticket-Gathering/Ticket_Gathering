@@ -10,7 +10,8 @@ export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: ''
+            data: '',
+            cityValue:''
         };
         this.showSwiper = this.showSwiper.bind(this);
     }
@@ -37,8 +38,8 @@ export default class Home extends Component {
     render() {
         return (
             <div>
-                <Nav pageIdent="home"></Nav>
-                <NavList></NavList>
+                <Nav setCityValue={(newV) => this.setState({cityValue:newV})} pageIdent="home"/>
+                <NavList cityValue={this.state.cityValue} ></NavList>
                 <Notable></Notable>
                 <Posters title={"演唱会"}></Posters>
                 <Posters title={"话剧歌剧"}></Posters>
