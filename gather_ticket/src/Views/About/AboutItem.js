@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import abouti from "./AboutItem.module.css";
 import Sign from "./Sign";
 import {Divider} from "antd";
+import {InputNumber} from "element-react"
 
 export default class AboutItem extends Component {
     constructor(props) {
@@ -168,13 +169,7 @@ export default class AboutItem extends Component {
 
                     <div className={abouti.rightbtime}>
                         <div className={abouti.rightbtimel}>数量</div>
-                        <div className={abouti.rightbtimer}>
-                            <div className={abouti.rightnumber}>
-                                <div className={this.state.count <= 1 ? abouti.rightnumberolim : abouti.rightnumbero} onClick={this.cmil}>-</div>
-                                <div className={abouti.rightnumberi}>{this.state.count}</div>
-                                <div className={this.state.count >= this.props.aboutitem.limittic ? abouti.rightnumberolim : abouti.rightnumbero} onClick={this.cadd}>+</div>
-                            </div >
-                        </div>
+                        <InputNumber defaultValue={1} step="1" min="1" style={{marginLeft: "10px"}}/>
                     </div>
 
                     <div className={abouti.rightbtime}>

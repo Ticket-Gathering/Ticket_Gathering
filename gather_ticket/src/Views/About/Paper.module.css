@@ -2,15 +2,13 @@
     width: 280px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 .son {
     width: 255px;
-    height: 125px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    margin-bottom: 30px;
 }
 .stop {
     width: 255px;
@@ -37,9 +35,10 @@
 }
 .sbot {
     width: 255px;
-    height: 80px;
     color:gray;
     font-size: 12px;
+    text-align: left;
+    margin-top: 5px;
 }
 .bk {
     width: 255px;
@@ -50,4 +49,8 @@
 .bk img{
     width: 120px;
     height: 120px;
+}
+.icon{
+    width: 29px;
+    height: 29px;
 }
