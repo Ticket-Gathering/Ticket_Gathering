@@ -3,9 +3,10 @@ import Nav from "../../Components/Nav";
 import Bottom from "../../Components/Bottom";
 import page from "./Page.module.css";
 import Axios from '../../Module/Axios';
-import Posterb from "../../Components/Posterb";
+import Posterb from "../../Components/Posterb"
 import 'antd/dist/antd.css';
-import { Pagination, Result, Icon, Button } from 'antd';
+import addressData from "../../Components/CityData";
+import { Pagination, Result, Icon, Button,DatePicker} from 'antd';
 export default class Page extends Component {
     constructor(props) {
         super(props);
@@ -13,17 +14,31 @@ export default class Page extends Component {
             typeID: (typeof (this.props.location.state)!="undefined")?this.props.location.state.typeID:0,
             cityID: (typeof (this.props.location.state)!="undefined")?(this.props.location.state.cityID=="全国"?0:this.props.location.state.cityID):0,
             timeID: 0,
-            sid: 1,
-            citys: ["全国", "上海", "北京", "浙江", "四川", "广东", "江苏", "湖北", "天津"],
+            filterID: 1,
+            city: '',
+            type: '',
+            time:'',
+            collapseFlag:true,
+            citys: [],
             types: ["全部", "演唱会", "话剧歌剧", "体育", "儿童亲子","展览休闲","音乐会","曲苑杂坛", "舞蹈芭蕾" ],
             times: ["全部", "今天", "明天", "本周末", "一个月内"],
             sorts: ["相关度排序", "推荐排序", "最近开场", "最新上架"],
-            data: [],
-            city: '',
-            type: ''
+            data: [{name:'作业测试',address:'ss',showtime:'sss',imgurl:require('../../ImgAssets/cartoon.png'),price:40}],
         }
     }
+    componentWillMount() {
+        let tempArr=[]
+        for(let i=0;i<addressData.length;i++){
+            tempArr.push(addressData[i].value)
+        }
+        this.setState({
+            city:tempArr[this.state.cityID],
+            citys:tempArr
+        })
+    }
+
     changeCity=(newCityID, newCity)=>{
+        console.log(newCityID)
         this.setState({
             cityID:newCityID,
             city:newCity
@@ -38,16 +53,21 @@ export default class Page extends Component {
         this.getData();
 
     }
-    changeTime=(newTimeID) =>{
+    changeTime=(newTimeID,newTime) =>{
         this.setState({
-            timeID:newTimeID
-
+            timeID:newTimeID,
+            time:newTime,
         })
     }
-    changestyle3(sid) {
+    changeDate=(_,dateString)=>{
         this.setState({
-            sid
-
+            timeID:-1,
+            time:dateString,
+        })
+    }
+    changeFilter=(newFilterID)=> {
+        this.setState({
+            filterID:newFilterID
         })
     }
     getPosterb(i) {
@@ -85,6 +105,20 @@ export default class Page extends Component {
             })
     }
     render() {
+        var MoreCitys=[]
+        for(let i=1;i<4;i++){
+            MoreCitys.push(
+                <div className={page.titleBox}>
+                    {
+                        this.state.citys.slice(8+9*(i-1), 8+9*i).map((item, index) => {
+                            return <div
+                                className={page.titleOne + (this.state.city==item ? (' ' + page.titleSelected) : '')}
+                                onClick={() => this.changeCity(index, item)}>{item}</div>
+                        })
+                    }
+                </div>
+            )
+        }
         return (
             <div>
                 <div >
@@ -93,46 +127,59 @@ export default class Page extends Component {
                 <div>
 
                     <div className={page.title}>
-                        <div className={page.titleone}>
-                            <span>当 前 选 中 城 市：</span>
-                            <br/>
+                        <div className={page.titleContainer}>
+                            <div className={page.horizontal} >
+                                <span>当 前 选 中 城 市：</span>
+                                <div className={page.titleOne+' ' + page.titleSelected}>{this.state.city}</div>
+                            </div>
                             <span>城 市：</span>
-                            <div className={page.titlebox}>
+                            <div className={page.titleBox}>
                                 {
-                                    this.state.citys.map((item, index) => {
-                                        console.log(this.state.cityID)
-                                        return <div className={page.titleUnselected + (this.state.cityID == index ? (' ' + page.titleSelected) : '')} onClick={()=>this.changeCity(index,item)} >{item}</div>
+                                    this.state.citys.slice(0,8).map((item, index) => {
+                                        return <div className={page.titleOne + (this.state.city == item ? (' ' + page.titleSelected) : '')} onClick={()=>this.changeCity(index,item)} >{item}</div>
                                     })
+                                }
+                                <div className={page.showMore} onClick={()=>this.setState({collapseFlag:!this.state.collapseFlag})}><u>{this.state.collapseFlag?'显示更多':'收起'}</u></div>
+                            </div>
+                            <div>
+                                {!this.state.collapseFlag
+                                    ?<div>{MoreCitys}</div>
+                                    : <div/>
                                 }
                             </div>
                         </div>
                         <div className={page.line}></div>
-                        <div className={page.titleone}>
+                        <div className={page.titleContainer}>
                             <span>分 类：</span>
-                            <div className={page.titlebox}>
+                            <div className={page.titleBox}>
                                 {
                                     this.state.types.map((item, index) => {
-                                        return <div className={page.titleUnselected + (this.state.typeID == index ? (' ' + page.titleSelected) : '')}  onClick={()=>this.changeType(index,item)} >{item}</div>
+                                        return <div className={page.titleOne + (this.state.typeID == index ? (' ' + page.titleSelected) : '')}  onClick={()=>this.changeType(index,item)} >{item}</div>
                                     })
                                 }
                             </div>
                         </div>
                         <div className={page.line}></div>
-                        <div className={page.titleone}>
+                        <div className={page.titleContainer}>
                             <span>时 间：</span>
-                            <div className={page.titlebox}>
+                            <div className={page.titleBox}>
                                 {
                                     this.state.times.map((item, index) => {
-                                        return <div className={page.titleUnselected + (this.state.timeID == index ? (' ' + page.titleSelected) : '')} onClick={()=>this.changeTime(index)} >{item}</div>
+                                        return <div className={page.titleOne + (this.state.timeID == index ? (' ' + page.titleSelected) : '')} onClick={()=>this.changeTime(index,item)} >{item}</div>
                                     })
                                 }
+                                <div className={page.datePicker}>
+                                    <DatePicker placeholder={'按日历'} size={'small'}
+                                                onChange={(_,dateString)=>this.changeDate(_,dateString)}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div className={page.showbox}>
-                        <div className={page.showbox1}>
+                    <div className={page.showContainer}>
+                        <div className={page.showBox}>
                             {this.state.sorts.map((item, index) => {
-                                return <div className={page.showevery + (this.state.sid == index ? (' ' + page.showevery1) : '')} key={index} onClick={()=>this.changestyle3.bind(this, index)} >{item}</div>
+                                return <div className={page.showOne + (this.state.filterID == index ? (' ' + page.showSelected) : '')} key={index} onClick={()=>this.changeFilter(index)} >{item}</div>
                             })}
                         </div>
                         {this.getPosterb(this.state.data)}
