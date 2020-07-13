@@ -54,11 +54,11 @@ export default class Auction extends Component {
     render() {
         return (
             <div className={about.about}>
-                <Nav pageIdent="page"></Nav>
-                <div className={about.all}>
+                <Nav/>
+                <div className={about.format}>
                     <div className={about.left}>
 
-                        <AboutItem aboutitem={this.state.data}></AboutItem>
+                        <AboutItem aboutitem={this.state.data}/>
                         <div className={about.leftb}>
                             <div className={about.leftbt}>
                                 <div className={about.leftbtb}>
@@ -88,7 +88,7 @@ export default class Auction extends Component {
 李荣浩「年少有为」巡回演唱会于2019年3月16日上海正式开跑，这也是继「天生李荣浩亚洲巡回演唱会」和「李荣浩有理想世界巡回演唱会」之后，职业生涯的第三轮巡演，也是第五张专辑发行后众多新歌首秀舞台，当然，前几张专辑的经典曲目也将进行重新编曲再演绎，争取让歌迷们享受到一次全新的音乐之旅。
 
 作为本次演唱会的总导演之一及总策划，李荣浩事事亲力亲为，严格把关各个关卡，从主视觉海报拍摄、到曲目编排，再到舞美灯光，事无巨细，极尽所能做好最好，意在给歌迷一个独特的演唱会体验，这无疑不体现对于本次巡演重视之程度。而以「年少有为」作为本次巡演的主题，也是希望大家能够珍惜身边所有，不负热望。</div>
-                                <img src='http://localhost:8081/images/li2.webp' className={about.img2}></img>
+                                <img src='http://localhost:8081/images/li2.webp' className={about.img2}/>
                             </div>
                             <div className={about.leftbb} id="gpxz">
                                 <div className={about.mytext}>购票须知</div>

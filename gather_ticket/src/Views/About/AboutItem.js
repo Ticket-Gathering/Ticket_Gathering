@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import abouti from "./AboutItem.module.css";
 import Sign from "./Sign";
+import {Divider} from "antd";
 
 export default class AboutItem extends Component {
     constructor(props) {
@@ -93,8 +94,8 @@ export default class AboutItem extends Component {
         let n = this.state.count;
         return e * n;
     }
-    
-  
+
+
 
     render() {
         return (
@@ -102,21 +103,27 @@ export default class AboutItem extends Component {
                 <div className={abouti.left}>
                     <div className={abouti.leftt}>
                         {/*<img className={abouti.leftti} src={this.props.aboutitem.imgurl} />*/}
-                        <img className={abouti.leftti} src={this.props.aboutitem.imgurl} />
+                        <img className={abouti.leftti} src={require("../../Assets/images/poster1.jpg")} />
                         <div className={abouti.leftts}>
-                            <Sign></Sign>
+                            <Sign/>
                         </div>
 
                     </div>
                 </div>
 
                 <div className={abouti.right}>
-                    <div className={abouti.righttop}>{this.props.aboutitem.name}</div>
-
+                    {/*<div className={abouti.righttop}>{this.props.aboutitem.name}</div>*/}
+                    <div className={abouti.righttop}>【广州站】李荣浩年少有为世界巡回演唱会</div>
                     <div className={abouti.rightmid}>时间：{this.props.aboutitem.showtime}</div>
-
                     <div className={abouti.rightmidf}>
-                        <div className={abouti.rightmid}>场馆：{this.props.aboutitem.address}|{this.props.aboutitem.addressdetail}</div>
+                        {/*<div className={abouti.rightmid}>场馆：{this.props.aboutitem.address}
+                            <Divider type={"vertical"}/>
+                        {this.props.aboutitem.addressdetail}
+                        </div>*/}
+                        <div className={abouti.rightmid}>场馆：广州
+                            <Divider type={"vertical"}/>
+                            广州国际体育演艺中心
+                        </div>
                     </div>
 
                     {this.isShop(this.props.aboutitem.shoptime)}
@@ -130,7 +137,7 @@ export default class AboutItem extends Component {
                         <div className={abouti.rightbtimel}>场次</div>
                         <div className={abouti.rightbtimer}>
                             {this.props.aboutitem.timelist.map((t, ind) => {
-                                if (ind == 0) {
+                                if (ind === 0) {
                                     this.state.timelist.push(1);
                                     return <div key={ind} className={this.state.timelist[ind] ? abouti.rightbtimericli : abouti.rightbtimeri} onClick={this.cTime.bind(this, ind)}>{t}</div>
                                 }
@@ -146,7 +153,7 @@ export default class AboutItem extends Component {
                         <div className={abouti.rightbtimel}>票档</div>
                         <div className={abouti.rightbtimer}>
                             {this.props.aboutitem.pricelist.map((p, ind) => {
-                                if (ind == 0) {
+                                if (ind === 0) {
                                     this.state.pricelist.push({ state: 1, price: p.price });
                                     return <div key={ind} className={this.state.pricelist[ind].state ? abouti.rightbtimericli : abouti.rightbtimeri} onClick={this.cPrice.bind(this, ind)}>{p.price}</div>
                                 }
