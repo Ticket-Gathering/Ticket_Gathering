@@ -25,7 +25,7 @@ class Poster extends Component {
                         <div className={posterb.prighttb}>{this.props.poster.address}</div>
                         <div className={posterb.prighttb}>{this.props.poster.showtime}</div>
                     </div>
-                    <div className={posterb.prightb}>￥{JSON.parse(this.props.poster.pricelist)[0].price}起</div>
+                    <div className={posterb.prightb}>￥{this.props.poster.price}起</div>
                 </div>
             </div>
         )
