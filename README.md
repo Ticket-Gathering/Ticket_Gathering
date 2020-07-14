@@ -69,3 +69,5 @@ UI页面
 
 ## 07/14
 沈佳威：1.backend login+checkuser的编写 2.使用postman测试 3.进一步学习单测
+
+陈嘉轩:   1.后端实现homepage的数据传输以及按照类别和id查找演出的功能 2. 利用postman进行接口测试
