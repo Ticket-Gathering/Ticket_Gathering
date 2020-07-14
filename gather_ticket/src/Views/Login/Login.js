@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import Bottom from "../../Components/Bottom";
 import Axios from '../../Module/Axios'
 
+const url = "http://localhost:8080";
+
 export default class Login extends Component {
     constructor(props) {
         super(props);
@@ -128,7 +130,7 @@ export default class Login extends Component {
         });
     }
     submitForm() {
-        Axios.post("/user/reg", this.state.signUpForm)
+        Axios.post(url+"/reg", this.state.signUpForm)
             .then(response => {
                 if (response.data.msg === "account_already_exist") {
                     alert("账号名已存在，请您重新注册")
@@ -147,15 +149,14 @@ export default class Login extends Component {
             });
     }
     login() {
-        Axios.post("/user/login", this.state.loginForm)
+        Axios.post(url+"/login", this.state.loginForm)
             .then(response => {
-                if (response.data.msg === "account_no_exist") {
-                    alert("账号不存在", "请您先注册")
-                } else if (response.data.msg === "false password") {
-                    alert("密码错误", "请您重新输入密码")
-                } else if (response.data.msg === "login_success") {
+                if (response.data.msg === "用户名或密码错误，请重新输入！") {
+                    alert("用户名或密码错误", "请您重新输入")
+                } else if (response.data.msg === "登录成功！") {
                     this.props.history.push('/self', null);
                 }
+                console.log(response);
             })
             .catch(function (error) {
                 console.log(error);
