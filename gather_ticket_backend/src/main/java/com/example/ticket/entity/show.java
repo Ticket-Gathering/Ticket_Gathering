@@ -12,9 +12,9 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "show")
+@Table(name = "perform")
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "showID")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "showId")
 public class show {
     @Id
     @Column(name = "id")
