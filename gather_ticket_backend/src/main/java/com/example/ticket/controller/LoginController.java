@@ -1,6 +1,7 @@
 package com.example.ticket.controller;
 
 import com.example.ticket.entity.clients_auth;
+import com.example.ticket.constant.Constant;
 import com.example.ticket.service.UserService;
 import com.example.ticket.utils.msgutils.Msg;
 import com.example.ticket.utils.msgutils.MsgCode;
@@ -29,17 +30,11 @@ public class LoginController {
     public Msg login(@RequestBody Map<String, String> params){
         String username = params.get(Constant.USERNAME);
         String password = params.get(Constant.PASSWORD);
-        UserAuth auth = userService.checkUser(username, password);
-        Integer ifforbidden = userService.getForbidden(username).getforbidden();
-        if (ifforbidden != 0){
-            return MsgUtil.makeMsg(MsgCode.FORBIDDEN_ERROR);
-        }
+        clients_auth auth = userService.checkUser(username, password);
         if(auth != null){
-
             JSONObject obj = new JSONObject();
             obj.put(Constant.USER_ID, auth.getUserId());
             obj.put(Constant.USERNAME, auth.getUsername());
-            obj.put(Constant.USER_TYPE, auth.getUserType());
             SessionUtil.setSession(obj);
 
             JSONObject data = JSONObject.fromObject(auth);
