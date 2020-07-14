@@ -8,148 +8,135 @@ export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            cardInfo: true,
-            cardInfo1: false,
-            cardInfo2: false,
-            i: 1,
-            ruleForm: {
+            loginCard: true,
+            signUpCard: false,
+            curTab: 1,
+            signUpForm: {
                 account: "",
                 passwd: ""
             },
-            ruleForm1: {
+            loginForm: {
                 account: "",
                 passwd: ""
             },
-
-
-
-        }
-        this.changeStyle = this.changeStyle.bind(this);
-        this.changeStyle1 = this.changeStyle1.bind(this);
-        this.changeStyle2 = this.changeStyle2.bind(this);
-        this.inputChange = this.inputChange.bind(this);
-        this.inputChange2 = this.inputChange2.bind(this);
-        this.inputChange3 = this.inputChange3.bind(this);
-        this.inputChange4 = this.inputChange4.bind(this);
+        };
+        this.changeToLogin = this.changeToLogin.bind(this);
+        this.changeToSignUp = this.changeToSignUp.bind(this);
+        this.inputUsernameSign = this.inputUsernameSign.bind(this);
+        this.inputPasswordSign = this.inputPasswordSign.bind(this);
+        this.inputUsername = this.inputUsername.bind(this);
+        this.inputPassword = this.inputPassword.bind(this);
         this.submitForm = this.submitForm.bind(this);
-        this.submitForm1 = this.submitForm1.bind(this);
+        this.login = this.login.bind(this);
     };
 
-    changeStyle() {
+    changeToLogin() {
         this.setState({
-            cardInfo: true,
-            cardInfo1: false,
-            cardInfo2: false,
-            i: 1
+            loginCard: true,
+            signUpCard: false,
+            curTab: 1
         })
     }
-    changeStyle1() {
+    changeToSignUp() {
         this.setState({
-            cardInfo: false,
-            cardInfo1: true,
-            cardInfo2: false,
-            i: 2
-        })
-    }
-    changeStyle2() {
-        this.setState({
-            cardInfo: false,
-            cardInfo1: false,
-            cardInfo2: true,
-            i: 3
+            loginCard: false,
+            signUpCard: true,
+            curTab: 2
         })
     }
 
     display() {
-        switch (this.state.i) {
+        switch (this.state.curTab) {
             case 1:
-                return <div className={login.last}>
-                    <input type="text" placeholder="请输入手机号或邮箱" className={login.input} onChange={this.inputChange3}></input>
-                    <div className={login.logo}>
-                        <img src={require('../../Assets/images/ico/user2.png')}></img>
+                return <div className={login.base}>
+                    <input type="text" placeholder="请输入手机号或邮箱" className={login.input} onChange={this.inputUsername}/>
+                    <div className={login.logoUsr}>
+                        <img src={require('../../Assets/images/ico/user2.png')}/>
                     </div>
-                    <input type="password" placeholder="请输入登录密码" className={login.input} onChange={this.inputChange4}></input>
-                    <div className={login.logo1}>
-                        <img src={require('../../Assets/images/ico/lock2.png')}></img>
+                    <input type="password" placeholder="请输入登录密码" className={login.input} onChange={this.inputPassword}/>
+                    <div className={login.logoLock}>
+                        <img src={require('../../Assets/images/ico/lock2.png')}/>
                     </div>
-                    <div className={login.dl} onClick={this.submitForm1}>LOGIN</div>
-                    <div className={login.every}>
-                        <div className={login.everyson}>
-                            <img src={require('../../Assets/images/ico/xin.png')}></img>
+                    <div className={login.loginBtn} onClick={this.login}>LOGIN</div>
+                    <div className={login.logoPlatforms}>
+                        <div className={login.logoPlatform}>
+                            <img src={require('../../Assets/images/ico/xin.png')}/>
                         </div>
-                        <div className={login.everyson}>
-                            <img src={require('../../Assets/images/ico/haah.png')}></img>
+                        <div className={login.logoPlatform}>
+                            <img src={require('../../Assets/images/ico/haah.png')}/>
                         </div>
-                        <div className={login.everyson}>
-                            <img src={require('../../Assets/images/ico/wei.png')}></img>
+                        <div className={login.logoPlatform}>
+                            <img src={require('../../Assets/images/ico/wei.png')}/>
                         </div>
-                        <div className={login.everyson}>
-                            <img src={require('../../Assets/images/ico/zhi.png')}></img>
+                        <div className={login.logoPlatform}>
+                            <img src={require('../../Assets/images/ico/zhi.png')}/>
                         </div>
                     </div>
-                    <div className={login.bottom}>
-                        <div className={login.bottomson}><Link to="/findpw">忘记密码</Link></div>
-                        <div className={login.bottomson}><Link to="/reg">免费注册</Link></div>
+                    <div className={login.bottomOptions}>
+                        <div className={login.bottomOption}><Link to="/findpw">忘记密码</Link></div>
+                        <div className={login.bottomOption} onClick={this.changeToSignUp}>免费注册</div>
                     </div>
-                </div>
+                </div>;
                 break;
             case 2:
-                return <div className={login.last}>
-                    <input type="text" placeholder="请输入手机号或邮箱" className={login.input} onChange={this.inputChange}></input>
-                    <div className={login.logo}>
-                        <img src={require('../../Assets/images/ico/phone.png')}></img>
+                return <div className={login.base}>
+                    <input type="text" placeholder="请输入手机号或邮箱" className={login.input} onChange={this.inputUsernameSign}/>
+                    <div className={login.logoUsr}>
+                        <img src={require('../../Assets/images/ico/user2.png')}/>
                     </div>
-                    <input type="password" placeholder="请输入登录密码" className={login.input} onChange={this.inputChange2}
-                    ></input>
-                    <div className={login.logo1}>
-                        <img src={require('../../Assets/images/ico/123.png')}></img>
+                    <input type="password" placeholder="请输入登录密码" className={login.input} onChange={this.inputPasswordSign}/>
+                    <div className={login.logoLock}>
+                        <img src={require('../../Assets/images/ico/lock2.png')}/>
                     </div>
-                    <div className={login.dl} onClick={this.submitForm}>注册</div>
-                </div>
+                    <div className={login.loginBtn} onClick={this.submitForm}>SignUp</div>
+                    <div className={login.bottomOptions}>
+                        <div className={login.bottomOption} onClick={this.changeToLogin} style={{float: "right"}}>返回登录</div>
+                    </div>
+                </div>;
                 break;
         }
     }
 
-    inputChange(e) {
+    inputUsernameSign(e) {
         let val = e.target.value;
-        let data = Object.assign({}, this.state.ruleForm, { account: val })
+        let data = Object.assign({}, this.state.signUpForm, { account: val })
         this.setState({
-            ruleForm: data
+            signUpForm: data
         });
     }
-    inputChange2(e) {
+    inputPasswordSign(e) {
         let val = e.target.value;
         //修改state对象
-        let data = Object.assign({}, this.state.ruleForm, { passwd: val })
+        let data = Object.assign({}, this.state.signUpForm, { passwd: val })
         this.setState({
-            ruleForm: data
+            signUpForm: data
         });
     }
-    inputChange3(e) {
+    inputUsername(e) {
         let val = e.target.value;
-        let data = Object.assign({}, this.state.ruleForm1, { account: val })
+        let data = Object.assign({}, this.state.loginForm, { account: val })
         this.setState({
-            ruleForm1: data
+            loginForm: data
         });
     }
-    inputChange4(e) {
+    inputPassword(e) {
         let val = e.target.value;
         //修改state对象
-        let data = Object.assign({}, this.state.ruleForm1, { passwd: val })
+        let data = Object.assign({}, this.state.loginForm, { passwd: val })
         this.setState({
-            ruleForm1: data
+            loginForm: data
         });
     }
     submitForm() {
-        Axios.post("/user/reg", this.state.ruleForm)
+        Axios.post("/user/reg", this.state.signUpForm)
             .then(response => {
-                if (response.data.msg == "account_already_exist") {
+                if (response.data.msg === "account_already_exist") {
                     alert("账号名已存在，请您重新注册")
-                } else if (response.data.msg == "reg_success") {
-                    alert("恭喜您注册成功，请登录享受更好的体验~")
-                    let da = this.state.ruleForm;
+                } else if (response.data.msg === "reg_success") {
+                    alert("恭喜您注册成功，请登录享受更好的体验~");
+                    let da = this.state.signUpForm;
                     this.setState({
-                        ruleForm1: da
+                        loginForm: da
                     });
                     this.changeStyle();
 
@@ -159,16 +146,15 @@ export default class Login extends Component {
                 console.log(error);
             });
     }
-    submitForm1() {
-        Axios.post("/user/login", this.state.ruleForm1)
+    login() {
+        Axios.post("/user/login", this.state.loginForm)
             .then(response => {
-                if (response.data.msg == "account_no_exist") {
+                if (response.data.msg === "account_no_exist") {
                     alert("账号不存在", "请您先注册")
-                } else if (response.data.msg == "false password") {
+                } else if (response.data.msg === "false password") {
                     alert("密码错误", "请您重新输入密码")
-                } else if (response.data.msg == "login_success") {
+                } else if (response.data.msg === "login_success") {
                     this.props.history.push('/self', null);
-
                 }
             })
             .catch(function (error) {
@@ -180,18 +166,13 @@ export default class Login extends Component {
         return (
             <div className={login.bg}>
                 <div className={login.bg_mask}/>
-                <div className={login.firstbox}>
-                    <div className={login.imgbox}>
-                        <img src={require('../../Assets/images/logo.png')}></img>
+                <div className={login.headerBox}>
+                    <div className={login.imgBox}>
+                        <img src={require('../../Assets/images/logo.png')}/>
                     </div>
                 </div>
-                <div className={login.secondbox}>
-                    <div className={login.loginbox}>
-                        {/*<div className={login.loginboxfirst}>*/}
-                        {/*    <div className={this.state.cardInfo ? login.loginboxfirstson1 : login.loginboxfirstson} onClick={this.changeStyle}>密码登录</div>*/}
-                        {/*    <div className={this.state.cardInfo1 ? login.loginboxfirstson1 : login.loginboxfirstson} onClick={this.changeStyle1}>用户注册</div>*/}
-                        {/*    <div className={this.state.cardInfo2 ? login.loginboxfirstson1 : login.loginboxfirstson} onClick={this.changeStyle2}>扫码登录</div>*/}
-                        {/*</div>*/}
+                <div className={login.mainBox}>
+                    <div className={login.loginBox}>
                         {this.display()}
                     </div>
                 </div>
