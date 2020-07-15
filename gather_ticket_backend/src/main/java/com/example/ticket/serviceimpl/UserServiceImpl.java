@@ -15,4 +15,9 @@ public class UserServiceImpl implements UserService{
     public Clients_auth checkUser(String username, String password) {
         return userDao.checkUser(username, password);
     }
+
+    @Override
+    public clients getUserById(int userId){
+        return userDao.getUserById(userId);
+    }
 }

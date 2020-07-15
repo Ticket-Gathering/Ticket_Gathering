@@ -16,4 +16,9 @@ public class UserController {
     public Clients_auth checkUser(@RequestParam("username") String username, @RequestParam("password") String password){
         return userService.checkUser(username, password);
     }
+
+    @RequestMapping("/getUserById")
+    public clients getUserById(@RequestParam("userId") int userId){
+        return userService.getUserById(userId);
+    }
 }
