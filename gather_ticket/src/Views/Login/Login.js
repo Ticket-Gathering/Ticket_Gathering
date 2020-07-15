@@ -154,7 +154,8 @@ export default class Login extends Component {
                 if (response.data.msg === "用户名或密码错误，请重新输入！") {
                     alert("用户名或密码错误", "请您重新输入")
                 } else if (response.data.msg === "登录成功！") {
-                    
+                    sessionStorage.setItem('userId', response.data.data.userId)
+                    sessionStorage.setItem('username', response.data.data.username)
                     this.props.history.push('/', null);
                 }
                 console.log(response);

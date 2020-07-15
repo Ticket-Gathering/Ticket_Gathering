@@ -26,6 +26,7 @@ public class UserDapImpl implements UserDao{
 
     @Override
     public clients getUserById(int userId){
-        return userRepository.findById(userId).get();
+        System.out.println(userId);
+        return userRepository.getOne(userId);
     }
 }

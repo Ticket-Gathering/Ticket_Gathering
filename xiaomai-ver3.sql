@@ -62,7 +62,7 @@ CREATE TABLE `clients`  (
   `user_id` int(11) NOT NULL,
   `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `id` int(11) NULL DEFAULT NULL,
+  `id_num` int(11) NULL DEFAULT NULL,
   `tel` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `birth` date NULL DEFAULT NULL,
@@ -1545,18 +1545,58 @@ INSERT INTO `perform` VALUES (1387, '暑假报名｜首届火种少儿越野跑�
 -- ----------------------------
 -- Table structure for receiver
 -- ----------------------------
-DROP TABLE IF EXISTS `receiver`;
-CREATE TABLE `receiver`  (
+DROP TABLE IF EXISTS `receivers`;
+CREATE TABLE `receivers`  (
+  `receiver_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `receiver` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `tel` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`user_id`) USING BTREE
+  PRIMARY KEY (`receiver_id`) USING BTREE,
+  CONSTRAINT fk_rcvr FOREIGN KEY (user_id) REFERENCES clients(user_id)
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of receiver
 -- ----------------------------
+insert into receivers value(1, 1, "Shen Jiawei", "Shanghai Jiao Tong University", "12345678900");
+insert into receivers value(2, 1, "Shen Jiawei", "Shanghai Minhang Dongchuan Road 800", "12345678900");
+insert into receivers value(3, 1, "Shen Jiawei", "His Home", "12345678900");
+insert into receivers value(4, 2, "Chen Jiaxuan", "Shanghai Jiao Tong University", "12345678900");
+insert into receivers value(5, 2, "Chen Jiaxuan", "Shanghai Minhang Dongchuan Road 800", "12345678900");
+insert into receivers value(6, 2, "Chen Jiaxuan", "His Home", "12345678900");
+insert into receivers value(7, 3, "Jiang Yufan", "Shanghai Jiao Tong University", "12345678900");
+insert into receivers value(8, 3, "Jiang Yufan", "Shanghai Minhang Dongchuan Road 800", "12345678900");
+insert into receivers value(9, 3, "Jiang Yufan", "His Home", "12345678900");
+insert into receivers value(10, 4, "Zhu Yicheng", "Shanghai Jiao Tong University", "12345678900");
+insert into receivers value(11, 4, "Zhu Yicheng", "Shanghai Minhang Dongchuan Road 800", "12345678900");
+insert into receivers value(12, 4, "Zhu Yicheng", "His Home", "12345678900");
+
+-- ----------------------------
+-- Table structure for ticket_holders
+-- ----------------------------
+DROP TABLE IF EXISTS `ticket_holders`;
+CREATE TABLE `ticket_holders`  (
+  `ticket_holder_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `id_type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `id_num` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`ticket_holder_id`) USING BTREE,
+  CONSTRAINT fk_tkhdr FOREIGN KEY (user_id) REFERENCES clients(user_id)
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of receiver
+-- ----------------------------
+insert into ticket_holders value(1, 1, "Shen Jiawei", "ID-card", "1234567890ABCDEF");
+insert into ticket_holders value(2, 2, "Chen Jiaxuan", "ID-card", "1234567890ABCDEG");
+insert into ticket_holders value(3, 3, "Jiang Yufan", "ID-card", "1234567890ABCDEH");
+insert into ticket_holders value(4, 4, "Zhu Yicheng", "ID-cart", "1234567890ABCDEI");
+insert into ticket_holders value(5, 4, "Shen Jiawei", "ID-card", "1234567890ABCDEF");
+insert into ticket_holders value(6, 4, "Chen JiaXuan", "ID-card", "1234567890ABCDEG");
+insert into ticket_holders value(7, 4, "Zhu YiCheng", "ID-card", "1234567890ABCDEI");
+insert into ticket_holders value(8, 4, "Jiang Yufan", "passport", "AAAAAAAASSSSSSS");
 
 -- ----------------------------
 -- Table structure for status

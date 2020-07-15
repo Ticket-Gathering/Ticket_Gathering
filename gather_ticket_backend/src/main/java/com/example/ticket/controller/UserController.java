@@ -5,6 +5,7 @@ import com.example.ticket.entity.clients_auth;
 import com.example.ticket.service.UserService;
 import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +22,8 @@ public class UserController {
         return userService.checkUser(username, password);
     }
 
-    @RequestMapping("/getUserById")
-    public clients getUserById(@RequestParam("userId") int userId){
+    @RequestMapping("/getUserById/{id}")
+    public clients getUserById(@PathVariable("id") int userId){
         return userService.getUserById(userId);
     }
 }

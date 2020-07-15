@@ -16,18 +16,9 @@ export default class nav extends Component {
         }
     };
     componentWillMount() {
-        if(sessionStorage.getItem('token')) {
-            Axios.get("/user/getAccount")
-                .then(res => {
-                    this.setState({
-                        username: res.data.account
-                    })
-
-                })
-                .catch(err => {
-                    console.log(err);
-                });
+        if(sessionStorage.getItem('userId') !== 'NULL') {
             this.setState({
+                username: sessionStorage.getItem('username'),
                 isLoggedIn:true
             })
         }else{
@@ -42,13 +33,13 @@ export default class nav extends Component {
             <div className={navstyle.nav}>
                 <div className={navstyle.navson}>
                     <div className={navstyle.logo}>
-                        <img src={require('../ImgAssets/logo.png')} ></img>
+                        <img src={require('../ImgAssets/logo.png')} />
                     </div>
-                        {this.props.pageIdent == "home" ? (
+                        {this.props.pageIdent === "home" ? (
                             <div className={navstyle.global}>
                                 <div className={navstyle.globalt}>
                                     <div className={navstyle.position}>
-                                        <img src={require('../ImgAssets/location.png')}></img>
+                                        <img src={require('../ImgAssets/location.png')}/>
                                     </div>
                                     <div style={{marginLeft: 5 + "px"}}>
                                         <Select style={{width: 144 + "px", color: "#999999"}}
@@ -72,7 +63,7 @@ export default class nav extends Component {
                         <div className={navstyle.page}><Link to={{pathname:'/page',state:{typeID:0,cityID:this.state.cityValue}}}>分类</Link></div>
                     </div>
                     <div className={navstyle.search}>
-                        <img src={require('../ImgAssets/search.png')} className={navstyle.searchimg}></img>
+                        <img src={require('../ImgAssets/search.png')} className={navstyle.searchimg}/>
                         <input type="text" className={navstyle.input} placeholder="搜索明星、演出、体育赛事">
                         </input>
                     </div>
@@ -80,22 +71,23 @@ export default class nav extends Component {
                         ?
                         <div className={navstyle.loginbox}>
                             <div className={navstyle.logintext}>
-                                欢迎您！{this.state.username}
+                                欢迎您！<Link to="/self">{this.state.username}</Link>
                             </div>
                         </div>
                         :
                         <div className={navstyle.loginbox}>
-                            <img src={require('../ImgAssets/login.png')}></img>
+                            <img src={require('../ImgAssets/login.png')}/>
+
                             <div className={navstyle.logintext}><Link to="/login">登录</Link></div>
                         </div>
 
                     }
                     <div className={navstyle.loginbox}>
-                        <img src={require('../ImgAssets/download.png')} ></img>
+                        <img src={require('../ImgAssets/download.png')} />
                         <div className={navstyle.logintext}>下载</div>
                     </div>
                     <div className={navstyle.loginbox}>
-                        <img src={require('../ImgAssets/english.png')} ></img>
+                        <img src={require('../ImgAssets/english.png')} />
                         <div className={navstyle.logintext}>English</div>
                     </div>
                 </div>
