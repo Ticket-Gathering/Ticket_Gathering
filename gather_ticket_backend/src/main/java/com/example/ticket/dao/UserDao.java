@@ -1,10 +1,7 @@
 package com.example.ticket.dao;
 
-import com.example.ticket.entity.clients;
-import com.example.ticket.entity.clients_auth;
-
-import java.util.List;
+import com.example.ticket.entity.Clients_auth;
 
 public interface UserDao {
-    clients_auth checkUser(String username, String password);
+    Clients_auth checkUser(String username, String password);
 }

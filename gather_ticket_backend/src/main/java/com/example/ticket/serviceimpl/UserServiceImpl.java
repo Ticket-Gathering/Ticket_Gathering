@@ -1,13 +1,10 @@
 package com.example.ticket.serviceimpl;
 
 import com.example.ticket.dao.UserDao;
-import com.example.ticket.entity.clients;
-import com.example.ticket.entity.clients_auth;
+import com.example.ticket.entity.Clients_auth;
 import com.example.ticket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -15,7 +12,7 @@ public class UserServiceImpl implements UserService{
     private UserDao userDao;
 
     @Override
-    public clients_auth checkUser(String username, String password) {
+    public Clients_auth checkUser(String username, String password) {
         return userDao.checkUser(username, password);
     }
 }

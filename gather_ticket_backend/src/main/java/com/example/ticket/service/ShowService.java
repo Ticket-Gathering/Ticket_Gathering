@@ -1,13 +1,15 @@
 package com.example.ticket.service;
 
-import com.example.ticket.entity.show;
+import com.example.ticket.entity.Show;
 
 import java.util.List;
 
 public interface ShowService {
-    List<show> findByCategory(Integer Categoryid);
+    List<Show> findByCategory(Integer Categoryid);
 
-    show getByShowid(Integer Showid);
+    Show getByShowid(Integer Showid);
 
-    List<List<show>> getHomePage();
+    List<List<Show>> getHomePage();
+
+    List<Show>  searchShow(String keyword,Integer categoryid,Integer cityid,Integer subid,Integer pagesize,Integer currentsize);
 }

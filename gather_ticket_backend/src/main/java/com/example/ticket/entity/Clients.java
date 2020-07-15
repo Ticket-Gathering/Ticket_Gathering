@@ -16,7 +16,7 @@ import java.util.Date;
 @Table(name = "clients")
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "clientID")
-public class clients {
+public class Clients {
     @Id
     @Column(name = "user_id")
     private int userId;

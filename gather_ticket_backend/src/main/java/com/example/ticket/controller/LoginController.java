@@ -1,6 +1,6 @@
 package com.example.ticket.controller;
 
-import com.example.ticket.entity.clients_auth;
+import com.example.ticket.entity.Clients_auth;
 import com.example.ticket.constant.Constant;
 import com.example.ticket.service.UserService;
 import com.example.ticket.utils.msgutils.Msg;
@@ -8,16 +8,11 @@ import com.example.ticket.utils.msgutils.MsgCode;
 import com.example.ticket.utils.msgutils.MsgUtil;
 import com.example.ticket.utils.sessionutils.SessionUtil;
 import net.sf.json.JSONObject;
-import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import javax.persistence.criteria.CriteriaBuilder;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -30,7 +25,7 @@ public class LoginController {
     public Msg login(@RequestBody Map<String, String> params){
         String username = params.get(Constant.USERNAME);
         String password = params.get(Constant.PASSWORD);
-        clients_auth auth = userService.checkUser(username, password);
+        Clients_auth auth = userService.checkUser(username, password);
         if(auth != null){
             JSONObject obj = new JSONObject();
             obj.put(Constant.USER_ID, auth.getUserId());

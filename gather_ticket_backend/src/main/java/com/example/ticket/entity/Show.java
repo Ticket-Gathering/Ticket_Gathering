@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Table(name = "perform")
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "showId")
-public class show {
+public class Show {
     @Id
     @Column(name = "id")
     private int showId;

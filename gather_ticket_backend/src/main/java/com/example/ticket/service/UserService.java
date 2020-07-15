@@ -1,11 +1,7 @@
 package com.example.ticket.service;
 
-import com.example.ticket.entity.clients;
-import com.example.ticket.entity.clients_auth;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
+import com.example.ticket.entity.Clients_auth;
 
 public interface UserService {
-    clients_auth checkUser(String username, String password);
+    Clients_auth checkUser(String username, String password);
 }
