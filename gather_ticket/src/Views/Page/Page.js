@@ -99,14 +99,15 @@ export default class Page extends Component {
             })
     }
     componentDidMount() {
-        Axios.get("/page/getClassify").then(res => {
-            this.setState({
-                data: res.data
-            })
-        })
-            .catch(err => {
-                console.log(err);
-            })
+    //     Axios.get("/page/getClassify").then(res => {
+    //         this.setState({
+    //             data: res.data
+    //         })
+    //     })
+    //         .catch(err => {
+    //             console.log(err);
+    //         })
+    //
     }
     render() {
         var MoreCitys=[]

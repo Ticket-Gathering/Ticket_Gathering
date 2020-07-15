@@ -3,7 +3,7 @@ import Nav from "../../Components/Nav";
 import AboutItem from "./AboutItem";
 import Paper from "./Paper";
 import about from "./About.module.css";
-import Poster from "../../Components/Poster";
+import Poster from "../Home/posterItem";
 import Axios from "../../Module/Axios";
 import Bottom from "../../Components/Bottom";
 

@@ -1,34 +1,39 @@
 import React, { Component } from 'react'
 import Nav from "../../Components/Nav";
 import Notable from "../../Components/Notable";
-import Posters from "../../Views/Home/Posters";
+import HomePoster from "./homePoster";
 import NavList from "../../Components/NavList";
 import Bottom from "../../Components/Bottom";
 import Axios from "../../Module/Axios";
+const url = "http://localhost:8080";
 
 export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: '',
-            cityValue:''
+            posterData:[],
+            cityValue:'全国'
         };
         this.showSwiper = this.showSwiper.bind(this);
     }
 
     componentDidMount() {
-        Axios.get("/home/getnotable", { params: { aid: this.state.data } }).then(res => {
+        // Axios.get("/home/getnotable", { params: { aid: this.state.data } }).then(res => {
+        //     this.setState({
+        //         data: res
+        //     })
+        // })
+        //     .catch(err => {
+        //         console.log(err)
+        //     })
+        Axios.get(url+"/getHomePage").then(res=>{
             this.setState({
-                data: res
+                posterData:res.data
             })
         })
-            .catch(err => {
-                console.log(err)
-            })
     }
 
     showSwiper(ev) {
-        console.log(ev.target)
         this.setState({
             data: ev.target.ad
         })
@@ -41,9 +46,14 @@ export default class Home extends Component {
                 <Nav setCityValue={(newV) => this.setState({cityValue:newV})} pageIdent="home"/>
                 <NavList cityValue={this.state.cityValue} ></NavList>
                 <Notable></Notable>
-                <Posters title={"演唱会"}></Posters>
-                <Posters title={"话剧歌剧"}></Posters>
-                <Posters title={"体育比赛"}></Posters>
+                <HomePoster title={"演唱会"} posterData={this.state.posterData[1]} cityValue={this.state.cityValue} typeID={1}></HomePoster>
+                <HomePoster title={"歌剧话剧"} posterData={this.state.posterData[3]} cityValue={this.state.cityValue} typeID={2}></HomePoster>
+                <HomePoster title={"体育"} posterData={this.state.posterData[6]} cityValue={this.state.cityValue} typeID={3}></HomePoster>
+                <HomePoster title={"儿童亲子"} posterData={this.state.posterData[0]} cityValue={this.state.cityValue} typeID={4}></HomePoster>
+                <HomePoster title={"展览休闲"} posterData={this.state.posterData[7]} cityValue={this.state.cityValue} typeID={5}></HomePoster>
+                <HomePoster title={"音乐会"} posterData={this.state.posterData[2]} cityValue={this.state.cityValue} typeID={6}></HomePoster>
+                <HomePoster title={"曲苑杂坛"} posterData={this.state.posterData[5]} cityValue={this.state.cityValue} typeID={7}></HomePoster>
+                <HomePoster title={"舞蹈芭蕾"} posterData={this.state.posterData[4]} cityValue={this.state.cityValue} typeID={8}></HomePoster>
                 <Bottom></Bottom>
             </div>
         )
