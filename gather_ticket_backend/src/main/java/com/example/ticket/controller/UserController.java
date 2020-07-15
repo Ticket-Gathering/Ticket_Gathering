@@ -1,6 +1,7 @@
 package com.example.ticket.controller;
 
-import com.example.ticket.entity.Clients_auth;
+import com.example.ticket.entity.clients;
+import com.example.ticket.entity.clients_auth;
 import com.example.ticket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,7 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/checkUser")
-    public Clients_auth checkUser(@RequestParam("username") String username, @RequestParam("password") String password){
+    public clients_auth checkUser(@RequestParam("username") String username, @RequestParam("password") String password){
         return userService.checkUser(username, password);
     }
 

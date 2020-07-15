@@ -1,7 +1,8 @@
 package com.example.ticket.daoimpl;
 
 import com.example.ticket.dao.UserDao;
-import com.example.ticket.entity.Clients_auth;
+import com.example.ticket.entity.clients;
+import com.example.ticket.entity.clients_auth;
 import com.example.ticket.repository.UserAuthRepository;
 import com.example.ticket.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class UserDapImpl implements UserDao{
     UserRepository userRepository;
 
     @Override
-    public Clients_auth checkUser(String username, String password){
+    public clients_auth checkUser(String username, String password){
         return userAuthRepository.checkUser(username,password);
     }
 
