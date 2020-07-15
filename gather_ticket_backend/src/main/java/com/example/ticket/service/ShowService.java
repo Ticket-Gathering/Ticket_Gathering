@@ -9,6 +9,8 @@ public interface ShowService {
 
     Show getByShowid(Integer Showid);
 
+    List<String> getAllCityWithShowNow();
+
     List<List<Show>> getHomePage();
 
     List<Show>  searchShow(String keyword,Integer categoryid,String cityname,Integer subid,Integer pagesize,Integer currentsize);

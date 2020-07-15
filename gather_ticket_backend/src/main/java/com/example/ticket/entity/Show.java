@@ -34,4 +34,5 @@ public class Show {
     private int show_status;
     private String img_url;
     private String platform;
+    private String city;
 }

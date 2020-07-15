@@ -30,6 +30,11 @@ public class ShowServiceImpl implements ShowService {
     }
 
     @Override
+    public List<String> getAllCityWithShowNow() {
+        return showDao.findAllCityWithShowNow();
+    }
+
+    @Override
     public List<List<Show>> getHomePage() {
         List<Category> categories = categoryDao.getAllCategory();
         List<List<Show>> homepageshows= new ArrayList<List<Show>>();
@@ -43,15 +48,15 @@ public class ShowServiceImpl implements ShowService {
 
     @Override
     public List<Show> searchShow(String keyword, Integer categoryid, String cityname, Integer subid, Integer pagesize, Integer currentpage) {
-        if(categoryid==null && cityname==null && subid==null)
+        if(categoryid==null && cityname.isEmpty() && subid==null)
             return showDao.findByKeywordWithNumber(keyword,pagesize,currentpage);
-        else if(cityname==null && subid==null)
+        else if(cityname.isEmpty() && subid==null)
             return showDao.findByKeywordAndCategoryWithNumber(keyword,categoryid,pagesize,currentpage);
         else if(categoryid==null)
             return showDao.findByKeywordAndCityWithNumber(keyword,cityname,pagesize,currentpage);
         else if(subid==null)
             return showDao.findByKeywordAndCategoryAndCityWithNumber(keyword,categoryid,cityname,pagesize,currentpage);
-        else if(cityname==null)
+        else if(cityname.isEmpty())
             return showDao.findByCategoryAndSubCatWithNumber(keyword,categoryid,subid,pagesize,currentpage);
         else
             return showDao.findByAllFactor(keyword,categoryid,cityname,subid,pagesize,currentpage);

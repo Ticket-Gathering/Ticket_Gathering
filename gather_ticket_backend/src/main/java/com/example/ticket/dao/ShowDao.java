@@ -7,6 +7,7 @@ import java.util.List;
 public interface ShowDao {
      List<Show> findByCategory(Integer Categoryid);
      Show getByShowid(Integer Showid);
+     List<String>  findAllCityWithShowNow();
      List<Show> findForHomePageByCategory(Integer Showid);
      List<Show> findByKeywordAndCategoryWithNumber(String keyword, Integer categoryid,Integer pagesize,Integer currentpage);
      List<Show> findByKeywordWithNumber(String keyword,Integer pagesize,Integer currentpage);

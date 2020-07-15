@@ -11,6 +11,9 @@ public interface ShowRepository extends JpaRepository<Show,Integer> {
 
      Show findByShowId(Integer Showid);
 
+     @Query(nativeQuery = true,value="select distinct city from perform")
+     List<String> findAllCityWithShowNow();
+
      @Query(nativeQuery=true,value="select * from perform where category=?1 ORDER BY rand() LIMIT 7")
      List<Show>  findForHomePageByCategory(Integer Showid);
 

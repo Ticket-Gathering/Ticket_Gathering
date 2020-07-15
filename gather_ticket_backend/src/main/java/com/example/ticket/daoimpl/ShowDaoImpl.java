@@ -24,6 +24,11 @@ public class ShowDaoImpl implements ShowDao {
     }
 
     @Override
+    public List<String> findAllCityWithShowNow() {
+        return showRepository.findAllCityWithShowNow();
+    }
+
+    @Override
     public List<Show> findForHomePageByCategory(Integer Showid) {
         return showRepository.findForHomePageByCategory(Showid);
     }
