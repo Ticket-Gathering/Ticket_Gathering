@@ -3,7 +3,7 @@ import Nav from "../../Components/Nav";
 import Bottom from "../../Components/Bottom";
 import page from "./Page.module.css";
 import Axios from '../../Module/Axios';
-import Posterb from "../../Components/Posterb"
+import Posterb from "../../Components/PageItem"
 import 'antd/dist/antd.css';
 import addressData from "../../Components/CityData";
 import { Pagination, Result, Icon, Button,DatePicker} from 'antd';
@@ -181,11 +181,11 @@ export default class Page extends Component {
                         </div>
                     </div>
                     <div className={page.showContainer}>
-                        <div className={page.showBox}>
-                            {this.state.sorts.map((item, index) => {
-                                return <div className={page.showOne + (this.state.filterID == index ? (' ' + page.showSelected) : '')} key={index} onClick={()=>this.changeFilter(index)} >{item}</div>
-                            })}
-                        </div>
+                        {/*<div className={page.showBox}>*/}
+                        {/*    {this.state.sorts.map((item, index) => {*/}
+                        {/*        return <div className={page.showOne + (this.state.filterID == index ? (' ' + page.showSelected) : '')} key={index} onClick={()=>this.changeFilter(index)} >{item}</div>*/}
+                        {/*    })}*/}
+                        {/*</div>*/}
                         {this.getPosterb(this.state.data)}
                         <Pagination defaultCurrent={1} total={50} className={page.paging} />
                     </div>
