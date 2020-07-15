@@ -35,4 +35,9 @@ public class Show {
     @OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name="venue_id",referencedColumnName="id",nullable=false)
     private Venue venue;
+
+    public String getName()
+    {
+        return name;
+    }
 }

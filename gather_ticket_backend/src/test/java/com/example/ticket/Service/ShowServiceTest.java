@@ -1,0 +1,35 @@
+package com.example.ticket.Service;
+
+import com.example.ticket.TicketApplication;
+import com.example.ticket.entity.Show;
+import com.example.ticket.service.ShowService;
+import javafx.application.Application;
+import net.sf.json.JSONObject;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
+
+
+@SpringBootTest(classes = TicketApplication.class)
+public class ShowServiceTest {
+    @Test
+    public void contextLoads(){
+    }
+
+    @Autowired
+    private ShowService showService;
+
+    @Test
+    public void getHomePage_successfully(){
+        Integer id=1;
+        Show testshow=showService.getByShowid(id);
+        String name=testshow.getName();
+        System.out.println(name);
+    }
+}
