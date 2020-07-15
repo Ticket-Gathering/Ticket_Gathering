@@ -35,6 +35,9 @@ export default class HomePoster extends Component {
                 posterData: nextProps.posterData.splice(1, 7),
             })
         }
+        this.setState({
+            cityValue:nextProps.cityValue
+        })
     }
 
     render() {
