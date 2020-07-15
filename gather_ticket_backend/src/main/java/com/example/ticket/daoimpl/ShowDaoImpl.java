@@ -29,8 +29,8 @@ public class ShowDaoImpl implements ShowDao {
     }
 
     @Override
-    public List<Show> findByKeyWordAndCategoryWithNumber(String keyword, Integer categoryid,Integer pagesize,Integer currentpage) {
-        return showRepository.findByKeyWordAndCategoryWithNumber(keyword,categoryid,pagesize,currentpage);
+    public List<Show> findByKeywordAndCategoryWithNumber(String keyword, Integer categoryid,Integer pagesize,Integer currentpage) {
+        return showRepository.findByKeywordAndCategoryWithNumber(keyword,categoryid,pagesize,currentpage);
     }
 
     @Override
@@ -38,8 +38,23 @@ public class ShowDaoImpl implements ShowDao {
         return showRepository.findByKeywordWithNumber(keyword,pagesize,currentpage);
     }
 
-//    @Override
-//    public List<Show> searchShow2(String keyword, Integer categoryid) {
-//        return showRepository.findB;
-//    }
+    @Override
+    public List<Show> findByKeywordAndCityWithNumber(String keyword, String cityname, Integer pagesize, Integer currentpage) {
+        return showRepository.findByKeywordAndCityWithNumber(keyword,cityname,pagesize,currentpage);
+    }
+
+    @Override
+    public List<Show> findByKeywordAndCategoryAndCityWithNumber(String keyword, Integer category, String cityname, Integer pagesize, Integer currentpage) {
+        return showRepository.findByKeywordAndCategoryAndCityWithNumber(keyword,category,cityname,pagesize,currentpage);
+    }
+
+    @Override
+    public List<Show> findByCategoryAndSubCatWithNumber(String keyword, Integer categoryid, Integer subid, Integer pagesize, Integer currentpage) {
+        return showRepository.findByCategoryAndSubCatWithNumber(keyword,categoryid,subid,pagesize,currentpage);
+    }
+
+    @Override
+    public List<Show> findByAllFactor(String keyword, Integer categoryid, String cityname, Integer subid, Integer pagesize, Integer currentsize) {
+        return showRepository.findByAllFactor(keyword,categoryid,cityname,subid,pagesize,currentsize);
+    }
 }

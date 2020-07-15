@@ -35,10 +35,10 @@ public class ShowController {
     }
 
     @RequestMapping("/searchShow")
-    public List<Show> searchShow(@RequestParam("keyword") String keyword , @RequestParam("category") Integer categoryid,@RequestParam("city") Integer cityid,@RequestParam("sub_category") Integer subid,@RequestParam("pagesize") Integer pagesize,@RequestParam("currentsize") Integer currentpage ){
+    public List<Show> searchShow(@RequestParam("keyword") String keyword , @RequestParam("category") Integer categoryid,@RequestParam("city") String cityname,@RequestParam("sub_category") Integer subid,@RequestParam("pagesize") Integer pagesize,@RequestParam("currentsize") Integer currentpage ){
         keyword="%"+keyword+"%";
         currentpage=(currentpage-1)*pagesize;
-        return showService.searchShow(keyword,categoryid,cityid,subid,pagesize,currentpage);
+        return showService.searchShow(keyword,categoryid,cityname,subid,pagesize,currentpage);
     }
 
 }

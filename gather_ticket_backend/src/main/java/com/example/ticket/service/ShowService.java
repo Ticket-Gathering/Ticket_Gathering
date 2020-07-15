@@ -11,5 +11,5 @@ public interface ShowService {
 
     List<List<Show>> getHomePage();
 
-    List<Show>  searchShow(String keyword,Integer categoryid,Integer cityid,Integer subid,Integer pagesize,Integer currentsize);
+    List<Show>  searchShow(String keyword,Integer categoryid,String cityname,Integer subid,Integer pagesize,Integer currentsize);
 }

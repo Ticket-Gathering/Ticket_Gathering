@@ -42,9 +42,18 @@ public class ShowServiceImpl implements ShowService {
     }
 
     @Override
-    public List<Show> searchShow(String keyword, Integer categoryid, Integer cityid, Integer subid, Integer pagesize, Integer currentpage) {
-        if(categoryid==null)
+    public List<Show> searchShow(String keyword, Integer categoryid, String cityname, Integer subid, Integer pagesize, Integer currentpage) {
+        if(categoryid==null && cityname==null && subid==null)
             return showDao.findByKeywordWithNumber(keyword,pagesize,currentpage);
-        return showDao.findByKeyWordAndCategoryWithNumber(keyword,categoryid,pagesize,currentpage);
+        else if(cityname==null && subid==null)
+            return showDao.findByKeywordAndCategoryWithNumber(keyword,categoryid,pagesize,currentpage);
+        else if(categoryid==null)
+            return showDao.findByKeywordAndCityWithNumber(keyword,cityname,pagesize,currentpage);
+        else if(subid==null)
+            return showDao.findByKeywordAndCategoryAndCityWithNumber(keyword,categoryid,cityname,pagesize,currentpage);
+        else if(cityname==null)
+            return showDao.findByCategoryAndSubCatWithNumber(keyword,categoryid,subid,pagesize,currentpage);
+        else
+            return showDao.findByAllFactor(keyword,categoryid,cityname,subid,pagesize,currentpage);
     }
 }
