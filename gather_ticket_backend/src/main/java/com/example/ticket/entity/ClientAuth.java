@@ -11,12 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
-@Data
 @Entity
 @Table(name = "clients_auth")
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "userID")
-public class clients_auth {
+public class ClientAuth {
     @Id
     @Column(name = "user_id")
     private int userId;

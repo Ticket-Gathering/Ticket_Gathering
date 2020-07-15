@@ -1,7 +1,7 @@
 package com.example.ticket.controller;
 
-import com.example.ticket.entity.clients;
-import com.example.ticket.entity.clients_auth;
+import com.example.ticket.entity.Client;
+import com.example.ticket.entity.ClientAuth;
 import com.example.ticket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,12 +15,12 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/checkUser")
-    public clients_auth checkUser(@RequestParam("username") String username, @RequestParam("password") String password){
+    public ClientAuth checkUser(@RequestParam("username") String username, @RequestParam("password") String password){
         return userService.checkUser(username, password);
     }
 
     @RequestMapping("/getUserById/{id}")
-    public clients getUserById(@PathVariable("id") int userId){
+    public Client getUserById(@PathVariable("id") int userId){
         return userService.getUserById(userId);
     }
 }

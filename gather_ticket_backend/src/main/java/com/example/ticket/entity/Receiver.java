@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -52,14 +51,14 @@ public class Receiver {
         this.tel = tel;
     }
 
-    private clients client;
+    private Client client;
 
     @JsonBackReference
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH}, optional = false, fetch=FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    public clients getClient() { return this.client;}
+    public Client getClient() { return this.client;}
 
-    public void setClient(clients client) {
+    public void setClient(Client client) {
         this.client = client;
     }
 }

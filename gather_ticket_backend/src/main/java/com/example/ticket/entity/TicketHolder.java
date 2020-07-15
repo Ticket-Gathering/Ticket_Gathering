@@ -1,6 +1,5 @@
 package com.example.ticket.entity;
 
-import com.example.ticket.entity.clients;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -52,14 +51,14 @@ public class TicketHolder {
         this.idNum = idNum;
     }
 
-    private clients client;
+    private Client client;
 
     @JsonBackReference
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH}, optional = false, fetch=FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    public clients getClient() { return this.client;}
+    public Client getClient() { return this.client;}
 
-    public void setClient(clients client) {
+    public void setClient(Client client) {
         this.client = client;
     }
 }

@@ -1,8 +1,8 @@
 package com.example.ticket.serviceimpl;
 
-import com.example.ticket.entity.clients_auth;
 import com.example.ticket.constant.Constant;
 import com.example.ticket.dao.UserDao;
+import com.example.ticket.entity.ClientAuth;
 import com.example.ticket.service.LoginService;
 import com.example.ticket.utils.msgutils.Msg;
 import com.example.ticket.utils.msgutils.MsgCode;
@@ -19,7 +19,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public Msg login(String username,String password) {
-        clients_auth auth = userDao.checkUser(username, password);
+        ClientAuth auth = userDao.checkUser(username, password);
         if(auth != null){
             JSONObject obj = new JSONObject();
             obj.put(Constant.USER_ID, auth.getUserId());
