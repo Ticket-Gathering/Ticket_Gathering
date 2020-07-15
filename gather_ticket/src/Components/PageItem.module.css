@@ -91,5 +91,8 @@
     margin-bottom: 5px;
     width: 30px;
     height: 30px;
-    filter: grayscale(100%);
+    /*filter: grayscale(0%);*/
+}
+.srcWebImgSelected{
+    border: inset;
 }
