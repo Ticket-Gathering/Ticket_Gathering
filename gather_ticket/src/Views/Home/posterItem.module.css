@@ -1,19 +1,20 @@
-.poster {
+.posterContainer {
    width: 270px;
    height: 180px;
    display: flex;
    justify-content: space-between;
    margin-top: 9px;
 }
-.pleft {
+.posterImgContainer{
    width: 120px;
    height: 160px;
 }
-.plefti {
+.posterImg {
     width: 120px;
     height: 160px;
+    border-radius: 5px;
 }
-.pright {
+.posterDetailContainer {
     width: 135px;
     height: 160px;
     display: flex;
@@ -21,13 +22,13 @@
     justify-content: space-between;
     align-items: center;
 }
-.prightt {
+.posterDetailBox {
     width: 135px;
     height: 80px;
     display: flex;
     flex-direction: column;
 }
-.prighttt {
+.name {
     width: 135px;
     height: 60px;
     font-size: 14px;
@@ -38,7 +39,7 @@
     -webkit-line-clamp: 2;
     overflow: hidden;
 }
-.prighttb {
+.address {
     width: 135px;
     height: 15px;
     font-size: 12px;
@@ -46,7 +47,7 @@
     line-height: 15px;
     color: gray;
 }
-.prightb {
+.price {
     width: 135px;
     height: 40px;
     font-size: 14px;
