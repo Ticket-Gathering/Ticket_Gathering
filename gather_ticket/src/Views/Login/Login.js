@@ -12,12 +12,12 @@ export default class Login extends Component {
             signUpCard: false,
             curTab: 1,
             signUpForm: {
-                account: "",
-                passwd: ""
+                username: "",
+                password: ""
             },
             loginForm: {
-                account: "",
-                passwd: ""
+                username: "",
+                password: ""
             },
         };
         this.changeToLogin = this.changeToLogin.bind(this);
@@ -99,7 +99,7 @@ export default class Login extends Component {
 
     inputUsernameSign(e) {
         let val = e.target.value;
-        let data = Object.assign({}, this.state.signUpForm, { account: val })
+        let data = Object.assign({}, this.state.signUpForm, { username: val })
         this.setState({
             signUpForm: data
         });
@@ -107,14 +107,14 @@ export default class Login extends Component {
     inputPasswordSign(e) {
         let val = e.target.value;
         //修改state对象
-        let data = Object.assign({}, this.state.signUpForm, { passwd: val })
+        let data = Object.assign({}, this.state.signUpForm, { password: val })
         this.setState({
             signUpForm: data
         });
     }
     inputUsername(e) {
         let val = e.target.value;
-        let data = Object.assign({}, this.state.loginForm, { account: val })
+        let data = Object.assign({}, this.state.loginForm, { username: val })
         this.setState({
             loginForm: data
         });
@@ -122,7 +122,7 @@ export default class Login extends Component {
     inputPassword(e) {
         let val = e.target.value;
         //修改state对象
-        let data = Object.assign({}, this.state.loginForm, { passwd: val })
+        let data = Object.assign({}, this.state.loginForm, { password: val })
         this.setState({
             loginForm: data
         });
@@ -138,7 +138,7 @@ export default class Login extends Component {
                     this.setState({
                         loginForm: da
                     });
-                    this.changeStyle();
+                    this.changeToLogin();
 
                 }
             })

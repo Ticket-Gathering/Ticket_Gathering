@@ -50,6 +50,7 @@ export default class About extends Component {
     //         .catch(err => {
     //             console.log(err);
     //         })
+
     // }
 
     render() {

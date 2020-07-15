@@ -30,6 +30,23 @@
     "@ant-design/colors" "^3.1.0"
     babel-runtime "^6.26.0"
 
+"@ant-design/icons-svg@^4.0.0":
+  version "4.1.0"
+  resolved "https://registry.npm.taobao.org/@ant-design/icons-svg/download/@ant-design/icons-svg-4.1.0.tgz#480b025f4b20ef7fe8f47d4a4846e4fee84ea06c"
+  integrity sha1-SAsCX0sg73/o9H1KSEbk/uhOoGw=
+
+"@ant-design/icons@^4.2.1":
+  version "4.2.1"
+  resolved "https://registry.npm.taobao.org/@ant-design/icons/download/@ant-design/icons-4.2.1.tgz#6f3ea5d98ab782072e4e9cbb70f25e4403ae1a6b"
+  integrity sha1-bz6l2Yq3ggcuTpy7cPJeRAOuGms=
+  dependencies:
+    "@ant-design/colors" "^3.1.0"
+    "@ant-design/icons-svg" "^4.0.0"
+    "@babel/runtime" "^7.10.1"
+    classnames "^2.2.6"
+    insert-css "^2.0.0"
+    rc-util "^5.0.1"
+
 "@ant-design/icons@~2.1.1":
   version "2.1.1"
   resolved "https://registry.npm.taobao.org/@ant-design/icons/download/@ant-design/icons-2.1.1.tgz#7b9c08dffd4f5d41db667d9dbe5e0107d0bd9a4a"
@@ -1636,7 +1653,7 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.1.2", "@babel/runtime@^7.5.5":
+"@babel/runtime@^7.1.2", "@babel/runtime@^7.10.1", "@babel/runtime@^7.5.5":
   version "7.10.4"
   resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.10.4.tgz?cache=0&sync_timestamp=1593521346994&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fruntime%2Fdownload%2F%40babel%2Fruntime-7.10.4.tgz#a6724f1a6b8d2f6ea5236dbfe58c7d7ea9c5eb99"
   integrity sha1-pnJPGmuNL26lI22/5Yx9fqnF65k=
@@ -2443,7 +2460,7 @@ ansi-styles@^3.2.0, ansi-styles@^3.2.1:
 
 antd@^3.26.18:
   version "3.26.18"
-  resolved "https://registry.npm.taobao.org/antd/download/antd-3.26.18.tgz?cache=0&sync_timestamp=1594458374314&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fantd%2Fdownload%2Fantd-3.26.18.tgz#541e26a6865dd20e5d192027c45599b963146e67"
+  resolved "https://registry.npm.taobao.org/antd/download/antd-3.26.18.tgz?cache=0&sync_timestamp=1594455842670&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fantd%2Fdownload%2Fantd-3.26.18.tgz#541e26a6865dd20e5d192027c45599b963146e67"
   integrity sha1-VB4mpoZd0g5dGSAnxFWZuWMUbmc=
   dependencies:
     "@ant-design/create-react-context" "^0.2.4"
@@ -4301,7 +4318,7 @@ dom-serializer@0:
 
 dom-walk@^0.1.0:
   version "0.1.2"
-  resolved "https://registry.npm.taobao.org/dom-walk/download/dom-walk-0.1.2.tgz?cache=0&sync_timestamp=1585908356502&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdom-walk%2Fdownload%2Fdom-walk-0.1.2.tgz#0c548bef048f4d1f2a97249002236060daa3fd84"
+  resolved "https://registry.npm.taobao.org/dom-walk/download/dom-walk-0.1.2.tgz#0c548bef048f4d1f2a97249002236060daa3fd84"
   integrity sha1-DFSL7wSPTR8qlySQAiNgYNqj/YQ=
 
 domain-browser@^1.1.1:
@@ -5913,6 +5930,11 @@ inquirer@^6.2.2:
     string-width "^2.1.0"
     strip-ansi "^5.1.0"
     through "^2.3.6"
+
+insert-css@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npm.taobao.org/insert-css/download/insert-css-2.0.0.tgz#eb5d1097b7542f4c79ea3060d3aee07d053880f4"
+  integrity sha1-610Ql7dUL0x56jBg067gfQU4gPQ=
 
 internal-ip@^4.2.0:
   version "4.3.0"
@@ -9751,7 +9773,7 @@ react-slick@~0.25.2:
 
 react-transition-group@^2.5.3:
   version "2.9.0"
-  resolved "https://registry.npm.taobao.org/react-transition-group/download/react-transition-group-2.9.0.tgz#df9cdb025796211151a436c69a8f3b97b5b07c8d"
+  resolved "https://registry.npm.taobao.org/react-transition-group/download/react-transition-group-2.9.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-transition-group%2Fdownload%2Freact-transition-group-2.9.0.tgz#df9cdb025796211151a436c69a8f3b97b5b07c8d"
   integrity sha1-35zbAleWIRFRpDbGmo87l7WwfI0=
   dependencies:
     dom-helpers "^3.4.0"
@@ -10999,7 +11021,7 @@ throat@^4.0.0:
 
 throttle-debounce@^2.1.0:
   version "2.2.1"
-  resolved "https://registry.npm.taobao.org/throttle-debounce/download/throttle-debounce-2.2.1.tgz?cache=0&sync_timestamp=1591627081398&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fthrottle-debounce%2Fdownload%2Fthrottle-debounce-2.2.1.tgz#fbd933ae6793448816f7d5b3cae259d464c98137"
+  resolved "https://registry.npm.taobao.org/throttle-debounce/download/throttle-debounce-2.2.1.tgz?cache=0&sync_timestamp=1591627116872&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fthrottle-debounce%2Fdownload%2Fthrottle-debounce-2.2.1.tgz#fbd933ae6793448816f7d5b3cae259d464c98137"
   integrity sha1-+9kzrmeTRIgW99WzyuJZ1GTJgTc=
 
 through2@^2.0.0:
