@@ -1,7 +1,7 @@
 package com.example.ticket.daoimpl;
 
 import com.example.ticket.dao.ShowDao;
-import com.example.ticket.entity.show;
+import com.example.ticket.entity.Show;
 import com.example.ticket.repository.ShowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,17 +14,52 @@ public class ShowDaoImpl implements ShowDao {
     ShowRepository showRepository;
 
     @Override
-    public List<show> findByCategory(Integer Categoryid) {
+    public List<Show> findByCategory(Integer Categoryid) {
         return showRepository.findByCategory(Categoryid);
     }
 
     @Override
-    public show getByShowid(Integer Showid) {
+    public Show getByShowid(Integer Showid) {
         return showRepository.findByShowId(Showid);
     }
 
     @Override
-    public List<show> findForHomePageByCategory(Integer Showid) {
+    public List<String> findAllCityWithShowNow() {
+        return showRepository.findAllCityWithShowNow();
+    }
+
+    @Override
+    public List<Show> findForHomePageByCategory(Integer Showid) {
         return showRepository.findForHomePageByCategory(Showid);
+    }
+
+    @Override
+    public List<Show> findByKeywordAndCategoryWithNumber(String keyword, Integer categoryid,Integer pagesize,Integer currentpage) {
+        return showRepository.findByKeywordAndCategoryWithNumber(keyword,categoryid,pagesize,currentpage);
+    }
+
+    @Override
+    public List<Show> findByKeywordWithNumber(String keyword,Integer pagesize ,Integer currentpage) {
+        return showRepository.findByKeywordWithNumber(keyword,pagesize,currentpage);
+    }
+
+    @Override
+    public List<Show> findByKeywordAndCityWithNumber(String keyword, String cityname, Integer pagesize, Integer currentpage) {
+        return showRepository.findByKeywordAndCityWithNumber(keyword,cityname,pagesize,currentpage);
+    }
+
+    @Override
+    public List<Show> findByKeywordAndCategoryAndCityWithNumber(String keyword, Integer category, String cityname, Integer pagesize, Integer currentpage) {
+        return showRepository.findByKeywordAndCategoryAndCityWithNumber(keyword,category,cityname,pagesize,currentpage);
+    }
+
+    @Override
+    public List<Show> findByCategoryAndSubCatWithNumber(String keyword, Integer categoryid, Integer subid, Integer pagesize, Integer currentpage) {
+        return showRepository.findByCategoryAndSubCatWithNumber(keyword,categoryid,subid,pagesize,currentpage);
+    }
+
+    @Override
+    public List<Show> findByAllFactor(String keyword, Integer categoryid, String cityname, Integer subid, Integer pagesize, Integer currentsize) {
+        return showRepository.findByAllFactor(keyword,categoryid,cityname,subid,pagesize,currentsize);
     }
 }

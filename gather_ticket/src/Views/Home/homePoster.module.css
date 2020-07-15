@@ -1,7 +1,7 @@
 .posters {
    width: 1200px;
    height: 430px;
-   display: flex; 
+   display: flex;
    flex-direction: column;
    justify-content: space-around;
    align-items: center;
@@ -10,47 +10,52 @@
    margin: 0 auto;
    margin-top: 15px;
 }
-.ptop {
+.posterTitle{
    width: 1160px;
    height: 40px;
-   display: flex; 
+   display: flex;
    justify-content: space-between;
 }
-.ptopl {
+.pTitleCategory {
    width: 500px;
    height: 40px;
    font-size: 24px;
    text-align: left;
    line-height: 40px;
 }
-.ptopr {
-   width: 80px;
-   height: 40px;
-   font-size: 14px;
-   text-align: left;
-   line-height: 40px;
-   color: lightgray;
+.pTitleMore {
+    width: 80px;
+    height: 40px;
+    font-size: 14px;
+    text-align: left;
+    line-height: 40px;
+    color: lightgray;
 }
-.pbot {
+.pTitleMore a:hover{
+    color: #0088D6;
+}
+.posterBody {
    width: 1160px;
    height: 365px;
-   display: flex; 
+   display: flex;
    justify-content: space-between;
 }
-.pbotl {
+.firstPosterContainer {
     width: 270px;
     height: 365px;
-    display: flex; 
+    display: flex;
     flex-direction: column;
     position: relative;
 }
-.pbotli {
+.firstPosterImg {
     width: 270px;
     height: 365px;
+    border-radius: 8px;
 }
-.pbotld {
+.firstPosterDetail {
     width: 270px;
-    height: 105px;
+    height: 140px;
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -60,15 +65,17 @@
     bottom: 0px;
     left: 0px;
 }
-.pbotldi {
+.firstPosterName {
+    margin-top: 5px;
+    margin-left: 15px;
     width: 270px;
-    height: 45px;
+    height: 25px;
     text-align: left;
-    line-height: 45px;
+    line-height: 25px;
     font-size: 16px;
     color: white;
 }
-.pbotr {
+.posterItem {
     width: 870px;
     height: 365px;
     display: flex;

@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Table(name = "perform")
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "showId")
-public class show {
+public class Show {
     @Id
     @Column(name = "id")
     private int showId;
@@ -34,4 +34,5 @@ public class show {
     private int show_status;
     private String img_url;
     private String platform;
+    private String city;
 }

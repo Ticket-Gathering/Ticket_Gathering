@@ -3,7 +3,7 @@ package com.example.ticket.serviceimpl;
 import com.example.ticket.dao.CategoryDao;
 import com.example.ticket.dao.ShowDao;
 import com.example.ticket.entity.Category;
-import com.example.ticket.entity.show;
+import com.example.ticket.entity.Show;
 import com.example.ticket.service.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,24 +20,45 @@ public class ShowServiceImpl implements ShowService {
     CategoryDao categoryDao;
 
     @Override
-    public List<show> findByCategory(Integer Categoryid) {
+    public List<Show> findByCategory(Integer Categoryid) {
         return showDao.findByCategory(Categoryid);
     }
 
     @Override
-    public show getByShowid(Integer Showid) {
+    public Show getByShowid(Integer Showid) {
         return showDao.getByShowid(Showid);
     }
 
     @Override
-    public List<List<show>> getHomePage() {
+    public List<String> getAllCityWithShowNow() {
+        return showDao.findAllCityWithShowNow();
+    }
+
+    @Override
+    public List<List<Show>> getHomePage() {
         List<Category> categories = categoryDao.getAllCategory();
-        List<List<show>> homepageshows= new ArrayList<List<show>>();
+        List<List<Show>> homepageshows= new ArrayList<List<Show>>();
         for (Category c : categories) {
             Category one =c;
             Integer id=one.getCategoryId();
             homepageshows.add(showDao.findForHomePageByCategory(id));
         }
         return homepageshows;
+    }
+
+    @Override
+    public List<Show> searchShow(String keyword, Integer categoryid, String cityname, Integer subid, Integer pagesize, Integer currentpage) {
+        if(categoryid==null && cityname.isEmpty() && subid==null)
+            return showDao.findByKeywordWithNumber(keyword,pagesize,currentpage);
+        else if(cityname.isEmpty() && subid==null)
+            return showDao.findByKeywordAndCategoryWithNumber(keyword,categoryid,pagesize,currentpage);
+        else if(categoryid==null)
+            return showDao.findByKeywordAndCityWithNumber(keyword,cityname,pagesize,currentpage);
+        else if(subid==null)
+            return showDao.findByKeywordAndCategoryAndCityWithNumber(keyword,categoryid,cityname,pagesize,currentpage);
+        else if(cityname.isEmpty())
+            return showDao.findByCategoryAndSubCatWithNumber(keyword,categoryid,subid,pagesize,currentpage);
+        else
+            return showDao.findByAllFactor(keyword,categoryid,cityname,subid,pagesize,currentpage);
     }
 }
