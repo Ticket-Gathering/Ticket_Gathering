@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface UserService {
     clients_auth checkUser(String username, String password);
+
+    clients getUserById(int userId);
 }

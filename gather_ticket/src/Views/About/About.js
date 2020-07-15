@@ -9,6 +9,8 @@ import Bottom from "../../Components/Bottom";
 
 const Data = {timelist:['2020.08.01 周六 20:00','2020.08.02 周日 20:00' ],pricelist:['100','120','188'],billtype:{chooice:1,getter:1,type:1},name:'李荣浩2019「年少有为」巡回演唱会',showtime:'2020.08.01-2020.08.02' ,address:'上海市 | 珍珠剧场The Pearl '};
 
+const url = "http://localhost:8080";
+
 export default class About extends Component {
     constructor(props) {
         super(props);
@@ -19,20 +21,19 @@ export default class About extends Component {
 
     }
     componentDidMount() {
-        // let i = this.props.match.params.aid;
-        // Axios.get("/about/getAbout", { params: { aid: i } }).then((res) => {
-        //     res.data[0].timelist = JSON.parse(res.data[0].timelist);
-        //     res.data[0].pricelist = JSON.parse(res.data[0].pricelist);
-        //     res.data[0].billtype = JSON.parse(res.data[0].billtype);
-        //     console.log(res.data[0]);
-        //     this.setState({
-        //         data: res.data[0]
-        //     });
-        //     this.getIntroduce(res.data[0].address);
-        // })
-        //     .catch(err => {
-        //         console.log(err);
-        //     })
+        let params = new FormData();
+        params.append("id", this.props.match.params.aid);
+
+        Axios.post(url+"/getShowByShowId", params
+        ).then((res) => {
+            console.log(res);
+            this.setState({
+                showData : res.data
+            })
+        })
+            .catch(err => {
+                console.log(err);
+            })
         this.setState({data:Data});
     }
 

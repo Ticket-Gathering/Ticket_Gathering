@@ -24,9 +24,9 @@ export default class Page extends Component {
             times: ["全部", "今天", "明天", "本周末", "一个月内"],
             sorts: ["相关度排序", "推荐排序", "最近开场", "最新上架"],
             data: [
-                {name:'作业测试',address:'上海',show_time:'2020-8-12',img_url:require('../../ImgAssets/testCarousel/posterTest1.jpg'),price:40,show_status:1,category:1,platform:'大麦网'},
-                {name:'作业测试',address:'上海',show_time:'2020-8-12',img_url:require('../../ImgAssets/testCarousel/posterTest2.jpg'),price:40,show_status:2,category:2,platform:'摩天轮'},
-                {name:'作业测试',address:'上海',show_time:'2020-8-12',img_url:require('../../ImgAssets/testCarousel/posterTest3.jpg'),price:40,show_status:3,category:3,platform:'永乐票务'}
+                {aid:1, name:'作业测试',address:'上海',show_time:'2020-8-12',img_url:require('../../ImgAssets/testCarousel/posterTest1.jpg'),price:40,show_status:1,category:1,platform:'大麦网'},
+                {aid:2, name:'作业测试',address:'上海',show_time:'2020-8-12',img_url:require('../../ImgAssets/testCarousel/posterTest2.jpg'),price:40,show_status:2,category:2,platform:'摩天轮'},
+                {aid:3, name:'作业测试',address:'上海',show_time:'2020-8-12',img_url:require('../../ImgAssets/testCarousel/posterTest3.jpg'),price:40,show_status:3,category:3,platform:'永乐票务'}
                 ],
         }
     }
