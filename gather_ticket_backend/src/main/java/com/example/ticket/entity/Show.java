@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -25,7 +22,7 @@ public class Show {
     private int sub_category;
     private String artists;
     private String show_time;
-    private int venue_id;
+    //private int venue_id;
     private int is_eticket;
     private int is_general_agent;
     private int is_xuanzuo;
@@ -35,4 +32,7 @@ public class Show {
     private String img_url;
     private String platform;
     private String city;
+    @OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name="venue_id",referencedColumnName="id",nullable=false)
+    private Venue venue;
 }
