@@ -3,10 +3,13 @@ package com.example.ticket.Service;
 import com.example.ticket.TicketApplication;
 import com.example.ticket.entity.ClientAuth;
 import com.example.ticket.entity.Client;
+import com.example.ticket.repository.UserRepository;
 import com.example.ticket.service.UserService;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -18,6 +21,9 @@ public class UserServiceTest {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Test
     public void checkUser(){
@@ -47,11 +53,10 @@ public class UserServiceTest {
     @Test
     public void getUserById(){
         Integer userId1 = 1;
-        Integer userId2 = 10;
 
-        Client test1 = userService.getUserById(userId1);
-        Client test2 = userService.getUserById(userId2);
+        Client user = new Client(1, "sjw", );
+        when(userRepository.findById(userId1).get()).thenReturn(user);
 
-
+        assertEquals(user, userService.getUserById(userId1));
     }
 }
