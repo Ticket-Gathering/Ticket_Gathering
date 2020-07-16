@@ -22,7 +22,6 @@ public class Show {
     private int sub_category;
     private String artists;
     private String show_time;
-    //private int venue_id;
     private int is_eticket;
     private int is_general_agent;
     private int is_xuanzuo;
