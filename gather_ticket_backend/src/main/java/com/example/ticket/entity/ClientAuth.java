@@ -27,6 +27,8 @@ public class ClientAuth {
         return userId;
     }
 
+    public void setUserId(Integer userid) { this.userId = userid; }
+
     public String getUsername() {
         return username;
     }
