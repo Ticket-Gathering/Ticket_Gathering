@@ -87,3 +87,6 @@ UI页面
 陈嘉轩：1.后端实现了分类页面的筛选和搜索功能，目前可以按照搜索关键词，城市，类别和子类别进行筛选。
 
 2.后端实现了获取当前全部有演出的城市的功能 3.初步尝试了junit的的unit test
+
+## 07/16
+沈佳威：编写了loginservicetest logincontrollertest userservicetest 
