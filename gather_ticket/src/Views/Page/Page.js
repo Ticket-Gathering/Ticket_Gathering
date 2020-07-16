@@ -3,59 +3,39 @@ import Nav from "../../Components/Nav";
 import Bottom from "../../Components/Bottom";
 import page from "./Page.module.css";
 import Axios from '../../Module/Axios';
-import Posterb from "../../Components/PageItem"
+import PageItem from "./PageItem";
+import {categoryMap} from './categoryMap'
+import qs from 'qs'
 import 'antd/dist/antd.css';
-import addressData from "../../Components/CityData";
 import { Pagination, Result, Icon, Button,DatePicker} from 'antd';
+const url = "http://localhost:8080";
+
 export default class Page extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            typeID: (typeof (this.props.location.state)!="undefined")?this.props.location.state.typeID:0,
-            cityID: (typeof (this.props.location.state)!="undefined")?(this.props.location.state.cityID=="全国"?0:this.props.location.state.cityID):0,
-            timeID: 0,
-            filterID: 1,
-            city: '',
-            type: '',
+            type: (typeof (this.props.location.state)!="undefined")?this.props.location.state.type:'全部',
+            city: (typeof (this.props.location.state)!="undefined")?this.props.location.state.city:'全国',
             time:'',
+            timeID: 0,
             collapseFlag:true,
-            citys: [],
+            AllCity: [],
             types: ["全部", "演唱会", "话剧歌剧", "体育", "儿童亲子","展览休闲","音乐会","曲苑杂坛", "舞蹈芭蕾" ],
             times: ["全部", "今天", "明天", "本周末", "一个月内"],
-            sorts: ["相关度排序", "推荐排序", "最近开场", "最新上架"],
-            data: [
-                {aid:1, name:'作业测试',address:'上海',show_time:'2020-8-12',img_url:require('../../ImgAssets/testCarousel/posterTest1.jpg'),price:40,show_status:1,category:1,platform:'大麦网'},
-                {aid:2, name:'作业测试',address:'上海',show_time:'2020-8-12',img_url:require('../../ImgAssets/testCarousel/posterTest2.jpg'),price:40,show_status:2,category:2,platform:'摩天轮'},
-                {aid:3, name:'作业测试',address:'上海',show_time:'2020-8-12',img_url:require('../../ImgAssets/testCarousel/posterTest3.jpg'),price:40,show_status:3,category:3,platform:'永乐票务'}
-                ],
+            data: [],
+            searchKeyword:null
         }
     }
-    componentWillMount() {
-        let tempArr=[]
-        for(let i=0;i<addressData.length;i++){
-            tempArr.push(addressData[i].value)
-        }
+    changeCity=(newCity)=>{
         this.setState({
-            city:tempArr[this.state.cityID],
-            citys:tempArr
-        })
-    }
-
-    changeCity=(newCityID, newCity)=>{
-        console.log(newCityID)
-        this.setState({
-            cityID:newCityID,
             city:newCity
-        });
-        this.getData();
-    }
-    changeType=(newTypeID,newType)=>{
-        this.setState({
-            typeID:newTypeID,
-            type:newType
-        });
-        this.getData();
+        },()=>this.getFilteredData());
 
+    }
+    changeType=(newType)=>{
+        this.setState({
+            type:newType
+        },()=>this.getFilteredData());
     }
     changeTime=(newTimeID,newTime) =>{
         this.setState({
@@ -69,12 +49,31 @@ export default class Page extends Component {
             time:dateString,
         })
     }
-    changeFilter=(newFilterID)=> {
-        this.setState({
-            filterID:newFilterID
-        })
+    getFilteredData(){
+        let city=null,category=null,keyword=''
+        console.log(this.state.city)
+        if(this.state.city!='全国')
+            city=this.state.city
+
+        if(this.state.type!='全部')
+            category=categoryMap.get(this.state.type)
+
+        if(this.state.searchKeyword)
+            keyword=this.state.searchKeyword
+
+        console.log(city)
+        console.log(category)
+        console.log(keyword)
+        Axios.post(url+'/searchShow',qs.stringify({keyword:keyword,pagesize:20,currentsize:1,category:category,sub_category:null,city:city})).then(
+            (res)=>{
+                console.log(res.data)
+                this.setState({
+                    data:res.data
+                })
+            }
+        )
     }
-    getPosterb(i) {
+    getPageItem(i) {
         if (i.length < 1) {
             return <Result
                 icon={<Icon type="smile" theme="twoTone" />}
@@ -82,43 +81,64 @@ export default class Page extends Component {
                 extra={<Button type="primary">Next</Button>}
             />
         } else {
-            return (i.map((item, ind) => {
-                return <Posterb poster={item} key={ind}></Posterb>
+            return (i.map((item, index) => {
+                return <PageItem poster={item} key={index}></PageItem>
             }))
         }
     }
-    getData() {
-        Axios.get("/page/getClassify", { params: { city: this.state.city, type: this.state.type } }).then(res => {
-            this.setState({
-                data: res.data
-            })
-            console.log(res.data)
-        })
-            .catch(err => {
-                console.log(err);
-            })
+    parseSearchParams=(pairs)=>{
+        let keyword=''
+        for(let index in pairs){
+            let [key,value]=pairs[index].split('=')
+            if(key=='keyword') {
+                keyword = value
+                this.setState({
+                    searchKeyword:value
+                })
+            }
+        }
+        Axios.post(url+'/searchShow',qs.stringify({keyword:keyword,pagesize:20,currentsize:1,category:null,sub_category:null,city:null})).then(
+            (res)=>{
+                this.setState({
+                    data:res.data
+                })
+            }
+        )
     }
     componentDidMount() {
-    //     Axios.get("/page/getClassify").then(res => {
-    //         this.setState({
-    //             data: res.data
-    //         })
-    //     })
-    //         .catch(err => {
-    //             console.log(err);
-    //         })
-    //
+        Axios.get(url+'/getAllCityWithShowNow').then(
+            res=>{
+                let citys=res.data
+                let tempArr=['全国']
+                for(let index in citys){
+                    tempArr.push(citys[index])
+                }
+
+                this.setState({
+                    AllCity:tempArr
+                })
+            }
+        )
+        let pairs=this.props.location.search.slice(1,).split('&')
+        this.parseSearchParams(pairs)
+
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        let pairs=nextProps.location.search.slice(1,).split('&')
+        this.parseSearchParams(pairs)
     }
     render() {
         var MoreCitys=[]
-        for(let i=1;i<4;i++){
+        let length=this.state.AllCity.length
+        for(let i=1;i<=length/9;i++){
             MoreCitys.push(
                 <div className={page.titleBox}>
                     {
-                        this.state.citys.slice(8+9*(i-1), 8+9*i).map((item, index) => {
+                        this.state.AllCity.slice(8+9*(i-1), 8+9*i).map((item, index) => {
                             return <div
                                 className={page.titleOne + (this.state.city==item ? (' ' + page.titleSelected) : '')}
-                                onClick={() => this.changeCity(index, item)}>{item}</div>
+                                onClick={() => this.changeCity(item)}>{item}</div>
                         })
                     }
                 </div>
@@ -127,7 +147,7 @@ export default class Page extends Component {
         return (
             <div>
                 <div >
-                    <Nav pageIdent="page"></Nav>
+                    <Nav pageIdent="page" history={this.props.history}></Nav>
                 </div>
                 <div>
 
@@ -140,8 +160,8 @@ export default class Page extends Component {
                             <span>城 市：</span>
                             <div className={page.titleBox}>
                                 {
-                                    this.state.citys.slice(0,8).map((item, index) => {
-                                        return <div className={page.titleOne + (this.state.city == item ? (' ' + page.titleSelected) : '')} onClick={()=>this.changeCity(index,item)} >{item}</div>
+                                    this.state.AllCity.slice(0,8).map((item, index) => {
+                                        return <div className={page.titleOne + (this.state.city == item ? (' ' + page.titleSelected) : '')} onClick={()=>this.changeCity(item)} >{item}</div>
                                     })
                                 }
                                 <div className={page.showMore} onClick={()=>this.setState({collapseFlag:!this.state.collapseFlag})}><u>{this.state.collapseFlag?'显示更多':'收起'}</u></div>
@@ -159,7 +179,7 @@ export default class Page extends Component {
                             <div className={page.titleBox}>
                                 {
                                     this.state.types.map((item, index) => {
-                                        return <div className={page.titleOne + (this.state.typeID == index ? (' ' + page.titleSelected) : '')}  onClick={()=>this.changeType(index,item)} >{item}</div>
+                                        return <div className={page.titleOne + (this.state.type == item ? (' ' + page.titleSelected) : '')}  onClick={()=>this.changeType(item)} >{item}</div>
                                     })
                                 }
                             </div>
@@ -182,12 +202,7 @@ export default class Page extends Component {
                         </div>
                     </div>
                     <div className={page.showContainer}>
-                        {/*<div className={page.showBox}>*/}
-                        {/*    {this.state.sorts.map((item, index) => {*/}
-                        {/*        return <div className={page.showOne + (this.state.filterID == index ? (' ' + page.showSelected) : '')} key={index} onClick={()=>this.changeFilter(index)} >{item}</div>*/}
-                        {/*    })}*/}
-                        {/*</div>*/}
-                        {this.getPosterb(this.state.data)}
+                        {this.getPageItem(this.state.data)}
                         <Pagination defaultCurrent={1} total={50} className={page.paging} />
                     </div>
                     <Bottom></Bottom>

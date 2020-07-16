@@ -69,6 +69,12 @@
         <version>1.18.10</version>
         <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>ticket</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

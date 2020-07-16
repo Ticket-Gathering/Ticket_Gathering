@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import navstyle from './Nav.module.css'
 import { Link } from 'react-router-dom';
-import {Cascader,Select} from "antd";
-import addressData from "./CityData";
+import {Cascader,Select,Input} from "antd";
 import Axios from "../Module/Axios";
+const {Search} =Input;
 const { Option } = Select;
+const url= "http://localhost:8080";
 export default class nav extends Component {
 
     constructor(props) {
@@ -12,7 +13,8 @@ export default class nav extends Component {
         this.state={
             cityValue:'全国',
             username: 'test',
-            isLoggedIn:false
+            isLoggedIn:false,
+            AllCity:[]
         }
     };
     componentWillMount() {
@@ -26,8 +28,35 @@ export default class nav extends Component {
                 isLoggedIn:false
             })
         }
+        Axios.get(url+'/getAllCityWithShowNow').then(
+            res=>{
+                let citys=res.data
+                let tempArr=[]
+                tempArr.push({value:'全国',label:-1})
+                this.setState({
+                    AllCity:tempArr
+                })
+                for(let index in citys){
+                    let city=citys[index]
+                    let tempObject={}
+                    tempObject.value=city
+                    tempObject.label=index
+                    tempArr.push(tempObject)
+                }
+                tempArr.push({value:'全国',label:-1})
+                this.setState({
+                    AllCity:tempArr
+                })
+            }
+        )
     }
 
+
+    onSearch=(event)=>{
+        if(event.key=='Enter'){
+            this.props.history.push("/page?keyword="+document.getElementById('search').value)
+        }
+    }
     render() {
         return (
             <div className={navstyle.nav}>
@@ -45,10 +74,10 @@ export default class nav extends Component {
                                         <Select style={{width: 144 + "px", color: "#999999"}}
                                                 defaultValue="全国"
                                                 value={this.state.cityValue}
-                                                onChange={(newValue)=>{this.setState({cityValue:newValue});this.props.setCityValue(newValue)}}
+                                                onChange={(newValue,option)=>{this.setState({cityValue:option.props.children});this.props.setCityValue(option.props.children);}}
                                         >
-                                            {addressData.map((item,index)=>{
-                                                return <Option key={index} >{addressData[index].value}</Option>
+                                            {this.state.AllCity.map((item,index)=>{
+                                                return <Option key={index} >{this.state.AllCity[index].value}</Option>
                                             })}
                                         </Select>
                                     </div>
@@ -60,11 +89,11 @@ export default class nav extends Component {
                         }
                     <div className={navstyle.navbar}>
                         <div className={navstyle.index}><Link to='/'>首页</Link></div>
-                        <div className={navstyle.page}><Link to={{pathname:'/page',state:{typeID:0,cityID:this.state.cityValue}}}>分类</Link></div>
+                        <div className={navstyle.page}><Link to={{pathname:'/page',state:{type:'全部',city:this.state.cityValue}}}>分类</Link></div>
                     </div>
                     <div className={navstyle.search}>
                         <img src={require('../ImgAssets/search.png')} className={navstyle.searchimg}/>
-                        <input type="text" className={navstyle.input} placeholder="搜索明星、演出、体育赛事">
+                        <input type="text" id={'search'} className={navstyle.input} placeholder="搜索明星、演出、体育赛事" onKeyPress={(e)=>this.onSearch(e)}>
                         </input>
                     </div>
                     {this.state.isLoggedIn

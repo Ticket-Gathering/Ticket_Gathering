@@ -18,14 +18,6 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
-        // Axios.get("/home/getnotable", { params: { aid: this.state.data } }).then(res => {
-        //     this.setState({
-        //         data: res
-        //     })
-        // })
-        //     .catch(err => {
-        //         console.log(err)
-        //     })
         Axios.get(url+"/getHomePage").then(res=>{
             this.setState({
                 posterData:res.data
@@ -43,17 +35,17 @@ export default class Home extends Component {
     render() {
         return (
             <div>
-                <Nav setCityValue={(newV) => this.setState({cityValue:newV})} pageIdent="home"/>
+                <Nav setCityValue={(newV) => this.setState({cityValue:newV})} history={this.props.history} pageIdent="home"/>
                 <NavList cityValue={this.state.cityValue} ></NavList>
                 <Notable></Notable>
-                <HomePoster title={"演唱会"} posterData={this.state.posterData[1]} cityValue={this.state.cityValue} typeID={1}></HomePoster>
-                <HomePoster title={"歌剧话剧"} posterData={this.state.posterData[3]} cityValue={this.state.cityValue} typeID={2}></HomePoster>
-                <HomePoster title={"体育"} posterData={this.state.posterData[6]} cityValue={this.state.cityValue} typeID={3}></HomePoster>
-                <HomePoster title={"儿童亲子"} posterData={this.state.posterData[0]} cityValue={this.state.cityValue} typeID={4}></HomePoster>
-                <HomePoster title={"展览休闲"} posterData={this.state.posterData[7]} cityValue={this.state.cityValue} typeID={5}></HomePoster>
-                <HomePoster title={"音乐会"} posterData={this.state.posterData[2]} cityValue={this.state.cityValue} typeID={6}></HomePoster>
-                <HomePoster title={"曲苑杂坛"} posterData={this.state.posterData[5]} cityValue={this.state.cityValue} typeID={7}></HomePoster>
-                <HomePoster title={"舞蹈芭蕾"} posterData={this.state.posterData[4]} cityValue={this.state.cityValue} typeID={8}></HomePoster>
+                <HomePoster title={"演唱会"} posterData={this.state.posterData[1]} cityValue={this.state.cityValue} ></HomePoster>
+                <HomePoster title={"歌剧话剧"} posterData={this.state.posterData[3]} cityValue={this.state.cityValue}></HomePoster>
+                <HomePoster title={"体育"} posterData={this.state.posterData[6]} cityValue={this.state.cityValue} ></HomePoster>
+                <HomePoster title={"儿童亲子"} posterData={this.state.posterData[0]} cityValue={this.state.cityValue}></HomePoster>
+                <HomePoster title={"展览休闲"} posterData={this.state.posterData[7]} cityValue={this.state.cityValue}></HomePoster>
+                <HomePoster title={"音乐会"} posterData={this.state.posterData[2]} cityValue={this.state.cityValue}></HomePoster>
+                <HomePoster title={"曲苑杂坛"} posterData={this.state.posterData[5]} cityValue={this.state.cityValue}></HomePoster>
+                <HomePoster title={"舞蹈芭蕾"} posterData={this.state.posterData[4]} cityValue={this.state.cityValue}></HomePoster>
                 <Bottom></Bottom>
             </div>
         )
