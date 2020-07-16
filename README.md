@@ -89,9 +89,9 @@ UI页面
 2.后端实现了获取当前全部有演出的城市的功能 3.初步尝试了junit的的unit test
 
 ## 07/16
-沈佳威：编写了loginservicetest logincontrollertest userservicetest 
+沈佳威：1.编写了loginservicetest logincontrollertest userservicetest 
 2.后端实现了获取当前全部有演出的城市的功能 3.初步尝试了junit的的unit test、
 
-
-##07/16
 朱益成：实现了搜索功能
+
+江玙璠：1.初步了解了推荐算法；2.学习了Python的相关内容
