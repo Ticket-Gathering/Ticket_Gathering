@@ -8,6 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
+
 
 @SpringBootTest(classes = TicketApplication.class)
 public class ShowServiceTest {
@@ -20,9 +24,10 @@ public class ShowServiceTest {
 
     @Test
     public void getHomePage_successfully(){
-        Integer id=1;
-        Show testshow=showService.getByShowid(id);
-        String name=testshow.getName();
-        System.out.println(name);
+
+        List<List<Show>> expect = showService.getHomePage();
+        Integer expectnumber = expect.size();
+        //assertEquals(8,expectnumber);
+
     }
 }

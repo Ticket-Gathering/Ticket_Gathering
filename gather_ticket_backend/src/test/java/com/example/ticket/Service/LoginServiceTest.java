@@ -2,11 +2,6 @@ package com.example.ticket.Service;
 
 import com.example.ticket.TicketApplication;
 import com.example.ticket.service.LoginService;
-import com.example.ticket.utils.msgutils.Msg;
-import com.example.ticket.utils.msgutils.MsgCode;
-import com.example.ticket.utils.msgutils.MsgUtil;
-import com.example.ticket.utils.sessionutils.SessionUtil;
-import net.sf.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,7 +24,7 @@ public class LoginServiceTest {
         int status = (loginService.login(username,password)).getStatus();
         System.out.println(status);
 //        int status = test.getStatus();
-//        assertEquals(0,status);
+        assertEquals(0,status);
     }
 
     @Test
