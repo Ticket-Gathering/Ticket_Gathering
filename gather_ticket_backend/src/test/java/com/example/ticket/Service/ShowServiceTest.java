@@ -14,6 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 
 @SpringBootTest(classes = TicketApplication.class)
 public class ShowServiceTest {
@@ -26,9 +28,7 @@ public class ShowServiceTest {
 
     @Test
     public void getHomePage_successfully(){
-        Integer id=1;
-        Show testshow=showService.getByShowid(id);
-        String name=testshow.getName();
-        System.out.println(name);
+        List<List<Show>> expect = showService.getHomePage();
+        assertEquals(1,expect.size());
     }
 }
