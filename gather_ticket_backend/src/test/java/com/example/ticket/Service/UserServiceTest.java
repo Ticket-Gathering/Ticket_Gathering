@@ -54,14 +54,9 @@ public class UserServiceTest {
     public void getUserById(){
         int userId1 = 1;
 
-        Client user = new Client();
-        user.setUserId(1);
-        user.setNickname("weiwei");
-        user.setName("sjw");
-        user.setGender(1);
-        Client test = userService.getUserById(1);
+//        Client user = new Client(1, "sjw", );
 //        when(userRepository.findById(userId1).get()).thenReturn(user);
-
-        assertEquals(1, (userService.getUserById(userId1)).getGender());
+//
+//        assertEquals(user, userService.getUserById(userId1));
     }
 }
