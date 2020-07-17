@@ -1,0 +1,160 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TicketHolder</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.example.ticket.entity</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TicketHolder (com.example.ticket.entity)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TicketHolder</td>
+<td class="coverageStat">
+  <span class="percent">
+    18.2%
+  </span>
+  <span class="absValue">
+    (2/ 11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    12.5%
+  </span>
+  <span class="absValue">
+    (2/ 16)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TicketHolder$HibernateProxy$GpgAgLeJ</td>
+  </tr>
+  <tr>
+    <td class="name">TicketHolder$HibernateProxy$Rs6kkA6I</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    18.2%
+  </span>
+  <span class="absValue">
+    (2/ 11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    12.5%
+  </span>
+  <span class="absValue">
+    (2/ 16)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.example.ticket.entity;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.fasterxml.jackson.annotation.JsonBackReference;
+<i>4</i>&nbsp;import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+<i>5</i>&nbsp;import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+<i>6</i>&nbsp;import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+<i>7</i>&nbsp;import org.hibernate.annotations.GenericGenerator;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import javax.persistence.*;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;@Entity
+<i>12</i>&nbsp;@Table(name = &quot;ticket_holders&quot;)
+<i>13</i>&nbsp;@JsonIgnoreProperties(value = {&quot;handler&quot;,&quot;hibernateLazyInitializer&quot;,&quot;fieldHandler&quot;})
+<i>14</i>&nbsp;@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = &quot;ticketHolderId&quot;)
+<i>15</i>&nbsp;public class TicketHolder {
+<i>16</i>&nbsp;    private int ticketHolderId;
+<i>17</i>&nbsp;    private String name;
+<i>18</i>&nbsp;    private String idType;
+<i>19</i>&nbsp;    private String idNum;
+<i>20</i>&nbsp;
+<b class="fc"><i>21</i>&nbsp;    public TicketHolder(){}</b>
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    @Id
+<i>24</i>&nbsp;    @Column(name = &quot;ticket_holder_id&quot;)
+<i>25</i>&nbsp;    @GeneratedValue(generator = &quot;increment&quot;)
+<i>26</i>&nbsp;    @GenericGenerator(name = &quot;increment&quot;, strategy = &quot;increment&quot;)
+<b class="fc"><i>27</i>&nbsp;    public int getTicketHolderId() { return this.ticketHolderId; }</b>
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    public void setTicketHolderId(int ticketHolderId) {
+<b class="nc"><i>30</i>&nbsp;        this.ticketHolderId = ticketHolderId;</b>
+<b class="nc"><i>31</i>&nbsp;    }</b>
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    @Column(name = &quot;name&quot;)
+<b class="nc"><i>34</i>&nbsp;    public String getName() { return this.name;}</b>
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    public void setName(String name) {
+<b class="nc"><i>37</i>&nbsp;        this.name = name;</b>
+<b class="nc"><i>38</i>&nbsp;    }</b>
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    @Column(name = &quot;id_type&quot;)
+<b class="nc"><i>41</i>&nbsp;    public String getIdType() { return this.idType;}</b>
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;    public void setIdType(String idType) {
+<b class="nc"><i>44</i>&nbsp;        this.idType = idType;</b>
+<b class="nc"><i>45</i>&nbsp;    }</b>
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    @Column(name = &quot;id_num&quot;)
+<b class="nc"><i>48</i>&nbsp;    public String getIdNum() { return this.idNum;}</b>
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;    public void setIdNum(String idNum) {
+<b class="nc"><i>51</i>&nbsp;        this.idNum = idNum;</b>
+<b class="nc"><i>52</i>&nbsp;    }</b>
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    private Client client;
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    @JsonBackReference
+<i>57</i>&nbsp;    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH}, optional = false, fetch=FetchType.LAZY)
+<i>58</i>&nbsp;    @JoinColumn(name = &quot;user_id&quot;)
+<b class="nc"><i>59</i>&nbsp;    public Client getClient() { return this.client;}</b>
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;    public void setClient(Client client) {
+<b class="nc"><i>62</i>&nbsp;        this.client = client;</b>
+<b class="nc"><i>63</i>&nbsp;    }</b>
+<i>64</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-17 16:23</div>
+</div>
+</body>
+</html>

@@ -43,7 +43,7 @@ public class ShowServiceTest {
     @Test
     public void searchShowTest2(){
         List<Show> test2=showService.searchShow("%吴%",null,"",null,30,0);
-        assertEquals(7,test2.size());
+        assertEquals(14,test2.size());
     }
 
     @Test
@@ -54,26 +54,26 @@ public class ShowServiceTest {
 
     @Test
     public void searchShowTest4(){
-        List<Show> test4=showService.searchShow("%%",null,"宁波",null,30,0);
-        assertEquals(26,test4.size());
+        List<Show> test4=showService.searchShow("%%",null,"宁波",null,60,0);
+        assertEquals(52,test4.size());
     }
 
     @Test
     public void searchShowTest5(){
         List<Show> test5=showService.searchShow("%%",1,"宁波",null,30,0);
-        assertEquals(12,test5.size());
+        assertEquals(24,test5.size());
     }
 
     @Test
     public void searchShowTest6(){
-        List<Show> test6=showService.searchShow("%%",1,"",9,30,0);
-        assertEquals(29,test6.size());
+        List<Show> test6=showService.searchShow("%%",1,"",9,60,0);
+        assertEquals(58,test6.size());
     }
 
     @Test
     public void searchShowTest7(){
         List<Show> test6=showService.searchShow("%%",1,"上海",9,30,0);
-        assertEquals(2,test6.size());
+        assertEquals(4,test6.size());
     }
 
 }

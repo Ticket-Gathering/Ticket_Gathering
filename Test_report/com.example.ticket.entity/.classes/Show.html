@@ -1,0 +1,138 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Show</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.example.ticket.entity</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Show (com.example.ticket.entity)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Show</td>
+<td class="coverageStat">
+  <span class="percent">
+    5.9%
+  </span>
+  <span class="absValue">
+    (1/ 17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    5.9%
+  </span>
+  <span class="absValue">
+    (1/ 17)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Show$HibernateProxy$QjstEWUd</td>
+  </tr>
+  <tr>
+    <td class="name">Show$HibernateProxy$t2gPVrKd</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    5.9%
+  </span>
+  <span class="absValue">
+    (1/ 17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    5.9%
+  </span>
+  <span class="absValue">
+    (1/ 17)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.example.ticket.entity;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+<i>4</i>&nbsp;import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+<i>5</i>&nbsp;import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+<i>6</i>&nbsp;import lombok.Data;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import javax.persistence.*;
+<i>9</i>&nbsp;
+<b class="fc"><i>10</i>&nbsp;@Data</b>
+<i>11</i>&nbsp;@Entity
+<i>12</i>&nbsp;@Table(name = &quot;perform&quot;)
+<i>13</i>&nbsp;@JsonIgnoreProperties(value = {&quot;handler&quot;,&quot;hibernateLazyInitializer&quot;,&quot;fieldHandler&quot;})
+<i>14</i>&nbsp;@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = &quot;showId&quot;)
+<i>15</i>&nbsp;public class Show {
+<i>16</i>&nbsp;    @Id
+<i>17</i>&nbsp;    @Column(name = &quot;id&quot;)
+<b class="nc"><i>18</i>&nbsp;    private int showId;</b>
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    private String name;
+<b class="nc"><i>21</i>&nbsp;    private int category;</b>
+<b class="nc"><i>22</i>&nbsp;    private int sub_category;</b>
+<b class="nc"><i>23</i>&nbsp;    private String artists;</b>
+<b class="nc"><i>24</i>&nbsp;    private String show_time;</b>
+<b class="nc"><i>25</i>&nbsp;    private int is_eticket;</b>
+<b class="nc"><i>26</i>&nbsp;    private int is_general_agent;</b>
+<b class="nc"><i>27</i>&nbsp;    private int is_xuanzuo;</b>
+<b class="nc"><i>28</i>&nbsp;    private Double price_low;</b>
+<b class="nc"><i>29</i>&nbsp;    private Double price_high;</b>
+<b class="nc"><i>30</i>&nbsp;    private int show_status;</b>
+<b class="nc"><i>31</i>&nbsp;    private String img_url;</b>
+<b class="nc"><i>32</i>&nbsp;    private String platform;</b>
+<b class="nc"><i>33</i>&nbsp;    private String city;</b>
+<i>34</i>&nbsp;    @OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+<i>35</i>&nbsp;    @JoinColumn(name=&quot;venue_id&quot;,referencedColumnName=&quot;id&quot;,nullable=false)
+<b class="nc"><i>36</i>&nbsp;    private Venue venue;</b>
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    public String getName()
+<i>39</i>&nbsp;    {
+<b class="nc"><i>40</i>&nbsp;        return name;</b>
+<i>41</i>&nbsp;    }
+<i>42</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-17 16:23</div>
+</div>
+</body>
+</html>
