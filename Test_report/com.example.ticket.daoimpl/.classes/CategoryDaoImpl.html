@@ -1,0 +1,119 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CategoryDaoImpl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.example.ticket.daoimpl</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CategoryDaoImpl (com.example.ticket.daoimpl)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CategoryDaoImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CategoryDaoImpl$$EnhancerBySpringCGLIB$$f90334cf</td>
+  </tr>
+  <tr>
+    <td class="name">CategoryDaoImpl$$EnhancerBySpringCGLIB$$f90334cf$$FastClassBySpringCGLIB$$c35104ac</td>
+  </tr>
+  <tr>
+    <td class="name">CategoryDaoImpl$$FastClassBySpringCGLIB$$7e04fdc7</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.example.ticket.daoimpl;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.example.ticket.dao.CategoryDao;
+<i>4</i>&nbsp;import com.example.ticket.entity.Category;
+<i>5</i>&nbsp;import com.example.ticket.repository.CategoryRepository;
+<i>6</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>7</i>&nbsp;import org.springframework.stereotype.Repository;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;import java.util.List;
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;@Repository
+<b class="fc"><i>12</i>&nbsp;public class CategoryDaoImpl implements CategoryDao {</b>
+<i>13</i>&nbsp;    @Autowired
+<i>14</i>&nbsp;    CategoryRepository categoryRepository;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    @Override
+<i>17</i>&nbsp;    public List&lt;Category&gt; getAllCategory() {
+<b class="fc"><i>18</i>&nbsp;        return categoryRepository.findAll();</b>
+<i>19</i>&nbsp;    }
+<i>20</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-17 16:23</div>
+</div>
+</body>
+</html>
