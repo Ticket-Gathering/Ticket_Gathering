@@ -52,11 +52,16 @@ public class UserServiceTest {
 
     @Test
     public void getUserById(){
-        Integer userId1 = 1;
+        int userId1 = 1;
 
-        Client user = new Client(1, "sjw", );
-        when(userRepository.findById(userId1).get()).thenReturn(user);
+        Client user = new Client();
+        user.setUserId(1);
+        user.setNickname("weiwei");
+        user.setName("sjw");
+        user.setGender(1);
+        Client test = userService.getUserById(1);
+//        when(userRepository.findById(userId1).get()).thenReturn(user);
 
-        assertEquals(user, userService.getUserById(userId1));
+        assertEquals(1, (userService.getUserById(userId1)).getGender());
     }
 }
