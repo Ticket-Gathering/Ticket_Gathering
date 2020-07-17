@@ -4,6 +4,7 @@ import com.example.ticket.TicketApplication;
 import com.example.ticket.constant.Constant;
 import com.example.ticket.utils.msgutils.Msg;
 import com.example.ticket.service.LoginService;
+import com.example.ticket.utils.msgutils.Msg;
 import net.sf.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
