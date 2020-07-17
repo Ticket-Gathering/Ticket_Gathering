@@ -53,7 +53,7 @@ export default class nav extends Component {
 
 
     onSearch=(event)=>{
-        if(event.key=='Enter'){
+        if(event.key==='Enter'){
             this.props.history.push("/page?keyword="+document.getElementById('search').value)
         }
     }
@@ -106,7 +106,6 @@ export default class nav extends Component {
                         :
                         <div className={navstyle.loginbox}>
                             <img src={require('../ImgAssets/login.png')}/>
-
                             <div className={navstyle.logintext}><Link to="/login">登录</Link></div>
                         </div>
 

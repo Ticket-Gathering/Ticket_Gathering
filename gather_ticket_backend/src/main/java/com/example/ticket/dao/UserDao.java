@@ -7,4 +7,8 @@ public interface UserDao {
     ClientAuth checkUser(String username, String password);
 
     Client getUserById(int userId);
+
+    ClientAuth checkUserDuplicate(String username);
+
+    Client addUser(String username, String password);
 }

@@ -3,6 +3,8 @@ import login from './Login.module.css';
 import { Link } from 'react-router-dom';
 import Bottom from "../../Components/Bottom";
 import Axios from '../../Module/Axios'
+import {Message} from 'element-react'
+import {Form} from "antd";
 
 const url = "http://localhost:8080";
 
@@ -15,21 +17,27 @@ export default class Login extends Component {
             curTab: 1,
             signUpForm: {
                 username: "",
-                password: ""
+                password: "",
+                repeatPassword: "",
             },
             loginForm: {
                 username: "",
                 password: ""
             },
+            illegalUsername: true,
+            illegalPassword: false,
         };
         this.changeToLogin = this.changeToLogin.bind(this);
         this.changeToSignUp = this.changeToSignUp.bind(this);
         this.inputUsernameSign = this.inputUsernameSign.bind(this);
         this.inputPasswordSign = this.inputPasswordSign.bind(this);
+        this.inputPasswordSign2 = this.inputPasswordSign2.bind(this);
         this.inputUsername = this.inputUsername.bind(this);
         this.inputPassword = this.inputPassword.bind(this);
         this.submitForm = this.submitForm.bind(this);
         this.login = this.login.bind(this);
+        this.testUsernameDuplicate = this.testUsernameDuplicate.bind(this);
+        this.testPasswordMatch = this.testPasswordMatch.bind(this);
     };
 
     changeToLogin() {
@@ -51,7 +59,7 @@ export default class Login extends Component {
         switch (this.state.curTab) {
             case 1:
                 return <div className={login.base}>
-                    <input type="text" placeholder="请输入手机号或邮箱" className={login.input} onChange={this.inputUsername}/>
+                    <input type="text" placeholder="请输入用户名" className={login.input} onChange={this.inputUsername}/>
                     <div className={login.logoUsr}>
                         <img src={require('../../Assets/images/ico/user2.png')}/>
                     </div>
@@ -82,12 +90,16 @@ export default class Login extends Component {
                 break;
             case 2:
                 return <div className={login.base}>
-                    <input type="text" placeholder="请输入手机号或邮箱" className={login.input} onChange={this.inputUsernameSign}/>
+                    <input type="text" placeholder="请输入用户名" className={login.input} onChange={this.inputUsernameSign} onBlur={this.testUsernameDuplicate}/>
                     <div className={login.logoUsr}>
                         <img src={require('../../Assets/images/ico/user2.png')}/>
                     </div>
                     <input type="password" placeholder="请输入登录密码" className={login.input} onChange={this.inputPasswordSign}/>
                     <div className={login.logoLock}>
+                        <img src={require('../../Assets/images/ico/lock2.png')}/>
+                    </div>
+                    <input type="password" placeholder="请再次输入登录密码" className={login.input} onChange={this.inputPasswordSign2} onBlur={this.testPasswordMatch}/>
+                    <div className={login.logoLock2}>
                         <img src={require('../../Assets/images/ico/lock2.png')}/>
                     </div>
                     <div className={login.loginBtn} onClick={this.submitForm}>SignUp</div>
@@ -114,6 +126,14 @@ export default class Login extends Component {
             signUpForm: data
         });
     }
+    inputPasswordSign2(e) {
+        let val = e.target.value;
+        //修改state对象
+        let data = Object.assign({}, this.state.signUpForm, { repeatPassword: val })
+        this.setState({
+            signUpForm: data
+        });
+    }
     inputUsername(e) {
         let val = e.target.value;
         let data = Object.assign({}, this.state.loginForm, { username: val })
@@ -130,23 +150,44 @@ export default class Login extends Component {
         });
     }
     submitForm() {
-        Axios.post(url+"/reg", this.state.signUpForm)
-            .then(response => {
-                if (response.data.msg === "account_already_exist") {
-                    alert("账号名已存在，请您重新注册")
-                } else if (response.data.msg === "reg_success") {
-                    alert("恭喜您注册成功，请登录享受更好的体验~");
-                    let da = this.state.signUpForm;
-                    this.setState({
-                        loginForm: da
-                    });
-                    this.changeToLogin();
-
-                }
+        if(this.state.illegalPassword || this.state.illegalUsername){
+            Message({
+                message: "您的用户名或密码不符合条件！",
+                type: "error"
             })
-            .catch(function (error) {
-                console.log(error);
-            });
+        } else {
+            let data = new FormData();
+            data.append("username", this.state.signUpForm.username);
+            data.append("password", this.state.signUpForm.password);
+            Axios.post(url+"/addUser", data)
+                .then(response => {
+                    if(response.data.status === -1){
+                        Message({
+                            message: response.data.msg,
+                            type: 'error'
+                        });
+
+                    } else {
+                        Message({
+                            message: response.data.msg,
+                            type: 'success'
+                        })
+                        setTimeout(()=>{
+                            this.setState({
+                                signUpForm: {
+                                    username: "",
+                                    password: "",
+                                    repeatPassword: "",
+                                }
+                            });
+                            this.changeToLogin();
+                        }, 1000);
+                    }
+
+                }).catch(function (error) {
+                    console.log(error);
+                });
+        }
     }
     login() {
         Axios.post(url+"/login", this.state.loginForm)
@@ -163,6 +204,44 @@ export default class Login extends Component {
             .catch(function (error) {
                 console.log(error);
             });
+    }
+    testUsernameDuplicate(){
+        let data = new FormData();
+        data.append("username", this.state.signUpForm.username);
+        Axios.post(url+"/checkUserDuplicate", data)
+            .then(response => {
+                console.log(response);
+                if(response.data.status === -1){
+                    Message({
+                        message: response.data.msg,
+                        type: 'error'
+                    });
+                    this.setState({
+                        illegalUsername: true
+                    })
+                } else {
+                    this.setState({
+                        illegalUsername: false
+                    })
+                }
+            }).catch(function (error) {
+                console.log(error)
+            });
+    }
+    testPasswordMatch(){
+        if(this.state.signUpForm.repeatPassword !== this.state.signUpForm.password){
+            Message({
+                message: "两次输入的密码不一致！",
+                type: 'error'
+            });
+            this.setState({
+                illegalPassword : true
+            })
+        } else {
+            this.setState({
+                illegalPassword : false
+            })
+        }
     }
 
     render() {

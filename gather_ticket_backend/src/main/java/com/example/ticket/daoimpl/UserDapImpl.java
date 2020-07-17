@@ -27,4 +27,23 @@ public class UserDapImpl implements UserDao{
         System.out.println(userId);
         return userRepository.getOne(userId);
     }
+
+    @Override
+    public ClientAuth checkUserDuplicate(String username){
+        return userAuthRepository.getUserAuthByUsername(username);
+    }
+
+    @Override
+    public Client addUser(String username, String password){
+        ClientAuth CA = new ClientAuth();
+        CA.setUsername(username);
+        CA.setPassword(password);
+        userAuthRepository.save(CA);
+        Client C = new Client();
+        C.setNickname("Anonymous");
+        C.setName("Anonymous");
+        C.setGender(2);
+        userRepository.save(C);
+        return C;
+    }
 }
