@@ -8,27 +8,14 @@ export default class HomePoster extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            // dataone: { pricelist: [{}] }
             firstPoster:{},
             posterData:[],
-            type:this.props.typeID,
             cityValue:this.props.cityValue
         }
     }
 
 
     componentWillReceiveProps(nextProps, nextContext){
-        // Axios.get("/home/getposters").then(res => {
-        //     res.data[0].pricelist = JSON.parse(res.data[0].pricelist)
-        //     this.setState({
-        //         data: res.data.splice(1, res.data.length - 1),
-        //         dataone: res.data[0]
-        //     })
-        // })
-        //     .catch(err => {
-        //         console.log(err);
-        //     })
-        console.log(nextProps.posterData)
         if(nextProps.posterData.length>1) {
             this.setState({
                 firstPoster: nextProps.posterData[0],
@@ -46,7 +33,7 @@ export default class HomePoster extends Component {
                 <div className={posters.posterTitle}>
                     <div className={posters.pTitleCategory}>{this.props.title}</div>
                     <div className={posters.pTitleMore}>
-                        <Link to={{pathname:'/page',state:{typeID:this.state.type,cityID:this.state.cityValue}}}
+                        <Link to={{pathname:'/page',state:{type:this.props.title,city:this.state.cityValue}}}
                             style={{color:'lightgray'}}
                         >
                             查看全部
