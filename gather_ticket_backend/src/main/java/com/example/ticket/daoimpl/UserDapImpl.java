@@ -8,6 +8,8 @@ import com.example.ticket.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public class UserDapImpl implements UserDao{
@@ -45,5 +47,26 @@ public class UserDapImpl implements UserDao{
         C.setGender(2);
         userRepository.save(C);
         return C;
+    }
+
+    @Override
+    public List<ClientAuth> getAllUsers(){
+        return userAuthRepository.getAllUsers();
+    }
+
+    @Override
+    public ClientAuth blockUser(int userId){
+        ClientAuth CA = userAuthRepository.getOne(userId);
+        CA.setUserType(2);
+        userAuthRepository.save(CA);
+        return CA;
+    }
+
+    @Override
+    public ClientAuth unblockUser(int userId){
+        ClientAuth CA = userAuthRepository.getOne(userId);
+        CA.setUserType(1);
+        userAuthRepository.save(CA);
+        return CA;
     }
 }

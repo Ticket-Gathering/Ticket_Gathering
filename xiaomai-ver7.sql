@@ -88,10 +88,11 @@ INSERT INTO `clients_auth` VALUES (4, 'zyc', '123', 1);
 -- ----------------------------
 DROP TABLE IF EXISTS `operation_log`;
 CREATE TABLE `operation_log`  (
+  `log_id` int(11) NOT NULL,
   `admin_id` int(11) NOT NULL,
   `operation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `timestamp` datetime(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`admin_id`) USING BTREE
+  PRIMARY KEY (`log_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------

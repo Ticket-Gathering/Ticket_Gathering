@@ -6,6 +6,9 @@ import 'antd/dist/antd.css';
 import selfstyle from './Self.module.css'
 import Axios from '../../Module/Axios'
 import moment from 'moment';
+import {Message} from "element-react"
+
+import TeamOutlined from "@ant-design/icons/lib/icons/TeamOutlined";
 const data1 = [
     {
         title: '贺子航 1',
@@ -159,10 +162,14 @@ export default class Self extends Component {
             content: "1",
             client: {
                 nickname: ""
-            }
+            },
+            userList:[]
         };
         this.changeContent = this.changeContent.bind(this)
         this.logOut = this.logOut.bind(this)
+        this.showAllUsers = this.showAllUsers.bind(this)
+        this.blockUser = this.blockUser.bind(this)
+        this.unblockUser = this.unblockUser.bind(this)
 
     }
     componentDidMount() {
@@ -192,6 +199,76 @@ export default class Self extends Component {
         sessionStorage.setItem("userId", "NULL");
         sessionStorage.setItem("username", "NULL");
         this.props.history.push('/', null);
+    }
+    showAllUsers(){
+        Axios.get(url+"/getAllUsers")
+            .then(response => {
+                // console.log(response.data)
+                this.setState({
+                    userList : response.data
+                })
+                this.changeContent({key:"7"});
+            }).catch(function (error) {
+            console.log(error);
+        });
+    }
+    blockUser(idx){
+        Axios.get(url+"/blockUser/"+this.state.userList[idx].userId)
+            .then(response => {
+                if(response.data.status === 0){
+                    Message({
+                        message: response.data.msg,
+                        type: "success"
+                    });
+                    let tmpList = this.state.userList;
+                    tmpList[idx].userType = 2;
+                    this.setState({
+                        userList: tmpList
+                    })
+                }
+            }).then(() => {
+                let data = new FormData();
+                data.append("adminId", sessionStorage.getItem("userId"));
+                data.append("operation", "Block user with id:"+this.state.userList[idx].userId)
+                Axios.post(url+"/logOperation", data)
+                    .then(response => {
+                        console.log(response)
+                    }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+        ).catch(function (error) {
+            console.log(error);
+        });
+    }
+    unblockUser(idx){
+        Axios.get(url+"/unblockUser/"+this.state.userList[idx].userId)
+            .then(response => {
+                if(response.data.status === 0){
+                    Message({
+                        message: response.data.msg,
+                        type: "success"
+                    });
+                    let tmpList = this.state.userList;
+                    tmpList[idx].userType = 1;
+                    this.setState({
+                        userList: tmpList
+                    })
+                }
+            }).then(() => {
+                let data = new FormData();
+                data.append("adminId", sessionStorage.getItem("userId"));
+                data.append("operation", "Unblock user with id:"+this.state.userList[idx].userId)
+                Axios.post(url+"/logOperation", data)
+                    .then(response => {
+                        console.log(response)
+                    }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+        ).catch(function (error) {
+            console.log(error);
+        });
     }
 
     SwitchTab(i) {
@@ -283,6 +360,32 @@ export default class Self extends Component {
                     </div>
                 </Content>;
                 break;
+            case "7":
+                return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
+                    <div className={selfstyle.tabBox}>用户管理</div>
+                    <div className={selfstyle.line}/>
+                    <div style={{height: "300px"}}>
+                        <List
+                            itemLayout="horizontal"
+                            dataSource={this.state.userList}
+                            colunm="10"
+                            renderItem={(item,index) => (
+                                <List.Item
+                                    actions={[item.userType === 1? (<Button type="primary" className={selfstyle.button} style={{backgroundColor: 'red'}} onClick={() => this.blockUser(index)}>禁用</Button>)
+                                        :(<Button type="primary" className={selfstyle.button} style={{backgroundColor: 'green'}} onClick={() => this.unblockUser(index)}>解禁</Button>)]}
+                                >
+                                    <List.Item.Meta
+                                        avatar={
+                                            <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                                        }
+                                        title={<span style={{fontSize: "20px"}}>{item.username}</span>}
+                                    />
+                                </List.Item>
+                            )}
+                        />
+                    </div>
+                </Content>;
+                break;
         }
     }
     render() {
@@ -329,6 +432,17 @@ export default class Self extends Component {
                                         >
                                             <Menu.Item key="5" onClick={this.changeContent}>订单管理</Menu.Item>
                                             <Menu.Item key="6" onClick={this.changeContent}>我的优惠券</Menu.Item>
+                                        </SubMenu>
+                                        <SubMenu
+                                            key="sub3"
+                                            title={
+                                                <span >
+                                                    <Icon type="setting"/>
+                                                    网站管理
+                                                </span>}
+                                        >
+                                            <Menu.Item key="7" onClick={this.showAllUsers}>用户管理</Menu.Item>
+                                            <Menu.Item key="8" onClick={this.changeContent}>演出管理</Menu.Item>
                                         </SubMenu>
                                         <Menu.Item onClick={this.logOut}><Icon type="close" />Log Out</Menu.Item>
                                     </Menu>
