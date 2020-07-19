@@ -8,6 +8,8 @@ import com.example.ticket.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public class UserDapImpl implements UserDao{
@@ -26,5 +28,45 @@ public class UserDapImpl implements UserDao{
     public Client getUserById(int userId){
         System.out.println(userId);
         return userRepository.getOne(userId);
+    }
+
+    @Override
+    public ClientAuth checkUserDuplicate(String username){
+        return userAuthRepository.getUserAuthByUsername(username);
+    }
+
+    @Override
+    public Client addUser(String username, String password){
+        ClientAuth CA = new ClientAuth();
+        CA.setUsername(username);
+        CA.setPassword(password);
+        userAuthRepository.save(CA);
+        Client C = new Client();
+        C.setNickname("Anonymous");
+        C.setName("Anonymous");
+        C.setGender(2);
+        userRepository.save(C);
+        return C;
+    }
+
+    @Override
+    public List<ClientAuth> getAllUsers(){
+        return userAuthRepository.getAllUsers();
+    }
+
+    @Override
+    public ClientAuth blockUser(int userId){
+        ClientAuth CA = userAuthRepository.getOne(userId);
+        CA.setUserType(2);
+        userAuthRepository.save(CA);
+        return CA;
+    }
+
+    @Override
+    public ClientAuth unblockUser(int userId){
+        ClientAuth CA = userAuthRepository.getOne(userId);
+        CA.setUserType(1);
+        userAuthRepository.save(CA);
+        return CA;
     }
 }
