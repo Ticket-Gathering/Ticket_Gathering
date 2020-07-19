@@ -7,22 +7,8 @@ import selfstyle from './Self.module.css'
 import Axios from '../../Module/Axios'
 import moment from 'moment';
 import {Message} from "element-react"
+import ShowManage from "./ShowManage";
 
-import TeamOutlined from "@ant-design/icons/lib/icons/TeamOutlined";
-const data1 = [
-    {
-        title: '贺子航 1',
-    },
-    {
-        title: '贺子航 2',
-    },
-    {
-        title: '贺子航 3',
-    },
-    {
-        title: '贺子航 4',
-    },
-];
 const columns = [
     {
         title: '姓名',
@@ -101,29 +87,6 @@ const columns1 = [
         ),
     },
 ];
-const data = [
-    {
-        key: '1',
-        name: '贺子航',
-        age: 23,
-        address: '四川省乐山',
-        tags: ['家', '哈哈'],
-    },
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-];
 const data2 = [
     {
         key: '1',
@@ -161,7 +124,10 @@ export default class Self extends Component {
             value: 1,
             content: "1",
             client: {
-                nickname: ""
+                nickname: "",
+                name: "",
+                gender: 1,
+                birth: null,
             },
             userList:[]
         };
@@ -183,13 +149,22 @@ export default class Self extends Component {
             console.log(error);
         });
     }
-
-    onChange = e => {
-        console.log('radio checked', e.target.value);
+    onChange(key, e){
+        let value = e.target.value;
+        let tmpForm = this.state.client;
+        tmpForm[key] = value;
         this.setState({
-            value: e.target.value,
-        });
-    };
+            client: tmpForm,
+        })
+    }
+    onDateChange(date){
+        let value = date;
+        let tmpForm = this.state.client;
+        tmpForm['birth'] = value;
+        this.setState({
+            client: tmpForm,
+        })
+    }
     changeContent(e) {
         this.setState({
             content: e.key
@@ -212,6 +187,10 @@ export default class Self extends Component {
             console.log(error);
         });
     }
+    updateUser(){
+
+    }
+
     blockUser(idx){
         Axios.get(url+"/blockUser/"+this.state.userList[idx].userId)
             .then(response => {
@@ -278,15 +257,22 @@ export default class Self extends Component {
                     <div className={selfstyle.tabBox}>基本资料</div>
                     <div className={selfstyle.line}/>
                     <div>
-                        昵称：<Input placeholder="nickname" className={selfstyle.input} style={{marginLeft: '37px'}} value={this.state.client.nickname}/><br />
-                        真实姓名：<Input placeholder="Real name" className={selfstyle.input} value={this.state.client.name} /><br />
-                        性别： <Radio.Group onChange={this.onChange} value={this.state.client.gender} className={selfstyle.genderSelect}>
+                        昵称：<Input placeholder="Nickname" className={selfstyle.input} style={{marginLeft: '37px'}} value={this.state.client.nickname} onChange={this.onChange.bind(this, 'nickname')}/><br />
+                        真实姓名：<Input placeholder="Real name" className={selfstyle.input} value={this.state.client.name} onChange={this.onChange.bind(this, 'name')}/><br />
+                        性别： <Radio.Group onChange={this.onChange.bind(this, 'gender')} value={this.state.client.gender} className={selfstyle.genderSelect}>
                             <Radio value={1}>男</Radio>
                             <Radio value={2}>女</Radio>
                         </Radio.Group><br />
-                        出生日期： <DatePicker style={{width: '300px'}} defaultValue={moment('2019/08/03', dateFormat)} format={dateFormat} className={selfstyle.dateSelect} value={this.state.client.birth}/><br />
-                        身份证号：<Input placeholder="Id number" className={selfstyle.input} value={this.state.client.idNum}/><br />
-                        <Button type="primary" className={selfstyle.button} style={{backgroundColor: '#ff3366'}}>保存</Button>
+                        出生日期： <DatePicker
+                            style={{width: '300px'}}
+                            defaultValue={moment('2019/08/03', dateFormat)}
+                            format={dateFormat} className={selfstyle.dateSelect}
+                            value={this.state.client.birth}
+                            onChange={this.onDateChange.bind(this)}/><br />
+                        身份证号：<Input placeholder="Id number" className={selfstyle.input} value={this.state.client.idNum} onChange={this.onChange.bind(this, 'idNum')}/><br />
+                        电话号码：<Input placeholder="Tel number" className={selfstyle.input} value={this.state.client.tel} onChange={this.onChange.bind(this, 'tel')}/><br />
+                        邮箱地址：<Input placeholder="Email address" className={selfstyle.input} value={this.state.client.email} onChange={this.onChange.bind(this, 'email')}/><br />
+                        <Button type="primary" className={selfstyle.button} style={{backgroundColor: '#ff3366'}} onClick={this.updateUser.bind(this)}>保存</Button>
                     </div>
                 </Content>;
                 break;
@@ -386,6 +372,8 @@ export default class Self extends Component {
                     </div>
                 </Content>;
                 break;
+            case "8":
+                return <ShowManage/>
         }
     }
     render() {
