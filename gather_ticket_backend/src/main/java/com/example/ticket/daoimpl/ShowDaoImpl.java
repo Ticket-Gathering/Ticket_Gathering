@@ -18,10 +18,6 @@ public class ShowDaoImpl implements ShowDao {
         return showRepository.findByCategory(Categoryid);
     }
 
-    @Override
-    public Show getByShowid(Integer Showid) {
-        return showRepository.findByShowId(Showid);
-    }
 
     @Override
     public List<String> findAllCityWithShowNow() {

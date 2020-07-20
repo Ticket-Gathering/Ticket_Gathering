@@ -25,11 +25,6 @@ public class ShowServiceImpl implements ShowService {
     }
 
     @Override
-    public Show getByShowid(Integer Showid) {
-        return showDao.getByShowid(Showid);
-    }
-
-    @Override
     public List<String> getAllCityWithShowNow() {
         return showDao.findAllCityWithShowNow();
     }

@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class Show {
     @Id
     @Column(name = "id")
-    private int showId;
+    private String showId;
 
     private String name;
     private int category;

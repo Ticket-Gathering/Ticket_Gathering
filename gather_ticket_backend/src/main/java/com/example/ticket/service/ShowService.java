@@ -7,8 +7,6 @@ import java.util.List;
 public interface ShowService {
     List<Show> findByCategory(Integer Categoryid);
 
-    Show getByShowid(Integer Showid);
-
     List<String> getAllCityWithShowNow();
 
     List<List<Show>> getHomePage();
