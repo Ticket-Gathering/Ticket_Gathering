@@ -427,7 +427,7 @@ export default class Self extends Component {
                                                 key="sub3"
                                                 title={
                                                     <span>
-                                                        <Icon type="setting"/>
+                                                        <SettingOutlined/>
                                                         网站管理
                                                     </span>}
                                             >
@@ -436,7 +436,7 @@ export default class Self extends Component {
                                             </SubMenu>) :
                                             (<div/>)
                                         }
-                                        <Menu.Item onClick={this.logOut}><Icon type="close" />Log Out</Menu.Item>
+                                        <Menu.Item onClick={this.logOut}><CloseOutlined/>Log Out</Menu.Item>
                                     </Menu>
                                 </Sider>
                                 {this.SwitchTab(this.state.content)}
