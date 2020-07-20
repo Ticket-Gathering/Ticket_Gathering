@@ -56,4 +56,9 @@ public class ShowServiceImpl implements ShowService {
         else
             return showDao.findByAllFactor(keyword,categoryid,cityname,subid,pagesize,currentpage);
     }
+
+    @Override
+    public List<Show> recommendByCategory(int subCategory){
+        return showDao.recommendByCategory(subCategory);
+    }
 }

@@ -6,6 +6,7 @@ import about from "./About.module.css";
 import Poster from "../Home/posterItem";
 import Axios from "../../Module/Axios";
 import Bottom from "../../Components/Bottom";
+import Recommend from "./Recommend";
 
 const Data = {timelist:['2020.08.01 周六 20:00','2020.08.02 周日 20:00' ],pricelist:['100','120','188'],billtype:{chooice:1,getter:1,type:1},name:'李荣浩2019「年少有为」巡回演唱会',showtime:'2020.08.01-2020.08.02' ,address:'上海市 | 珍珠剧场The Pearl '};
 
@@ -15,7 +16,7 @@ export default class About extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: { timelist: [], pricelist: [], billtype: {}, imgurl: '../../Assets/images/poster1.jpg',name:'',showtime:'',address:'' },
+            data: { timelist: [], pricelist: [], billtype: {}, imgurl: '../../Assets/images/poster1.jpg',name:'',showtime:'',address:'', subCategory:9 },
             introduce: []
         }
 
@@ -28,7 +29,7 @@ export default class About extends Component {
         ).then((res) => {
             console.log(res);
             this.setState({
-                showData : res.data
+                showData : res.data,
             })
         })
             .catch(err => {
@@ -137,6 +138,7 @@ export default class About extends Component {
                         </div>
                     </div>
                 </div>
+                <Recommend subCategory={this.state.data.subCategory}/>
                 <Bottom/>
             </div>
         )

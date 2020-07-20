@@ -58,4 +58,9 @@ public class ShowDaoImpl implements ShowDao {
     public List<Show> findByAllFactor(String keyword, Integer categoryid, String cityname, Integer subid, Integer pagesize, Integer currentsize) {
         return showRepository.findByAllFactor(keyword,categoryid,cityname,subid,pagesize,currentsize);
     }
+
+    @Override
+    public List<Show> recommendByCategory(int subCategory){
+        return showRepository.recommendByCategory(subCategory);
+    }
 }
