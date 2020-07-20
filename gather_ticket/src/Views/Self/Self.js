@@ -421,17 +421,20 @@ export default class Self extends Component {
                                             <Menu.Item key="5" onClick={this.changeContent}>订单管理</Menu.Item>
                                             <Menu.Item key="6" onClick={this.changeContent}>我的优惠券</Menu.Item>
                                         </SubMenu>
-                                        <SubMenu
-                                            key="sub3"
-                                            title={
-                                                <span >
-                                                    <Icon type="setting"/>
-                                                    网站管理
-                                                </span>}
-                                        >
-                                            <Menu.Item key="7" onClick={this.showAllUsers}>用户管理</Menu.Item>
-                                            <Menu.Item key="8" onClick={this.changeContent}>演出管理</Menu.Item>
-                                        </SubMenu>
+                                        {(sessionStorage.getItem("userType") === "0") ?
+                                            (<SubMenu
+                                                key="sub3"
+                                                title={
+                                                    <span>
+                                                        <Icon type="setting"/>
+                                                        网站管理
+                                                    </span>}
+                                            >
+                                                <Menu.Item key="7" onClick={this.showAllUsers}>用户管理</Menu.Item>
+                                                <Menu.Item key="8" onClick={this.changeContent}>演出管理</Menu.Item>
+                                            </SubMenu>) :
+                                            (<div/>)
+                                        }
                                         <Menu.Item onClick={this.logOut}><Icon type="close" />Log Out</Menu.Item>
                                     </Menu>
                                 </Sider>
