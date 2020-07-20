@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import pymongo
 
 def getresponse(id):
-    driver = webdriver.PhantomJS()
+    driver = webdriver.Chrome()
     driver.get("https://detail.damai.cn/item.htm?id="+id)
     res = driver.page_source
     driver.quit()
