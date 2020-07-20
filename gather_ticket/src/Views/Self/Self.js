@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import Nav from "../../Components/Nav";
 import Bottom from "../../Components/Bottom";
-import { Layout, Menu, Breadcrumb, Icon, Radio, DatePicker, Input, Button, Collapse, Table, Divider, Tag, List, Avatar, Result } from 'antd';
+import { Layout, Menu, Breadcrumb, Radio, DatePicker, Input, Button, Collapse, Table, Divider, Tag, List, Avatar, Result } from 'antd';
 import 'antd/dist/antd.css';
 import selfstyle from './Self.module.css'
 import Axios from '../../Module/Axios'
 import moment from 'moment';
+import {SmileTwoTone,UserOutlined,LaptopOutlined,SettingOutlined,CloseOutlined} from "@ant-design/icons";
 import {Message} from "element-react"
 import ShowManage from "./ShowManage";
 
@@ -330,7 +331,7 @@ export default class Self extends Component {
                     <div className={selfstyle.line}/>
                     <div>
                         <Result
-                            icon={<Icon type="smile" theme="twoTone" />}
+                            icon={<SmileTwoTone />}
                             title="您还没有订单哦~"
                             extra={<Button type="primary">Next</Button>}
                         />
@@ -399,7 +400,7 @@ export default class Self extends Component {
                                             key="sub1"
                                             title={
                                                 <span>
-                                                    <Icon type="user" />
+                                                    <UserOutlined/>
                                                     账户中心
                                                 </span>
                                             }
@@ -413,7 +414,7 @@ export default class Self extends Component {
                                             key="sub2"
                                             title={
                                                 <span>
-                                                    <Icon type="laptop" />
+                                                    <LaptopOutlined/>
                                                     交易中心
                                                 </span>
                                             }
@@ -425,14 +426,14 @@ export default class Self extends Component {
                                             key="sub3"
                                             title={
                                                 <span >
-                                                    <Icon type="setting"/>
+                                                    <SettingOutlined/>
                                                     网站管理
                                                 </span>}
                                         >
                                             <Menu.Item key="7" onClick={this.showAllUsers}>用户管理</Menu.Item>
                                             <Menu.Item key="8" onClick={this.changeContent}>演出管理</Menu.Item>
                                         </SubMenu>
-                                        <Menu.Item onClick={this.logOut}><Icon type="close" />Log Out</Menu.Item>
+                                        <Menu.Item onClick={this.logOut}><CloseOutlined/>Log Out</Menu.Item>
                                     </Menu>
                                 </Sider>
                                 {this.SwitchTab(this.state.content)}

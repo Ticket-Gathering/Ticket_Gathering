@@ -7,7 +7,9 @@ import PageItem from "./PageItem";
 import {categoryMap} from './categoryMap'
 import qs from 'qs'
 import 'antd/dist/antd.css';
-import { Pagination, Result, Icon, Button,DatePicker} from 'antd';
+import { Pagination, Result, Button,DatePicker} from 'antd';
+import {SmileTwoTone} from "@ant-design/icons";
+
 const url = "http://localhost:8080";
 
 export default class Page extends Component {
@@ -76,7 +78,7 @@ export default class Page extends Component {
     getPageItem(i) {
         if (i.length < 1) {
             return <Result
-                icon={<Icon type="smile" theme="twoTone" />}
+                icon={<SmileTwoTone />}
                 title="没有找到符合条件的商品。您可以减少筛选条件重新搜索。"
                 extra={<Button type="primary">Next</Button>}
             />
