@@ -4,31 +4,33 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "clients_auth")
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "userID")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "userId")
 public class ClientAuth {
-    @Id
-    @Column(name = "user_id")
-    private int userId;
 
+    private int userId;
     private String username;
     private String password;
+    private int userType;
 
+    @Id
+    @Column(name = "user_id")
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     public Integer getUserId() {
         return userId;
     }
 
     public void setUserId(Integer userid) { this.userId = userid; }
 
+    @Column(name = "username")
     public String getUsername() {
         return username;
     }
@@ -37,6 +39,7 @@ public class ClientAuth {
         this.username = username;
     }
 
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -44,4 +47,9 @@ public class ClientAuth {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Column(name = "user_type")
+    public int getUserType() { return userType;}
+
+    public void setUserType(int userType) { this.userType = userType;}
 }

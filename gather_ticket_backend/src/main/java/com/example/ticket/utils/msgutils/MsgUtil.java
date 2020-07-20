@@ -17,6 +17,9 @@ public class MsgUtil {
     public static final String LOGIN_USER_ERROR_MSG = "用户名或密码错误，请重新输入！";
     public static final String NOT_LOGGED_IN_ERROR_MSG = "登录失效，请重新登录！";
     public static final String FORBIDDEN_MSG = "您的账号已经被禁用！";
+    public static final String USERNAME_DUPLICATE = "该用户名已被注册！";
+    public static final String USERNAME_AVAILABLE = "用户名可用！";
+    public static final String SIGNUP_SUCCESS_MSG = "注册成功！";
 
 
 

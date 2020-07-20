@@ -1,0 +1,58 @@
+.container{
+    width:1200px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: row;
+}
+.buyerInfoContainer{
+    width: 900px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 1px solid #E9E9E9;
+}
+.tickerInfoContainer{
+    margin-left:20px;
+    width: 300px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 1px solid #E9E9E9;
+}
+.imgAndNameContainer{
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+}
+.imgContainer{
+    margin: 20px 20px;
+    width: 80px;
+    height: 100px;
+}
+.imgContainer img{
+    width: 80px;
+    height: 100px;
+}
+.nameContainer{
+    width: 180px;
+    margin: 20px 20px;
+    font-size: 12px;
+}
+.basicInfoContainer{
+    margin-left: 20px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+}
+.gray{
+    color: #999999;
+}
+.rightAlign{
+    float: right;
+    margin-right: 40px;
+}
+.red{
+    color:#FF1D76;
+}
