@@ -9,12 +9,17 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "perform")
+@IdClass(ShowKey.class)
 @JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "showId")
 public class Show {
     @Id
     @Column(name = "id")
     private String showId;
+
+    @Id
+    @Column(name="platform")
+    private String platform;
 
     private String name;
     private int sub_category;
@@ -27,7 +32,6 @@ public class Show {
     private Double price_high;
     private int show_status;
     private String img_url;
-    private String platform;
     private String city;
 
     @OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)

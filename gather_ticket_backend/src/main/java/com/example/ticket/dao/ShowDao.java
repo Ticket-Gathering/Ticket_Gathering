@@ -5,7 +5,6 @@ import com.example.ticket.entity.Show;
 import java.util.List;
 
 public interface ShowDao {
-     List<Show> findByCategory(Integer Categoryid);
      List<String>  findAllCityWithShowNow();
      List<Show> findForHomePageByCategory(Integer Showid);
      List<Show> findByKeywordAndCategoryWithNumber(String keyword, Integer categoryid,Integer pagesize,Integer currentpage);

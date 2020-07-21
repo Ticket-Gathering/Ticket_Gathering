@@ -49,7 +49,6 @@ public class LoginControllerTest {
                                 .param("password","123")
                 )
                 .andReturn().getResponse().getContentAsString();   //将相应的数据转换为字符串
-//        System.out.println(responseString);
     }
 
 }
