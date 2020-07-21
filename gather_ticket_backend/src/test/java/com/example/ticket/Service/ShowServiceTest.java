@@ -67,13 +67,13 @@ public class ShowServiceTest {
     @Test
     public void searchShowTest6(){
         List<Show> test6=showService.searchShow("%%",1,"",9,60,0);
-        assertEquals(58,test6.size());
+        assertEquals(56,test6.size());
     }
 
     @Test
     public void searchShowTest7(){
         List<Show> test6=showService.searchShow("%%",1,"上海",9,30,0);
-        assertEquals(4,test6.size());
+        assertEquals(2,test6.size());
     }
 
 }
