@@ -14,19 +14,6 @@ public class ShowController {
     @Autowired
     private ShowService showService;
 
-//    //仅测试用
-//    @RequestMapping("/getShowByCategory")
-//    public List<Show> getShowByCategory(@RequestParam("category") Integer Categoryid) {
-//        return showService.findByCategory(Categoryid);
-//    }
-//
-//    //仅仅测试用
-//    @RequestMapping("/getShowByShowId")
-//    public Show getShowByShowId(@RequestParam("id") Integer id)
-//    {
-//        return showService.getByShowid(id);
-//    }
-//
     @RequestMapping("/getAllCityWithShowNow")
     public List<String> getAllCityWithShowNow()
     {

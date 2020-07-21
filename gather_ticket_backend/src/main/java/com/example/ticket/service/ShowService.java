@@ -5,7 +5,6 @@ import com.example.ticket.entity.Show;
 import java.util.List;
 
 public interface ShowService {
-    List<Show> findByCategory(Integer Categoryid);
 
     List<String> getAllCityWithShowNow();
 

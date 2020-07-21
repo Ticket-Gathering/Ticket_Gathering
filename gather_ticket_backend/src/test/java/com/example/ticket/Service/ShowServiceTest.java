@@ -76,4 +76,15 @@ public class ShowServiceTest {
         assertEquals(2,test6.size());
     }
 
+    @Test
+    public void recommendTest(){
+        List<Show> recommendtest =showService.recommendByCategory(9);
+        assertEquals(6,recommendtest.size());
+    }
+
+    @Test
+    public void getAllCityTest(){
+        List<String> cities=showService.getAllCityWithShowNow();
+        assertEquals(87,cities.size());
+    }
 }
