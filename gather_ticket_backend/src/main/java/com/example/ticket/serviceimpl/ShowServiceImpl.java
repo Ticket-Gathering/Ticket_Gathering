@@ -20,11 +20,6 @@ public class ShowServiceImpl implements ShowService {
     CategoryDao categoryDao;
 
     @Override
-    public List<Show> findByCategory(Integer Categoryid) {
-        return showDao.findByCategory(Categoryid);
-    }
-
-    @Override
     public List<String> getAllCityWithShowNow() {
         return showDao.findAllCityWithShowNow();
     }
