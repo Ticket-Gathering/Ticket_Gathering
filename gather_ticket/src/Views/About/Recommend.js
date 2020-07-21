@@ -11,11 +11,10 @@ export default class Recommend extends Component{
             recmdList:[{venue:{},category:{}}],
         }
     }
-    componentDidMount() {
+    componentDidMount()
+     {
         Axios.get(url+"/recommendByCategory/"+this.props.subCategory)
             .then(response => {
-                console.log(response.data);
-                console.log(response.data[2].venue)
                 this.setState({
                     recmdList:response.data
                 })

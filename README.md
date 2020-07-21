@@ -116,3 +116,7 @@ UI页面
 朱益成：完成了orderConfirm的部分功能逻辑
 
 沈佳威：修改了数据库perform的id属性，新加了indent，indent_status表，在后端实现了order
+
+## 07/21
+
+江玙璠：基本完成了详情页的展示
