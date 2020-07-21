@@ -1,0 +1,57 @@
+.posterContainer {
+   width: 270px;
+   height: 180px;
+   display: flex;
+   justify-content: space-between;
+   margin-top: 9px;
+}
+.posterImgContainer{
+   width: 120px;
+   height: 160px;
+}
+.posterImg {
+    width: 120px;
+    height: 160px;
+    border-radius: 5px;
+}
+.posterDetailContainer {
+    width: 135px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.posterDetailBox {
+    width: 135px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+}
+.name {
+    width: 135px;
+    height: 60px;
+    font-size: 14px;
+    text-align: left;
+    line-height: 40px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+.address {
+    width: 135px;
+    height: 15px;
+    font-size: 12px;
+    text-align: left;
+    line-height: 15px;
+    color: gray;
+}
+.price {
+    width: 135px;
+    height: 40px;
+    font-size: 14px;
+    text-align: left;
+    line-height: 40px;
+    color: #FF1268;
+}

@@ -1,0 +1,176 @@
+.bg{
+    background: url("../../Assets/images/loginbg3.jpg") no-repeat top center;
+    background-size: cover;
+    background-attachment: fixed;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.bg_mask{
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    left: 0;
+    top: 0;
+    content: "";
+    background-color: rgba(0,0,0,.55);
+}
+.headerBox{
+    width: 100%;
+    height: 100px;
+    padding: 1px;
+}
+.imgBox{
+    width: 110px;
+    height: 50px;
+    margin-left: 160px;
+    margin-top: 30px;
+    float: top;
+    z-index: 1;
+}
+.imgBox img{
+    width: 110px;
+    height: 50px;
+}
+.mainBox{
+    width: 100%;
+    height: 760px;
+    display: flex;
+}
+.mainBox img{
+    width: 100%;
+    height: auto;
+    margin-top: -100px;
+    margin-left: 0;
+    z-index: 1;
+}
+.loginBox{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-bottom: 200px;
+    margin: auto;
+    text-align: center;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    z-index: 1;
+}
+.base{
+    width: 330px;
+    position: relative;
+}
+.input{
+    width: 320px;
+    height: 48px;
+    margin-top: 20px;
+
+    box-sizing: border-box;
+    padding-left: 50px;
+    outline: none;
+    border: none;
+    border-radius: 30px;
+    transition: cubic-bezier(0.0, 0, 0.2, 1) 200ms;
+    background-color: hsla(0,0%,100%,.2);
+
+}
+.input::-webkit-input-placeholder{
+    color: hsla(0,0%,100%,.5);
+}
+.input:focus{
+    border: none;
+    background-color: hsla(0,0%,100%,.3);
+}
+.input::-webkit-input-placeholder {
+    font-size: 15px;
+}
+.logoUsr{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 22px;
+    left: 10px;
+}
+.logoUsr img{
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.logoLock{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 90px;
+    left: 10px;
+}
+.logoLock img{
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.logoLock2{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 160px;
+    left: 10px;
+}
+.logoLock2 img{
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.loginBtn{
+    width: 320px;
+    height: 48px;
+    margin-top: 64px;
+    background:linear-gradient(to right,#BF264D,#FF1D76);
+    text-align: center;
+    line-height: 42px;
+    color: #FFFFFF;
+    border: 1px solid #ff3366;
+    border-radius: 30px;
+    font-size: 20px;
+}
+.loginBtn:hover{
+    background: #FF1D76;
+}
+.logoPlatforms{
+    width: 110px;
+    height: 22px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.logoPlatform{
+    width: 22px;
+    height: 22px;
+}
+.logoPlatform img{
+    width: 22px;
+    height: 22px;
+    margin-top: 0;
+    margin-left: 0;
+}
+.bottomOptions{
+    width: 330px;
+    margin-top: 15px;
+}
+.bottomOption{
+    font-size: 15px;
+    float: right;
+    margin-left: 20px;
+    color: #ff3366;
+}
+.bottomOption Link{
+    text-decoration: none;
+}
