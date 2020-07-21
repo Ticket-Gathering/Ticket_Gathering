@@ -1,4 +1,7 @@
 package com.example.ticket.repository;
 
-public interface IndentRepository {
+import com.example.ticket.entity.Indent;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface IndentRepository extends JpaRepository<Indent,Integer> {
 }
