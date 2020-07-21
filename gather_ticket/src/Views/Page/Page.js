@@ -52,10 +52,10 @@ export default class Page extends Component {
     getFilteredData(){
         let city=null,category=null,keyword=''
         console.log(this.state.city)
-        if(this.state.city!='全国')
+        if(this.state.city!=='全国')
             city=this.state.city
 
-        if(this.state.type!='全部')
+        if(this.state.type!=='全部')
             category=categoryMap.get(this.state.type)
 
         if(this.state.searchKeyword)
@@ -82,7 +82,7 @@ export default class Page extends Component {
             />
         } else {
             return (i.map((item, index) => {
-                return <PageItem poster={item} key={index}></PageItem>
+                return <PageItem poster={item} key={index}/>
             }))
         }
     }
@@ -90,7 +90,7 @@ export default class Page extends Component {
         let keyword=''
         for(let index in pairs){
             let [key,value]=pairs[index].split('=')
-            if(key=='keyword') {
+            if(key==='keyword') {
                 keyword = value
                 this.setState({
                     searchKeyword:value
@@ -137,7 +137,7 @@ export default class Page extends Component {
                     {
                         this.state.AllCity.slice(8+9*(i-1), 8+9*i).map((item, index) => {
                             return <div
-                                className={page.titleOne + (this.state.city==item ? (' ' + page.titleSelected) : '')}
+                                className={page.titleOne + (this.state.city===item ? (' ' + page.titleSelected) : '')}
                                 onClick={() => this.changeCity(item)}>{item}</div>
                         })
                     }
@@ -147,7 +147,7 @@ export default class Page extends Component {
         return (
             <div>
                 <div >
-                    <Nav pageIdent="page" history={this.props.history}></Nav>
+                    <Nav pageIdent="page" history={this.props.history}/>
                 </div>
                 <div>
 
@@ -161,7 +161,7 @@ export default class Page extends Component {
                             <div className={page.titleBox}>
                                 {
                                     this.state.AllCity.slice(0,8).map((item, index) => {
-                                        return <div className={page.titleOne + (this.state.city == item ? (' ' + page.titleSelected) : '')} onClick={()=>this.changeCity(item)} >{item}</div>
+                                        return <div className={page.titleOne + (this.state.city === item ? (' ' + page.titleSelected) : '')} onClick={()=>this.changeCity(item)} >{item}</div>
                                     })
                                 }
                                 <div className={page.showMore} onClick={()=>this.setState({collapseFlag:!this.state.collapseFlag})}><u>{this.state.collapseFlag?'显示更多':'收起'}</u></div>
@@ -173,24 +173,24 @@ export default class Page extends Component {
                                 }
                             </div>
                         </div>
-                        <div className={page.line}></div>
+                        <div className={page.line}/>
                         <div className={page.titleContainer}>
                             <span>分 类：</span>
                             <div className={page.titleBox}>
                                 {
                                     this.state.types.map((item, index) => {
-                                        return <div className={page.titleOne + (this.state.type == item ? (' ' + page.titleSelected) : '')}  onClick={()=>this.changeType(item)} >{item}</div>
+                                        return <div className={page.titleOne + (this.state.type === item ? (' ' + page.titleSelected) : '')} onClick={()=>this.changeType(item)} >{item}</div>
                                     })
                                 }
                             </div>
                         </div>
-                        <div className={page.line}></div>
+                        <div className={page.line}/>
                         <div className={page.titleContainer}>
                             <span>时 间：</span>
                             <div className={page.titleBox}>
                                 {
                                     this.state.times.map((item, index) => {
-                                        return <div className={page.titleOne + (this.state.timeID == index ? (' ' + page.titleSelected) : '')} onClick={()=>this.changeTime(index,item)} >{item}</div>
+                                        return <div className={page.titleOne + (this.state.timeID === index ? (' ' + page.titleSelected) : '')} onClick={()=>this.changeTime(index,item)} >{item}</div>
                                     })
                                 }
                                 <div className={page.datePicker}>
@@ -205,7 +205,7 @@ export default class Page extends Component {
                         {this.getPageItem(this.state.data)}
                         <Pagination defaultCurrent={1} total={50} className={page.paging} />
                     </div>
-                    <Bottom></Bottom>
+                    <Bottom/>
                 </div >
             </div>
         )

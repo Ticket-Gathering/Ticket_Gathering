@@ -93,9 +93,9 @@ class Poster extends Component {
                     <div className={pagePoster.srcWebText}>
                         <span>票 源: {this.props.poster.platform}</span>
                     </div>
-                    <img className={pagePoster.srcWebImg+(this.props.poster.platform=='大麦网'?' '+pagePoster.srcWebImgSelected:'')} src={require('../../ImgAssets/logo-d.png')}/>
-                    <img className={pagePoster.srcWebImg+(this.props.poster.platform=='摩天轮'?' '+pagePoster.srcWebImgSelected:'')} src={require('../../ImgAssets/logo-m.jpg')}/>
-                    <img className={pagePoster.srcWebImg+(this.props.poster.platform=='永乐票务'?' '+pagePoster.srcWebImgSelected:'')} src={require('../../ImgAssets/logo-y.jpg')}/>
+                    <img className={pagePoster.srcWebImg+(this.props.poster.platform==='大麦网'?' '+pagePoster.srcWebImgSelected:'')} src={require('../../ImgAssets/logo-d.png')}/>
+                    <img className={pagePoster.srcWebImg+(this.props.poster.platform==='摩天轮'?' '+pagePoster.srcWebImgSelected:'')} src={require('../../ImgAssets/logo-m.jpg')}/>
+                    <img className={pagePoster.srcWebImg+(this.props.poster.platform==='永乐票务'?' '+pagePoster.srcWebImgSelected:'')} src={require('../../ImgAssets/logo-y.jpg')}/>
                 </div>
 
             </div>

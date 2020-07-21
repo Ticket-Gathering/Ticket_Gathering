@@ -8,7 +8,7 @@ export default class Recommend extends Component{
     constructor(props) {
         super(props)
         this.state = {
-            recmdList:[{venue:{}}],
+            recmdList:[{venue:{},category:{}}],
         }
     }
     componentDidMount() {
@@ -40,7 +40,7 @@ export default class Recommend extends Component{
                                 <img src={item.img_url}/>
                             </div>
                             <div className={recommend.showInfo}>
-                                <h6 className={recommend.category}>演唱会</h6>
+                                <h6 className={recommend.category}>{item.category.category}</h6>
                                 <h4 className={recommend.title}>{item.name}</h4>
                                 <h6 className={recommend.info}>
                                     {item.city}|{item.venue.venuename}<br/>

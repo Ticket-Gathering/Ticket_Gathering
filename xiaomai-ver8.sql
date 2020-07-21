@@ -145,7 +145,9 @@ CREATE TABLE `perform`  (
   `is_general_agent` int(11) NOT NULL,
   PRIMARY KEY (`id`, `platform`) USING BTREE,
   INDEX `venue`(`venue_id`) USING BTREE,
-  CONSTRAINT `venue` FOREIGN KEY (`venue_id`) REFERENCES `venue` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `venue` FOREIGN KEY (`venue_id`) REFERENCES `venue` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `category` FOREIGN KEY (`category`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `sub_category` FOREIGN KEY (`sub_category`) REFERENCES `sub_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------

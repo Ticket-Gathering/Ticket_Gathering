@@ -1,8 +1,7 @@
 package com.example.ticket.entity;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,7 +17,6 @@ public class Show {
     private String showId;
 
     private String name;
-    private int category;
     private int sub_category;
     private String artists;
     private String show_time;
@@ -31,9 +29,15 @@ public class Show {
     private String img_url;
     private String platform;
     private String city;
+
     @OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name="venue_id",referencedColumnName="id",nullable=false)
     private Venue venue;
+
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH}, optional=false, fetch=FetchType.LAZY)
+    @JoinColumn(name="category",referencedColumnName="id",nullable=false)
+    private Category category;
+
 
     public String getName()
     {
