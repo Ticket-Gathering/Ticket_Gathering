@@ -9,6 +9,8 @@ import java.util.List;
 public interface ShowRepository extends JpaRepository<Show,Integer> {
      List<Show> findByCategory(Integer Categoryid);
 
+     Show findByShowIdAndAndPlatform(String id,String platform);
+
      @Query(nativeQuery = true,value="select distinct city from perform")
      List<String> findAllCityWithShowNow();
 

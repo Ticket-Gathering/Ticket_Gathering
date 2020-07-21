@@ -8,7 +8,6 @@ public class ShowKey implements Serializable {
 
 
     public ShowKey() {
-
     }
 
     public ShowKey(String showId, String platform) {
