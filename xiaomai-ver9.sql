@@ -11,7 +11,7 @@
  Target Server Version : 50725
  File Encoding         : 65001
 
- Date: 20/07/2020 11:28:27
+ Date: 21/07/2020 08:47:37
 */
 
 SET NAMES utf8mb4;
@@ -105,6 +105,23 @@ CREATE TABLE `indent`  (
 -- ----------------------------
 -- Records of indent
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for indent_status
+-- ----------------------------
+DROP TABLE IF EXISTS `indent_status`;
+CREATE TABLE `indent_status`  (
+  `id` int(11) NULL DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of indent_status
+-- ----------------------------
+INSERT INTO `indent_status` VALUES (1, '未支付');
+INSERT INTO `indent_status` VALUES (2, '已支付');
+INSERT INTO `indent_status` VALUES (3, '已取消');
+INSERT INTO `indent_status` VALUES (4, '已超时');
 
 -- ----------------------------
 -- Table structure for operation_log
