@@ -27,11 +27,11 @@ public class ShowController {
 //        return showService.getByShowid(id);
 //    }
 //
-//    @RequestMapping("/getAllCityWithShowNow")
-//    public List<String> getAllCityWithShowNow()
-//    {
-//        return showService.getAllCityWithShowNow();
-//    }
+    @RequestMapping("/getAllCityWithShowNow")
+    public List<String> getAllCityWithShowNow()
+    {
+        return showService.getAllCityWithShowNow();
+    }
 
     @RequestMapping("/getHomePage")
     public List<List<Show>> getHomePage()
