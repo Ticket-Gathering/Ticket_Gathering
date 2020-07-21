@@ -1,0 +1,31 @@
+.body{
+    width: 1200px;
+    display: flex;
+    margin: 0px auto;
+    flex-direction: column;
+}
+.Container{
+    width: 1200px;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #E9E9E9;
+}
+.imgContainer{
+    width: 200px;
+}
+.imgContainer img{
+    width:100px;
+    height: 100px;
+}
+.infoContainer{
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+}
+.tipContainer{
+    display: flex;
+    flex-direction: column;
+    float: left;
+}
+

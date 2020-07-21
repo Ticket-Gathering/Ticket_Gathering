@@ -1,3 +1,9 @@
+.body{
+    width: 1200px;
+    display: flex;
+    margin: 0px auto;
+    flex-direction: column;
+}
 .container{
     width:1200px;
     margin: 50px auto;
@@ -45,14 +51,18 @@
     width: 100%;
 }
 .watcherItemContainer{
-    margin-left: 10px;
-    margin-top: 10px;;
+    margin:0px auto 20px 10px;
     display: inline-block;
     width: 31%;
+    height: 160px;
 }
 .cardContent{
     display: flex;
     flex-direction: column;
+}
+.plusBig{
+    height: 65px;
+    vertical-align: middle;
 }
 .tickerInfoContainer{
     margin-left:20px;
@@ -97,5 +107,10 @@
 }
 .red{
     color:#FF1D76;
+}
+.payButton{
+    width:880px;
+    height: 50px;
+    margin: 50px auto;
 }
 
