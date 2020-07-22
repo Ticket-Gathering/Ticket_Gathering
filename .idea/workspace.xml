@@ -19,7 +19,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="11d594be-acb1-4f2d-8126-84a024743c6a" name="Default Changelist" comment="" />
+    <list default="true" id="11d594be-acb1-4f2d-8126-84a024743c6a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/gather_ticket/src/ImgAssets/order_done.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gather_ticket/src/Views/Order/OrderPay.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gather_ticket/src/Views/Order/OrderConfirm.js" beforeDir="false" afterPath="$PROJECT_DIR$/gather_ticket/src/Views/Order/OrderConfirm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gather_ticket/src/Views/Order/OrderConfirm.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/gather_ticket/src/Views/Order/OrderConfirm.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gather_ticket/src/Views/Order/OrderPay.js" beforeDir="false" afterPath="$PROJECT_DIR$/gather_ticket/src/Views/Order/OrderPay.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -97,6 +103,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="144" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1594688710591">
