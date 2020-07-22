@@ -7,38 +7,49 @@ import Poster from "../Home/posterItem";
 import Axios from "../../Module/Axios";
 import Bottom from "../../Components/Bottom";
 import Recommend from "./Recommend";
+import {withRouter} from "react-router-dom";
 
 const Data = {timelist:['2020.08.01 周六 20:00','2020.08.02 周日 20:00' ],pricelist:['100','120','188'],billtype:{chooice:1,getter:1,type:1},name:'李荣浩2019「年少有为」巡回演唱会',showtime:'2020.08.01-2020.08.02' ,address:'上海市 | 珍珠剧场The Pearl '};
 
 const url = "http://localhost:8080";
 
-export default class About extends Component {
+class About extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: { times: [], prices: [], images: ['../../Assets/images/poster1.jpg'],name:'',notice0:'',notice1:'', detail:" ", show:{venue:{},category:{}} },
-            introduce: []
+            data: {},
+            success: false
         }
 
     }
-    componentDidMount() {
+    componentDidMount()
+     {
         let data = new FormData();
         data.append("id", this.props.match.params.aid);
 
         Axios.post(url+"/getDetail", data
         ).then((res) => {
-            console.log("detail:")
-            console.log(res.data.show);
             this.setState({
                 data : res.data,
+                success: true
             })
         }).catch(err => {
                 console.log(err);
-            })
+        })
+    }
+    goAbout(id) {
+        this.props.history.push({pathname: "/about" + `/${id}`})
+        window.onbeforeunload = function(){
+            document.documentElement.scrollTop = 0;  //ie下
+            document.body.scrollTop = 0;  //非ie
+        }
+        window.location.reload(true);
     }
 
+
     render() {
-        return (
+        if(!this.state.success) return (<div>Loading...</div>)
+        else return (
             <div className={about.about}>
                 <Nav pageIdent="page"/>
                 <div className={about.base}>
@@ -69,7 +80,7 @@ export default class About extends Component {
                             <div className={about.subtitle}>演出介绍</div>
                             <div className={about.line}/>
                             {
-                                this.state.data.detail.replace(/\s+/g," ").split(" ").map(text =>
+                                this.state.data.detail.split("\n").map(text =>
                                     <div className={about.detailText}>{text}</div>
                                 )
                             }
@@ -107,9 +118,10 @@ export default class About extends Component {
                         </div>
                     </div>
                 </div>
-                <Recommend subCategory={this.state.data.show.sub_category}/>
+                <Recommend subCategory={this.state.data.show.sub_category} goAbout={(id) => this.goAbout(id)}/>
                 <Bottom/>
             </div>
         )
     }
 }
+export default withRouter(About);

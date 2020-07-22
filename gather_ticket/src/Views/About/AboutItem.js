@@ -11,7 +11,8 @@ export default class AboutItem extends Component {
             count: 1,
             num: 0,
             priceList: [],
-            timeList: []
+            timeList: [],
+            success:false
         };
     }
 
@@ -61,20 +62,28 @@ export default class AboutItem extends Component {
         n = "";
         m = "";
     }
-
+    addTicket(e){
+        this.setState({
+            count: e
+        })
+    }
     sum() {
-        let e = this.state.num;
+        let e = this.state.num === 0? this.state.priceList[0].price : this.state.num;
         let n = this.state.count;
         return e * n;
     }
-    componentDidMount() {
-        console.log("about:")
+    componentDidMount(){
+        console.log("abouti")
         console.log(this.props.aboutitem)
+        this.setState({
+            success:true
+        })
     }
 
 
     render() {
-        return (
+        if(!this.state.success) return (<div>Loading...</div>)
+        else return (
             <div className={abouti.abouti}>
                 <div className={abouti.showPoster}>
                     <div className={abouti.poster}>
@@ -82,10 +91,8 @@ export default class AboutItem extends Component {
                         <div className={abouti.posterSign}>
                             <Sign/>
                         </div>
-
                     </div>
                 </div>
-
                 <div className={abouti.showInfo}>
                     {/*<div className={abouti.righttop}>{this.props.aboutitem.name}</div>*/}
                     <div className={abouti.showName}>{this.props.aboutitem.show.name}</div>
@@ -106,7 +113,9 @@ export default class AboutItem extends Component {
                     <div className={abouti.showSessions}>
                         <div className={abouti.showSessionTag}>场次</div>
                         <div className={abouti.showSession}>
-                            {this.props.aboutitem.times.map((t, ind) => {
+                            {
+                                this.props.aboutitem.times.length === 0? <div style={{marginTop:"9px", marginLeft:"10px"}}>暂无场次信息</div> :
+                                this.props.aboutitem.times.map((t, ind) => {
                                 if (ind === 0) {
                                     this.state.timeList.push(1);
                                     return <div key={ind} className={this.state.timeList[ind] ? abouti.chosen : abouti.unChosen} onClick={this.timeSelect.bind(this, ind)}>{t}</div>
@@ -118,18 +127,19 @@ export default class AboutItem extends Component {
                             })}
                         </div>
                     </div>
-
                     <div className={abouti.showSessions}>
                         <div className={abouti.showSessionTag}>票档</div>
                         <div className={abouti.showSession}>
-                            {this.props.aboutitem.prices.map((p, ind) => {
+                            {
+                                this.props.aboutitem.prices.length === 0? <div style={{marginTop:"9px", marginLeft:"10px"}}>暂无票档信息</div> :
+                                this.props.aboutitem.prices.map((p, ind) => {
                                 if (ind === 0) {
-                                    this.state.priceList.push({ state: 1, price: p });
-                                    return <div key={ind} className={this.state.priceList[ind].state ? abouti.chosen : abouti.unChosen} onClick={this.priceSelect.bind(this, ind)}>{p.price}</div>
+                                    this.state.priceList.push({ state: 1, price: parseInt(p) });
+                                    return <div key={ind} className={this.state.priceList[ind].state ? abouti.chosen : abouti.unChosen} onClick={this.priceSelect.bind(this, ind)}>{p}</div>
                                 }
                                 else {
-                                    this.state.priceList.push({ state: 0, price: p });
-                                    return <div key={ind} className={this.state.priceList[ind].state ? abouti.chosen : abouti.unChosen} onClick={this.priceSelect.bind(this, ind)}>{p.price}</div>
+                                    this.state.priceList.push({ state: 0, price: parseInt(p) });
+                                    return <div key={ind} className={this.state.priceList[ind].state ? abouti.chosen : abouti.unChosen} onClick={this.priceSelect.bind(this, ind)}>{p}</div>
                                 }
 
                             })}
@@ -138,7 +148,7 @@ export default class AboutItem extends Component {
 
                     <div className={abouti.showSessions}>
                         <div className={abouti.showSessionTag}>数量</div>
-                        <InputNumber defaultValue={1} step="1" min="1" style={{marginLeft: "10px"}}/>
+                        <InputNumber defaultValue={1} step="1" min="1" style={{marginLeft: "10px"}} onChange={this.addTicket.bind(this)}/>
                     </div>
 
                     <div className={abouti.showSession}>

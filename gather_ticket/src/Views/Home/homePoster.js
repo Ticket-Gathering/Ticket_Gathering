@@ -57,7 +57,7 @@ export default class HomePoster extends Component {
                     <div className={posters.posterItem}>
                         {
                             this.state.posterData.map((item,index)=>{
-                                return <Poster poster={item} key={index}></Poster>
+                                return <Poster poster={item} key={index}/>
                             })
                         }
                     </div>

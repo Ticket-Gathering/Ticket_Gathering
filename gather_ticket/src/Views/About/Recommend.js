@@ -13,14 +13,17 @@ export default class Recommend extends Component{
     }
     componentDidMount()
      {
-        Axios.get(url+"/recommendByCategory/"+this.props.subCategory)
-            .then(response => {
-                this.setState({
-                    recmdList:response.data
-                })
-            }).catch(err => {
-            console.log(err);
-        })
+         Axios.get(url+"/recommendByCategory/"+this.props.subCategory)
+             .then(response => {
+                 this.setState({
+                     recmdList:response.data
+                 })
+             }).catch(err => {
+             console.log(err);
+         })
+    }
+    goAbout(id){
+        this.props.goAbout(id);
     }
 
     render() {
@@ -34,7 +37,7 @@ export default class Recommend extends Component{
                 </div>
                 {this.state.recmdList.map((item, index) => {
                     return(
-                        <div className={recommend.itemBox}>
+                        <div className={recommend.itemBox} onClick={this.goAbout.bind(this, item.showId)}>
                             <div className={recommend.poster}>
                                 <img src={item.img_url}/>
                             </div>
