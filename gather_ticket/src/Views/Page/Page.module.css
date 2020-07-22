@@ -1,11 +1,36 @@
+.base {
+    width: 95%;
+    --animate-duration: 1s;
+    --animate-delay: 1s;
+    --animate-repeat: 1;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: 300;
+    line-height: 1.5em;
+    color: #3c4858;
+    font-size: 1rem;
+    letter-spacing: normal!important;
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    z-index: 3;
+    position: relative;
+    background: #FFF;
+    margin: auto;
+    margin-top: 30px;
+    padding-top: 20px;
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px ;
+}
 .title{
     width: 900px;
     border: 1px solid #E9E9E9;
-    margin: 10px auto;
+    margin: 10px auto 30px;
+    border-radius: 5px;
 }
 .titleContainer{
     margin-top: 18px;
     margin-left: 40px;
+    margin-right: 40px;
 }
 .titleBox{
     display: flex;
@@ -47,10 +72,12 @@
     margin-top: 5px;
 }
 .showContainer{
-    border-radius: 10px;
-    width: 900px;
-    border: 1px solid #E9E9E9;
+    border-radius: 6px;
+    width: 1200px;
     margin: 10px auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 .showBox{
     width: 100%;

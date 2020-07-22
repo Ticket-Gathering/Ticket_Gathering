@@ -22,8 +22,8 @@ class PosterItem extends Component {
                 <div className={poster.posterDetailContainer}>
                     <div className={poster.posterDetailBox}>
                         <div className={poster.name}>{this.props.poster.name}</div>
-                        <div className={poster.address}>{this.props.poster.address}</div>
-                        <div className={poster.address}>{this.props.poster.show_time}</div>
+                        <div className={poster.address}>{this.props.poster.venue.venuename}</div>
+                        <div className={poster.time}>{this.props.poster.show_time}</div>
                     </div>
                     <div className={poster.price}>
                         <span style={{fontSize:20+'px'}}>

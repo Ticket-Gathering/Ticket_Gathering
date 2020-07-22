@@ -8,7 +8,7 @@ export default class HomePoster extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            firstPoster:{},
+            firstPoster:{venue:{}},
             posterData:[],
             cityValue:this.props.cityValue
         }
@@ -45,6 +45,8 @@ export default class HomePoster extends Component {
                         <img src={this.state.firstPoster.img_url} className={posters.firstPosterImg} />
                         <div className={posters.firstPosterDetail}>
                             <div className={posters.firstPosterName}>{this.state.firstPoster.name}</div>
+                            <div className={posters.firstPosterAddress}>{this.state.firstPoster.venue.venuename}</div>
+                            <div className={posters.firstPosterTime}>{this.state.firstPoster.show_time}</div>
                             <div className={posters.firstPosterName}>
                                 <span style={{fontSize:24+'px'}}>
                                     ￥
