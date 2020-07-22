@@ -26,7 +26,6 @@ public class ShowController {
 //    {
 //        return showService.getByShowid(id);
 //    }
-
     @RequestMapping("/getAllCityWithShowNow")
     public List<String> getAllCityWithShowNow()
     {

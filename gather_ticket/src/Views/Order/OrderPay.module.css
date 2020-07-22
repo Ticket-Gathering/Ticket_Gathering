@@ -1,0 +1,80 @@
+.body{
+    width: 1200px;
+    display: flex;
+    margin: 50px auto;
+    flex-direction: column;
+}
+.Container{
+    width: 1200px;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #E9E9E9;
+}
+.imgContainer{
+    width: 200px;
+    text-align: center;
+}
+.imgContainer img{
+    margin-top: 20px;
+    width:100px;
+    height: 100px;
+}
+.infoContainer{
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+}
+.row{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px
+}
+.tipContainer{
+    width:50% ;
+    display: flex;
+    flex-direction: column;
+}
+.bigText{
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 50px;
+}
+.rightContainer{
+    width: 40%;
+}
+.price{
+    color: #FF1D76;
+    line-height: 100px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.gray{
+    color: #999999;
+}
+.payment{
+    border: 1px solid #E9E9E9;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+}
+.paymentItem{
+    text-align: center;
+    width:160px;
+    height: 60px;
+    margin:10px 10px;
+    border-radius: 8px;
+
+}
+.unselected{
+    border: 1px solid #E9E9E9;
+}
+.selected{
+    border:1px solid #0088D6;
+}
+.paymentItemImg{
+    height: 50px;
+    width: 150px;
+    margin-top: 5px;
+}
