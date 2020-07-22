@@ -69,11 +69,11 @@ export default class Paper extends Component {
     render() {
         return (
             <div className={paper.paper}>
-                <div>{this.sSet(this.props.paper.chooice)}</div>
+                <div>{this.sSet(this.props.paper.is_xuanzuo)}</div>
                 <Divider/>
-                <div>{this.sTicket(this.props.paper.getter)}</div>
+                <div>{this.sTicket(this.props.paper.is_eticket)}</div>
                 <Divider/>
-                <div>{this.sInv(this.props.paper.type)}</div>
+                <div>{this.sInv(1)}</div>
             </div>
         )
     }

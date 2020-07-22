@@ -20,16 +20,6 @@ public class ShowServiceImpl implements ShowService {
     CategoryDao categoryDao;
 
     @Override
-    public List<Show> findByCategory(Integer Categoryid) {
-        return showDao.findByCategory(Categoryid);
-    }
-
-    @Override
-    public Show getByShowid(Integer Showid) {
-        return showDao.getByShowid(Showid);
-    }
-
-    @Override
     public List<String> getAllCityWithShowNow() {
         return showDao.findAllCityWithShowNow();
     }
@@ -60,5 +50,10 @@ public class ShowServiceImpl implements ShowService {
             return showDao.findByCategoryAndSubCatWithNumber(keyword,categoryid,subid,pagesize,currentpage);
         else
             return showDao.findByAllFactor(keyword,categoryid,cityname,subid,pagesize,currentpage);
+    }
+
+    @Override
+    public List<Show> recommendByCategory(int subCategory){
+        return showDao.recommendByCategory(subCategory);
     }
 }

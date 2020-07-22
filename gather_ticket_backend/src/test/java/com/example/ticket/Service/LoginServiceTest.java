@@ -26,8 +26,6 @@ public class LoginServiceTest {
         String username = "sjw";
         String password = "123";
         int status = (loginService.login(username,password)).getStatus();
-        System.out.println(status);
-//        int status = test.getStatus();
         assertEquals(0,status);
     }
 

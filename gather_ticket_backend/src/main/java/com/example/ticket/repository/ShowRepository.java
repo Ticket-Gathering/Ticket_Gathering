@@ -9,7 +9,7 @@ import java.util.List;
 public interface ShowRepository extends JpaRepository<Show,Integer> {
      List<Show> findByCategory(Integer Categoryid);
 
-     Show findByShowId(Integer Showid);
+     Show findByShowIdAndAndPlatform(String id,String platform);
 
      @Query(nativeQuery = true,value="select distinct city from perform")
      List<String> findAllCityWithShowNow();
@@ -34,4 +34,7 @@ public interface ShowRepository extends JpaRepository<Show,Integer> {
 
      @Query(nativeQuery = true,value="select * from perform where name like ?1 and category=?2 and city=?3 and sub_category=?4 LIMIT ?6,?5")
      List<Show> findByAllFactor(String keyword,Integer categoryid,String cityname,Integer subid,Integer pagesize,Integer currentsize);
+
+     @Query(nativeQuery = true,value="select * from perform where sub_category=?1 ORDER BY rand() LIMIT 6")
+     List<Show> recommendByCategory(Integer subCategory);
 }

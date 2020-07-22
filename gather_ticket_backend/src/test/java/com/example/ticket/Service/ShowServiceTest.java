@@ -67,13 +67,24 @@ public class ShowServiceTest {
     @Test
     public void searchShowTest6(){
         List<Show> test6=showService.searchShow("%%",1,"",9,60,0);
-        assertEquals(58,test6.size());
+        assertEquals(56,test6.size());
     }
 
     @Test
     public void searchShowTest7(){
         List<Show> test6=showService.searchShow("%%",1,"上海",9,30,0);
-        assertEquals(4,test6.size());
+        assertEquals(2,test6.size());
     }
 
+    @Test
+    public void recommendTest(){
+        List<Show> recommendtest =showService.recommendByCategory(9);
+        assertEquals(6,recommendtest.size());
+    }
+
+    @Test
+    public void getAllCityTest(){
+        List<String> cities=showService.getAllCityWithShowNow();
+        assertEquals(87,cities.size());
+    }
 }

@@ -14,16 +14,6 @@ public class ShowDaoImpl implements ShowDao {
     ShowRepository showRepository;
 
     @Override
-    public List<Show> findByCategory(Integer Categoryid) {
-        return showRepository.findByCategory(Categoryid);
-    }
-
-    @Override
-    public Show getByShowid(Integer Showid) {
-        return showRepository.findByShowId(Showid);
-    }
-
-    @Override
     public List<String> findAllCityWithShowNow() {
         return showRepository.findAllCityWithShowNow();
     }
@@ -61,5 +51,10 @@ public class ShowDaoImpl implements ShowDao {
     @Override
     public List<Show> findByAllFactor(String keyword, Integer categoryid, String cityname, Integer subid, Integer pagesize, Integer currentsize) {
         return showRepository.findByAllFactor(keyword,categoryid,cityname,subid,pagesize,currentsize);
+    }
+
+    @Override
+    public List<Show> recommendByCategory(int subCategory){
+        return showRepository.recommendByCategory(subCategory);
     }
 }
