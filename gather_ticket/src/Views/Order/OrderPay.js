@@ -2,15 +2,26 @@ import React, { Component } from 'react';
 import SimpleNav from "./SimpleNav";
 import ordPaySty from './OrderPay.module.css'
 import {Space,Divider} from "antd";
-
+import Axios from "axios";
+const base_url='http://localhost:8080'
 export default class OrderPay extends Component{
     constructor(props) {
         super(props);
         this.state={
-            receiverData:{name:'朱益成',tele:'12345678523',address:'Shanghai JiaoTong University'},
+            receiverData:{name:null,tele:"",address: null},
             orderData:{orderID:1023,name:'李荣浩2019「年少有为」巡回演唱会',time:'2020.08.02 周日 20:00',total:540},
             selected:'支付宝'
         }
+    }
+    componentDidMount() {
+        Axios.get(base_url+'/getIndent?order_id='+this.props.match.params.orderID).then(
+            res=>{
+                console.log(res.data)
+                this.setState({
+                    receiverData:{name:res.data.receiver_name,address:res.data.receiver_address,tele:res.data.receiver_tel}
+                })
+            }
+        )
     }
 
     render() {
