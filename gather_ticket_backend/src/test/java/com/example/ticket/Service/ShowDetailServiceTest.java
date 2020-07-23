@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import sun.security.util.Cache;
 
 @SpringBootTest(classes = TicketApplication.class)
 public class ShowDetailServiceTest {
