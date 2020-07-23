@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import SimpleNav from "./SimpleNav";
 import ordConfSty from "./OrderConfirm.module.css"
-import {Divider,Input,Button,Drawer,Radio,Descriptions,Checkbox,Card,Modal,Form,Select} from "antd";
+import {Divider, Input, Button, Drawer, Radio, Descriptions, Checkbox, Card, Modal, Form, Select, message} from "antd";
 import Axios from '../../Module/Axios';
 import {UserOutlined,PhoneOutlined,EnvironmentOutlined,PlusOutlined} from "@ant-design/icons";
+import qs from 'qs'
 import {Link} from "react-router-dom";
 const base_url='http://localhost:8080'
 const { Option } = Select;
-const testData={time:'2020.08.02 周日 20:00' ,price:'188',name:'李荣浩2019「年少有为」巡回演唱会',showtime:'2020.08.01-2020.08.02' ,address:'上海市 | 珍珠剧场The Pearl ',ticketType:'电子票',faceValue:'成人票',num:3,img_url:require('../../Assets/images/poster1.jpg'),coupon:24}
 export default class OrderConfirm extends Component{
     constructor(props) {
         super(props);
@@ -17,7 +17,7 @@ export default class OrderConfirm extends Component{
             watcherValue:[],        //选取的观影人
             receiverValue:0,        //选取的收票人
             visible:false,
-            data: testData,
+            data: this.props.location.state?this.props.location.state:JSON.parse(sessionStorage.getItem('orderInfo')),
             total: 0,
             payAmount: 0,
             buyerName: null,
@@ -27,18 +27,24 @@ export default class OrderConfirm extends Component{
             watcherList: [],
             receiver: null,
             watchers: [],
-            MoreWatchers:[]
+            MoreWatchers:[],
+            checked:false
         }
     }
     componentDidMount() {
+        console.log(this.state.data)
+        let userId=sessionStorage.getItem('userId')
+        if(isNaN(parseInt(userId))){
+            userId=4
+            sessionStorage.setItem('username','zyc')
+            // this.props.history.push({pathname:'/login'})
+        }
         this.setState({
             total:parseInt(this.state.data.price)*this.state.data.num,
         },()=>{this.setState({
             payAmount:this.state.total-this.state.data.coupon
         })})
-        Axios.get(base_url+'/getUserById/'+4
-            // sessionStorage.getItem('userId')
-            )
+        Axios.get(base_url+'/getUserById/'+ userId)
             .then(
             res=>{
                 this.setState({
@@ -99,6 +105,34 @@ export default class OrderConfirm extends Component{
             MoreWatchers:tempArr,
             watcherModalVisible:false
         })
+    }
+    pay = () =>{
+        if(this.state.buyerAddress==null||this.state.buyerAddress==null||this.state.buyerPhone==null) {
+            message.error('请填写完整的取票人信息！')
+            return
+        }
+        if(this.state.watcherValue.length<1&&this.state.MoreWatchers.length<1){
+            message.error('至少需要填写一位观影人的信息！')
+            return;
+        }
+        if(!this.state.checked){
+            message.error('请阅读相关协议后进行勾选！')
+            return;
+        }
+        Axios.post(base_url+'/addIndent',qs.stringify(
+    {username:sessionStorage.getItem('username'),
+            show_id:this.state.data.id,
+            facevalue:this.state.data.price,
+            num:this.state.data.num,
+            payamount:this.state.payAmount,
+            receiver_name:this.state.buyerName,
+            receiver_tel:this.state.buyerPhone,
+            receiver_address:this.state.buyerAddress
+            })).then(
+                res=>{
+                    console.log(res.data)
+                }
+            )
     }
     render() {
         const options=[]
@@ -350,10 +384,10 @@ export default class OrderConfirm extends Component{
 
                     </div>
                     <div>
-                        <Checkbox>我已经阅读并同意<a>《第三方平台商品交易服务协议》</a></Checkbox>
+                        <Checkbox checked={this.state.checked} onChange={()=>this.setState({checked:!this.state.checked})}>我已经阅读并同意<a>《第三方平台商品交易服务协议》</a></Checkbox>
                     </div>
                     <div>
-                        <Button className={ordConfSty.payButton} type={'primary'}>
+                        <Button className={ordConfSty.payButton} type={'primary'} onClick={this.pay}>
                             小计￥{this.state.payAmount.toFixed(2)}&nbsp;去结算
                         </Button>
                     </div>

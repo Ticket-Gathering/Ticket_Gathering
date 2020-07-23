@@ -12,7 +12,8 @@ export default class AboutItem extends Component {
             num: 0,
             priceList: [],
             timeList: [],
-            success:false
+            success:false,
+            selectedTime:null
         };
     }
 
@@ -42,7 +43,8 @@ export default class AboutItem extends Component {
         }
         n[e] = 1;
         this.setState({
-            timeList: n
+            timeList: n,
+            selectedTime:this.props.aboutitem.times[e]
         });
         n = "";
     }
@@ -71,6 +73,22 @@ export default class AboutItem extends Component {
         let e = this.state.num === 0? this.state.priceList[0].price : this.state.num;
         let n = this.state.count;
         return e * n;
+    }
+    buy = ()=>{
+        let orderInfo={
+            time:this.state.time?this.state.selectedTime:this.props.aboutitem.times[0],
+            num:this.state.count,
+            price:this.state.num === 0? this.state.priceList[0].price : this.state.num,
+            name:this.props.aboutitem.show.name,
+            showtime:this.props.aboutitem.show.show_time,
+            address:this.props.aboutitem.show.city+' | '+this.props.aboutitem.show.venue.venuename,
+            coupon:20,
+            img_url: this.props.aboutitem.show.img_url,
+            ticketType:'电子票',
+            id:this.props.aboutitem.id
+        }
+        sessionStorage.setItem('orderInfo',orderInfo)
+        this.props.history.push({pathname:'/orderConfirm'+`/${this.props.aboutitem.id}`,state:orderInfo})
     }
     componentDidMount(){
         console.log("abouti")
@@ -158,7 +176,7 @@ export default class AboutItem extends Component {
                         </div>
                     </div>
 
-                    <div className={abouti.buyNow}>
+                    <div className={abouti.buyNow} onClick={this.buy}>
                         立即购买
                     </div>
                 </div>
