@@ -26,4 +26,12 @@ public class IndentDaoImpl implements IndentDao {
         indentRepository.save(NI);
         return NI.getOrderId();
     }
+
+    @Override
+    public  int updateIndent(Integer order_id,Integer status){
+        Indent NI = indentRepository.getOne(order_id);
+        NI.setOrder_status(status);
+        indentRepository.save(NI);
+        return 1;
+    }
 }

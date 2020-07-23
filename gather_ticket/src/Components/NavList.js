@@ -12,7 +12,7 @@ export default class NavList extends Component {
                             state:{typeID:`1`,cityID:this.props.cityValue}}
                           }>
                         <div className={liststyle.sonimg}>
-                            <img src={require('../ImgAssets/vocal.png')} alt="定位图片"></img>
+                            <img src={require('../ImgAssets/vocal.png')} alt="定位图片"/>
                         </div>
                         <span className={liststyle.sontext}>演唱会</span>
                     </Link>
@@ -23,7 +23,7 @@ export default class NavList extends Component {
                             state:{typeID:`2`,cityID:this.props.cityValue}}
                     }>
                         <div className={liststyle.sonimg}>
-                            <img src={require('../ImgAssets/drama.png')} ></img>
+                            <img src={require('../ImgAssets/drama.png')} />
                         </div>
                         <span className={liststyle.sontext}>话剧歌剧</span>
                     </Link>
@@ -34,7 +34,7 @@ export default class NavList extends Component {
                             state:{typeID:`3`,cityID:this.props.cityValue}}
                     }>
                         <div className={liststyle.sonimg}>
-                            <img src={require('../ImgAssets/sports.png')} ></img>
+                            <img src={require('../ImgAssets/sports.png')} />
                         </div>
                         <span className={liststyle.sontext}>体育</span>
                     </Link>
@@ -45,7 +45,7 @@ export default class NavList extends Component {
                             state:{typeID:`4`,cityID:this.props.cityValue}}
                     }>
                         <div className={liststyle.sonimg}>
-                            <img src={require('../ImgAssets/children.png')} ></img>
+                            <img src={require('../ImgAssets/children.png')} />
                         </div>
                         <span className={liststyle.sontext}>儿童亲子</span>
                     </Link>
@@ -56,7 +56,7 @@ export default class NavList extends Component {
                             state:{typeID:`5`,cityID:this.props.cityValue}}
                     }>
                         <div className={liststyle.sonimg}>
-                            <img src={require('../ImgAssets/img.png')}></img>
+                            <img src={require('../ImgAssets/img.png')}/>
                         </div>
                         <span className={liststyle.sontext}>展览休闲</span>
                     </Link>
@@ -67,7 +67,7 @@ export default class NavList extends Component {
                             state:{typeID:`6`,cityID:this.props.cityValue}}
                     }>
                         <div className={liststyle.sonimg}>
-                            <img src={require('../ImgAssets/concert.png')} ></img>
+                            <img src={require('../ImgAssets/concert.png')} />
                         </div>
                     </Link>
                     <span className={liststyle.sontext}>音乐会</span>
@@ -78,7 +78,7 @@ export default class NavList extends Component {
                             state:{typeID:`7`,cityID:this.props.cityValue}}
                     }>
                         <div className={liststyle.sonimg}>
-                            <img src={require('../ImgAssets/opera.png')}></img>
+                            <img src={require('../ImgAssets/opera.png')}/>
                         </div>
                     </Link>
                     <span className={liststyle.sontext}>曲苑杂坛</span>
@@ -89,7 +89,7 @@ export default class NavList extends Component {
                             state:{typeID:`8`,cityID:this.props.cityValue}}
                     }>
                         <div className={liststyle.sonimg}>
-                            <img src={require('../ImgAssets/ballet.png')}></img>
+                            <img src={require('../ImgAssets/ballet.png')}/>
                         </div>
                         <span className={liststyle.sontext}>舞蹈芭蕾</span>
                     </Link>
@@ -100,7 +100,7 @@ export default class NavList extends Component {
                             state:{typeID:`0`,cityID:this.props.cityValue}}
                     }>
                         <div className={liststyle.sonimg}>
-                            <img src={require('../ImgAssets/cartoon.png')} ></img>
+                            <img src={require('../ImgAssets/cartoon.png')} />
                         </div>
                         <span className={liststyle.sontext}>二次元</span>
                     </Link>
@@ -111,7 +111,7 @@ export default class NavList extends Component {
                             state:{typeID:`0`,cityID:this.props.cityValue}}
                     }>
                         <div className={liststyle.sonimg}>
-                            <img src={require('../ImgAssets/travel.png')}></img>
+                            <img src={require('../ImgAssets/travel.png')}/>
                         </div>
                         <span className={liststyle.sontext}>旅游展览</span>
                     </Link>

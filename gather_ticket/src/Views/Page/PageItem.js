@@ -60,7 +60,7 @@ class Poster extends Component {
             <div className={pagePoster.showContainer}>
                 <div className={pagePoster.showImgContainer} onClick={this.goAbout}>
                     <img src={this.props.poster.img_url} className={pagePoster.showImg}/>
-                    <Tag className={pagePoster.showType} color={'#e62958'}>{typeText}</Tag>
+                    <Tag className={pagePoster.showType} color={'#e62958'}>{this.props.poster.category.category}</Tag>
                 </div>
 
                 <div className={pagePoster.infContainer}>
@@ -69,7 +69,7 @@ class Poster extends Component {
 
                         <div className={pagePoster.horizontal}>
                             <img className={pagePoster.smallImg} src={require('../../ImgAssets/location.png')}/>
-                            <div className={pagePoster.showDetail}>{this.props.poster.address}</div>
+                            <div className={pagePoster.showDetail}>{this.props.poster.city} | {this.props.poster.venue.venuename}</div>
                         </div>
 
                         <div className={pagePoster.horizontal}>
@@ -82,22 +82,25 @@ class Poster extends Component {
                         </div>
 
                     </div>
-                    <div className={pagePoster.price}>
-                        <span style={{fontSize:20+'px'}}>
+                    <div>
+                        <div className={pagePoster.price}>
+                        <span style={{fontSize:28+'px'}}>
                             ￥{this.props.poster.price_low}
                         </span>
-                        起
+                            起
+                        </div>
+                        <div className={pagePoster.srcWebContainer}>
+                            <img className={pagePoster.srcWebImg+(this.props.poster.platform==='永乐票务'?' '+pagePoster.srcWebImgSelected:'')} src={require('../../ImgAssets/logo-y.jpg')}/>
+                            <img className={pagePoster.srcWebImg+(this.props.poster.platform==='摩天轮'?' '+pagePoster.srcWebImgSelected:'')} src={require('../../ImgAssets/logo-m.jpg')}/>
+                            <img className={pagePoster.srcWebImg+(this.props.poster.platform==='大麦网'?' '+pagePoster.srcWebImgSelected:'')} src={require('../../ImgAssets/logo-d.png')}/>
+                            <div className={pagePoster.srcWebText}>
+                                <span>票 源: {this.props.poster.platform}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div className={pagePoster.srcWebContainer}>
-                    <div className={pagePoster.srcWebText}>
-                        <span>票 源: {this.props.poster.platform}</span>
-                    </div>
-                    <img className={pagePoster.srcWebImg+(this.props.poster.platform==='大麦网'?' '+pagePoster.srcWebImgSelected:'')} src={require('../../ImgAssets/logo-d.png')}/>
-                    <img className={pagePoster.srcWebImg+(this.props.poster.platform==='摩天轮'?' '+pagePoster.srcWebImgSelected:'')} src={require('../../ImgAssets/logo-m.jpg')}/>
-                    <img className={pagePoster.srcWebImg+(this.props.poster.platform==='永乐票务'?' '+pagePoster.srcWebImgSelected:'')} src={require('../../ImgAssets/logo-y.jpg')}/>
-                </div>
+
 
             </div>
         )

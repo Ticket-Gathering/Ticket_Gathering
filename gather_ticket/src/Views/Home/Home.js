@@ -37,17 +37,17 @@ export default class Home extends Component {
         return (
             <div>
                 <Nav setCityValue={(newV) => this.setState({cityValue:newV})} history={this.props.history} pageIdent="home"/>
-                <NavList cityValue={this.state.cityValue} ></NavList>
-                <Notable></Notable>
-                <HomePoster title={"演唱会"} posterData={this.state.posterData[1]} cityValue={this.state.cityValue} ></HomePoster>
-                <HomePoster title={"歌剧话剧"} posterData={this.state.posterData[3]} cityValue={this.state.cityValue}></HomePoster>
-                <HomePoster title={"体育"} posterData={this.state.posterData[6]} cityValue={this.state.cityValue} ></HomePoster>
-                <HomePoster title={"儿童亲子"} posterData={this.state.posterData[0]} cityValue={this.state.cityValue}></HomePoster>
-                <HomePoster title={"展览休闲"} posterData={this.state.posterData[7]} cityValue={this.state.cityValue}></HomePoster>
-                <HomePoster title={"音乐会"} posterData={this.state.posterData[2]} cityValue={this.state.cityValue}></HomePoster>
-                <HomePoster title={"曲苑杂坛"} posterData={this.state.posterData[5]} cityValue={this.state.cityValue}></HomePoster>
-                <HomePoster title={"舞蹈芭蕾"} posterData={this.state.posterData[4]} cityValue={this.state.cityValue}></HomePoster>
-                <Bottom></Bottom>
+                <NavList cityValue={this.state.cityValue} />
+                <Notable/>
+                <HomePoster title={"演唱会"} posterData={this.state.posterData[1]} cityValue={this.state.cityValue} />
+                <HomePoster title={"歌剧话剧"} posterData={this.state.posterData[3]} cityValue={this.state.cityValue}/>
+                <HomePoster title={"体育"} posterData={this.state.posterData[6]} cityValue={this.state.cityValue} />
+                <HomePoster title={"儿童亲子"} posterData={this.state.posterData[0]} cityValue={this.state.cityValue}/>
+                <HomePoster title={"展览休闲"} posterData={this.state.posterData[7]} cityValue={this.state.cityValue}/>
+                <HomePoster title={"音乐会"} posterData={this.state.posterData[2]} cityValue={this.state.cityValue}/>
+                <HomePoster title={"曲苑杂坛"} posterData={this.state.posterData[5]} cityValue={this.state.cityValue}/>
+                <HomePoster title={"舞蹈芭蕾"} posterData={this.state.posterData[4]} cityValue={this.state.cityValue}/>
+                <Bottom/>
             </div>
         )
     }

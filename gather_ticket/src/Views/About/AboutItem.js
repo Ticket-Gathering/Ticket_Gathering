@@ -120,6 +120,7 @@ export default class AboutItem extends Component {
                         <Divider type={"vertical"} style={{height:'26px'}}/>
                         {this.props.aboutitem.show.venue.venuename}
                     </div>
+                    <div className={abouti.showTime}>平台：{this.props.aboutitem.show.platform}</div>
 
                     {this.isPreSale(this.props.aboutitem.shoptime)}
 
@@ -152,11 +153,11 @@ export default class AboutItem extends Component {
                                 this.props.aboutitem.prices.length === 0? <div style={{marginTop:"9px", marginLeft:"10px"}}>暂无票档信息</div> :
                                 this.props.aboutitem.prices.map((p, ind) => {
                                 if (ind === 0) {
-                                    this.state.priceList.push({ state: 1, price: parseInt(p) });
+                                    this.state.priceList.push({ state: 1, price: p.replace(/[^0-9]/ig,"") });
                                     return <div key={ind} className={this.state.priceList[ind].state ? abouti.chosen : abouti.unChosen} onClick={this.priceSelect.bind(this, ind)}>{p}</div>
                                 }
                                 else {
-                                    this.state.priceList.push({ state: 0, price: parseInt(p) });
+                                    this.state.priceList.push({ state: 0, price: p.replace(/[^0-9]/ig,"") });
                                     return <div key={ind} className={this.state.priceList[ind].state ? abouti.chosen : abouti.unChosen} onClick={this.priceSelect.bind(this, ind)}>{p}</div>
                                 }
 

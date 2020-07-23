@@ -9,6 +9,8 @@ import qs from 'qs'
 import 'antd/dist/antd.css';
 import { Pagination, Result, Button,DatePicker} from 'antd';
 import {SmileTwoTone} from "@ant-design/icons";
+import LeftOutlined from "@ant-design/icons/lib/icons/LeftOutlined";
+import RightOutlined from "@ant-design/icons/lib/icons/RightOutlined";
 
 const url = "http://localhost:8080";
 
@@ -25,8 +27,9 @@ export default class Page extends Component {
             types: ["全部", "演唱会", "话剧歌剧", "体育", "儿童亲子","展览休闲","音乐会","曲苑杂坛", "舞蹈芭蕾" ],
             times: ["全部", "今天", "明天", "本周末", "一个月内"],
             data: [],
-            searchKeyword:null
-        }
+            searchKeyword:null,
+            currentPage: 1,
+        };
     }
     changeCity=(newCity)=>{
         this.setState({
@@ -88,6 +91,28 @@ export default class Page extends Component {
             }))
         }
     }
+    fetchPage(page){
+        let city=null,category=null,keyword=''
+        if(this.state.city!=='全国')
+            city=this.state.city
+
+        if(this.state.type!=='全部')
+            category=categoryMap.get(this.state.type)
+
+        if(this.state.searchKeyword)
+            keyword=this.state.searchKeyword
+        Axios.post(url+'/searchShow',qs.stringify({keyword:"",pagesize:20,currentsize:page,category:category,sub_category:null,city:city})).then(
+            (res)=>{
+                this.setState({
+                    data: res.data,
+                    currentPage: page
+                })
+                document.documentElement.scrollTop = 0;  //ie下
+                document.body.scrollTop = 0;  //非ie
+            }
+        )
+        // console.log(page);
+    }
     parseSearchParams=(pairs)=>{
         let keyword=''
         for(let index in pairs){
@@ -125,11 +150,11 @@ export default class Page extends Component {
         this.parseSearchParams(pairs)
 
     }
-
     componentWillReceiveProps(nextProps, nextContext) {
         let pairs=nextProps.location.search.slice(1,).split('&')
         this.parseSearchParams(pairs)
     }
+
     render() {
         var MoreCitys=[]
         let length=this.state.AllCity.length
@@ -151,8 +176,7 @@ export default class Page extends Component {
                 <div >
                     <Nav pageIdent="page" history={this.props.history}/>
                 </div>
-                <div>
-
+                <div className={page.base}>
                     <div className={page.title}>
                         <div className={page.titleContainer}>
                             <div className={page.horizontal} >
@@ -205,10 +229,17 @@ export default class Page extends Component {
                     </div>
                     <div className={page.showContainer}>
                         {this.getPageItem(this.state.data)}
-                        <Pagination defaultCurrent={1} total={50} className={page.paging} />
+                        {/*<Pagination defaultCurrent={1} total={50} className={page.paging} />*/}
+                        <div style={{width:"100%", marginBottom:"10px"}}>
+                            {this.state.currentPage === 1?
+                                <Button type="text" size="large" style={{float:"left"}} disabled><LeftOutlined />上一页</Button> :
+                                <Button type="text" size="large" style={{float:"left"}} onClick={this.fetchPage.bind(this, this.state.currentPage - 1)}><LeftOutlined />上一页</Button>
+                            }
+                            <Button type="text" size="large" style={{float:"right"}} onClick={this.fetchPage.bind(this, this.state.currentPage + 1)}><RightOutlined />下一页</Button>
+                        </div>
                     </div>
-                    <Bottom/>
                 </div >
+                <Bottom/>
             </div>
         )
     }

@@ -1,5 +1,5 @@
 .posterContainer {
-   width: 270px;
+   width: 290px;
    height: 180px;
    display: flex;
    justify-content: space-between;
@@ -12,10 +12,11 @@
 .posterImg {
     width: 120px;
     height: 160px;
-    border-radius: 5px;
+    box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24),  0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
 }
 .posterDetailContainer {
-    width: 135px;
+    width: 170px;
     height: 160px;
     display: flex;
     flex-direction: column;
@@ -24,28 +25,35 @@
 }
 .posterDetailBox {
     width: 135px;
-    height: 80px;
+    height: 120px;
     display: flex;
     flex-direction: column;
 }
 .name {
     width: 135px;
-    height: 60px;
     font-size: 14px;
     text-align: left;
-    line-height: 40px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
 }
 .address {
+    margin-top: 5px;
     width: 135px;
-    height: 15px;
     font-size: 12px;
     text-align: left;
-    line-height: 15px;
     color: gray;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.time {
+    width: 135px;
+    font-size: 12px;
+    text-align: left;
+    color: gray;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
 }
 .price {
     width: 135px;
