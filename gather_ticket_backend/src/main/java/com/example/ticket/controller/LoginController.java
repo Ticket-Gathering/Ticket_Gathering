@@ -14,7 +14,6 @@ public class LoginController {
     private LoginService loginService;
 
     @RequestMapping("/login")
-    //public Msg login(@RequestParam(Constant.USERNAME) String username, @RequestParam(Constant.PASSWORD) String password, @RequestParam(Constant.REMEMBER_ME) Boolean remember){
     public Msg login(@RequestBody Map<String, String> params){
         String username = params.get(Constant.USERNAME);
         String password = params.get(Constant.PASSWORD);
