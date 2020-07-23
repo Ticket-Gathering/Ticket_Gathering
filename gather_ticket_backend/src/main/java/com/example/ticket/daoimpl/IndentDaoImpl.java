@@ -34,4 +34,9 @@ public class IndentDaoImpl implements IndentDao {
         indentRepository.save(NI);
         return 1;
     }
+
+    @Override
+    public Indent getIndentByID(Integer order_id) {
+        return indentRepository.getOne(order_id);
+    }
 }

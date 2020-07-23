@@ -1,5 +1,6 @@
 package com.example.ticket.controller;
 
+import com.example.ticket.entity.Indent;
 import com.example.ticket.service.IndentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,5 +20,9 @@ public class IndentController {
     @RequestMapping("/updateIndent")
     public int updateIndent(@RequestParam("order_id") Integer order_id, @RequestParam("status") Integer status){
         return indentService.updateIndent(order_id,status);
+    }
+    @RequestMapping("/getIndent")
+    public Indent getIndentByID(@RequestParam("order_id") Integer order_id){
+        return indentService.getIndentByID(order_id);
     }
 }

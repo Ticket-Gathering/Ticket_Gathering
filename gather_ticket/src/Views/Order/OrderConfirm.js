@@ -130,7 +130,7 @@ export default class OrderConfirm extends Component{
             receiver_address:this.state.buyerAddress
             })).then(
                 res=>{
-                    console.log(res.data)
+                    this.props.history.push({pathname:'/orderPay'+`/${res.data}`})
                 }
             )
     }

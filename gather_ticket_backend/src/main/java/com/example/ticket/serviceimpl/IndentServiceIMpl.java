@@ -1,5 +1,6 @@
 package com.example.ticket.serviceimpl;
 
+import com.example.ticket.entity.Indent;
 import com.example.ticket.service.IndentService;
 import com.example.ticket.dao.IndentDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,10 @@ public class IndentServiceIMpl implements IndentService {
     @Override
     public int updateIndent(Integer order_id,Integer status){
        return indentDao.updateIndent(order_id,status);
+    }
+
+    @Override
+    public Indent getIndentByID(Integer order_id) {
+        return indentDao.getIndentByID(order_id);
     }
 }
