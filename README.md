@@ -125,8 +125,12 @@ UI页面
 
 朱益成：完成了orderPay和orderConfirm的基本页面
 
+沈佳威：完成了对indent的测试，初步学习了cypress
+
 ## 07/22
 
 江玙璠：完成了详情页、分类页的一些遗留问题，调整了页面，初步了解了spring security
 
 朱益成：在订单界面加入了与后端的交互
+
+沈佳威：新增了updateIndent和相应的测试，继续端到端的测试
