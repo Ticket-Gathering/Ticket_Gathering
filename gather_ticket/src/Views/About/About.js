@@ -52,7 +52,7 @@ class About extends Component {
         if(!this.state.success) return (<div>Loading...</div>)
         else return (
             <div className={about.about}>
-                <Nav pageIdent="page"/>
+                <Nav pageIdent="page" history={this.props.history}/>
                 <div className={about.base}>
                     <div className={about.briefInfo}>
                             <div className={about.showInfo}>

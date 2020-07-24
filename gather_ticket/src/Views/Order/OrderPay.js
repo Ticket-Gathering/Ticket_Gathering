@@ -36,11 +36,13 @@ export default class OrderPay extends Component{
         data.append("status",JSON.stringify(2));
         Axios.post(base_url+"/updateIndent", data).then(
             res=>{
-                if(res.data==1)
+                if(res.data==1) {
                     message.success("你已支付成功！")
-                this.setState({
-                    payStatus:2
-                })
+                    this.setState({
+                        payStatus: 2
+                    })
+                    this.props.history.push({pathname:'/'})
+                }
             }
         )
 

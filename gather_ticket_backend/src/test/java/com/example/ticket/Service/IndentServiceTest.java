@@ -1,7 +1,5 @@
 package com.example.ticket.Service;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.example.ticket.TicketApplication;
 import com.example.ticket.entity.Indent;
 import com.example.ticket.repository.IndentRepository;
@@ -11,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(classes = TicketApplication.class)
 public class IndentServiceTest {
@@ -27,7 +27,7 @@ public class IndentServiceTest {
     @Transactional
     @Test
     public void addIndent(){
-        int orderid = indentService.addIndent("sjw","test",10.0,1,10.0,"test","123","test","test");
+        int orderid = indentService.addIndent("sjw","test",10.0,1,10.0,"test","123","test","test","test");
         Indent test = indentRepository.getOne(orderid);
         assertEquals("sjw",test.getUsername());
         assertEquals("test",test.getShowid());
