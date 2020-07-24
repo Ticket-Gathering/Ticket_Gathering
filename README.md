@@ -142,3 +142,5 @@ UI页面
 陈嘉轩：1.完善了Controller的单元测试 2.其余时间由于电脑故障，都用来给新电脑配环境了
 
 江玙璠：进一步学习了spring security的用法，根据我们项目的需要做出合适的应用，目前先是在login的操作加入了spring security的authentication
+
+沈佳威：1.修改了indent表及相应后端和测试 2.学习使用cypress，但遇到了一些问题
