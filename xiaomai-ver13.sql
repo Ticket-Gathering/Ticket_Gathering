@@ -79,11 +79,11 @@ CREATE TABLE `clients_auth`  (
 -- ----------------------------
 -- Records of clients_auth
 -- ----------------------------
-INSERT INTO `clients_auth` VALUES (1, 'sjw', '123', 1);
-INSERT INTO `clients_auth` VALUES (2, 'cjx', '123', 1);
-INSERT INTO `clients_auth` VALUES (3, 'jyf', '123', 1);
-INSERT INTO `clients_auth` VALUES (4, 'zyc', '123', 1);
-INSERT INTO `clients_auth` VALUES (5, 'aaa', '123', 0);
+INSERT INTO `clients_auth` VALUES (1, 'sjw', '$2a$10$9GTcO8NvgxRfHlD9EKyJVOqbsE/a2FyOwle2uDrXIWiqhnentu7a.', 0);
+INSERT INTO `clients_auth` VALUES (2, 'cjx', '$2a$10$gtyqNw8tEj1ppiCt8JNH/elZwlA7zrlqFcZAVEvNOHFdWJltiAC26', 0);
+INSERT INTO `clients_auth` VALUES (3, 'jyf', '$2a$10$w5ZJZ0CoT8p4biUQIFovhehIgKdvailVmXnPEAqXz16V/6r5AU8Wa', 0);
+INSERT INTO `clients_auth` VALUES (4, 'zyc', '$2a$10$uua0jqxulwIja2wSs2yWvOeC5bTTQMBKANLuEGvzn9vdRwYxeXoq.', 0);
+INSERT INTO `clients_auth` VALUES (5, 'aaa', '$2a$10$zsUwp7VDGnOkuKYxOA4Bqu8GsNKdckcTzCsCQzKjN9B8KsQtQQFsy', 1);
 
 -- ----------------------------
 -- Table structure for indent
@@ -101,16 +101,18 @@ CREATE TABLE `indent`  (
   `order_status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `selected_time` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `platform` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  CONSTRAINT indRperf FOREIGN KEY (show_id,platform) REFERENCES perform(id,platform),
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of indent
 -- ----------------------------
-INSERT INTO `indent` VALUES (3, '\"test\"', 10, 1, 10, '\"test\"', '\"123\"', '\"test\"', '2', '\"sjw\"', NULL);
-INSERT INTO `indent` VALUES (4, '\"test\"', 10, 1, 10, '\"test\"', '\"123\"', '\"test\"', '4', '\"sjw\"', NULL);
-INSERT INTO `indent` VALUES (5, 'test', 10, 1, 10, 'test', '123', 'test', '1', 'sjw', NULL);
-INSERT INTO `indent` VALUES (6, 'test', 10, 1, 10, 'test', '123', 'test', '1', 'sjw', NULL);
+INSERT INTO `indent` VALUES (3, '1_1_180218', 10, 1, 10, '\"test\"', '\"123\"', '\"test\"', '2', '\"sjw\"', NULL,'大麦网');
+INSERT INTO `indent` VALUES (4, '1_1_180218', 10, 1, 10, '\"test\"', '\"123\"', '\"test\"', '4', '\"sjw\"', NULL,'大麦网');
+INSERT INTO `indent` VALUES (5, '1_1_180218', 10, 1, 10, 'test', '123', 'test', '1', 'sjw', NULL,'大麦网');
+INSERT INTO `indent` VALUES (6, '1_1_180218', 10, 1, 10, 'test', '123', 'test', '1', 'sjw', NULL,'大麦网');
 
 -- ----------------------------
 -- Table structure for indent_status
