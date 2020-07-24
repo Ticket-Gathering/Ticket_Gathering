@@ -13,7 +13,7 @@ export default class Recommend extends Component{
     }
     componentDidMount()
      {
-         Axios.get(url+"/recommendByCategory/"+this.props.subCategory)
+         Axios.get(url+"/show/recommendByCategory/"+this.props.subCategory)
              .then(response => {
                  this.setState({
                      recmdList:response.data

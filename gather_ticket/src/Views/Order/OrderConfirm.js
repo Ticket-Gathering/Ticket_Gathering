@@ -105,7 +105,7 @@ export default class OrderConfirm extends Component{
         })
     }
     pay = () =>{
-        if(this.state.buyerAddress==null||this.state.buyerAddress==null||this.state.buyerPhone==null) {
+        if(this.state.buyerAddress == null||this.state.buyerPhone==null) {
             message.error('请填写完整的取票人信息！')
             return
         }
