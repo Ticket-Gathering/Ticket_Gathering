@@ -19,13 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="11d594be-acb1-4f2d-8126-84a024743c6a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/gather_ticket/src/ImgAssets/order_done.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gather_ticket/src/Views/Order/OrderPay.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gather_ticket/src/Views/Order/OrderConfirm.js" beforeDir="false" afterPath="$PROJECT_DIR$/gather_ticket/src/Views/Order/OrderConfirm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gather_ticket/src/Views/Order/OrderConfirm.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/gather_ticket/src/Views/Order/OrderConfirm.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gather_ticket/src/Views/Order/OrderPay.js" beforeDir="false" afterPath="$PROJECT_DIR$/gather_ticket/src/Views/Order/OrderPay.js" afterDir="false" />
-    </list>
+    <list default="true" id="11d594be-acb1-4f2d-8126-84a024743c6a" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -88,6 +82,7 @@
       <workItem from="1594089851096" duration="366000" />
       <workItem from="1594688300226" duration="5986000" />
       <workItem from="1595489317945" duration="51000" />
+      <workItem from="1595510324309" duration="21000" />
     </task>
     <servers />
   </component>
