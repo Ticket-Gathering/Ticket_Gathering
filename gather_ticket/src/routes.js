@@ -43,7 +43,7 @@ const routes = [
 
     },
     {
-        path: '/orderPay',
+        path: '/orderPay/:orderID',
         component: OrderPay
 
     }

@@ -12,7 +12,7 @@ public class IndentDaoImpl implements IndentDao {
     IndentRepository indentRepository;
 
     @Override
-    public int addIndent(String username,String showid,Double facevalue,Integer num,Double payamount,String receiver_name,String receiver_tel,String receiver_address){
+    public int addIndent(String username,String showid,Double facevalue,Integer num,Double payamount,String receiver_name,String receiver_tel,String receiver_address,String selected_time){
         Indent  NI= new Indent();
         NI.setUsername(username);
         NI.setShowid(showid);
@@ -23,6 +23,7 @@ public class IndentDaoImpl implements IndentDao {
         NI.setReceiver_tel(receiver_tel);
         NI.setReceiver_address(receiver_address);
         NI.setOrder_status(1);
+        NI.setSelected_time(selected_time);
         indentRepository.save(NI);
         return NI.getOrderId();
     }
@@ -33,5 +34,10 @@ public class IndentDaoImpl implements IndentDao {
         NI.setOrder_status(status);
         indentRepository.save(NI);
         return 1;
+    }
+
+    @Override
+    public Indent getIndentByID(Integer order_id) {
+        return indentRepository.getOne(order_id);
     }
 }
