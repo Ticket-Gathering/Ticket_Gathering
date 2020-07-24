@@ -70,6 +70,7 @@ export default class AboutItem extends Component {
         })
     }
     sum() {
+        if(this.state.priceList.length === 0) return 0;
         let e = this.state.num === 0? this.state.priceList[0].price : this.state.num;
         let n = this.state.count;
         return e * n;
