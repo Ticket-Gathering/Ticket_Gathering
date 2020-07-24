@@ -22,6 +22,7 @@ public class Indent {
     private String receiver_address;
     private Integer order_status;
     private String username;
+    private String selected_time;
     @Id
     @Column(name = "id")
     @GeneratedValue(generator = "increment")
@@ -104,6 +105,16 @@ public class Indent {
         this.username = name;
     }
 
+    @Basic
+    @Column(name = "selected_time")
+    public String getSelected_time() {return  selected_time;}
+
+    public void setSelected_time(String selected_time) {
+        this.selected_time = selected_time;
+    }
+
+//    @OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+//    @JoinColumn(name = "show_id",referencedColumnName = "id",nullable=false)
 //    private Show show;
 //    @ManyToOne(targetEntity = Show.class)
 //    @JoinColumn(name = "show_id", insertable = false, updatable = false, referencedColumnName = "id")

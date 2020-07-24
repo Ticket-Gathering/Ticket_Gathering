@@ -27,7 +27,7 @@ public class IndentServiceTest {
     @Transactional
     @Test
     public void addIndent(){
-        int orderid = indentService.addIndent("sjw","test",10.0,1,10.0,"test","123","test");
+        int orderid = indentService.addIndent("sjw","test",10.0,1,10.0,"test","123","test","test");
         Indent test = indentRepository.getOne(orderid);
         assertEquals("sjw",test.getUsername());
         assertEquals("test",test.getShowid());
@@ -37,6 +37,7 @@ public class IndentServiceTest {
         assertEquals("test",test.getReceiver_name());
         assertEquals("123",test.getReceiver_tel());
         assertEquals("test",test.getReceiver_address());
+        assertEquals("test",test.getSelected_time());
     }
 
     @Transactional
