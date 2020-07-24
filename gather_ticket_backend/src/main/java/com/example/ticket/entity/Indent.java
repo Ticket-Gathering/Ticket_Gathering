@@ -104,10 +104,9 @@ public class Indent {
         this.username = name;
     }
 
-
-//    @OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
-//    @JoinColumn(name = "show_id",referencedColumnName = "id",nullable=false)
 //    private Show show;
+//    @ManyToOne(targetEntity = Show.class)
+//    @JoinColumn(name = "show_id", insertable = false, updatable = false, referencedColumnName = "id")
 //    public Show getShow(){return show;}
 //    public void setShow(Show show){this.show=show;}
 }
