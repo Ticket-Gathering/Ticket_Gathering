@@ -9,6 +9,7 @@ import moment from 'moment';
 import {SmileTwoTone,UserOutlined,LaptopOutlined,SettingOutlined,CloseOutlined} from "@ant-design/icons";
 import {Message} from "element-react"
 import ShowManage from "./ShowManage";
+import page from "../Page/Page.module.css";
 
 const columns = [
     {
@@ -130,7 +131,8 @@ export default class Self extends Component {
                 gender: 1,
                 birth: null,
             },
-            userList:[]
+            userList:[],
+            isLogged: false
         };
         this.changeContent = this.changeContent.bind(this)
         this.logOut = this.logOut.bind(this)
@@ -139,7 +141,18 @@ export default class Self extends Component {
         this.unblockUser = this.unblockUser.bind(this)
 
     }
-    componentDidMount() {
+    componentWillMount() {
+        if(sessionStorage.getItem('userId') !== 'NULL' && sessionStorage.getItem('userId') !== null){
+            this.setState({
+                isLogged: true
+            })
+        } else {
+            this.setState({
+                isLogged: false
+            })
+            return;
+        }
+
         Axios.get(url+"/getUserById/"+sessionStorage.getItem("userId")
         ).then(response => {
             console.log(response);
@@ -381,70 +394,60 @@ export default class Self extends Component {
         return (
             <div>
                 <Nav/>
-                <div className={selfstyle.format}>
-                    <Layout style={{background: '#fff'}}>
-                        <Content style={{ padding: '0 50px' }}>
-                            <Breadcrumb style={{ margin: '16px 0' }}>
-                                <Breadcrumb.Item>首页</Breadcrumb.Item>
-                                <Breadcrumb.Item>个人中心</Breadcrumb.Item>
-                            </Breadcrumb>
-                            <Layout style={{ padding: '24px 0', background: '#fff' }}>
-                                <Sider width={200} style={{ background: '#fff' }}>
-                                    <Menu
-                                        mode="inline"
-                                        defaultSelectedKeys={['1']}
-                                        defaultOpenKeys={['sub1']}
-                                        style={{ height: '100%' }}
-                                    >
-                                        <SubMenu
-                                            key="sub1"
-                                            title={
-                                                <span>
-                                                    <UserOutlined/>
-                                                    账户中心
-                                                </span>
-                                            }
-                                        >
-                                            <Menu.Item key="1" onClick={this.changeContent}>个人信息</Menu.Item>
-                                            <Menu.Item key="2" onClick={this.changeContent}>账号设置</Menu.Item>
-                                            <Menu.Item key="3" onClick={this.changeContent}>常用购票人</Menu.Item>
-                                            <Menu.Item key="4" onClick={this.changeContent}>收货地址</Menu.Item>
-                                        </SubMenu>
-                                        <SubMenu
-                                            key="sub2"
-                                            title={
-                                                <span>
-                                                    <LaptopOutlined/>
-                                                    交易中心
-                                                </span>
-                                            }
-                                        >
-                                            <Menu.Item key="5" onClick={this.changeContent}>订单管理</Menu.Item>
-                                            <Menu.Item key="6" onClick={this.changeContent}>我的优惠券</Menu.Item>
-                                        </SubMenu>
-                                        {(sessionStorage.getItem("userType") === "0") ?
-                                            (<SubMenu
-                                                key="sub3"
-                                                title={
-                                                    <span>
-                                                        <SettingOutlined/>
-                                                        网站管理
-                                                    </span>}
+                    <div className={selfstyle.format}>
+                    {this.state.isLogged
+                        ?
+                            (<Layout style={{background: '#fff'}}>
+                                <Content style={{ padding: '0 50px' }}>
+                                    <Breadcrumb style={{ margin: '16px 0' }}>
+                                        <Breadcrumb.Item>首页</Breadcrumb.Item>
+                                        <Breadcrumb.Item>个人中心</Breadcrumb.Item>
+                                    </Breadcrumb>
+                                    <Layout style={{ padding: '24px 0', background: '#fff' }}>
+                                        <Sider width={200} style={{ background: '#fff' }}>
+                                            <Menu
+                                                mode="inline"
+                                                defaultSelectedKeys={['1']}
+                                                defaultOpenKeys={['sub1']}
+                                                style={{ height: '100%' }}
                                             >
-                                                <Menu.Item key="7" onClick={this.showAllUsers}>用户管理</Menu.Item>
-                                                <Menu.Item key="8" onClick={this.changeContent}>演出管理</Menu.Item>
-                                            </SubMenu>) :
-                                            (<div/>)
-                                        }
-                                        <Menu.Item onClick={this.logOut}><CloseOutlined/>Log Out</Menu.Item>
-                                    </Menu>
-                                </Sider>
-                                {this.SwitchTab(this.state.content)}
-                            </Layout>
-                        </Content>
-                        <Footer style={{ textAlign: 'center', background: '#fff' }}>You are very welcome</Footer>
-                    </Layout>
-                </div>
+                                                <SubMenu
+                                                    key="sub1"
+                                                    title={<span><UserOutlined/>账户中心</span>}
+                                                >
+                                                    <Menu.Item key="1" onClick={this.changeContent}>个人信息</Menu.Item>
+                                                    <Menu.Item key="2" onClick={this.changeContent}>账号设置</Menu.Item>
+                                                    <Menu.Item key="3" onClick={this.changeContent}>常用购票人</Menu.Item>
+                                                    <Menu.Item key="4" onClick={this.changeContent}>收货地址</Menu.Item>
+                                                </SubMenu>
+                                                <SubMenu key="sub2" title={<span><LaptopOutlined/>交易中心</span>}>
+                                                <Menu.Item key="5" onClick={this.changeContent}>订单管理</Menu.Item>
+                                                <Menu.Item key="6" onClick={this.changeContent}>我的优惠券</Menu.Item>
+                                                </SubMenu>
+                                            {(sessionStorage.getItem("userType") === "0") ?
+                                                (<SubMenu
+                                                    key="sub3"
+                                                    title={
+                                                        <span>
+                                                            <SettingOutlined/>
+                                                            网站管理
+                                                        </span>}
+                                                >
+                                                    <Menu.Item key="7" onClick={this.showAllUsers}>用户管理</Menu.Item>
+                                                    <Menu.Item key="8" onClick={this.changeContent}>演出管理</Menu.Item>
+                                                </SubMenu>) :
+                                                (<div/>)
+                                            }
+                                            <Menu.Item onClick={this.logOut}><CloseOutlined/>Log Out</Menu.Item>
+                                        </Menu>
+                                    </Sider>
+                                    {this.SwitchTab(this.state.content)}
+                                </Layout>
+                            </Content>
+                            <Footer style={{ textAlign: 'center', background: '#fff' }}>You are very welcome</Footer>
+                        </Layout>)
+                    : (<Result className={selfstyle.noResult} icon={<SmileTwoTone />} title="您还没有登录，请登录后再操作。"/>)}
+                    </div>
                 <Bottom/>
             </div>
         )

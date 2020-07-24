@@ -13,7 +13,7 @@ public class ShowDetailController {
     @Autowired
     private ShowDetailService showDetailService;
 
-    @RequestMapping("/getDetail")
+    @RequestMapping("/show/getDetail")
     public ShowDetail getDetail(@RequestParam("id") String id){
         return showDetailService.getDetail(id);
     }
