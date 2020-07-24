@@ -101,16 +101,19 @@ CREATE TABLE `indent`  (
   `order_status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `selected_time` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `platform` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  CONSTRAINT sidRid FOREIGN KEY (show_id) REFERENCES perfrom(id),
+  CONSTRAINT plaRpla FOREIGN KEY (platform) REFERENCES perfrom(platform),
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of indent
 -- ----------------------------
-INSERT INTO `indent` VALUES (3, '\"test\"', 10, 1, 10, '\"test\"', '\"123\"', '\"test\"', '2', '\"sjw\"', NULL);
-INSERT INTO `indent` VALUES (4, '\"test\"', 10, 1, 10, '\"test\"', '\"123\"', '\"test\"', '4', '\"sjw\"', NULL);
-INSERT INTO `indent` VALUES (5, 'test', 10, 1, 10, 'test', '123', 'test', '1', 'sjw', NULL);
-INSERT INTO `indent` VALUES (6, 'test', 10, 1, 10, 'test', '123', 'test', '1', 'sjw', NULL);
+INSERT INTO `indent` VALUES (3, '1_1_180218', 10, 1, 10, '\"test\"', '\"123\"', '\"test\"', '2', '\"sjw\"', NULL,'大麦网');
+INSERT INTO `indent` VALUES (4, '1_1_180218', 10, 1, 10, '\"test\"', '\"123\"', '\"test\"', '4', '\"sjw\"', NULL,'大麦网');
+INSERT INTO `indent` VALUES (5, '1_1_180218', 10, 1, 10, 'test', '123', 'test', '1', 'sjw', NULL,'大麦网');
+INSERT INTO `indent` VALUES (6, '1_1_180218', 10, 1, 10, 'test', '123', 'test', '1', 'sjw', NULL,'大麦网');
 
 -- ----------------------------
 -- Table structure for indent_status
