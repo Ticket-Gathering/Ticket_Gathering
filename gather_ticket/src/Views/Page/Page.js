@@ -69,7 +69,7 @@ export default class Page extends Component {
         console.log(city)
         console.log(category)
         console.log(keyword)
-        Axios.post(url+'/searchShow',qs.stringify({keyword:keyword,pagesize:20,currentsize:1,category:category,sub_category:null,city:city})).then(
+        Axios.post(url+'/show/searchShow',qs.stringify({keyword:keyword,pagesize:20,currentsize:1,category:category,sub_category:null,city:city})).then(
             (res)=>{
                 console.log(res.data)
                 this.setState({
@@ -81,9 +81,9 @@ export default class Page extends Component {
     getPageItem(i) {
         if (i.length < 1) {
             return <Result
+                className={page.noResult}
                 icon={<SmileTwoTone />}
                 title="没有找到符合条件的商品。您可以减少筛选条件重新搜索。"
-                extra={<Button type="primary">Next</Button>}
             />
         } else {
             return (i.map((item, index) => {
@@ -101,7 +101,7 @@ export default class Page extends Component {
 
         if(this.state.searchKeyword)
             keyword=this.state.searchKeyword
-        Axios.post(url+'/searchShow',qs.stringify({keyword:"",pagesize:20,currentsize:page,category:category,sub_category:null,city:city})).then(
+        Axios.post(url+'/show/searchShow',qs.stringify({keyword:"",pagesize:20,currentsize:page,category:category,sub_category:null,city:city})).then(
             (res)=>{
                 this.setState({
                     data: res.data,
@@ -124,7 +124,7 @@ export default class Page extends Component {
                 })
             }
         }
-        Axios.post(url+'/searchShow',qs.stringify({keyword:keyword,pagesize:20,currentsize:1,category:null,sub_category:null,city:null})).then(
+        Axios.post(url+'/show/searchShow',qs.stringify({keyword:keyword,pagesize:20,currentsize:1,category:null,sub_category:null,city:null})).then(
             (res)=>{
                 this.setState({
                     data:res.data
@@ -133,7 +133,7 @@ export default class Page extends Component {
         )
     }
     componentDidMount() {
-        Axios.get(url+'/getAllCityWithShowNow').then(
+        Axios.get(url+'/show/getAllCityWithShowNow').then(
             res=>{
                 let citys=res.data
                 let tempArr=['全国']

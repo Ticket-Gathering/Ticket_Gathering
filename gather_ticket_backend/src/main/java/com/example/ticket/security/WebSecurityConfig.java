@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -67,11 +68,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username") // 登录名
                 .passwordParameter("password") // 登录密码
                 .and().authorizeRequests()
-                .antMatchers("/getHomePage").permitAll() // 访问演出页面不需要授权
+                .antMatchers("/show/**").permitAll() // 访问演出页面不需要授权
                 .antMatchers("/addUser").permitAll()    // 注册用户不需要授权
-                .antMatchers("/searchShow").permitAll()
-                .antMatchers("/recommendByCategory/**").permitAll()
-                .antMatchers("/login").permitAll()
+                .antMatchers("/login").permitAll()  // 登录页面不需要授权
+                .antMatchers("/logOperation").hasRole("ADMIN")  // 只有管理员能够编写日志
                 .anyRequest().authenticated() // 剩余都需要授权
                 .and()
                 .logout().permitAll() // 登出API不需要授权
@@ -88,7 +88,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new JWTPasswordEncoder();
+        return new BCryptPasswordEncoder();
     }
 
     /**

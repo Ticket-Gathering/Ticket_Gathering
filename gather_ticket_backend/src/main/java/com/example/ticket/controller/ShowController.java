@@ -26,26 +26,26 @@ public class ShowController {
 //    {
 //        return showService.getByShowid(id);
 //    }
-    @RequestMapping("/getAllCityWithShowNow")
+    @RequestMapping("/show/getAllCityWithShowNow")
     public List<String> getAllCityWithShowNow()
     {
         return showService.getAllCityWithShowNow();
     }
 
-    @RequestMapping("/getHomePage")
+    @RequestMapping("/show/getHomePage")
     public List<List<Show>> getHomePage()
     {
         return showService.getHomePage();
     }
 
-    @RequestMapping("/searchShow")
+    @RequestMapping("/show/searchShow")
     public List<Show> searchShow(@RequestParam("keyword") String keyword , @RequestParam("category") Integer categoryid, @RequestParam("city") String cityname, @RequestParam("sub_category") Integer subid,@RequestParam("pagesize") Integer pagesize,@RequestParam("currentsize") Integer currentpage ){
         keyword="%"+keyword+"%";
         currentpage=(currentpage-1)*pagesize;
         return showService.searchShow(keyword,categoryid,cityname,subid,pagesize,currentpage);
     }
 
-    @RequestMapping("/recommendByCategory/{subCategory}")
+    @RequestMapping("/show/recommendByCategory/{subCategory}")
     public List<Show> recommendByCategory(@PathVariable("subCategory") int subCategory){
         return showService.recommendByCategory(subCategory);
     }
