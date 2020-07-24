@@ -18,7 +18,7 @@ export default class nav extends Component {
         }
     };
     componentWillMount() {
-        if(sessionStorage.getItem('userId') !== 'NULL') {
+        if(sessionStorage.getItem('userId') !== 'NULL' && sessionStorage.getItem('userId') !== null) {
             this.setState({
                 username: sessionStorage.getItem('username'),
                 isLoggedIn:true
