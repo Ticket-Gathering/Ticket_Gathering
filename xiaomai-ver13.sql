@@ -79,11 +79,11 @@ CREATE TABLE `clients_auth`  (
 -- ----------------------------
 -- Records of clients_auth
 -- ----------------------------
-INSERT INTO `clients_auth` VALUES (1, 'sjw', '123', 1);
-INSERT INTO `clients_auth` VALUES (2, 'cjx', '123', 1);
-INSERT INTO `clients_auth` VALUES (3, 'jyf', '123', 1);
-INSERT INTO `clients_auth` VALUES (4, 'zyc', '123', 1);
-INSERT INTO `clients_auth` VALUES (5, 'aaa', '123', 0);
+INSERT INTO `clients_auth` VALUES (1, 'sjw', '$2a$10$9GTcO8NvgxRfHlD9EKyJVOqbsE/a2FyOwle2uDrXIWiqhnentu7a.', 0);
+INSERT INTO `clients_auth` VALUES (2, 'cjx', '$2a$10$gtyqNw8tEj1ppiCt8JNH/elZwlA7zrlqFcZAVEvNOHFdWJltiAC26', 0);
+INSERT INTO `clients_auth` VALUES (3, 'jyf', '$2a$10$w5ZJZ0CoT8p4biUQIFovhehIgKdvailVmXnPEAqXz16V/6r5AU8Wa', 0);
+INSERT INTO `clients_auth` VALUES (4, 'zyc', '$2a$10$uua0jqxulwIja2wSs2yWvOeC5bTTQMBKANLuEGvzn9vdRwYxeXoq.', 0);
+INSERT INTO `clients_auth` VALUES (5, 'aaa', '$2a$10$zsUwp7VDGnOkuKYxOA4Bqu8GsNKdckcTzCsCQzKjN9B8KsQtQQFsy', 1);
 
 -- ----------------------------
 -- Table structure for indent
