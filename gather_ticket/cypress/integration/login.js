@@ -1,15 +1,15 @@
-describe('Register', () => {
-    beforeEach(() =>{
-        cy.visit('http://localhost:3000/login')
-    })
-    it('register',function () {
-        cy.get('.Login_bottomOptions__3rK3U > :nth-child(2)').click();
-        cy.get('[type="text"]').type("test");
-        cy.get('[placeholder="请输入登录密码"]').type("test");
-        cy.get('[placeholder="请再次输入登录密码"]').type("test");
-        cy.get('.Login_loginBtn__ZRqpN').click();
-    })
-})
+// describe('Register', () => {
+//     beforeEach(() =>{
+//         cy.visit('http://localhost:3000/login')
+//     })
+//     it('register',function () {
+//         cy.get('.Login_bottomOptions__3rK3U > :nth-child(2)').click();
+//         cy.get('[type="text"]').type("test");
+//         cy.get('[placeholder="请输入登录密码"]').type("test");
+//         cy.get('[placeholder="请再次输入登录密码"]').type("test");
+//         cy.get('.Login_loginBtn__ZRqpN').click();
+//     })
+// })
 describe('Login', () => {
     beforeEach(() =>{
         cy.visit('http://localhost:3000/login')
