@@ -68,3 +68,8 @@
   .table-operations > button {
     margin-right: 8px;
   }
+  .noResult{
+    height: 520px;
+    margin: auto;
+    padding-top: 200px;
+  }

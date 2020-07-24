@@ -27,7 +27,7 @@ class About extends Component {
         let data = new FormData();
         data.append("id", this.props.match.params.aid);
 
-        Axios.post(url+"/getDetail", data
+        Axios.post(url+"/show/getDetail", data
         ).then((res) => {
             this.setState({
                 data : res.data,

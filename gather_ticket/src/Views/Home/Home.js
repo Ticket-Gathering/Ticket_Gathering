@@ -18,7 +18,7 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
-        Axios.get(url+"/getHomePage").then(res=>{
+        Axios.get(url+"/show/getHomePage").then(res=>{
             // console.log(res.data)
             this.setState({
                 posterData:res.data
