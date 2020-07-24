@@ -193,12 +193,12 @@ export default class Login extends Component {
         Axios.post(url+"/login", this.state.loginForm)
             .then(response => {
                 console.log(response)
-                if (response.data.msg === "用户名或密码错误，请重新输入！") {
+                if (response.status === 403) {
                     alert("用户名或密码错误", "请您重新输入")
-                } else if (response.data.msg === "登录成功！" && response.data.data.userType !== 2) {
+                } else if (response.status === 200) {
 
-                    sessionStorage.setItem('userId', response.data.data.userId)
-                    sessionStorage.setItem('username', response.data.data.username)
+                    sessionStorage.setItem('userId', response.data.userId)
+                    sessionStorage.setItem('username', response.data.username)
                     sessionStorage.setItem('userType', response.data.data.userType)
                     this.props.history.push('/', null);
                 } else if (response.data.data.userType === 2){
@@ -208,7 +208,6 @@ export default class Login extends Component {
                     })
                     return;
                 }
-                console.log(response);
             })
             .catch(function (error) {
                 console.log(error);

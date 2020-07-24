@@ -3,14 +3,8 @@ package com.example.ticket.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
-import java.beans.IntrospectionException;
-import java.util.Date;
 
 @Entity
 @Table(name = "indent")
@@ -28,7 +22,6 @@ public class Indent {
     private String receiver_address;
     private Integer order_status;
     private String username;
-
     @Id
     @Column(name = "id")
     @GeneratedValue(generator = "increment")
@@ -110,4 +103,11 @@ public class Indent {
     public void setUsername(String name) {
         this.username = name;
     }
+
+
+//    @OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+//    @JoinColumn(name = "show_id",referencedColumnName = "id",nullable=false)
+//    private Show show;
+//    public Show getShow(){return show;}
+//    public void setShow(Show show){this.show=show;}
 }

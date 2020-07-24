@@ -55,7 +55,7 @@ class About extends Component {
                 <div className={about.base}>
                     <div className={about.briefInfo}>
                             <div className={about.showInfo}>
-                                <AboutItem aboutitem={this.state.data}/>
+                                <AboutItem aboutitem={this.state.data} history={this.props.history}/>
                             </div>
                             <div className={about.ticketInfo}>
                                 <Paper paper={this.state.data.show}/>
