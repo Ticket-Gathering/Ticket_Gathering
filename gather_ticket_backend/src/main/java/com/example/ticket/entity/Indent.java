@@ -121,15 +121,15 @@ public class Indent {
     public void setPlatform(String platform) {
         this.platform = platform;
     }
-    private Show show;
-    @ManyToOne(targetEntity = Show.class)
-    @JoinTable(
-            name="perform",
-            joinColumns={
-                    @JoinColumn(name="show_id",referencedColumnName="id",nullable=false),
-                    @JoinColumn(name="platform",referencedColumnName="platform",nullable=false)
-            }
-    )
-    public Show getShow(){return show;}
-    public void setShow(Show show){this.show=show;}
+//    private Show show;
+//    @ManyToOne(targetEntity = Show.class)
+//    @JoinTable(
+//            name="perform",
+//            joinColumns={
+//                    @JoinColumn(name="show_id",referencedColumnName="id",nullable=false),
+//                    @JoinColumn(name="platform",referencedColumnName="platform",nullable=false)
+//            }
+//    )
+//    public Show getShow(){return show;}
+//    public void setShow(Show show){this.show=show;}
 }

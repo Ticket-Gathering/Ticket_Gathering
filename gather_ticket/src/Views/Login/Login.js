@@ -200,6 +200,7 @@ export default class Login extends Component {
                     sessionStorage.setItem('userId', response.data.userId)
                     sessionStorage.setItem('username', response.data.username)
                     sessionStorage.setItem('userType', response.data.userType)
+                    window.history.back(-1)
                     this.props.history.push('/', null);
                 } else if (response.data.data.userType === 2){
                     Message({
