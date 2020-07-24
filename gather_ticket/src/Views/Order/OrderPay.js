@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import SimpleNav from "./SimpleNav";
 import ordPaySty from './OrderPay.module.css'
-import {Space,Divider} from "antd";
+import {Space, Divider, Button, message,Modal} from "antd";
+import {ExclamationCircleOutlined} from "@ant-design/icons";
 import Axios from "axios";
 const base_url='http://localhost:8080'
 export default class OrderPay extends Component{
@@ -9,25 +10,70 @@ export default class OrderPay extends Component{
         super(props);
         this.state={
             receiverData:{name:null,tele:"",address: null},
-            orderData:{orderID:1023,name:'李荣浩2019「年少有为」巡回演唱会',time:'2020.08.02 周日 20:00',total:540},
-            selected:'支付宝'
+            orderData:{},
+            payStatus:1,
+            selected:'支付宝',
+            loadSuccess:false
         }
     }
     componentDidMount() {
         Axios.get(base_url+'/getIndent?order_id='+this.props.match.params.orderID).then(
             res=>{
                 console.log(res.data)
+                let params=this.props.location.state?this.props.location.state:JSON.parse(sessionStorage.getItem('orderPayData'))
                 this.setState({
-                    receiverData:{name:res.data.receiver_name,address:res.data.receiver_address,tele:res.data.receiver_tel}
+                    receiverData:{name:res.data.receiver_name,address:res.data.receiver_address,tele:res.data.receiver_tel},
+                    orderData:{orderID:res.data.orderId,name:params.name,time:res.data.selected_time,total:res.data.payamount,address:params.address},
+                    payStatus:res.data.order_status,
+                    loadSuccess:true
                 })
             }
         )
     }
+    pay=()=>{
+        let data = new FormData();
+        data.append("order_id", this.props.match.params.orderID);
+        data.append("status",JSON.stringify(2));
+        Axios.post(base_url+"/updateIndent", data).then(
+            res=>{
+                if(res.data==1) {
+                    message.success("你已支付成功！")
+                    this.setState({
+                        payStatus: 2
+                    })
+                    this.props.history.push({pathname:'/'})
+                }
+            }
+        )
 
+    }
+    cancelOrder=()=>{
+        if(this.state.payStatus==2) return
+        Modal.confirm({
+            title: '请求确认',
+            icon: <ExclamationCircleOutlined />,
+            content: '你是否要取消订单？',
+            okText: '确认',
+            cancelText: '取消',
+            onOk:()=>{
+                let data = new FormData();
+                data.append("order_id", this.props.match.params.orderID);
+                data.append("status",JSON.stringify(3));
+                Axios.post(base_url+"/updateIndent", data).then(
+                    res=>{
+                        if(res.data==1)
+                            message.success("你已成功取消订单！")
+                    }
+                )
+            }
+        });
+    }
     render() {
+        if(!this.state.loadSuccess)return (<div>loading...</div>)
+        else
         return (
             <div>
-                <SimpleNav/>
+                <SimpleNav history={this.props.history}/>
                 <div className={ordPaySty.body}>
                     <div className={ordPaySty.Container}>
                         <div className={ordPaySty.imgContainer}>
@@ -51,6 +97,7 @@ export default class OrderPay extends Component{
                                     <span className={ordPaySty.price}>
                                         应付总金额：{this.state.orderData.total.toFixed(2)}元
                                     </span>
+                                    <span ><a className={ordPaySty.gray} onClick={this.cancelOrder}>取消订单</a></span>
                                 </div>
                             </div>
                             <Divider/>
@@ -60,6 +107,7 @@ export default class OrderPay extends Component{
                                     <span>订单号：&nbsp;<span className={ordPaySty.gray}>{this.state.orderData.orderID}</span></span>
                                     <span>票品信息：&nbsp;<span className={ordPaySty.gray}>{this.state.orderData.name}</span></span>
                                     <span>演出场次：&nbsp;<span className={ordPaySty.gray}>{this.state.orderData.time}</span></span>
+                                    <span>演出地点：&nbsp;<span className={ordPaySty.gray}>{this.state.orderData.address}</span></span>
                                 </div>
                             </div>
                         </div>
@@ -73,6 +121,9 @@ export default class OrderPay extends Component{
                             <img src={require('../../ImgAssets/weixinpay.jpg')} className={ordPaySty.paymentItemImg} />
                         </div>
                     </div>
+                    <Button type={'primary'} className={ordPaySty.buttonContainer} onClick={this.pay} disabled={this.state.payStatus==2}>
+                        {this.state.payStatus==2?'订单已支付':'支付订单'}
+                    </Button>
                 </div>
             </div>
         );

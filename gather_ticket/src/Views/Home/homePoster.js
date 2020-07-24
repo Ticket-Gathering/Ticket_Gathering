@@ -16,7 +16,7 @@ export default class HomePoster extends Component {
 
 
     componentWillReceiveProps(nextProps, nextContext){
-        if(nextProps.posterData.length>1) {
+        if(nextProps.posterData&&nextProps.posterData.length>1) {
             this.setState({
                 firstPoster: nextProps.posterData[0],
                 posterData: nextProps.posterData.splice(1, 7),

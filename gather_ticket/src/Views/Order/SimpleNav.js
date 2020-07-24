@@ -29,8 +29,9 @@ export default class SimpleNav extends Component {
         return (
             <div className={navstyle.nav}>
                 <div className={navstyle.navson}>
-                    <div className={navstyle.logo}>
-                        <img src={require('../../ImgAssets/logo.png')} />
+                    <div className={navstyle.logo} onClick={()=>{this.props.history.push({pathname:'/'})}}>
+                        <img src={require('../../ImgAssets/logo.svg')} />
+                        <span className={navstyle.webFont}>聚票</span>
                     </div>
 
                     {this.state.isLoggedIn

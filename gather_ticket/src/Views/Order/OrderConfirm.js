@@ -35,9 +35,7 @@ export default class OrderConfirm extends Component{
         console.log(this.state.data)
         let userId=sessionStorage.getItem('userId')
         if(isNaN(parseInt(userId))){
-            userId=4
-            sessionStorage.setItem('username','zyc')
-            // this.props.history.push({pathname:'/login'})
+            this.props.history.push({pathname:'/login'})
         }
         this.setState({
             total:parseInt(this.state.data.price)*this.state.data.num,
@@ -119,6 +117,7 @@ export default class OrderConfirm extends Component{
             message.error('请阅读相关协议后进行勾选！')
             return;
         }
+        console.log(this.state.data.platform)
         Axios.post(base_url+'/addIndent',qs.stringify(
     {username:sessionStorage.getItem('username'),
             show_id:this.state.data.id,
@@ -127,10 +126,17 @@ export default class OrderConfirm extends Component{
             payamount:this.state.payAmount,
             receiver_name:this.state.buyerName,
             receiver_tel:this.state.buyerPhone,
-            receiver_address:this.state.buyerAddress
+            receiver_address:this.state.buyerAddress,
+            platform:'大麦网',
+            selected_time:this.state.data.time
             })).then(
                 res=>{
-                    this.props.history.push({pathname:'/orderPay'+`/${res.data}`})
+                    let orderPayData={
+                        name:this.state.data.name,
+                        address:this.state.data.address
+                    }
+                    sessionStorage.setItem('orderPayData',orderPayData)
+                    this.props.history.push({pathname:'/orderPay'+`/${res.data}`,state:orderPayData} )
                 }
             )
     }
@@ -141,7 +147,7 @@ export default class OrderConfirm extends Component{
         }
         return (
             <div>
-                <SimpleNav/>
+                <SimpleNav history={this.props.history}/>
                 <div className={ordConfSty.body}>
                     <div className={ordConfSty.container}>
                         <div className={ordConfSty.buyerInfoContainer}>

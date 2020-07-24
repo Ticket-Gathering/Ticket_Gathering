@@ -144,3 +144,8 @@ UI页面
 江玙璠：进一步学习了spring security的用法，根据我们项目的需要做出合适的应用，目前先是在login的操作加入了spring security的authentication
 
 沈佳威：1.修改了indent表及相应后端和测试 2.学习使用cypress，但遇到了一些问题
+
+朱益成：基本完成了与订单相关的前端功能逻辑
+
+##
+朱益成：修复了一些琐屑的bug

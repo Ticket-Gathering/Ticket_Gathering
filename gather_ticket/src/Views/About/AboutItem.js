@@ -86,7 +86,8 @@ export default class AboutItem extends Component {
             coupon:20,
             img_url: this.props.aboutitem.show.img_url,
             ticketType:'电子票',
-            id:this.props.aboutitem.id
+            id:this.props.aboutitem.id,
+            platform:this.props.aboutitem.platform
         }
         sessionStorage.setItem('orderInfo',orderInfo)
         this.props.history.push({pathname:'/orderConfirm'+`/${this.props.aboutitem.id}`,state:orderInfo})

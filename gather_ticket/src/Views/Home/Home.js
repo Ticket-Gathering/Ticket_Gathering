@@ -40,7 +40,7 @@ export default class Home extends Component {
                 <NavList cityValue={this.state.cityValue} />
                 <Notable/>
                 <HomePoster title={"演唱会"} posterData={this.state.posterData[1]} cityValue={this.state.cityValue} />
-                <HomePoster title={"歌剧话剧"} posterData={this.state.posterData[3]} cityValue={this.state.cityValue}/>
+                <HomePoster title={"话剧歌剧"} posterData={this.state.posterData[3]} cityValue={this.state.cityValue}/>
                 <HomePoster title={"体育"} posterData={this.state.posterData[6]} cityValue={this.state.cityValue} />
                 <HomePoster title={"儿童亲子"} posterData={this.state.posterData[0]} cityValue={this.state.cityValue}/>
                 <HomePoster title={"展览休闲"} posterData={this.state.posterData[7]} cityValue={this.state.cityValue}/>
