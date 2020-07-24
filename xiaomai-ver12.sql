@@ -102,8 +102,7 @@ CREATE TABLE `indent`  (
   `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `selected_time` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `platform` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  CONSTRAINT sidRid FOREIGN KEY (show_id) REFERENCES perfrom(id),
-  CONSTRAINT plaRpla FOREIGN KEY (platform) REFERENCES perfrom(platform),
+  CONSTRAINT indRperf FOREIGN KEY (show_id,platform) REFERENCES perform(id,platform),
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
