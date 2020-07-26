@@ -3,8 +3,9 @@ import posters from './homePoster.module.css';
 import Axios from '../../Module/Axios';
 import Poster from "./posterItem";
 import {Link} from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 
-export default class HomePoster extends Component {
+class HomePoster extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -12,6 +13,7 @@ export default class HomePoster extends Component {
             posterData:[],
             cityValue:this.props.cityValue
         }
+        this.goAbout = this.goAbout.bind(this)
     }
 
 
@@ -25,6 +27,11 @@ export default class HomePoster extends Component {
         this.setState({
             cityValue:nextProps.cityValue
         })
+    }
+
+    goAbout(){
+        let i = this.state.firstPoster.showId;
+        this.props.history.push({ pathname: "/about" + `/${i}` })
     }
 
     render() {
@@ -41,7 +48,7 @@ export default class HomePoster extends Component {
                     </div>
                 </div>
                 <div className={posters.posterBody}>
-                    <div className={posters.firstPosterContainer}>
+                    <div className={posters.firstPosterContainer} onClick={this.goAbout}>
                         <img src={this.state.firstPoster.img_url} className={posters.firstPosterImg} />
                         <div className={posters.firstPosterDetail}>
                             <div className={posters.firstPosterName}>{this.state.firstPoster.name}</div>
@@ -68,3 +75,4 @@ export default class HomePoster extends Component {
         )
     }
 }
+export default withRouter(HomePoster)

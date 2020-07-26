@@ -3,6 +3,8 @@ import navstyle from './Nav.module.css'
 import { Link } from 'react-router-dom';
 import {Cascader,Select,Input} from "antd";
 import Axios from "../Module/Axios";
+import Cookies from 'js-cookie'
+
 const {Search} =Input;
 const { Option } = Select;
 const url= "http://localhost:8080";
@@ -18,9 +20,9 @@ export default class nav extends Component {
         }
     };
     componentWillMount() {
-        if(sessionStorage.getItem('userId') !== 'NULL' && sessionStorage.getItem('userId') !== null) {
+        if(Cookies.get('userId') !== 'NULL' && Cookies.get('userId') !== null) {
             this.setState({
-                username: sessionStorage.getItem('username'),
+                username: Cookies.get('username'),
                 isLoggedIn:true
             })
         }else{
