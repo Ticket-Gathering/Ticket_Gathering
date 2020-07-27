@@ -1,23 +1,22 @@
 describe('Classify', () => {
     beforeEach(() =>{
+        cy.visit('/')
         cy.visit('/login')
     })
     it('classify',function () {
         cy.get('[type="text"]').type("sjw");
         cy.get('[type="password"]').type("123");
-        cy.get('.Login_loginBtn__3At_c').click();
-        cy.url().should('include', '/');
-        cy.get('.Nav_logintext__1GNU_ > a').click();
+        cy.get('[data-cy=login]').click();
+        cy.get('[data-cy=self]').click();
         cy.url().should('include', '/self');
         cy.get(':nth-child(3) > .ant-menu-submenu-title').click();
-        // cy.get('#sub3\$Menu > :nth-child(1)').click();
-        cy.get('[role="menuitem"][style="padding-left: 24px;"]').click();
+        cy.get('[data-cy=logout]').click();
         cy.url().should('include', '/');
-        cy.get('.Nav_logintext__1GNU_ > a').click();
+        cy.get('[data-cy=login]').click();
         cy.url().should('include', '/login');
         cy.get('[type="text"]').type("test");
         cy.get('[type="password"]').type("test");
-        cy.get('.Login_loginBtn__3At_c').click();
-        cy.url().should('include', '/');
+        cy.get('[data-cy=login]').click();
+        cy.url().should('include', '/login');
     })
 })

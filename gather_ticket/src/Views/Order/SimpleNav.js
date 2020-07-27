@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import navstyle from './SimpleNav.module.css'
 import { Link } from 'react-router-dom';
 import {Select} from "antd";
+import Cookies from "js-cookie"
 const { Option } = Select;
-
 export default class SimpleNav extends Component {
 
     constructor(props) {
@@ -14,9 +14,9 @@ export default class SimpleNav extends Component {
         }
     };
     componentWillMount() {
-        if(sessionStorage.getItem('userId') !== 'NULL') {
+        if(Cookies.get('userId') !== 'NULL') {
             this.setState({
-                username: sessionStorage.getItem('username'),
+                username: Cookies.get('username'),
                 isLoggedIn:true
             })
         }else{
