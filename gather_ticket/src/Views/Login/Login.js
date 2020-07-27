@@ -67,7 +67,7 @@ export default class Login extends Component {
                     <div className={login.logoLock}>
                         <img src={require('../../Assets/images/ico/lock2.png')}/>
                     </div>
-                    <div className={login.loginBtn} onClick={this.login}>LOGIN</div>
+                    <div className={login.loginBtn} onClick={this.login} data-cy={'login'}>LOGIN</div>
                     <div className={login.logoPlatforms}>
                         <div className={login.logoPlatform}>
                             <img src={require('../../Assets/images/ico/xin.png')}/>

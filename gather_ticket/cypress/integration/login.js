@@ -10,22 +10,30 @@
 //         cy.get('.Login_loginBtn__ZRqpN').click();
 //     })
 // })
-describe('Login', () => {
-    beforeEach(() =>{
+describe('logIn', () => {
+    it('log_in',function () {
         cy.visit('/login')
-    })
-    it('login',function () {
-        cy.get('[type="text"]').type("test");
-        cy.get('[type="password"]').type("test");
-        cy.get('.Login_loginBtn__ZRqpN').click();
-        cy.url().should('include', '/');
+        cy.get('[type="text"]').type("aaa");
+        cy.get('[type="password"]').type("123");
+        cy.get('[data-cy=login]').click();
+        cy.url().should('contain','/')
     })
 })
-describe('Login_out', () => {
-    it('login_out',function () {
-        cy.get('.Nav_logintext__YP7s2 > a').click();
-        cy.url().should('include', '/self');
-        cy.get('[role="menuitem"][style="padding-left: 24px;"]').click();
-        cy.url().should('include', '/');
+
+describe('logOut',()=>{
+    before(()=>{
+        cy.visit('/')
+        cy.visit('/login')
+        cy.get('[type="text"]').type("aaa");
+        cy.get('[type="password"]').type("123");
+        cy.get('[data-cy=login]').click();
+    })
+    it('log_out',function () {
+
+        cy.get('[data-cy=self]').click()
+        cy.url().should('include','/self')
+        cy.get('[data-cy=logout]').click()
+        cy.url().should('include','/')
     })
 })
+

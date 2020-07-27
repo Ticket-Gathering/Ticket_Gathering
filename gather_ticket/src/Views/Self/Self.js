@@ -439,7 +439,7 @@ export default class Self extends Component {
                                                 </SubMenu>) :
                                                 (<div/>)
                                             }
-                                            <Menu.Item onClick={this.logOut}><CloseOutlined/>Log Out</Menu.Item>
+                                            <Menu.Item onClick={this.logOut} data-cy={'logout'}><CloseOutlined/>Log Out</Menu.Item>
                                         </Menu>
                                     </Sider>
                                     {this.SwitchTab(this.state.content)}

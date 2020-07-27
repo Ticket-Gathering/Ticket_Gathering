@@ -92,7 +92,7 @@ export default class nav extends Component {
                         }
                     <div className={navstyle.navbar}>
                         <div className={navstyle.index}><Link to='/'>首页</Link></div>
-                        <div className={navstyle.page}><Link to={{pathname:'/page',state:{type:'全部',city:this.state.cityValue}}}>分类</Link></div>
+                        <div className={navstyle.page}><Link to={{pathname:'/page',state:{type:'全部',city:this.state.cityValue}}} data-cy={'classify'}>分类</Link></div>
                     </div>
                     <div className={navstyle.search}>
                         <img src={require('../ImgAssets/search.png')} className={navstyle.searchimg}/>
@@ -103,13 +103,13 @@ export default class nav extends Component {
                         ?
                         <div className={navstyle.loginbox}>
                             <div className={navstyle.logintext}>
-                                欢迎您！<Link to="/self">{this.state.username}</Link>
+                                欢迎您！<Link to="/self" data-cy={'self'}>{this.state.username}</Link>
                             </div>
                         </div>
                         :
-                        <div className={navstyle.loginbox}>
+                        <div className={navstyle.loginbox} >
                             <img src={require('../ImgAssets/login.png')}/>
-                            <div className={navstyle.logintext}><Link to="/login">登录</Link></div>
+                            <div className={navstyle.logintext}><Link to="/login" data-cy={'login'}>登录</Link></div>
                         </div>
 
                     }
