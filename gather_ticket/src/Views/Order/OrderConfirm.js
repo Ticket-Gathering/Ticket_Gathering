@@ -34,10 +34,10 @@ export default class OrderConfirm extends Component{
         }
     }
     componentDidMount() {
-        console.log(this.state.data)
         let userId=Cookies.get('userId')
+        console.log(this.props.match)
         if(isNaN(parseInt(userId))){
-            this.props.history.push({pathname:'/login'})
+            this.props.history.push({pathname:'/login',state:{lastUrl:this.props.match.url}})
         }
         this.setState({
             total:parseInt(this.state.data.price)*this.state.data.num,

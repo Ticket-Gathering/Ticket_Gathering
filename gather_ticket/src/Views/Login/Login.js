@@ -200,8 +200,11 @@ export default class Login extends Component {
                     Cookies.set('userId', response.data.userId)
                     Cookies.set('username', response.data.username)
                     Cookies.set('userType', response.data.userType)
-                    window.history.back(-1)
-                    this.props.history.push('/', null);
+                    console.log(window.history)
+                    if(typeof (this.props.location.state)!="undefined"&&this.props.location.state.lastUrl){
+                        window.history.back(-1)
+                    }
+                    this.props.history.push({pathname:'/'})
                 } else if (response.data.data.userType === 2){
                     Message({
                         message: "您的账号已被管理员禁用，请联系管理员！",
