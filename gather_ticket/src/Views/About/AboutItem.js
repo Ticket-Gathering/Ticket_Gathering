@@ -179,10 +179,16 @@ export default class AboutItem extends Component {
                             ￥{this.sum(this.state.num)}
                         </div>
                     </div>
-
-                    <div className={abouti.buyNow} onClick={this.buy}>
-                        立即购买
-                    </div>
+                    {
+                        this.props.aboutitem.prices.length === 0?
+                            <div className={abouti.buyNowDisabled}>
+                                暂时无法购买
+                            </div>
+                            :
+                            <div className={abouti.buyNow} onClick={this.buy}>
+                                立即购买
+                            </div>
+                    }
                 </div>
             </div>
         )
