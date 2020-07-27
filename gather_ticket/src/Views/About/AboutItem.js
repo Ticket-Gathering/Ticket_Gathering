@@ -156,11 +156,11 @@ export default class AboutItem extends Component {
                                 this.props.aboutitem.prices.length === 0? <div style={{marginTop:"9px", marginLeft:"10px"}}>暂无票档信息</div> :
                                 this.props.aboutitem.prices.map((p, ind) => {
                                 if (ind === 0) {
-                                    this.state.priceList.push({ state: 1, price: p.replace(/[^0-9]/ig,"") });
+                                    this.state.priceList.push({ state: 1, price: /[0-9]+/.exec(p) });
                                     return <div key={ind} className={this.state.priceList[ind].state ? abouti.chosen : abouti.unChosen} onClick={this.priceSelect.bind(this, ind)}>{p}</div>
                                 }
                                 else {
-                                    this.state.priceList.push({ state: 0, price: p.replace(/[^0-9]/ig,"") });
+                                    this.state.priceList.push({ state: 0, price: /[0-9]+/.exec(p) });
                                     return <div key={ind} className={this.state.priceList[ind].state ? abouti.chosen : abouti.unChosen} onClick={this.priceSelect.bind(this, ind)}>{p}</div>
                                 }
 
