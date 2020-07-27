@@ -1,6 +1,6 @@
 describe('Search', () => {
     beforeEach(() =>{
-        cy.visit('http://localhost:3000')
+        cy.visit('/')
     })
     it('search',function () {
         cy.get('#search').type("林俊杰{enter}");

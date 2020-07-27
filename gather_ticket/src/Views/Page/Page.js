@@ -114,7 +114,7 @@ export default class Page extends Component {
         // console.log(page);
     }
     parseSearchParams=(pairs)=>{
-        let keyword='',category=null
+        let keyword='',category=null,city=null
         for(let index in pairs){
             let [key,value]=pairs[index].split('=')
             if(key==='keyword') {
@@ -126,7 +126,9 @@ export default class Page extends Component {
         }
         if(this.state.type!=='全部')
             category=categoryMap.get(this.state.type)
-        Axios.post(url+'/show/searchShow',qs.stringify({keyword:keyword,pagesize:20,currentsize:1,category:category,sub_category:null,city:null})).then(
+        if(this.state.city!=='全国')
+            city=this.state.city
+        Axios.post(url+'/show/searchShow',qs.stringify({keyword:keyword,pagesize:20,currentsize:1,category:category,sub_category:null,city:city})).then(
             (res)=>{
                 this.setState({
                     data:res.data
