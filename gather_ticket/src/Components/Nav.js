@@ -30,7 +30,7 @@ export default class nav extends Component {
                 isLoggedIn:false
             })
         }
-        Axios.get(url+'/getAllCityWithShowNow').then(
+        Axios.get(url+'/show/getAllCityWithShowNow').then(
             res=>{
                 let citys=res.data
                 let tempArr=[]

@@ -144,7 +144,7 @@ export default class Page extends Component {
                 }
 
                 this.setState({
-                    AllCity:tempArr
+                    AllCity:tempArr,
                 })
             }
         )

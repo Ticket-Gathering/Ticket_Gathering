@@ -3,6 +3,7 @@ import abouti from "./AboutItem.module.css";
 import Sign from "./Sign";
 import {Divider} from "antd";
 import {InputNumber} from "element-react"
+import Cookies from 'js-cookie'
 
 export default class AboutItem extends Component {
     constructor(props) {
@@ -89,7 +90,7 @@ export default class AboutItem extends Component {
             id:this.props.aboutitem.id,
             platform:this.props.aboutitem.platform
         }
-        sessionStorage.setItem('orderInfo',orderInfo)
+        Cookies.set('orderInfo',orderInfo)
         this.props.history.push({pathname:'/orderConfirm'+`/${this.props.aboutitem.id}`,state:orderInfo})
     }
     componentDidMount(){
