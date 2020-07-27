@@ -6,6 +6,8 @@ import Axios from '../../Module/Axios';
 import {UserOutlined,PhoneOutlined,EnvironmentOutlined,PlusOutlined} from "@ant-design/icons";
 import qs from 'qs'
 import {Link} from "react-router-dom";
+import Cookies from "js-cookie"
+
 const base_url='http://localhost:8080'
 const { Option } = Select;
 export default class OrderConfirm extends Component{
@@ -33,7 +35,7 @@ export default class OrderConfirm extends Component{
     }
     componentDidMount() {
         console.log(this.state.data)
-        let userId=sessionStorage.getItem('userId')
+        let userId=Cookies.get('userId')
         if(isNaN(parseInt(userId))){
             this.props.history.push({pathname:'/login'})
         }
@@ -119,7 +121,7 @@ export default class OrderConfirm extends Component{
         }
         console.log(this.state.data.platform)
         Axios.post(base_url+'/addIndent',qs.stringify(
-    {username:sessionStorage.getItem('username'),
+    {username:Cookies.get('username'),
             show_id:this.state.data.id,
             facevalue:this.state.data.price,
             num:this.state.data.num,

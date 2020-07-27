@@ -90,7 +90,7 @@ export default class AboutItem extends Component {
             id:this.props.aboutitem.id,
             platform:this.props.aboutitem.platform
         }
-        Cookies.set('orderInfo',orderInfo)
+        sessionStorage.setItem('orderInfo',orderInfo)
         this.props.history.push({pathname:'/orderConfirm'+`/${this.props.aboutitem.id}`,state:orderInfo})
     }
     componentDidMount(){
