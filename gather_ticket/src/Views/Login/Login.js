@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Bottom from "../../Components/Bottom";
 import Axios from '../../Module/Axios'
 import {Message} from 'element-react'
-import {Form} from "antd";
+import Cookies from 'js-cookie'
 
 const url = "http://localhost:8080";
 
@@ -197,9 +197,9 @@ export default class Login extends Component {
                     alert("用户名或密码错误", "请您重新输入")
                 } else if (response.status === 200) {
 
-                    sessionStorage.setItem('userId', response.data.userId)
-                    sessionStorage.setItem('username', response.data.username)
-                    sessionStorage.setItem('userType', response.data.userType)
+                    Cookies.set('userId', response.data.userId)
+                    Cookies.set('username', response.data.username)
+                    Cookies.set('userType', response.data.userType)
                     window.history.back(-1)
                     this.props.history.push('/', null);
                 } else if (response.data.data.userType === 2){

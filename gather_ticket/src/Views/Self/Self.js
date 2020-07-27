@@ -9,7 +9,8 @@ import moment from 'moment';
 import {SmileTwoTone,UserOutlined,LaptopOutlined,SettingOutlined,CloseOutlined} from "@ant-design/icons";
 import {Message} from "element-react"
 import ShowManage from "./ShowManage";
-import page from "../Page/Page.module.css";
+import Cookies from 'js-cookie'
+
 
 const columns = [
     {
@@ -142,7 +143,7 @@ export default class Self extends Component {
 
     }
     componentWillMount() {
-        if(sessionStorage.getItem('userId') !== 'NULL' && sessionStorage.getItem('userId') !== null){
+        if(Cookies.get('userId') !== 'NULL' && Cookies.get('userId') !== null){
             this.setState({
                 isLogged: true
             })
@@ -153,7 +154,7 @@ export default class Self extends Component {
             return;
         }
 
-        Axios.get(url+"/getUserById/"+sessionStorage.getItem("userId")
+        Axios.get(url+"/getUserById/"+Cookies.get("userId")
         ).then(response => {
             console.log(response);
             this.setState({
@@ -185,8 +186,8 @@ export default class Self extends Component {
         })
     }
     logOut(){
-        sessionStorage.setItem("userId", "NULL");
-        sessionStorage.setItem("username", "NULL");
+        Cookies.set("userId", "NULL");
+        Cookies.set("username", "NULL");
         this.props.history.push('/', null);
     }
     showAllUsers(){
@@ -221,7 +222,7 @@ export default class Self extends Component {
                 }
             }).then(() => {
                 let data = new FormData();
-                data.append("adminId", sessionStorage.getItem("userId"));
+                data.append("adminId", Cookies.get("userId"));
                 data.append("operation", "Block user with id:"+this.state.userList[idx].userId)
                 Axios.post(url+"/logOperation", data)
                     .then(response => {
@@ -250,7 +251,7 @@ export default class Self extends Component {
                 }
             }).then(() => {
                 let data = new FormData();
-                data.append("adminId", sessionStorage.getItem("userId"));
+                data.append("adminId", Cookies.get("userId"));
                 data.append("operation", "Unblock user with id:"+this.state.userList[idx].userId)
                 Axios.post(url+"/logOperation", data)
                     .then(response => {
@@ -424,7 +425,7 @@ export default class Self extends Component {
                                                 <Menu.Item key="5" onClick={this.changeContent}>订单管理</Menu.Item>
                                                 <Menu.Item key="6" onClick={this.changeContent}>我的优惠券</Menu.Item>
                                                 </SubMenu>
-                                            {(sessionStorage.getItem("userType") === "0") ?
+                                            {(Cookies.get("userType") === "0") ?
                                                 (<SubMenu
                                                     key="sub3"
                                                     title={
