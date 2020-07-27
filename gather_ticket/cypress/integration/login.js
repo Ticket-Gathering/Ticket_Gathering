@@ -12,7 +12,7 @@
 // })
 describe('Login', () => {
     beforeEach(() =>{
-        cy.visit('http://localhost:3000/login')
+        cy.visit('/login')
     })
     it('login',function () {
         cy.get('[type="text"]').type("test");
