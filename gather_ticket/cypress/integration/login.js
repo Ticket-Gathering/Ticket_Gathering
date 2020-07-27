@@ -15,15 +15,15 @@ describe('Login', () => {
         cy.visit('/login')
     })
     it('login',function () {
-        cy.get('[type="text"]').type("test");
-        cy.get('[type="password"]').type("test");
-        cy.get('.Login_loginBtn__ZRqpN').click();
+        cy.get('[type="text"]').type("aaa");
+        cy.get('[type="password"]').type("123");
+        cy.get('.Login_loginBtn__3At_c').click();
         cy.url().should('include', '/');
     })
 })
 describe('Login_out', () => {
     it('login_out',function () {
-        cy.get('.Nav_logintext__YP7s2 > a').click();
+        cy.get('.Nav_logintext__1GNU_ > a').click();
         cy.url().should('include', '/self');
         cy.get('[role="menuitem"][style="padding-left: 24px;"]').click();
         cy.url().should('include', '/');

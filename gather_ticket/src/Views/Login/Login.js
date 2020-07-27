@@ -192,26 +192,35 @@ export default class Login extends Component {
     login() {
         Axios.post(url+"/login", this.state.loginForm)
             .then(response => {
-                console.log(response)
-                if (response.status === 403) {
-                    alert("用户名或密码错误", "请您重新输入")
-                } else if (response.status === 200) {
+                console.log(response.status)
+                if (response.status === 200) {
 
                     Cookies.set('userId', response.data.userId)
                     Cookies.set('username', response.data.username)
                     Cookies.set('userType', response.data.userType)
-                    window.history.back(-1)
+                    // window.history.back(-1)
                     this.props.history.push('/', null);
                 } else if (response.data.data.userType === 2){
                     Message({
                         message: "您的账号已被管理员禁用，请联系管理员！",
                         type: "error"
                     })
-                    return;
                 }
             })
             .catch(function (error) {
-                console.log(error);
+                console.log(error.response);
+                if (error.response.status === 401) {
+                    if(error.response.data.code === 1)
+                        Message({
+                            message: "用户名或密码错误，请重新尝试！",
+                            type: "error"
+                        })
+                    else if (error.response.data.code === 2)
+                        Message({
+                            message: "您的账号已被禁用，请联系管理员！",
+                            type: "error"
+                        })
+                }
             });
     }
     testUsernameDuplicate(){
