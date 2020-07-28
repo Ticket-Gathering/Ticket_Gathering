@@ -160,3 +160,5 @@ UI页面
 江玙璠：修复了一些因为引入spring security带来的bug和细节。下载了性能测试相关的软件。
 
 朱益成：修改了cypress测试使得其具有通用性(原先有使用antd组件导致的类名异常)，同时学习了jest的相关知识
+
+陈嘉轩：配置了Docker与promuthues相关工具与环境，初步了解Docker与性能测试相关内容
