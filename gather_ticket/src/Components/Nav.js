@@ -21,7 +21,7 @@ export default class nav extends Component {
     };
     componentWillMount() {
         let userId=Cookies.get('userId')
-        if(isNaN(parseInt(userId))&& userId !== null) {
+        if(!isNaN(parseInt(userId))&& userId !== null) {
             this.setState({
                 username: Cookies.get('username'),
                 isLoggedIn:true

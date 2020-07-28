@@ -413,17 +413,18 @@ export default class Self extends Component {
                                                 style={{ height: '100%' }}
                                             >
                                                 <SubMenu
+                                                    data-cy={'账户中心'}
                                                     key="sub1"
                                                     title={<span><UserOutlined/>账户中心</span>}
                                                 >
-                                                    <Menu.Item key="1" onClick={this.changeContent}>个人信息</Menu.Item>
-                                                    <Menu.Item key="2" onClick={this.changeContent}>账号设置</Menu.Item>
-                                                    <Menu.Item key="3" onClick={this.changeContent}>常用购票人</Menu.Item>
-                                                    <Menu.Item key="4" onClick={this.changeContent}>收货地址</Menu.Item>
+                                                    <Menu.Item key="1" onClick={this.changeContent} data-cy={'个人信息'}>个人信息</Menu.Item>
+                                                    <Menu.Item key="2" onClick={this.changeContent} data-cy={'账号设置'}>账号设置</Menu.Item>
+                                                    <Menu.Item key="3" onClick={this.changeContent} data-cy={'常用购票人'}>常用购票人</Menu.Item>
+                                                    <Menu.Item key="4" onClick={this.changeContent} data-cy={'收货地址'}>收货地址</Menu.Item>
                                                 </SubMenu>
-                                                <SubMenu key="sub2" title={<span><LaptopOutlined/>交易中心</span>}>
-                                                <Menu.Item key="5" onClick={this.changeContent}>订单管理</Menu.Item>
-                                                <Menu.Item key="6" onClick={this.changeContent}>我的优惠券</Menu.Item>
+                                                <SubMenu key="sub2" title={<span><LaptopOutlined/>交易中心</span>} data-cy={'交易中心'}>
+                                                <Menu.Item key="5" onClick={this.changeContent} data-cy={'订单管理'}>订单管理</Menu.Item>
+                                                <Menu.Item key="6" onClick={this.changeContent} data-cy={'我的优惠券'}>我的优惠券</Menu.Item>
                                                 </SubMenu>
                                             {(Cookies.get("userType") === "0") ?
                                                 (<SubMenu
@@ -433,9 +434,10 @@ export default class Self extends Component {
                                                             <SettingOutlined/>
                                                             网站管理
                                                         </span>}
+                                                    data-cy={'网站管理'}
                                                 >
-                                                    <Menu.Item key="7" onClick={this.showAllUsers}>用户管理</Menu.Item>
-                                                    <Menu.Item key="8" onClick={this.changeContent}>演出管理</Menu.Item>
+                                                    <Menu.Item key="7" onClick={this.showAllUsers} data-cy={'用户管理'}>用户管理</Menu.Item>
+                                                    <Menu.Item key="8" onClick={this.changeContent} data-cy={'演出管理'}>演出管理</Menu.Item>
                                                 </SubMenu>) :
                                                 (<div/>)
                                             }
