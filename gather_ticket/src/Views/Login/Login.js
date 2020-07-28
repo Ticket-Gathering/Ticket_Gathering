@@ -174,11 +174,18 @@ export default class Login extends Component {
                         })
                         setTimeout(()=>{
                             this.setState({
+                                loginForm:{
+                                    username: this.state.signUpForm.username,
+                                    password: this.state.signUpForm.password,
+                                }
+                            })
+                            this.setState({
                                 signUpForm: {
                                     username: "",
                                     password: "",
                                     repeatPassword: "",
-                                }
+                                },
+
                             });
                             this.changeToLogin();
                         }, 1000);
