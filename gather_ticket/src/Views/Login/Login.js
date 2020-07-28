@@ -175,11 +175,18 @@ export default class Login extends Component {
                         })
                         setTimeout(()=>{
                             this.setState({
+                                loginForm:{
+                                    username: this.state.signUpForm.username,
+                                    password: this.state.signUpForm.password,
+                                }
+                            })
+                            this.setState({
                                 signUpForm: {
                                     username: "",
                                     password: "",
                                     repeatPassword: "",
-                                }
+                                },
+
                             });
                             this.changeToLogin();
                         }, 1000);
@@ -193,10 +200,8 @@ export default class Login extends Component {
     login() {
         Axios.post(url+"/login", this.state.loginForm)
             .then(response => {
-                console.log(response)
-                if (response.status === 403) {
-                    alert("用户名或密码错误", "请您重新输入")
-                } else if (response.status === 200) {
+                console.log(response.status)
+                if (response.status === 200) {
 
                     Cookies.set('userId', response.data.userId)
                     Cookies.set('username', response.data.username)
@@ -211,11 +216,22 @@ export default class Login extends Component {
                         message: "您的账号已被管理员禁用，请联系管理员！",
                         type: "error"
                     })
-                    return;
                 }
             })
             .catch(function (error) {
-                console.log(error);
+                console.log(error.response);
+                if (error.response.status === 401) {
+                    if(error.response.data.code === 1)
+                        Message({
+                            message: "用户名或密码错误，请重新尝试！",
+                            type: "error"
+                        })
+                    else if (error.response.data.code === 2)
+                        Message({
+                            message: "您的账号已被禁用，请联系管理员！",
+                            type: "error"
+                        })
+                }
             });
     }
     testUsernameDuplicate(){

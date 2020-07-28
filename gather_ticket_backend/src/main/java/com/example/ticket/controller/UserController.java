@@ -38,17 +38,17 @@ UserController {
         return userService.addUser(username, password);
     }
 
-    @RequestMapping("/getAllUsers")
+    @RequestMapping("/admin/getAllUsers")
     public List<ClientAuth> getAllUsers(){
         return userService.getAllUsers();
     }
 
-    @RequestMapping("/blockUser/{id}")
+    @RequestMapping("/admin/blockUser/{id}")
     public Msg blockUser(@PathVariable("id") int userId){
         return userService.blockUser(userId);
     }
 
-    @RequestMapping("/unblockUser/{id}")
+    @RequestMapping("/admin/unblockUser/{id}")
     public Msg unblockUser(@PathVariable("id") int userId){
         return userService.unblockUser(userId);
     }

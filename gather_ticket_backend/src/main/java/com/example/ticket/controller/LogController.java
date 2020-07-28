@@ -12,7 +12,7 @@ public class LogController {
     @Autowired
     private LogService logService;
 
-    @RequestMapping("/logOperation")
+    @RequestMapping("/admin/logOperation")
     public Msg logOperation(@RequestParam("adminId") int adminId, @RequestParam("operation") String operation){
         return logService.logOperation(adminId, operation);
     }

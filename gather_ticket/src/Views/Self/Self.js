@@ -191,7 +191,7 @@ export default class Self extends Component {
         this.props.history.push('/', null);
     }
     showAllUsers(){
-        Axios.get(url+"/getAllUsers")
+        Axios.get(url+"/admin/getAllUsers")
             .then(response => {
                 // console.log(response.data)
                 this.setState({
@@ -207,7 +207,7 @@ export default class Self extends Component {
     }
 
     blockUser(idx){
-        Axios.get(url+"/blockUser/"+this.state.userList[idx].userId)
+        Axios.get(url+"/admin/blockUser/"+this.state.userList[idx].userId)
             .then(response => {
                 if(response.data.status === 0){
                     Message({
@@ -224,7 +224,7 @@ export default class Self extends Component {
                 let data = new FormData();
                 data.append("adminId", Cookies.get("userId"));
                 data.append("operation", "Block user with id:"+this.state.userList[idx].userId)
-                Axios.post(url+"/logOperation", data)
+                Axios.post(url+"/admin/logOperation", data)
                     .then(response => {
                         console.log(response)
                     }).catch(function (error) {
@@ -236,7 +236,7 @@ export default class Self extends Component {
         });
     }
     unblockUser(idx){
-        Axios.get(url+"/unblockUser/"+this.state.userList[idx].userId)
+        Axios.get(url+"/admin/unblockUser/"+this.state.userList[idx].userId)
             .then(response => {
                 if(response.data.status === 0){
                     Message({
@@ -253,7 +253,7 @@ export default class Self extends Component {
                 let data = new FormData();
                 data.append("adminId", Cookies.get("userId"));
                 data.append("operation", "Unblock user with id:"+this.state.userList[idx].userId)
-                Axios.post(url+"/logOperation", data)
+                Axios.post(url+"/admin/logOperation", data)
                     .then(response => {
                         console.log(response)
                     }).catch(function (error) {
