@@ -99,6 +99,7 @@ UI页面
 陈嘉轩：1.实现了Showservice相关的单元测试 2.学习selenium相关的爬虫
 
 ## 07/17
+
 沈佳威：1.修改数据库ver-6 2.完善test
 
 朱益成：阅读了cypress的文档，学习了前端的相关测试方法
@@ -163,8 +164,14 @@ UI页面
 
 陈嘉轩：配置了Docker与promuthues相关工具与环境，初步了解Docker与性能测试相关内容
 
-
 ##07/28
+
 陈嘉轩：尝试了jmeter的压力测试，配置了docker中prometheus环境并成功运行
 
 朱益成：丰富了cypress测试
+
+江玙璠：尝试了使用docker运行Prometheus，尝试使用了JMeter
+
+##07/29
+
+江玙璠：成功用docker运行了Prometheus、grafana、mysql和项目后端，并实现了初次的数据监控的尝试
