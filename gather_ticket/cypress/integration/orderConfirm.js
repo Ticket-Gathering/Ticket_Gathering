@@ -1,6 +1,6 @@
 //测试在orderConfirm界面的一系列操作
 describe('orderConfirm_test',function () {
-    before(function () {
+    beforeEach(function () {
         cy.fixture('example.json').as('testCase').then(($testCase)=>{
             cy.visit("/about/1_1_611200540124")
             let user=$testCase.adminUser
@@ -26,7 +26,7 @@ describe('orderConfirm_test',function () {
     })
 
     //测试未填写全部必须信息是否触发提醒
-    it.only('orderException_test',function () {
+    it('orderException_test',function () {
         let baseUrl=this.testCase.baseUrl
         //未填写取票人
         cy.get('[data-cy="结算"]').click()
