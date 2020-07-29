@@ -162,3 +162,7 @@ UI页面
 朱益成：修改了cypress测试使得其具有通用性(原先有使用antd组件导致的类名异常)，同时学习了jest的相关知识
 
 陈嘉轩：配置了Docker与promuthues相关工具与环境，初步了解Docker与性能测试相关内容
+
+
+##07/28
+陈嘉轩：尝试了jmeter的压力测试，配置了docker中prometheus环境并成功运行
