@@ -193,7 +193,7 @@ export default class Self extends Component {
     showAllUsers(){
         Axios.get(url+"/admin/getAllUsers")
             .then(response => {
-                // console.log(response.data)
+                console.log(response.data)
                 this.setState({
                     userList : response.data
                 })
@@ -372,8 +372,9 @@ export default class Self extends Component {
                             colunm="10"
                             renderItem={(item,index) => (
                                 <List.Item
-                                    actions={[item.userType === 1? (<Button type="primary" className={selfstyle.button} style={{backgroundColor: 'red'}} onClick={() => this.blockUser(index)}>禁用</Button>)
-                                        :(<Button type="primary" className={selfstyle.button} style={{backgroundColor: 'green'}} onClick={() => this.unblockUser(index)}>解禁</Button>)]}
+                                    data-cy={'user:'+item.username}
+                                    actions={[item.userType === 1? (<Button type="primary" className={selfstyle.button} style={{backgroundColor: 'red'}} onClick={() => this.blockUser(index)} data-cy={'disable'}>禁用</Button>)
+                                        :(<Button type="primary" className={selfstyle.button} style={{backgroundColor: 'green'}} onClick={() => this.unblockUser(index)} data-cy={'enable'}>解禁</Button>)]}
                                 >
                                     <List.Item.Meta
                                         avatar={
@@ -392,6 +393,8 @@ export default class Self extends Component {
         }
     }
     render() {
+        console.log(Cookies.getJSON('userType'))
+        console.log(Cookies.getJSON('username'))
         return (
             <div>
                 <Nav/>

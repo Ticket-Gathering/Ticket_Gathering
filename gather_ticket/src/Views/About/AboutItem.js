@@ -71,6 +71,8 @@ export default class AboutItem extends Component {
         })
     }
     sum() {
+        console.log(this.state.num)
+        console.log(this.state.priceList)
         if(this.state.priceList.length === 0) return 0;
         let e = this.state.num === 0? this.state.priceList[0].price : this.state.num;
         let n = this.state.count;
@@ -80,7 +82,7 @@ export default class AboutItem extends Component {
         let orderInfo={
             time:this.state.time?this.state.selectedTime:this.props.aboutitem.times[0],
             num:this.state.count,
-            price:this.state.num === 0? this.state.priceList[0].price : this.state.num,
+            price:this.state.num === 0? parseInt(this.state.priceList[0].price[0]) : parseInt(this.state.num[0]),
             name:this.props.aboutitem.show.name,
             showtime:this.props.aboutitem.show.show_time,
             address:this.props.aboutitem.show.city+' | '+this.props.aboutitem.show.venue.venuename,
@@ -105,7 +107,7 @@ export default class AboutItem extends Component {
     render() {
         if(!this.state.success) return (<div>Loading...</div>)
         else return (
-            <div className={abouti.abouti}>
+            <div className={abouti.abouti} data-cy={'aboutItem'}>
                 <div className={abouti.showPoster}>
                     <div className={abouti.poster}>
                         <img src={this.props.aboutitem.show.img_url} />
@@ -157,11 +159,11 @@ export default class AboutItem extends Component {
                                 this.props.aboutitem.prices.map((p, ind) => {
                                 if (ind === 0) {
                                     this.state.priceList.push({ state: 1, price: /[0-9]+/.exec(p) });
-                                    return <div key={ind} className={this.state.priceList[ind].state ? abouti.chosen : abouti.unChosen} onClick={this.priceSelect.bind(this, ind)}>{p}</div>
+                                    return <div key={ind} className={this.state.priceList[ind].state ? abouti.chosen : abouti.unChosen} onClick={this.priceSelect.bind(this, ind)} data-cy={`price:${ind}`}>{p}</div>
                                 }
                                 else {
                                     this.state.priceList.push({ state: 0, price: /[0-9]+/.exec(p) });
-                                    return <div key={ind} className={this.state.priceList[ind].state ? abouti.chosen : abouti.unChosen} onClick={this.priceSelect.bind(this, ind)}>{p}</div>
+                                    return <div key={ind} className={this.state.priceList[ind].state ? abouti.chosen : abouti.unChosen} onClick={this.priceSelect.bind(this, ind)} data-cy={`price:${ind}`}>{p}</div>
                                 }
 
                             })}
@@ -170,12 +172,12 @@ export default class AboutItem extends Component {
 
                     <div className={abouti.showSessions}>
                         <div className={abouti.showSessionTag}>数量</div>
-                        <InputNumber defaultValue={1} step="1" min="1" style={{marginLeft: "10px"}} onChange={this.addTicket.bind(this)}/>
+                        <InputNumber defaultValue={1} step="1" min="1" style={{marginLeft: "10px"}} onChange={this.addTicket.bind(this)}  data-cy={'numSelect'}/>
                     </div>
 
                     <div className={abouti.showSession}>
                         <div className={abouti.showSessionTag}>合计</div>
-                        <div className={abouti.sum}>
+                        <div className={abouti.sum} data-cy={'total'}>
                             ￥{this.sum(this.state.num)}
                         </div>
                     </div>
@@ -185,7 +187,7 @@ export default class AboutItem extends Component {
                                 暂时无法购买
                             </div>
                             :
-                            <div className={abouti.buyNow} onClick={this.buy}>
+                            <div className={abouti.buyNow} onClick={this.buy} data-cy={'buy'}>
                                 立即购买
                             </div>
                     }
