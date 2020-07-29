@@ -166,3 +166,5 @@ UI页面
 
 ##07/28
 陈嘉轩：尝试了jmeter的压力测试，配置了docker中prometheus环境并成功运行
+
+朱益成：丰富了cypress测试
