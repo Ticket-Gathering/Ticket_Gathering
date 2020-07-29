@@ -15,7 +15,7 @@ class PosterItem extends Component {
 
     render() {
         return (
-            <div className={poster.posterContainer}>
+            <div className={poster.posterContainer}data-cy={this.props['data-cy']}>
                 <div className={poster.posterImgContainer} onClick={this.goAbout}>
                     <img src={this.props.poster.img_url} className={poster.posterImg} />
                 </div>

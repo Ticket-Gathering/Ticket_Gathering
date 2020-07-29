@@ -87,7 +87,7 @@ export default class Page extends Component {
             />
         } else {
             return (i.map((item, index) => {
-                return <PageItem poster={item} key={index}/>
+                return <PageItem poster={item} key={index} data-cy={'pageItem'}/>
             }))
         }
     }
@@ -185,13 +185,13 @@ export default class Page extends Component {
                         <div className={page.titleContainer}>
                             <div className={page.horizontal} >
                                 <span>当 前 选 中 城 市：</span>
-                                <div className={page.titleOne+' ' + page.titleSelected}>{this.state.city}</div>
+                                <div className={page.titleOne+' ' + page.titleSelected} data-cy={'citySelected'}>{this.state.city}</div>
                             </div>
                             <span>城 市：</span>
                             <div className={page.titleBox}>
                                 {
                                     this.state.AllCity.slice(0,8).map((item, index) => {
-                                        return <div className={page.titleOne + (this.state.city === item ? (' ' + page.titleSelected) : '')} onClick={()=>this.changeCity(item)} >{item}</div>
+                                        return <div className={page.titleOne + (this.state.city === item ? (' ' + page.titleSelected) : '')} onClick={()=>this.changeCity(item)} data-cy={`select:${item}`}>{item}</div>
                                     })
                                 }
                                 <div className={page.showMore} onClick={()=>this.setState({collapseFlag:!this.state.collapseFlag})}><u>{this.state.collapseFlag?'显示更多':'收起'}</u></div>
@@ -209,7 +209,13 @@ export default class Page extends Component {
                             <div className={page.titleBox}>
                                 {
                                     this.state.types.map((item, index) => {
-                                        return <div className={page.titleOne + (this.state.type === item ? (' ' + page.titleSelected) : '')} onClick={()=>this.changeType(item)} >{item}</div>
+                                        return <div
+                                                    data-cy={this.state.type === item?'typeSelected':`select:${item}`}
+                                                    className={page.titleOne + (this.state.type === item ? (' ' + page.titleSelected) : '')}
+                                                    onClick={()=>this.changeType(item)}
+                                                >
+                                                    {item}
+                                                </div>
                                     })
                                 }
                             </div>
@@ -237,9 +243,9 @@ export default class Page extends Component {
                         <div style={{width:"100%", marginBottom:"10px"}}>
                             {this.state.currentPage === 1?
                                 <Button type="text" size="large" style={{float:"left"}} disabled><LeftOutlined />上一页</Button> :
-                                <Button type="text" size="large" style={{float:"left"}} onClick={this.fetchPage.bind(this, this.state.currentPage - 1)}><LeftOutlined />上一页</Button>
+                                <Button type="text" size="large" style={{float:"left"}} onClick={this.fetchPage.bind(this, this.state.currentPage - 1)} data-cy={'lastPage'}><LeftOutlined />上一页</Button>
                             }
-                            <Button type="text" size="large" style={{float:"right"}} onClick={this.fetchPage.bind(this, this.state.currentPage + 1)}><RightOutlined />下一页</Button>
+                            <Button type="text" size="large" style={{float:"right"}} onClick={this.fetchPage.bind(this, this.state.currentPage + 1)} data-cy={'nextPage'}><RightOutlined />下一页</Button>
                         </div>
                     </div>
                 </div >

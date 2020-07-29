@@ -1,6 +1,8 @@
 {
-  "name": "Using fixtures to represent data",
-  "email": "hello@cypress.io",
-  "body": "Fixtures are a great way to mock data for responses to routes",
-    "baseUrl":"http://localhost:8080"
+  "baseUrl":"http://localhost:3000",
+  "adminUser": "zyc",
+  "adminPassword": "123",
+  "User": "aaa",
+  "Password": "123",
+  "types":["儿童亲子","演唱会","音乐会","话剧歌剧","舞蹈芭蕾","曲苑杂坛","体育","展览休闲"]
 }
