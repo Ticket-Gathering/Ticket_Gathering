@@ -76,7 +76,7 @@ describe('about_Test', function () {
     })
 
     //测试未登录购买重新登录后页面是否正常跳转
-    it.only('buy_offline_thenLog_test',function () {
+    it('buy_offline_thenLog_test',function () {
         let baseUrl=this.testCase.baseUrl
         let user=this.testCase.User
         let pwd=this.testCase.Password
