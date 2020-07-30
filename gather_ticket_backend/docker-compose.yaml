@@ -16,8 +16,15 @@ services:
     networks:
       - demo
 
+  mongodb:
+    image: mongo:4.2
+    ports:
+      - "27017:27017"
+    networks:
+      - demo
+
   backend:
-    image: ticket_gathering:v1
+    image: ticket_gathering:v2
     ports:
       - "8080:8080"
     environment:
