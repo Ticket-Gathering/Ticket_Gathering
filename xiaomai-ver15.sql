@@ -47,7 +47,7 @@ CREATE TABLE `clients`  (
   `user_id` int(11) NOT NULL,
   `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `id_num` int(11) NULL DEFAULT NULL,
+  `id_num` varchar(20) NULL DEFAULT NULL,
   `tel` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `birth` date NULL DEFAULT NULL,
