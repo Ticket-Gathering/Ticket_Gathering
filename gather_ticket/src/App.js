@@ -2,13 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import routes from './routes';
 import 'element-theme-default';
-class App extends Component {
-  componentDidMount() {
-    sessionStorage.setItem('userType', '1');
-    sessionStorage.setItem('username', 'NULL');
-    sessionStorage.setItem('userId', 'NULL');
-  }
+import Cookies from "js-cookie"
 
+class App extends Component {
   render() {
     return (
       <Router>

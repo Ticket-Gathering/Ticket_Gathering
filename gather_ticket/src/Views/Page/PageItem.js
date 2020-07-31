@@ -57,19 +57,19 @@ class Poster extends Component {
                 break
         }
         return (
-            <div className={pagePoster.showContainer}>
-                <div className={pagePoster.showImgContainer} onClick={this.goAbout}>
+            <div className={pagePoster.showContainer} data-cy={this.props['data-cy']}>
+                <div className={pagePoster.showImgContainer} onClick={this.goAbout} data-cy={'pageItem-goodsImg'}>
                     <img src={this.props.poster.img_url} className={pagePoster.showImg}/>
-                    <Tag className={pagePoster.showType} color={'#e62958'}>{this.props.poster.category.category}</Tag>
+                    <Tag className={pagePoster.showType} color={'#e62958'} data-cy={'pageItem-type'}>{this.props.poster.category.category}</Tag>
                 </div>
 
                 <div className={pagePoster.infContainer}>
                     <div className={pagePoster.detailContainer}>
-                        <div className={pagePoster.name}>{this.props.poster.name}</div>
+                        <div className={pagePoster.name} data-cy={'pageItem-name'}>{this.props.poster.name}</div>
 
                         <div className={pagePoster.horizontal}>
                             <img className={pagePoster.smallImg} src={require('../../ImgAssets/location.png')}/>
-                            <div className={pagePoster.showDetail}>{this.props.poster.city} | {this.props.poster.venue.venuename}</div>
+                            <div className={pagePoster.showDetail} data-cy={'pageItem-city'}>{this.props.poster.city} | {this.props.poster.venue.venuename}</div>
                         </div>
 
                         <div className={pagePoster.horizontal}>

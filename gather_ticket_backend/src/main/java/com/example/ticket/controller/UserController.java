@@ -5,10 +5,7 @@ import com.example.ticket.entity.ClientAuth;
 import com.example.ticket.service.UserService;
 import com.example.ticket.utils.msgutils.Msg;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,18 +35,29 @@ UserController {
         return userService.addUser(username, password);
     }
 
-    @RequestMapping("/getAllUsers")
+    @RequestMapping("/updateUserDetail")
+    public Msg updateUserDetail(@RequestBody Client client)
+//    @RequestParam("userID")int userId,@RequestParam("birth") Date birth,
+//                                @RequestParam("nickname") String nickname,@RequestParam("name") String name,
+//                                @RequestParam("email") String email,@RequestParam("tele") String tele,
+//                                @RequestParam("ID") String IDNum,@RequestParam("gender") int gender)
+                                {
+                                    System.out.println("success!");
+        return userService.updateUserDetail(client);
+    }
+    @RequestMapping("/admin/getAllUsers")
     public List<ClientAuth> getAllUsers(){
         return userService.getAllUsers();
     }
 
-    @RequestMapping("/blockUser/{id}")
+    @RequestMapping("/admin/blockUser/{id}")
     public Msg blockUser(@PathVariable("id") int userId){
         return userService.blockUser(userId);
     }
 
-    @RequestMapping("/unblockUser/{id}")
+    @RequestMapping("/admin/unblockUser/{id}")
     public Msg unblockUser(@PathVariable("id") int userId){
         return userService.unblockUser(userId);
     }
+
 }

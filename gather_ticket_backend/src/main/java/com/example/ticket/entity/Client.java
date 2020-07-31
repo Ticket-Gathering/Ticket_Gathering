@@ -29,8 +29,12 @@ public class Client {
     private String nickname;
     private String tel;
     private String email;
-    private Date birth;
     private int gender;
+    private String IdNum;
+
+//    @JsonFormat(pattern = "yyyy-MM-dd", timezone="GMT+8")
+//    @DateTimeFormat(pattern = "yyyy-MM-dd" )
+    private Date birth;
 
     @Id
     @Column(name = "user_id")
@@ -56,13 +60,13 @@ public class Client {
         this.nickname = nickname;
     }
 
-//    @Basic
-//    @Column(name = "id")
-//    public int getId() {return id;}
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
+    @Basic
+    @Column(name = "id_num")
+    public String getIdNum() {return IdNum;}
+
+    public void setIdNum(String  IdNum) {
+        this.IdNum = IdNum;
+    }
 
     @Basic
     @Column(name = "tel")
@@ -83,7 +87,6 @@ public class Client {
     @Basic
     @Column(name = "birth")
     public Date getBirth() {return birth;}
-
     public void setBirth(Date birth) {
         this.birth = birth;
     }

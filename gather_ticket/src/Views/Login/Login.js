@@ -5,6 +5,7 @@ import Bottom from "../../Components/Bottom";
 import Axios from '../../Module/Axios'
 import {Message} from 'element-react'
 import Cookies from 'js-cookie'
+import {register} from "../../serviceWorker";
 
 const url = "http://localhost:8080";
 
@@ -67,7 +68,7 @@ export default class Login extends Component {
                     <div className={login.logoLock}>
                         <img src={require('../../Assets/images/ico/lock2.png')}/>
                     </div>
-                    <div className={login.loginBtn} onClick={this.login}>LOGIN</div>
+                    <div className={login.loginBtn} onClick={this.login} data-cy={'login'}>LOGIN</div>
                     <div className={login.logoPlatforms}>
                         <div className={login.logoPlatform}>
                             <img src={require('../../Assets/images/ico/xin.png')}/>
@@ -84,25 +85,25 @@ export default class Login extends Component {
                     </div>
                     <div className={login.bottomOptions}>
                         <div className={login.bottomOption}><Link to="/findpw">忘记密码</Link></div>
-                        <div className={login.bottomOption} onClick={this.changeToSignUp}>免费注册</div>
+                        <div className={login.bottomOption} onClick={this.changeToSignUp} data-cy={'register'}>免费注册</div>
                     </div>
                 </div>;
                 break;
             case 2:
                 return <div className={login.base}>
-                    <input type="text" placeholder="请输入用户名" className={login.input} onChange={this.inputUsernameSign} onBlur={this.testUsernameDuplicate}/>
+                    <input type="text" placeholder="请输入用户名" className={login.input} onChange={this.inputUsernameSign} onBlur={this.testUsernameDuplicate} data-cy={'register-user'}/>
                     <div className={login.logoUsr}>
                         <img src={require('../../Assets/images/ico/user2.png')}/>
                     </div>
-                    <input type="password" placeholder="请输入登录密码" className={login.input} onChange={this.inputPasswordSign}/>
+                    <input type="password" placeholder="请输入登录密码" className={login.input} onChange={this.inputPasswordSign} data-cy={'register-password'}/>
                     <div className={login.logoLock}>
                         <img src={require('../../Assets/images/ico/lock2.png')}/>
                     </div>
-                    <input type="password" placeholder="请再次输入登录密码" className={login.input} onChange={this.inputPasswordSign2} onBlur={this.testPasswordMatch}/>
+                    <input type="password" placeholder="请再次输入登录密码" className={login.input} onChange={this.inputPasswordSign2} onBlur={this.testPasswordMatch} data-cy={'register-password-confirm'}/>
                     <div className={login.logoLock2}>
                         <img src={require('../../Assets/images/ico/lock2.png')}/>
                     </div>
-                    <div className={login.loginBtn} onClick={this.submitForm}>SignUp</div>
+                    <div className={login.loginBtn} onClick={this.submitForm} data-cy={'register'}>SignUp</div>
                     <div className={login.bottomOptions}>
                         <div className={login.bottomOption} onClick={this.changeToLogin} style={{float: "right"}}>返回登录</div>
                     </div>
@@ -174,11 +175,18 @@ export default class Login extends Component {
                         })
                         setTimeout(()=>{
                             this.setState({
+                                loginForm:{
+                                    username: this.state.signUpForm.username,
+                                    password: this.state.signUpForm.password,
+                                }
+                            })
+                            this.setState({
                                 signUpForm: {
                                     username: "",
                                     password: "",
                                     repeatPassword: "",
-                                }
+                                },
+
                             });
                             this.changeToLogin();
                         }, 1000);
@@ -193,25 +201,37 @@ export default class Login extends Component {
         Axios.post(url+"/login", this.state.loginForm)
             .then(response => {
                 console.log(response)
-                if (response.status === 403) {
-                    alert("用户名或密码错误", "请您重新输入")
-                } else if (response.status === 200) {
+                if (response.status === 200) {
 
                     Cookies.set('userId', response.data.userId)
                     Cookies.set('username', response.data.username)
                     Cookies.set('userType', response.data.userType)
-                    window.history.back(-1)
-                    this.props.history.push('/', null);
+                    console.log(window.history)
+                    if(typeof (this.props.location.state)!="undefined"&&this.props.location.state.lastUrl){
+                        window.history.back(-1)
+                    }
+                    this.props.history.push({pathname:'/'})
                 } else if (response.data.data.userType === 2){
                     Message({
                         message: "您的账号已被管理员禁用，请联系管理员！",
                         type: "error"
                     })
-                    return;
                 }
             })
             .catch(function (error) {
-                console.log(error);
+                console.log(error.response);
+                if (error.response.status === 401) {
+                    if(error.response.data.code === 1)
+                        Message({
+                            message: "用户名或密码错误，请重新尝试！",
+                            type: "error"
+                        })
+                    else if (error.response.data.code === 2)
+                        Message({
+                            message: "您的账号已被禁用，请联系管理员！",
+                            type: "error"
+                        })
+                }
             });
     }
     testUsernameDuplicate(){
