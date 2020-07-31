@@ -16,7 +16,6 @@ class HomePoster extends Component {
         this.goAbout = this.goAbout.bind(this)
     }
 
-
     componentWillReceiveProps(nextProps, nextContext){
         if(nextProps.posterData&&nextProps.posterData.length>1) {
             this.setState({
@@ -36,19 +35,20 @@ class HomePoster extends Component {
 
     render() {
         return (
-            <div className={posters.posters} >
+            <div className={posters.posters} data-cy={this.props['data-cy']}>
                 <div className={posters.posterTitle}>
                     <div className={posters.pTitleCategory}>{this.props.title}</div>
                     <div className={posters.pTitleMore}>
                         <Link to={{pathname:'/page',state:{type:this.props.title,city:this.state.cityValue}}}
                             style={{color:'lightgray'}}
+                              data-cy={'more'}
                         >
                             查看全部
                         </Link>
                     </div>
                 </div>
                 <div className={posters.posterBody}>
-                    <div className={posters.firstPosterContainer} onClick={this.goAbout}>
+                    <div className={posters.firstPosterContainer} onClick={this.goAbout} data-cy={'firstPoster'}>
                         <img src={this.state.firstPoster.img_url} className={posters.firstPosterImg} />
                         <div className={posters.firstPosterDetail}>
                             <div className={posters.firstPosterName}>{this.state.firstPoster.name}</div>
@@ -66,7 +66,7 @@ class HomePoster extends Component {
                     <div className={posters.posterItem}>
                         {
                             this.state.posterData.map((item,index)=>{
-                                return <Poster poster={item} key={index}/>
+                                return <Poster poster={item} key={this.props.title+index} data-cy={`${this.props.title}:poster:${index}`}/>
                             })
                         }
                     </div>

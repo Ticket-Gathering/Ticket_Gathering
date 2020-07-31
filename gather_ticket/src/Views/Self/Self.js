@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import Nav from "../../Components/Nav";
 import Bottom from "../../Components/Bottom";
-import { Layout, Menu, Breadcrumb, Radio, DatePicker, Input, Button, Collapse, Table, Divider, Tag, List, Avatar, Result } from 'antd';
+import { Layout, Menu, Breadcrumb, Radio, DatePicker, Input, Button, Collapse, Table, Divider, Tag, List, Avatar, Result, Form } from 'antd';
 import 'antd/dist/antd.css';
 import selfstyle from './Self.module.css'
 import Axios from '../../Module/Axios'
 import moment from 'moment';
+import axios from 'axios'
 import {SmileTwoTone,UserOutlined,LaptopOutlined,SettingOutlined,CloseOutlined} from "@ant-design/icons";
 import {Message} from "element-react"
 import ShowManage from "./ShowManage";
 import Cookies from 'js-cookie'
+import {identityCheck} from "../../Tool/smallTools";
 
 
 const columns = [
@@ -124,6 +126,7 @@ export default class Self extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            isEditing:false,
             value: 1,
             content: "1",
             client: {
@@ -131,9 +134,12 @@ export default class Self extends Component {
                 name: "",
                 gender: 1,
                 birth: null,
+                idNum:null,
+                tel:null,
             },
             userList:[],
-            isLogged: false
+            isLogged: false,
+            loadSuccess:false
         };
         this.changeContent = this.changeContent.bind(this)
         this.logOut = this.logOut.bind(this)
@@ -159,7 +165,7 @@ export default class Self extends Component {
             console.log(response);
             this.setState({
                 client : response.data
-            })
+            },()=>this.setState({loadSuccess:true}))
         }).catch(function (error) {
             console.log(error);
         });
@@ -168,14 +174,6 @@ export default class Self extends Component {
         let value = e.target.value;
         let tmpForm = this.state.client;
         tmpForm[key] = value;
-        this.setState({
-            client: tmpForm,
-        })
-    }
-    onDateChange(date){
-        let value = date;
-        let tmpForm = this.state.client;
-        tmpForm['birth'] = value;
         this.setState({
             client: tmpForm,
         })
@@ -193,7 +191,8 @@ export default class Self extends Component {
     showAllUsers(){
         Axios.get(url+"/admin/getAllUsers")
             .then(response => {
-                // console.log(response.data)
+
+                console.log(JSON.parse(JSON.stringify(response.data)))
                 this.setState({
                     userList : response.data
                 })
@@ -202,8 +201,22 @@ export default class Self extends Component {
             console.log(error);
         });
     }
-    updateUser(){
-
+    updateUser=(values)=>{
+        this.setState({
+            isEditing:!this.state.isEditing
+        },()=>{
+            //说明之前为true处于编辑状态
+            if(!this.state.isEditing){
+                values.birth=values.birth._i
+                values.userId=Cookies.get('userId')
+                axios.post(url+'/updateUserDetail',JSON.stringify(values),{headers:{'Content-Type':'application/json'}})
+                    .then(
+                    (response)=>{
+                        console.log(response.data)
+                    }
+                )
+            }
+        })
     }
 
     blockUser(idx){
@@ -268,27 +281,77 @@ export default class Self extends Component {
     SwitchTab(i) {
         switch (i) {
             case "1":
+                const formItemLayout = {
+                    labelCol: { span: 1 },
+                    wrapperCol: { span: 6 },
+                };
                 return <Content style={{ padding: '0 80px', minHeight: 280 }}>
                     <div className={selfstyle.tabBox}>基本资料</div>
                     <div className={selfstyle.line}/>
-                    <div>
-                        昵称：<Input placeholder="Nickname" className={selfstyle.input} style={{marginLeft: '37px'}} value={this.state.client.nickname} onChange={this.onChange.bind(this, 'nickname')}/><br />
-                        真实姓名：<Input placeholder="Real name" className={selfstyle.input} value={this.state.client.name} onChange={this.onChange.bind(this, 'name')}/><br />
-                        性别： <Radio.Group onChange={this.onChange.bind(this, 'gender')} value={this.state.client.gender} className={selfstyle.genderSelect}>
-                            <Radio value={1}>男</Radio>
-                            <Radio value={2}>女</Radio>
-                        </Radio.Group><br />
-                        出生日期： <DatePicker
-                            style={{width: '300px'}}
-                            defaultValue={moment('2019/08/03', dateFormat)}
-                            format={dateFormat} className={selfstyle.dateSelect}
-                            value={this.state.client.birth}
-                            onChange={this.onDateChange.bind(this)}/><br />
-                        身份证号：<Input placeholder="Id number" className={selfstyle.input} value={this.state.client.idNum} onChange={this.onChange.bind(this, 'idNum')}/><br />
-                        电话号码：<Input placeholder="Tel number" className={selfstyle.input} value={this.state.client.tel} onChange={this.onChange.bind(this, 'tel')}/><br />
-                        邮箱地址：<Input placeholder="Email address" className={selfstyle.input} value={this.state.client.email} onChange={this.onChange.bind(this, 'email')}/><br />
-                        <Button type="primary" className={selfstyle.button} style={{backgroundColor: '#ff3366'}} onClick={this.updateUser.bind(this)}>保存</Button>
-                    </div>
+                    <Form
+                        onFinish={(values)=>this.updateUser(values)}
+                        className={selfstyle.form}
+                        {...formItemLayout}
+                        initialValues={{
+                            'nickname':this.state.client.nickname,
+                            'name':this.state.client.name,
+                            'gender':this.state.client.gender,
+                            'IdNum':this.state.client.idNum,
+                            'tel':this.state.client.tel,
+                            'email':this.state.client.email,
+                            'birth':moment(this.state.client.birth, dateFormat)
+                        }}
+
+                    >
+                        <Form.Item label={'昵称'} name={'nickname'}>
+                            <Input disabled={!this.state.isEditing} placeholder="Nickname" className={selfstyle.input} />
+                        </Form.Item>
+                        <Form.Item label={'真实姓名'} name={'name'}>
+                            <Input disabled={!this.state.isEditing}placeholder="Real name" className={selfstyle.input}/>
+                        </Form.Item>
+                        <Form.Item label={'性别'} name={'gender'} >
+                            <Radio.Group disabled={!this.state.isEditing}>
+                                <Radio value={1}>男</Radio>
+                                <Radio value={2}>女</Radio>
+                            </Radio.Group>
+                        </Form.Item>
+                        <Form.Item label={'身份证号'} name={'IdNum'}
+                                   hasFeedback
+                            rules={[{validator:(rules,val,cb)=>identityCheck(rules,val,cb)}]}
+                        >
+                            <Input disabled={!this.state.isEditing} placeholder="Id number" className={selfstyle.input}/>
+                        </Form.Item>
+                        <Form.Item label={'出生日期'} name={'birth'}>
+                            <DatePicker
+                                disabled={!this.state.isEditing}
+                                style={{width: '300px'}}
+                                // defaultValue={moment('2019/08/03', dateFormat)}
+                                format={dateFormat}
+                                className={selfstyle.datePicker}/>
+                        </Form.Item>
+                        <Form.Item hasFeedback label={'电话号码'} name={'tel'} rules={[{len:11,message:'The input is not valid telephone Number!'}]}>
+                            <Input  disabled={!this.state.isEditing} placeholder="Tel number" className={selfstyle.input} />
+                        </Form.Item>
+                        <Form.Item hasFeedback label={'邮箱地址'} name={'email'} rules={[
+                            {
+                                type: 'email',
+                                message: 'The input is not valid E-mail!',
+                            },
+                        ]}>
+                            <Input  disabled={!this.state.isEditing} placeholder="Email address" className={selfstyle.input}/>
+                        </Form.Item>
+                        <Form.Item>
+                            <Button
+                            type="primary"
+                            htmlType={"submit"}
+                            className={selfstyle.button}
+                            style={this.state.isEditing?{backgroundColor: '#ff3366'}:{backgroundColor: '#0088D6'}}
+                            // onClick={this.updateUser.bind(this)}
+                            >
+                            {this.state.isEditing?'保存':'编辑'}
+                            </Button>
+                        </Form.Item>
+                    </Form>
                 </Content>;
                 break;
             case "2":
@@ -372,8 +435,9 @@ export default class Self extends Component {
                             colunm="10"
                             renderItem={(item,index) => (
                                 <List.Item
-                                    actions={[item.userType === 1? (<Button type="primary" className={selfstyle.button} style={{backgroundColor: 'red'}} onClick={() => this.blockUser(index)}>禁用</Button>)
-                                        :(<Button type="primary" className={selfstyle.button} style={{backgroundColor: 'green'}} onClick={() => this.unblockUser(index)}>解禁</Button>)]}
+                                    data-cy={'user:'+item.username}
+                                    actions={[item.userType === 1? (<Button type="primary" className={selfstyle.button} style={{backgroundColor: 'red'}} onClick={() => this.blockUser(index)} data-cy={'disable'}>禁用</Button>)
+                                        :(<Button type="primary" className={selfstyle.button} style={{backgroundColor: 'green'}} onClick={() => this.unblockUser(index)} data-cy={'enable'}>解禁</Button>)]}
                                 >
                                     <List.Item.Meta
                                         avatar={
@@ -392,6 +456,10 @@ export default class Self extends Component {
         }
     }
     render() {
+        console.log(Cookies.getJSON('userId'))
+        console.log(Cookies.getJSON('username'))
+        if(!this.state.loadSuccess)return <div>loading</div>
+        else
         return (
             <div>
                 <Nav/>
@@ -413,17 +481,18 @@ export default class Self extends Component {
                                                 style={{ height: '100%' }}
                                             >
                                                 <SubMenu
+                                                    data-cy={'账户中心'}
                                                     key="sub1"
                                                     title={<span><UserOutlined/>账户中心</span>}
                                                 >
-                                                    <Menu.Item key="1" onClick={this.changeContent}>个人信息</Menu.Item>
-                                                    <Menu.Item key="2" onClick={this.changeContent}>账号设置</Menu.Item>
-                                                    <Menu.Item key="3" onClick={this.changeContent}>常用购票人</Menu.Item>
-                                                    <Menu.Item key="4" onClick={this.changeContent}>收货地址</Menu.Item>
+                                                    <Menu.Item key="1" onClick={this.changeContent} data-cy={'个人信息'}>个人信息</Menu.Item>
+                                                    <Menu.Item key="2" onClick={this.changeContent} data-cy={'账号设置'}>账号设置</Menu.Item>
+                                                    <Menu.Item key="3" onClick={this.changeContent} data-cy={'常用购票人'}>常用购票人</Menu.Item>
+                                                    <Menu.Item key="4" onClick={this.changeContent} data-cy={'收货地址'}>收货地址</Menu.Item>
                                                 </SubMenu>
-                                                <SubMenu key="sub2" title={<span><LaptopOutlined/>交易中心</span>}>
-                                                <Menu.Item key="5" onClick={this.changeContent}>订单管理</Menu.Item>
-                                                <Menu.Item key="6" onClick={this.changeContent}>我的优惠券</Menu.Item>
+                                                <SubMenu key="sub2" title={<span><LaptopOutlined/>交易中心</span>} data-cy={'交易中心'}>
+                                                <Menu.Item key="5" onClick={this.changeContent} data-cy={'订单管理'}>订单管理</Menu.Item>
+                                                <Menu.Item key="6" onClick={this.changeContent} data-cy={'我的优惠券'}>我的优惠券</Menu.Item>
                                                 </SubMenu>
                                             {(Cookies.get("userType") === "0") ?
                                                 (<SubMenu
@@ -433,9 +502,10 @@ export default class Self extends Component {
                                                             <SettingOutlined/>
                                                             网站管理
                                                         </span>}
+                                                    data-cy={'网站管理'}
                                                 >
-                                                    <Menu.Item key="7" onClick={this.showAllUsers}>用户管理</Menu.Item>
-                                                    <Menu.Item key="8" onClick={this.changeContent}>演出管理</Menu.Item>
+                                                    <Menu.Item key="7" onClick={this.showAllUsers} data-cy={'用户管理'}>用户管理</Menu.Item>
+                                                    <Menu.Item key="8" onClick={this.changeContent} data-cy={'演出管理'}>演出管理</Menu.Item>
                                                 </SubMenu>) :
                                                 (<div/>)
                                             }

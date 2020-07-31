@@ -5,6 +5,7 @@ import {Divider, Input, Button, Drawer, Radio, Descriptions, Checkbox, Card, Mod
 import Axios from '../../Module/Axios';
 import {UserOutlined,PhoneOutlined,EnvironmentOutlined,PlusOutlined} from "@ant-design/icons";
 import qs from 'qs'
+import {identityCheck} from "../../Tool/smallTools";
 import {Link} from "react-router-dom";
 import Cookies from "js-cookie"
 
@@ -30,12 +31,12 @@ export default class OrderConfirm extends Component{
             receiver: null,
             watchers: [],
             MoreWatchers:[],
-            checked:false
+            checked:false,
+            loadSuccess:false
         }
     }
     componentDidMount() {
         let userId=Cookies.get('userId')
-        console.log(this.props.match)
         if(isNaN(parseInt(userId))){
             this.props.history.push({pathname:'/login',state:{lastUrl:this.props.match.url}})
         }
@@ -47,11 +48,16 @@ export default class OrderConfirm extends Component{
         Axios.get(base_url+'/getUserById/'+ userId)
             .then(
             res=>{
+                console.log(res.data)
                 this.setState({
                     receiverList:res.data.receiverList,
                     watcherList:res.data.ticketHolderList,
                 })
             }
+        ).then(()=>
+            this.setState({
+                loadSuccess:true
+            })
         )
     }
 
@@ -119,7 +125,7 @@ export default class OrderConfirm extends Component{
             message.error('请阅读相关协议后进行勾选！')
             return;
         }
-        console.log(this.state.data.platform)
+        console.log(this.state.data)
         Axios.post(base_url+'/addIndent',qs.stringify(
     {username:Cookies.get('username'),
             show_id:this.state.data.id,
@@ -147,6 +153,8 @@ export default class OrderConfirm extends Component{
         for(let index in this.state.watcherList){
             options.push({label:this.state.watcherList[index].name,value:index})
         }
+        if(!this.state.loadSuccess)return <div>loading</div>
+        else
         return (
             <div>
                 <SimpleNav history={this.props.history}/>
@@ -163,10 +171,10 @@ export default class OrderConfirm extends Component{
 
                             <div  className={ordConfSty.InputContainer}>
                                 <span className={ordConfSty.watcherHeader}>取票人:</span>
-                                    <Input prefix={<UserOutlined/>} placeholder={'请输入取票人姓名'} onChange={(e)=>this.setState({buyerName:e.target.value})} style={{marginTop:10+'px'}} value={this.state.buyerName}/>
-                                    <Input prefix={<PhoneOutlined/>} placeholder={'请输入取票人联系方式'}  onChange={(e)=>this.setState({buyerPhone:e.target.value})} style={{marginTop:10+'px'}} value={this.state.buyerPhone}/>
-                                    <Input prefix={<EnvironmentOutlined/>} placeholder={'请输入取票人地址'}  onChange={(e)=>this.setState({buyerAddress:e.target.value})} style={{marginTop:10+'px'}} value={this.state.buyerAddress}/>
-                                    <Button type="primary" onClick={this.showDrawer} style={{marginTop:10+'px'}}>
+                                    <Input prefix={<UserOutlined/>} placeholder={'请输入取票人姓名'} onChange={(e)=>this.setState({buyerName:e.target.value})} style={{marginTop:10+'px'}} value={this.state.buyerName} data-cy={'receiverName'}/>
+                                    <Input prefix={<PhoneOutlined/>} placeholder={'请输入取票人联系方式'}  onChange={(e)=>this.setState({buyerPhone:e.target.value})} style={{marginTop:10+'px'}} value={this.state.buyerPhone} data-cy={'receiverPhone'}/>
+                                    <Input prefix={<EnvironmentOutlined/>} placeholder={'请输入取票人地址'}  onChange={(e)=>this.setState({buyerAddress:e.target.value})} style={{marginTop:10+'px'}} value={this.state.buyerAddress} data-cy={'receiverAddr'}/>
+                                    <Button type="primary" onClick={this.showDrawer} style={{marginTop:10+'px'}} data-cy={'addReceiver'}>
                                         <PlusOutlined /> 添加取票人
                                     </Button>
                                 <Drawer
@@ -185,7 +193,7 @@ export default class OrderConfirm extends Component{
                                             <Button onClick={this.onClose} style={{ marginRight: 8 }}>
                                                 取消
                                             </Button>
-                                            <Button onClick={this.onConfirm} type="primary">
+                                            <Button onClick={this.onConfirm} type="primary" data-cy={'receiverConfirm'}>
                                                 确认
                                             </Button>
                                         </div>
@@ -196,7 +204,7 @@ export default class OrderConfirm extends Component{
                                         {
                                             this.state.receiverList.map((item,index)=>{
                                                 return(
-                                                <Radio className={ordConfSty.radioStyle} value={index} key={index}>
+                                                <Radio className={ordConfSty.radioStyle} value={index} key={index} data-cy={`receiverOption:${index+1}`}>
                                                     {index+1}号
                                                     <Descriptions column={2} bordered style={{marginTop:20+'px'}}>
                                                         <Descriptions.Item label={'姓名'} span={1}>
@@ -305,8 +313,12 @@ export default class OrderConfirm extends Component{
                                                 label="证件号码"
                                                 rules={[
                                                     {
+                                                        message:"请输入相关证件号",
                                                         required: true,
                                                     },
+                                                    {
+                                                        validator:(rules,val,callback)=>identityCheck(rules,val,callback)
+                                                    }
                                                 ]}
                                             >
                                                 <Input />
@@ -392,10 +404,10 @@ export default class OrderConfirm extends Component{
 
                     </div>
                     <div>
-                        <Checkbox checked={this.state.checked} onChange={()=>this.setState({checked:!this.state.checked})}>我已经阅读并同意<a>《第三方平台商品交易服务协议》</a></Checkbox>
+                        <Checkbox checked={this.state.checked} onChange={()=>this.setState({checked:!this.state.checked})} data-cy={'协议确定'}>我已经阅读并同意<a>《第三方平台商品交易服务协议》</a></Checkbox>
                     </div>
                     <div>
-                        <Button className={ordConfSty.payButton} type={'primary'} onClick={this.pay}>
+                        <Button className={ordConfSty.payButton} type={'primary'} onClick={this.pay} data-cy={'结算'}>
                             小计￥{this.state.payAmount.toFixed(2)}&nbsp;去结算
                         </Button>
                     </div>

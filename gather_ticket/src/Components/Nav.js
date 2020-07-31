@@ -21,7 +21,7 @@ export default class nav extends Component {
     };
     componentWillMount() {
         let userId=Cookies.get('userId')
-        if(isNaN(parseInt(userId))&& userId !== null) {
+        if(!isNaN(parseInt(userId))&& userId !== null) {
             this.setState({
                 username: Cookies.get('username'),
                 isLoggedIn:true
@@ -75,13 +75,15 @@ export default class nav extends Component {
                                         <img src={require('../ImgAssets/location.png')}/>
                                     </div>
                                     <div style={{marginLeft: 5 + "px"}}>
-                                        <Select style={{width: 144 + "px", color: "#999999"}}
+                                        <Select
+                                            data-cy={'selectCity'}
+                                                style={{width: 144 + "px", color: "#999999"}}
                                                 defaultValue="全国"
                                                 value={this.state.cityValue}
                                                 onChange={(newValue,option)=>{this.setState({cityValue:option.props.children});this.props.setCityValue(option.props.children);}}
                                         >
                                             {this.state.AllCity.map((item,index)=>{
-                                                return <Option key={index} >{this.state.AllCity[index].value}</Option>
+                                                return <Option key={index} data-cy={this.state.AllCity[index].value} >{this.state.AllCity[index].value}</Option>
                                             })}
                                         </Select>
                                     </div>

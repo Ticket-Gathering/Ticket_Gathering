@@ -44,17 +44,15 @@
     background: linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%);
     margin-top: -3px;
   }
-  .input{
-    width: 300px;
-    margin-top: 15px;
+  .form{
+    margin-top: 5px;
+  }
+  .datePicker{
     margin-left: 5px;
   }
-  .genderSelect{
-    margin-top: 15px;
-    margin-left: 30px;
-  }
-  .dateSelect{
-    margin-top: 15px;
+  .input{
+    margin-left: 5px;
+    width: 300px;
   }
   .button{
     margin-top: 15px;

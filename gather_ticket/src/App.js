@@ -5,12 +5,6 @@ import 'element-theme-default';
 import Cookies from "js-cookie"
 
 class App extends Component {
-  componentDidMount() {
-    Cookies.set('userType', '1');
-    Cookies.set('username', 'NULL');
-    Cookies.set('userId', 'NULL');
-  }
-
   render() {
     return (
       <Router>
