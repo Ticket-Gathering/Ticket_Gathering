@@ -20,4 +20,6 @@ public interface UserService {
     Msg blockUser(int userId);
 
     Msg unblockUser(int userId);
+
+    Msg updateUserDetail(Client client);
 }

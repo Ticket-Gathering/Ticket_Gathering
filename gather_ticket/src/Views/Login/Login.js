@@ -200,7 +200,7 @@ export default class Login extends Component {
     login() {
         Axios.post(url+"/login", this.state.loginForm)
             .then(response => {
-                console.log(response.status)
+                console.log(response)
                 if (response.status === 200) {
 
                     Cookies.set('userId', response.data.userId)
