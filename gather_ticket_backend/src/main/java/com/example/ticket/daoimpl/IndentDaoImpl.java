@@ -24,7 +24,7 @@ public class IndentDaoImpl implements IndentDao {
         NI.setReceiver_address(receiver_address);
         NI.setOrder_status(1);
         NI.setSelected_time(selected_time);
-        NI.setSelected_time(platform);
+        NI.setPlatform(platform);
         indentRepository.save(NI);
         return NI.getOrderId();
     }
