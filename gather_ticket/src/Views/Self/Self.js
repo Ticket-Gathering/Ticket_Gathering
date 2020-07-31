@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import Nav from "../../Components/Nav";
 import Bottom from "../../Components/Bottom";
-import { Layout, Menu, Breadcrumb, Radio, DatePicker, Input, Button, Collapse, Table, Divider, Tag, List, Avatar, Result } from 'antd';
+import { Layout, Menu, Breadcrumb, Radio, DatePicker, Input, Button, Collapse, Table, Divider, Tag, List, Avatar, Result, Form } from 'antd';
 import 'antd/dist/antd.css';
 import selfstyle from './Self.module.css'
 import Axios from '../../Module/Axios'
 import moment from 'moment';
+import axios from 'axios'
 import {SmileTwoTone,UserOutlined,LaptopOutlined,SettingOutlined,CloseOutlined} from "@ant-design/icons";
 import {Message} from "element-react"
 import ShowManage from "./ShowManage";
 import Cookies from 'js-cookie'
+import {identityCheck} from "../../Tool/smallTools";
 
 
 const columns = [
@@ -124,6 +126,7 @@ export default class Self extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            isEditing:false,
             value: 1,
             content: "1",
             client: {
@@ -131,9 +134,12 @@ export default class Self extends Component {
                 name: "",
                 gender: 1,
                 birth: null,
+                idNum:null,
+                tel:null,
             },
             userList:[],
-            isLogged: false
+            isLogged: false,
+            loadSuccess:false
         };
         this.changeContent = this.changeContent.bind(this)
         this.logOut = this.logOut.bind(this)
@@ -159,7 +165,7 @@ export default class Self extends Component {
             console.log(response);
             this.setState({
                 client : response.data
-            })
+            },()=>this.setState({loadSuccess:true}))
         }).catch(function (error) {
             console.log(error);
         });
@@ -168,14 +174,6 @@ export default class Self extends Component {
         let value = e.target.value;
         let tmpForm = this.state.client;
         tmpForm[key] = value;
-        this.setState({
-            client: tmpForm,
-        })
-    }
-    onDateChange(date){
-        let value = date;
-        let tmpForm = this.state.client;
-        tmpForm['birth'] = value;
         this.setState({
             client: tmpForm,
         })
@@ -193,7 +191,8 @@ export default class Self extends Component {
     showAllUsers(){
         Axios.get(url+"/admin/getAllUsers")
             .then(response => {
-                console.log(response.data)
+
+                console.log(JSON.parse(JSON.stringify(response.data)))
                 this.setState({
                     userList : response.data
                 })
@@ -202,8 +201,22 @@ export default class Self extends Component {
             console.log(error);
         });
     }
-    updateUser(){
-
+    updateUser=(values)=>{
+        this.setState({
+            isEditing:!this.state.isEditing
+        },()=>{
+            //说明之前为true处于编辑状态
+            if(!this.state.isEditing){
+                values.birth=values.birth._i
+                values.userId=Cookies.get('userId')
+                axios.post(url+'/updateUserDetail',JSON.stringify(values),{headers:{'Content-Type':'application/json'}})
+                    .then(
+                    (response)=>{
+                        console.log(response.data)
+                    }
+                )
+            }
+        })
     }
 
     blockUser(idx){
@@ -268,27 +281,77 @@ export default class Self extends Component {
     SwitchTab(i) {
         switch (i) {
             case "1":
+                const formItemLayout = {
+                    labelCol: { span: 1 },
+                    wrapperCol: { span: 6 },
+                };
                 return <Content style={{ padding: '0 80px', minHeight: 280 }}>
                     <div className={selfstyle.tabBox}>基本资料</div>
                     <div className={selfstyle.line}/>
-                    <div>
-                        昵称：<Input placeholder="Nickname" className={selfstyle.input} style={{marginLeft: '37px'}} value={this.state.client.nickname} onChange={this.onChange.bind(this, 'nickname')}/><br />
-                        真实姓名：<Input placeholder="Real name" className={selfstyle.input} value={this.state.client.name} onChange={this.onChange.bind(this, 'name')}/><br />
-                        性别： <Radio.Group onChange={this.onChange.bind(this, 'gender')} value={this.state.client.gender} className={selfstyle.genderSelect}>
-                            <Radio value={1}>男</Radio>
-                            <Radio value={2}>女</Radio>
-                        </Radio.Group><br />
-                        出生日期： <DatePicker
-                            style={{width: '300px'}}
-                            defaultValue={moment('2019/08/03', dateFormat)}
-                            format={dateFormat} className={selfstyle.dateSelect}
-                            value={this.state.client.birth}
-                            onChange={this.onDateChange.bind(this)}/><br />
-                        身份证号：<Input placeholder="Id number" className={selfstyle.input} value={this.state.client.idNum} onChange={this.onChange.bind(this, 'idNum')}/><br />
-                        电话号码：<Input placeholder="Tel number" className={selfstyle.input} value={this.state.client.tel} onChange={this.onChange.bind(this, 'tel')}/><br />
-                        邮箱地址：<Input placeholder="Email address" className={selfstyle.input} value={this.state.client.email} onChange={this.onChange.bind(this, 'email')}/><br />
-                        <Button type="primary" className={selfstyle.button} style={{backgroundColor: '#ff3366'}} onClick={this.updateUser.bind(this)}>保存</Button>
-                    </div>
+                    <Form
+                        onFinish={(values)=>this.updateUser(values)}
+                        className={selfstyle.form}
+                        {...formItemLayout}
+                        initialValues={{
+                            'nickname':this.state.client.nickname,
+                            'name':this.state.client.name,
+                            'gender':this.state.client.gender,
+                            'IdNum':this.state.client.idNum,
+                            'tel':this.state.client.tel,
+                            'email':this.state.client.email,
+                            'birth':moment(this.state.client.birth, dateFormat)
+                        }}
+
+                    >
+                        <Form.Item label={'昵称'} name={'nickname'}>
+                            <Input disabled={!this.state.isEditing} placeholder="Nickname" className={selfstyle.input} />
+                        </Form.Item>
+                        <Form.Item label={'真实姓名'} name={'name'}>
+                            <Input disabled={!this.state.isEditing}placeholder="Real name" className={selfstyle.input}/>
+                        </Form.Item>
+                        <Form.Item label={'性别'} name={'gender'} >
+                            <Radio.Group disabled={!this.state.isEditing}>
+                                <Radio value={1}>男</Radio>
+                                <Radio value={2}>女</Radio>
+                            </Radio.Group>
+                        </Form.Item>
+                        <Form.Item label={'身份证号'} name={'IdNum'}
+                                   hasFeedback
+                            rules={[{validator:(rules,val,cb)=>identityCheck(rules,val,cb)}]}
+                        >
+                            <Input disabled={!this.state.isEditing} placeholder="Id number" className={selfstyle.input}/>
+                        </Form.Item>
+                        <Form.Item label={'出生日期'} name={'birth'}>
+                            <DatePicker
+                                disabled={!this.state.isEditing}
+                                style={{width: '300px'}}
+                                // defaultValue={moment('2019/08/03', dateFormat)}
+                                format={dateFormat}
+                                className={selfstyle.datePicker}/>
+                        </Form.Item>
+                        <Form.Item hasFeedback label={'电话号码'} name={'tel'} rules={[{len:11,message:'The input is not valid telephone Number!'}]}>
+                            <Input  disabled={!this.state.isEditing} placeholder="Tel number" className={selfstyle.input} />
+                        </Form.Item>
+                        <Form.Item hasFeedback label={'邮箱地址'} name={'email'} rules={[
+                            {
+                                type: 'email',
+                                message: 'The input is not valid E-mail!',
+                            },
+                        ]}>
+                            <Input  disabled={!this.state.isEditing} placeholder="Email address" className={selfstyle.input}/>
+                        </Form.Item>
+                        <Form.Item>
+                            <Button
+                            type="primary"
+                            htmlType={"submit"}
+                            className={selfstyle.button}
+                            style={this.state.isEditing?{backgroundColor: '#ff3366'}:{backgroundColor: '#0088D6'}}
+                            // onClick={this.updateUser.bind(this)}
+                            >
+                            {this.state.isEditing?'保存':'编辑'}
+                            </Button>
+                        </Form.Item>
+                    </Form>
                 </Content>;
                 break;
             case "2":
@@ -393,8 +456,10 @@ export default class Self extends Component {
         }
     }
     render() {
-        console.log(Cookies.getJSON('userType'))
+        console.log(Cookies.getJSON('userId'))
         console.log(Cookies.getJSON('username'))
+        if(!this.state.loadSuccess)return <div>loading</div>
+        else
         return (
             <div>
                 <Nav/>

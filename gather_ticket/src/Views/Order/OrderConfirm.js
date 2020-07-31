@@ -5,6 +5,7 @@ import {Divider, Input, Button, Drawer, Radio, Descriptions, Checkbox, Card, Mod
 import Axios from '../../Module/Axios';
 import {UserOutlined,PhoneOutlined,EnvironmentOutlined,PlusOutlined} from "@ant-design/icons";
 import qs from 'qs'
+import {identityCheck} from "../../Tool/smallTools";
 import {Link} from "react-router-dom";
 import Cookies from "js-cookie"
 
@@ -312,8 +313,12 @@ export default class OrderConfirm extends Component{
                                                 label="证件号码"
                                                 rules={[
                                                     {
+                                                        message:"请输入相关证件号",
                                                         required: true,
                                                     },
+                                                    {
+                                                        validator:(rules,val,callback)=>identityCheck(rules,val,callback)
+                                                    }
                                                 ]}
                                             >
                                                 <Input />

@@ -75,4 +75,15 @@ public class UserServiceImpl implements UserService{
             return MsgUtil.makeMsg(MsgCode.ERROR, MsgUtil.ERROR_MSG);
         }
     }
+
+    @Override
+    public Msg updateUserDetail(Client client) {
+        Client newClient=userDao.updateUserDetail(client);
+        if(newClient!= null){
+            return MsgUtil.makeMsg(MsgCode.SUCCESS, MsgUtil.SUCCESS_MSG);
+        }
+        else{
+            return MsgUtil.makeMsg(MsgCode.ERROR, MsgUtil.ERROR_MSG);
+        }
+    }
 }
