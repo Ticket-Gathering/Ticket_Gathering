@@ -6,6 +6,7 @@ import com.example.ticket.entity.ClientAuth;
 import com.example.ticket.repository.UserAuthRepository;
 import com.example.ticket.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
