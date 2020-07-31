@@ -164,6 +164,8 @@ UI页面
 
 陈嘉轩：配置了Docker与promuthues相关工具与环境，初步了解Docker与性能测试相关内容
 
+沈佳威：处理之前的端到端测试的bug 学习在有安全验证的情况下做单元测试Test
+
 ## 07/28
 
 陈嘉轩：尝试了jmeter的压力测试，配置了docker中prometheus环境并成功运行
@@ -172,13 +174,18 @@ UI页面
 
 江玙璠：尝试了使用docker运行Prometheus，尝试使用了JMeter
 
+沈佳威：处理了单元测试的bug
+
 ## 07/29
 
 江玙璠：成功用docker运行了Prometheus、grafana、mysql和项目后端，并实现了初次的数据监控的尝试
 朱益成：加入了一些表单对输入的验证
-
+沈佳威：在有安全验证的情况下做单元测试
 ## 07/30
 
 江玙璠：用docker运行了后端，使用JMeter在本地进行了部分低并发量的性能测试
 朱益成：加入了个人界面的详细信息填写功能
+沈佳威：学习docker与security相关内容
+
+
 
