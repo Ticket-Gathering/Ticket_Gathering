@@ -59,4 +59,29 @@ public class UserServiceTest {
 //
 //        assertEquals(user, userService.getUserById(userId1));
     }
+
+    @Test
+    public void blockUser(){
+
+    }
+
+    @Test
+    public void unblockUser(){
+
+    }
+
+    @Test
+    public void getAllUsers(){
+
+    }
+
+    @Test
+    public void addUser(){
+
+    }
+
+    @Test
+    public void checkUserDuplicate(){
+
+    }
 }
