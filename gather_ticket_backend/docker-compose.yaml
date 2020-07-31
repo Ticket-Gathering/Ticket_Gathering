@@ -3,21 +3,24 @@ version: '3.2'
 services:
   database:
     image: mysql:5.7
-#    volumes:
-#      - type: bind
-#        source: ./data/movies.csv
-#        target: /var/lib/mysql-files/movies.csv
-#        read_only: true
+    volumes:
+      - type: bind
+        source: ./ticket_demo.sql
+        target: /opt/ticket_demo.sql
     ports:
       - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=ticket_gathering
+      - MYSQL_DATABASE=ticket_demo
     networks:
       - demo
 
-  mongodb:
-    image: mongo:4.2
+  database_mongo:
+    image: mongo
+    volumes:
+      - type: bind
+        source: ./detail.json
+        target: /opt/detail.json
     ports:
       - "27017:27017"
     networks:

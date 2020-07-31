@@ -19,4 +19,6 @@ public interface UserDao {
     ClientAuth blockUser(int userId);
 
     ClientAuth unblockUser(int userId);
+
+    Client updateUserDetail(Client client);
 }

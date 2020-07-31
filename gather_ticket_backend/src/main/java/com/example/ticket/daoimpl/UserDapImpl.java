@@ -6,7 +6,7 @@ import com.example.ticket.entity.ClientAuth;
 import com.example.ticket.repository.UserAuthRepository;
 import com.example.ticket.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
@@ -22,6 +22,7 @@ public class UserDapImpl implements UserDao{
     UserRepository userRepository;
 
     @Autowired
+    @Lazy
     PasswordEncoder passwordEncoder;
 
     @Override
@@ -45,6 +46,7 @@ public class UserDapImpl implements UserDao{
         ClientAuth CA = new ClientAuth();
         CA.setUsername(username);
         CA.setPassword(passwordEncoder.encode(password));
+//        CA.setPassword(password);
         CA.setUserType(1);
         userAuthRepository.save(CA);
         Client C = new Client();
@@ -74,5 +76,10 @@ public class UserDapImpl implements UserDao{
         CA.setUserType(1);
         userAuthRepository.save(CA);
         return CA;
+    }
+
+    @Override
+    public Client updateUserDetail(Client client) {
+        return userRepository.save(client);
     }
 }
