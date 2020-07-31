@@ -78,19 +78,19 @@
             <version>1.2.60</version>
         </dependency>
         <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>ticket</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-        <!--spring-security单元测试-->
-        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <version>4.2.3.RELEASE</version>
             <scope>test</scope>
         </dependency>
-        <!--spring-security单元测试-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -101,5 +101,4 @@
         </plugin>
     </plugins>
     </build>
-
 </project>
