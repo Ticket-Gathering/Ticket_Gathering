@@ -21,6 +21,7 @@ public class UserDapImpl implements UserDao{
     UserRepository userRepository;
 
     @Autowired
+    @Lazy
     PasswordEncoder passwordEncoder;
 
     @Override
@@ -44,6 +45,7 @@ public class UserDapImpl implements UserDao{
         ClientAuth CA = new ClientAuth();
         CA.setUsername(username);
         CA.setPassword(passwordEncoder.encode(password));
+//        CA.setPassword(password);
         CA.setUserType(1);
         userAuthRepository.save(CA);
         Client C = new Client();

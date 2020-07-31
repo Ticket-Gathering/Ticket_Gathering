@@ -47,4 +47,9 @@ public class IndentServiceTest {
         indentService.updateIndent(3,3);
         assertEquals(3,test.getOrder_status());
     }
+
+    @Test
+    public void getIndentByID(){
+
+    }
 }
