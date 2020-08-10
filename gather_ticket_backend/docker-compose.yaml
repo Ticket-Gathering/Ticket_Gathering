@@ -15,8 +15,8 @@ services:
     networks:
       - demo
 
-  database_mongo:
-    image: mongo
+  mongodb:
+    image: mongo:4.2
     volumes:
       - type: bind
         source: ./detail.json
