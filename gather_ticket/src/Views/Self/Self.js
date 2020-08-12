@@ -12,38 +12,55 @@ import {Message} from "element-react"
 import ShowManage from "./ShowManage";
 import Cookies from 'js-cookie'
 import {identityCheck} from "../../Tool/smallTools";
+import {EditableTable} from "../../Components/EditableTable";
 
-
-const columns = [
+const receiverColumns=[
+    {
+        title:'姓名',
+        dataIndex:'receiver',
+        key:'receiver',
+        width: '25%',
+        editable: true,
+    },
+    {
+        title:'电话号码',
+        dataIndex:'tel',
+        key:'tel',
+        width: '15%',
+        editable: true,
+    },
+    {
+        title:'地址',
+        dataIndex:'address',
+        key:'address',
+        width: '40%',
+        editable: true,
+    }
+]
+const ticketHolderColumns = [
     {
         title: '姓名',
         dataIndex: 'name',
         key: 'name',
-        render: text => <a href="javascript:;">{text}</a>,
+        width: '25%',
+        editable: true,
     },
     {
         title: '证件类型',
         dataIndex: 'idType',
         key: 'idType',
+        width: '15%',
+        editable: true,
     },
     {
         title: '证件号码',
         dataIndex: 'idNum',
         key: 'idNum',
-    },
-    {
-        title: '操作',
-        key: 'action',
-        render: () => (
-            <span>
-                <a href="javascript:;">Alter</a>
-                <Divider type="vertical" />
-                <a href="javascript:;">Delete</a>
-            </span>
-        ),
+        width: '40%',
+        editable: true,
     },
 ];
-const columns1 = [
+const couponColumns = [
     {
         title: '优惠券号码',
         dataIndex: 'name',
@@ -92,7 +109,7 @@ const columns1 = [
         ),
     },
 ];
-const data2 = [
+const couponData = [
     {
         key: '1',
         name: '贺子航',
@@ -375,10 +392,11 @@ export default class Self extends Component {
                 break;
             case "3":
                 return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
-                    <div className={selfstyle.tabBox}>购票人管理</div>
+                    <div className={selfstyle.tabBox}>观影人管理</div>
                     <div className={selfstyle.line}/>
                     <div>
-                        <Table columns={columns} dataSource={this.state.client.ticketHolderList} />
+                        {/*<Table columns={receiverColumns} dataSource={this.state.client.ticketHolderList} />*/}
+                        <EditableTable columns={ticketHolderColumns} dataSource={this.state.client.ticketHolderList} TableName={'ticketHolder'}/>
                     </div>
                 </Content>;
                 break;
@@ -420,7 +438,7 @@ export default class Self extends Component {
                     <div className={selfstyle.tabBox}>我的优惠券</div>
                     <div className={selfstyle.line}/>
                     <div>
-                        <Table columns={columns1} dataSource={data2} />
+                        <Table columns={couponColumns} dataSource={couponData} />
                     </div>
                 </Content>;
                 break;
@@ -487,7 +505,7 @@ export default class Self extends Component {
                                                 >
                                                     <Menu.Item key="1" onClick={this.changeContent} data-cy={'个人信息'}>个人信息</Menu.Item>
                                                     <Menu.Item key="2" onClick={this.changeContent} data-cy={'账号设置'}>账号设置</Menu.Item>
-                                                    <Menu.Item key="3" onClick={this.changeContent} data-cy={'常用购票人'}>常用购票人</Menu.Item>
+                                                    <Menu.Item key="3" onClick={this.changeContent} data-cy={'常用观影人'}>常用观影人</Menu.Item>
                                                     <Menu.Item key="4" onClick={this.changeContent} data-cy={'收货地址'}>收货地址</Menu.Item>
                                                 </SubMenu>
                                                 <SubMenu key="sub2" title={<span><LaptopOutlined/>交易中心</span>} data-cy={'交易中心'}>
