@@ -3,6 +3,10 @@ package com.example.ticket.daoimpl;
 import com.example.ticket.dao.UserDao;
 import com.example.ticket.entity.Client;
 import com.example.ticket.entity.ClientAuth;
+import com.example.ticket.entity.Receiver;
+import com.example.ticket.entity.TicketHolder;
+import com.example.ticket.repository.ReceiverRepository;
+import com.example.ticket.repository.TicketHolderRepository;
 import com.example.ticket.repository.UserAuthRepository;
 import com.example.ticket.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +24,12 @@ public class UserDapImpl implements UserDao{
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ReceiverRepository receiverRepository;
+
+    @Autowired
+    TicketHolderRepository ticketHolderRepository;
 
     @Autowired
     @Lazy
@@ -81,5 +91,29 @@ public class UserDapImpl implements UserDao{
     @Override
     public Client updateUserDetail(Client client) {
         return userRepository.save(client);
+    }
+
+    @Override
+    public void deleteTicketHolder(int ticketHolderId) {
+        ticketHolderRepository.deleteById(ticketHolderId);
+    }
+
+    @Override
+    public void deleteReceiver(int receiverId) {
+        receiverRepository.deleteById(receiverId);
+    }
+
+    @Override
+    public TicketHolder updateTicketHolder(TicketHolder ticketHolder,int userId) {
+        Client client=userRepository.getOne(userId);
+        ticketHolder.setClient(client);
+        return ticketHolderRepository.save(ticketHolder);
+    }
+
+    @Override
+    public Receiver updateReceiver(Receiver receiver,int userId) {
+        Client client=userRepository.getOne(userId);
+        receiver.setClient(client);
+        return receiverRepository.save(receiver);
     }
 }

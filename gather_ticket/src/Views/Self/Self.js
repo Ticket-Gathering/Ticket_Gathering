@@ -179,6 +179,12 @@ export default class Self extends Component {
 
         Axios.get(url+"/getUserById/"+Cookies.get("userId")
         ).then(response => {
+            for(let item of response.data.ticketHolderList){
+                item.key=item.ticketHolderId
+            }
+            for(let item of response.data.receiverList){
+                item.key=item.receiverId
+            }
             console.log(response);
             this.setState({
                 client : response.data
@@ -397,8 +403,8 @@ export default class Self extends Component {
                             columns={ticketHolderColumns}
                             dataSource={this.state.client.ticketHolderList}
                             TableName={'ticketHolder'}
-                            updateUrl={'updateTicketHolder'}
-                            deleteUrl={'deleteTicketHolder'}
+                            updateUrl={'/updateTicketHolder'}
+                            deleteUrl={'/deleteTicketHolder'}
                         />
                     </div>
                 </Content>;
@@ -412,8 +418,8 @@ export default class Self extends Component {
                             columns={receiverColumns}
                             dataSource={this.state.client.receiverList}
                             TableName={'receiver'}
-                            updateUrl={'updateReceiver'}
-                            deleteUrl={'deleteReceiver'}
+                            updateUrl={'/updateReceiver'}
+                            deleteUrl={'/deleteReceiver'}
                         />
                     </div>
                 </Content>;
@@ -472,8 +478,8 @@ export default class Self extends Component {
         }
     }
     render() {
-        console.log(Cookies.getJSON('userId'))
-        console.log(Cookies.getJSON('username'))
+        // console.log(Cookies.getJSON('userId'))
+        // console.log(Cookies.getJSON('username'))
         if(!this.state.loadSuccess)return <div>loading</div>
         else
         return (
