@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {Table, Input, InputNumber, Popconfirm, Form, Space ,Button} from 'antd';
 import {clone} from "@babel/types";
+import Axios from "../Module/Axios";
+import axios from "axios";
+import Cookies from 'js-cookie'
+const url = "http://localhost:8080";
 const EditableCell = ({
                           editing,
                           dataIndex,
@@ -37,16 +41,14 @@ const EditableCell = ({
 };
 
 const EditableTable = (props) => {
-    for(let item of props.dataSource){
-        item.key=item.ticketHolderId
-    }
+    console.log(props)
     const [form] = Form.useForm();
     const [data, setData] = useState(props.dataSource);
     const [editingKey, setEditingKey] = useState('');
     const [addAvailable,setAddAvailable] = useState(true)
-
+    //强制更新dataSource，解决复用组件时的传值错乱问题
+    useEffect(()=>setData(props.dataSource),[props.TableName])
     const isEditing = record => record.key === editingKey;
-
     const edit = record => {
         form.setFieldsValue({
             ...record,
@@ -70,7 +72,16 @@ const EditableTable = (props) => {
     };
     const handleDelete = key => {
         const newData = [...data];
+        const index = newData.findIndex(item => key === item.key);
         setData(newData.filter(item => item.key !== key))
+        let formData = new FormData();
+        if(props.TableName=='ticketHolder'){
+            formData.append('ticketHolderId',data[index].ticketHolderId)
+        }else{
+            formData.append('receiverId',data[index].receiverId)
+        }
+        Axios.post(url+props.deleteUrl,formData)
+
     };
     const handleAdd = () => {
         let newDataItem={...data[0]}
@@ -97,6 +108,12 @@ const EditableTable = (props) => {
                 setData(newData);
                 setEditingKey('');
             }
+            axios.post(url+props.updateUrl+'?userId='+Cookies.getJSON('userId'),JSON.stringify(newData[index]),{headers:{'Content-Type':'application/json'}})
+                .then(
+                    (response)=>{
+                        console.log(response.data)
+                    }
+                )
             setAddAvailable(true)
         } catch (errInfo) {
             console.log('Validate Failed:', errInfo);
@@ -160,7 +177,6 @@ const EditableTable = (props) => {
     });
     console.log(data)
     return (
-
         <Form form={form} component={false}>
             <Button
                 onClick={()=>handleAdd()}

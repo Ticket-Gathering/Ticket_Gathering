@@ -179,6 +179,12 @@ export default class Self extends Component {
 
         Axios.get(url+"/getUserById/"+Cookies.get("userId")
         ).then(response => {
+            for(let item of response.data.ticketHolderList){
+                item.key=item.ticketHolderId
+            }
+            for(let item of response.data.receiverList){
+                item.key=item.receiverId
+            }
             console.log(response);
             this.setState({
                 client : response.data
@@ -299,7 +305,7 @@ export default class Self extends Component {
         switch (i) {
             case "1":
                 const formItemLayout = {
-                    labelCol: { span: 1 },
+                    labelCol: { span: 3 },
                     wrapperCol: { span: 6 },
                 };
                 return <Content style={{ padding: '0 80px', minHeight: 280 }}>
@@ -321,10 +327,10 @@ export default class Self extends Component {
 
                     >
                         <Form.Item label={'昵称'} name={'nickname'}>
-                            <Input disabled={!this.state.isEditing} placeholder="Nickname" className={selfstyle.input} />
+                            <Input disabled={!this.state.isEditing} placeholder="请输入你的用户昵称" className={selfstyle.input} />
                         </Form.Item>
                         <Form.Item label={'真实姓名'} name={'name'}>
-                            <Input disabled={!this.state.isEditing}placeholder="Real name" className={selfstyle.input}/>
+                            <Input disabled={!this.state.isEditing} placeholder="请输入你的真实姓名" className={selfstyle.input}/>
                         </Form.Item>
                         <Form.Item label={'性别'} name={'gender'} >
                             <Radio.Group disabled={!this.state.isEditing}>
@@ -336,13 +342,12 @@ export default class Self extends Component {
                                    hasFeedback
                             rules={[{validator:(rules,val,cb)=>identityCheck(rules,val,cb)}]}
                         >
-                            <Input disabled={!this.state.isEditing} placeholder="Id number" className={selfstyle.input}/>
+                            <Input disabled={!this.state.isEditing} placeholder="请输入你相应的证件号码" className={selfstyle.input}/>
                         </Form.Item>
                         <Form.Item label={'出生日期'} name={'birth'}>
                             <DatePicker
                                 disabled={!this.state.isEditing}
                                 style={{width: '300px'}}
-                                // defaultValue={moment('2019/08/03', dateFormat)}
                                 format={dateFormat}
                                 className={selfstyle.datePicker}/>
                         </Form.Item>
@@ -355,7 +360,7 @@ export default class Self extends Component {
                                 message: 'The input is not valid E-mail!',
                             },
                         ]}>
-                            <Input  disabled={!this.state.isEditing} placeholder="Email address" className={selfstyle.input}/>
+                            <Input  disabled={!this.state.isEditing} placeholder="请输入你的电子邮箱" className={selfstyle.input}/>
                         </Form.Item>
                         <Form.Item>
                             <Button
@@ -363,7 +368,6 @@ export default class Self extends Component {
                             htmlType={"submit"}
                             className={selfstyle.button}
                             style={this.state.isEditing?{backgroundColor: '#ff3366'}:{backgroundColor: '#0088D6'}}
-                            // onClick={this.updateUser.bind(this)}
                             >
                             {this.state.isEditing?'保存':'编辑'}
                             </Button>
@@ -395,8 +399,13 @@ export default class Self extends Component {
                     <div className={selfstyle.tabBox}>观影人管理</div>
                     <div className={selfstyle.line}/>
                     <div>
-                        {/*<Table columns={receiverColumns} dataSource={this.state.client.ticketHolderList} />*/}
-                        <EditableTable columns={ticketHolderColumns} dataSource={this.state.client.ticketHolderList} TableName={'ticketHolder'}/>
+                        <EditableTable
+                            columns={ticketHolderColumns}
+                            dataSource={this.state.client.ticketHolderList}
+                            TableName={'ticketHolder'}
+                            updateUrl={'/updateTicketHolder'}
+                            deleteUrl={'/deleteTicketHolder'}
+                        />
                     </div>
                 </Content>;
                 break;
@@ -405,17 +414,12 @@ export default class Self extends Component {
                     <div className={selfstyle.tabBox}>地址管理</div>
                     <div className={selfstyle.line}/>
                     <div>
-                        <List
-                            itemLayout="horizontal"
+                        <EditableTable
+                            columns={receiverColumns}
                             dataSource={this.state.client.receiverList}
-                            renderItem={item => (
-                                <List.Item>
-                                    <List.Item.Meta
-                                        title={item.receiver}
-                                        description={<div><p>Tel: {item.tel}<br/>Address: {item.address}</p></div>}
-                                    />
-                                </List.Item>
-                            )}
+                            TableName={'receiver'}
+                            updateUrl={'/updateReceiver'}
+                            deleteUrl={'/deleteReceiver'}
                         />
                     </div>
                 </Content>;
@@ -474,8 +478,8 @@ export default class Self extends Component {
         }
     }
     render() {
-        console.log(Cookies.getJSON('userId'))
-        console.log(Cookies.getJSON('username'))
+        // console.log(Cookies.getJSON('userId'))
+        // console.log(Cookies.getJSON('username'))
         if(!this.state.loadSuccess)return <div>loading</div>
         else
         return (
