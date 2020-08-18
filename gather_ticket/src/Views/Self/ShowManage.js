@@ -5,7 +5,7 @@ import selfstyle from "./Self.module.css";
 import {Layout, Button} from "antd";
 import {Form, Input, Radio, Checkbox, Switch, Tag} from "element-react"
 
-const url = "http://localhost:8080/admin"
+const url = "http://54.237.94.10:8080/admin"
 const { Content } = Layout;
 
 export default class ShowManage extends Component{

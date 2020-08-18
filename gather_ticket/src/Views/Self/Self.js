@@ -13,7 +13,6 @@ import ShowManage from "./ShowManage";
 import Cookies from 'js-cookie'
 import {identityCheck} from "../../Tool/smallTools";
 
-
 const columns = [
     {
         title: '姓名',
@@ -120,7 +119,7 @@ const dateFormat = 'YYYY/MM/DD';
 const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
 
-const url = "http://localhost:8080"
+const url = "http://54.237.94.10:8080"
 
 export default class Self extends Component {
     constructor(props) {

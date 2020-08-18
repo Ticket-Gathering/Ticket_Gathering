@@ -7,7 +7,7 @@ import Cookies from 'js-cookie'
 
 const {Search} =Input;
 const { Option } = Select;
-const url= "http://localhost:8080";
+const url= "http://54.237.94.10:8080";
 export default class nav extends Component {
 
     constructor(props) {

@@ -9,7 +9,7 @@ import {identityCheck} from "../../Tool/smallTools";
 import {Link} from "react-router-dom";
 import Cookies from "js-cookie"
 
-const base_url='http://localhost:8080'
+const base_url='http://54.237.94.10:8080'
 const { Option } = Select;
 export default class OrderConfirm extends Component{
     constructor(props) {

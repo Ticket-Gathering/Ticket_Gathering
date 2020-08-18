@@ -3,7 +3,7 @@ import recommend from "./Recommend.module.css";
 import about from "./About.module.css";
 import Axios from "../../Module/Axios";
 
-const url = "http://localhost:8080"
+const url = "http://54.237.94.10:8080"
 export default class Recommend extends Component{
     constructor(props) {
         super(props)

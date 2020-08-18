@@ -7,7 +7,7 @@ import {Message} from 'element-react'
 import Cookies from 'js-cookie'
 import {register} from "../../serviceWorker";
 
-const url = "http://localhost:8080";
+const url = "http://54.237.94.10:8080";
 
 export default class Login extends Component {
     constructor(props) {
