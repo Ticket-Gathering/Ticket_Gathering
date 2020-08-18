@@ -2,6 +2,8 @@ package com.example.ticket.controller;
 
 import com.example.ticket.entity.Client;
 import com.example.ticket.entity.ClientAuth;
+import com.example.ticket.entity.Receiver;
+import com.example.ticket.entity.TicketHolder;
 import com.example.ticket.service.UserService;
 import com.example.ticket.utils.msgutils.Msg;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,4 +62,23 @@ UserController {
         return userService.unblockUser(userId);
     }
 
+    @RequestMapping("deleteTicketHolder")
+    public Msg deleteTicketHolder(@RequestParam("ticketHolderId")int ticketHolderId){
+        return userService.deleteTicketHolder(ticketHolderId);
+    }
+
+    @RequestMapping("deleteReceiver")
+    public Msg deleteReceiver(@RequestParam("receiverId")int receiverId){
+        return userService.deleteReceiver(receiverId);
+    }
+
+    @RequestMapping("/updateTicketHolder")
+    public Msg updateTicketHolder(@RequestBody TicketHolder ticketHolder,@RequestParam("userId")int userId){
+        return userService.updateTicketHolder(ticketHolder,userId);
+    }
+
+    @RequestMapping("/updateReceiver")
+    public Msg updateReceiver(@RequestBody Receiver receiver,@RequestParam("userId")int userId){
+        return userService.updateReceiver(receiver,userId);
+    }
 }

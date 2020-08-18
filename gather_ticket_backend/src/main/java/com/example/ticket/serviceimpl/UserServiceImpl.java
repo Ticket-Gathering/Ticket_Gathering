@@ -3,6 +3,8 @@ package com.example.ticket.serviceimpl;
 import com.example.ticket.dao.UserDao;
 import com.example.ticket.entity.Client;
 import com.example.ticket.entity.ClientAuth;
+import com.example.ticket.entity.Receiver;
+import com.example.ticket.entity.TicketHolder;
 import com.example.ticket.service.UserService;
 import com.example.ticket.utils.msgutils.Msg;
 import com.example.ticket.utils.msgutils.MsgCode;
@@ -80,6 +82,40 @@ public class UserServiceImpl implements UserService{
     public Msg updateUserDetail(Client client) {
         Client newClient=userDao.updateUserDetail(client);
         if(newClient!= null){
+            return MsgUtil.makeMsg(MsgCode.SUCCESS, MsgUtil.SUCCESS_MSG);
+        }
+        else{
+            return MsgUtil.makeMsg(MsgCode.ERROR, MsgUtil.ERROR_MSG);
+        }
+    }
+
+    @Override
+    public Msg deleteTicketHolder(int ticketHolderId) {
+         userDao.deleteTicketHolder(ticketHolderId);
+         return MsgUtil.makeMsg(MsgCode.SUCCESS, MsgUtil.SUCCESS_MSG);
+    }
+
+    @Override
+    public Msg deleteReceiver(int receiverId) {
+        userDao.deleteReceiver(receiverId);
+        return MsgUtil.makeMsg(MsgCode.ERROR, MsgUtil.ERROR_MSG);
+    }
+
+    @Override
+    public Msg updateTicketHolder(TicketHolder ticketHolder,int userId) {
+        TicketHolder aTicketHolder=userDao.updateTicketHolder(ticketHolder,userId);
+        if(aTicketHolder!= null){
+            return MsgUtil.makeMsg(MsgCode.SUCCESS, MsgUtil.SUCCESS_MSG);
+        }
+        else{
+            return MsgUtil.makeMsg(MsgCode.ERROR, MsgUtil.ERROR_MSG);
+        }
+    }
+
+    @Override
+    public Msg updateReceiver(Receiver receiver,int userId) {
+        Receiver aReceiver=userDao.updateReceiver(receiver,userId);
+        if(aReceiver!= null){
             return MsgUtil.makeMsg(MsgCode.SUCCESS, MsgUtil.SUCCESS_MSG);
         }
         else{
