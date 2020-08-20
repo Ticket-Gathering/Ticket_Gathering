@@ -3,7 +3,7 @@ import abouti from "./AboutItem.module.css";
 import Sign from "./Sign";
 import {Divider} from "antd";
 import {InputNumber} from "element-react"
-import Cookies from 'js-cookie'
+import {url} from "../../Constants/constants"
 
 export default class AboutItem extends Component {
     constructor(props) {

@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import {Cascader,Select,Input} from "antd";
 import Axios from "../Module/Axios";
 import Cookies from 'js-cookie'
-
+import {url} from "../Constants/constants"
 const {Search} =Input;
 const { Option } = Select;
-const url= "http://54.237.94.10:8080";
+
 export default class nav extends Component {
 
     constructor(props) {

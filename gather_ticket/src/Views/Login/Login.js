@@ -6,8 +6,7 @@ import Axios from '../../Module/Axios'
 import {Message} from 'element-react'
 import Cookies from 'js-cookie'
 import {register} from "../../serviceWorker";
-
-const url = "http://54.237.94.10:8080";
+import {url} from "../../Constants/constants"
 
 export default class Login extends Component {
     constructor(props) {
@@ -202,7 +201,6 @@ export default class Login extends Component {
             .then(response => {
                 console.log(response)
                 if (response.status === 200) {
-
                     Cookies.set('userId', response.data.userId)
                     Cookies.set('username', response.data.username)
                     Cookies.set('userType', response.data.userType)

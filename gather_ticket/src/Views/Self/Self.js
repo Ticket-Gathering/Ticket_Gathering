@@ -13,6 +13,7 @@ import ShowManage from "./ShowManage";
 import Cookies from 'js-cookie'
 import {identityCheck} from "../../Tool/smallTools";
 import {EditableTable} from "../../Components/EditableTable";
+import {url} from "../../Constants/constants"
 
 const receiverColumns=[
     {
@@ -137,8 +138,6 @@ const dateFormat = 'YYYY/MM/DD';
 const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
 
-const url = "http://54.237.94.10:8080"
-
 export default class Self extends Component {
     constructor(props) {
         super(props);
@@ -166,26 +165,27 @@ export default class Self extends Component {
 
     }
     componentWillMount() {
-        if(Cookies.get('userId') !== 'NULL' && Cookies.get('userId') !== null){
-            this.setState({
-                isLogged: true
-            })
-        } else {
-            this.setState({
-                isLogged: false
-            })
-            return;
-        }
 
+        // if(Cookies.get('userId') !== 'NULL' && Cookies.get('userId') !== null){
+        //     this.setState({
+        //         isLogged: true
+        //     })
+        // } else {
+        //     this.setState({
+        //         isLogged: false
+        //     })
+        //     return;
+        // }
         Axios.get(url+"/getUserById/"+Cookies.get("userId")
         ).then(response => {
+            console.log(response);
             for(let item of response.data.ticketHolderList){
                 item.key=item.ticketHolderId
             }
             for(let item of response.data.receiverList){
                 item.key=item.receiverId
             }
-            console.log(response);
+
             this.setState({
                 client : response.data
             },()=>this.setState({loadSuccess:true}))

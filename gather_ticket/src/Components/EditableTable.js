@@ -4,7 +4,7 @@ import {clone} from "@babel/types";
 import Axios from "../Module/Axios";
 import axios from "axios";
 import Cookies from 'js-cookie'
-const url = "http://localhost:8080";
+import {url} from "../Constants/constants"
 const EditableCell = ({
                           editing,
                           dataIndex,
