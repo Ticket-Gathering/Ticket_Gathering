@@ -1,0 +1,13 @@
+.EmptyContainer{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.EmptyBody{
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 200px;
+}
+.tip{
+    font-size: 20px;
+}
