@@ -5,7 +5,7 @@ import HomePoster from "./homePoster";
 import NavList from "../../Components/NavList";
 import Bottom from "../../Components/Bottom";
 import Axios from "../../Module/Axios";
-const url = "http://localhost:8080";
+import {url} from "../../Constants/constants"
 
 export default class Home extends Component {
     constructor(props) {

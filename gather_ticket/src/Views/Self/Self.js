@@ -13,6 +13,7 @@ import ShowManage from "./ShowManage";
 import Cookies from 'js-cookie'
 import {identityCheck} from "../../Tool/smallTools";
 import {EditableTable} from "../../Components/EditableTable";
+import {url} from "../../Constants/constants"
 
 const receiverColumns=[
     {
@@ -137,8 +138,6 @@ const dateFormat = 'YYYY/MM/DD';
 const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
 
-const url = "http://localhost:8080"
-
 export default class Self extends Component {
     constructor(props) {
         super(props);
@@ -166,26 +165,27 @@ export default class Self extends Component {
 
     }
     componentWillMount() {
-        if(Cookies.get('userId') !== 'NULL' && Cookies.get('userId') !== null){
-            this.setState({
-                isLogged: true
-            })
-        } else {
-            this.setState({
-                isLogged: false
-            })
-            return;
-        }
 
+        // if(Cookies.get('userId') !== 'NULL' && Cookies.get('userId') !== null){
+        //     this.setState({
+        //         isLogged: true
+        //     })
+        // } else {
+        //     this.setState({
+        //         isLogged: false
+        //     })
+        //     return;
+        // }
         Axios.get(url+"/getUserById/"+Cookies.get("userId")
         ).then(response => {
+            console.log(response);
             for(let item of response.data.ticketHolderList){
                 item.key=item.ticketHolderId
             }
             for(let item of response.data.receiverList){
                 item.key=item.receiverId
             }
-            console.log(response);
+
             this.setState({
                 client : response.data
             },()=>this.setState({loadSuccess:true}))
@@ -240,6 +240,14 @@ export default class Self extends Component {
                 )
             }
         })
+    }
+    editUser(){
+        this.setState({
+            isEditing: true
+        })
+    }
+    ditchEdition(){
+
     }
 
     blockUser(idx){
@@ -314,7 +322,8 @@ export default class Self extends Component {
                     <Form
                         onFinish={(values)=>this.updateUser(values)}
                         className={selfstyle.form}
-                        {...formItemLayout}
+                        labelCol={{ span: 2 }}
+                        wrapperCol={{ span: 10 }}
                         initialValues={{
                             'nickname':this.state.client.nickname,
                             'name':this.state.client.name,
@@ -322,7 +331,7 @@ export default class Self extends Component {
                             'IdNum':this.state.client.idNum,
                             'tel':this.state.client.tel,
                             'email':this.state.client.email,
-                            'birth':moment(this.state.client.birth, dateFormat)
+                            'birth':this.state.client.birth? moment(this.state.client.birth, dateFormat): moment('1970/01/01', dateFormat)
                         }}
 
                     >
@@ -362,15 +371,31 @@ export default class Self extends Component {
                         ]}>
                             <Input  disabled={!this.state.isEditing} placeholder="请输入你的电子邮箱" className={selfstyle.input}/>
                         </Form.Item>
-                        <Form.Item>
-                            <Button
-                            type="primary"
-                            htmlType={"submit"}
-                            className={selfstyle.button}
-                            style={this.state.isEditing?{backgroundColor: '#ff3366'}:{backgroundColor: '#0088D6'}}
-                            >
-                            {this.state.isEditing?'保存':'编辑'}
-                            </Button>
+                        <Form.Item label={" "} colon={false}>
+                            {this.state.isEditing?
+                                <div><Button
+                                    type="primary"
+                                    className={selfstyle.button}
+                                    style={{backgroundColor: '#ff3366', marginRight:"20px"}}
+                                    onClick={this.updateUser.bind(this)}
+                                >
+                                    保存
+                                </Button>
+                                <Button
+                                    danger
+                                    onClick={this.ditchEdition.bind(this)}
+                                >
+                                    取消
+                                </Button></div>:
+                                <Button
+                                    type="primary"
+                                    htmlType={"submit"}
+                                    className={selfstyle.button}
+                                    style={this.state.isEditing?{backgroundColor: '#ff3366'}:{backgroundColor: '#0088D6'}}
+                                    onClick={this.editUser.bind(this)}
+                                >
+                                    编辑
+                                </Button>}
                         </Form.Item>
                     </Form>
                 </Content>;

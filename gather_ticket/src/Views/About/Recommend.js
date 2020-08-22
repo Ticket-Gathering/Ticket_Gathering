@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import recommend from "./Recommend.module.css";
 import about from "./About.module.css";
 import Axios from "../../Module/Axios";
+import {url} from "../../Constants/constants"
 
-const url = "http://localhost:8080"
 export default class Recommend extends Component{
     constructor(props) {
         super(props)

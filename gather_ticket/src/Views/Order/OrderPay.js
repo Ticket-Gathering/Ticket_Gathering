@@ -4,7 +4,9 @@ import ordPaySty from './OrderPay.module.css'
 import {Space, Divider, Button, message,Modal} from "antd";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
 import Axios from "axios";
-const base_url='http://localhost:8080'
+import {url} from "../../Constants/constants"
+
+const base_url=url
 export default class OrderPay extends Component{
     constructor(props) {
         super(props);

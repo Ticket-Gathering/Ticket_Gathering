@@ -9,10 +9,9 @@ import Bottom from "../../Components/Bottom";
 import Recommend from "./Recommend";
 import {withRouter} from "react-router-dom";
 import ErrorPage from "../Error/ErrorPage";
+import {url} from "../../Constants/constants"
 
 const Data = {timelist:['2020.08.01 周六 20:00','2020.08.02 周日 20:00' ],pricelist:['100','120','188'],billtype:{chooice:1,getter:1,type:1},name:'李荣浩2019「年少有为」巡回演唱会',showtime:'2020.08.01-2020.08.02' ,address:'上海市 | 珍珠剧场The Pearl '};
-
-const url = "http://localhost:8080";
 
 class About extends Component {
     constructor(props) {

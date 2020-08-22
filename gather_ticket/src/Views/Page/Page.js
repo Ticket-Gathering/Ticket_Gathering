@@ -11,8 +11,7 @@ import { Pagination, Result, Button,DatePicker} from 'antd';
 import {SmileTwoTone} from "@ant-design/icons";
 import LeftOutlined from "@ant-design/icons/lib/icons/LeftOutlined";
 import RightOutlined from "@ant-design/icons/lib/icons/RightOutlined";
-
-const url = "http://localhost:8080";
+import {url} from "../../Constants/constants"
 
 export default class Page extends Component {
     constructor(props) {

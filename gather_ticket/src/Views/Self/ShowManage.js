@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import manageStyle from './ShowManage.module.css'
-import Axios from '../../Module/Axios'
-import selfstyle from "./Self.module.css";
 import {Layout, Button} from "antd";
 import {Form, Input, Radio, Checkbox, Switch, Tag} from "element-react"
 
-const url = "http://localhost:8080/admin"
+import {url} from "../../Constants/constants"
 const { Content } = Layout;
 
 export default class ShowManage extends Component{

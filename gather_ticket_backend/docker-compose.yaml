@@ -5,8 +5,8 @@ services:
     image: mysql:5.7
     volumes:
       - type: bind
-        source: ./ticket_demo.sql
-        target: /opt/ticket_demo.sql
+        source: .
+        target: /opt/app
     ports:
       - "3306:3306"
     environment:
@@ -15,19 +15,19 @@ services:
     networks:
       - demo
 
-  database_mongo:
-    image: mongo
+  mongodb:
+    image: mongo:4.2
     volumes:
       - type: bind
-        source: ./detail.json
-        target: /opt/detail.json
+        source: .
+        target: /opt/app
     ports:
       - "27017:27017"
     networks:
       - demo
 
   backend:
-    image: ticket_gathering:v2
+    image: 152412629927.dkr.ecr.us-east-1.amazonaws.com/my_test_demo:latest
     ports:
       - "8080:8080"
     environment:

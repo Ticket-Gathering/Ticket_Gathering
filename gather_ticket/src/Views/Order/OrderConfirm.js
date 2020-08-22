@@ -8,8 +8,10 @@ import qs from 'qs'
 import {identityCheck} from "../../Tool/smallTools";
 import {Link} from "react-router-dom";
 import Cookies from "js-cookie"
+import "../../Constants/constants"
+import {url} from "../../Constants/constants";
+const base_url=url
 
-const base_url='http://localhost:8080'
 const { Option } = Select;
 export default class OrderConfirm extends Component{
     constructor(props) {
@@ -33,7 +35,16 @@ export default class OrderConfirm extends Component{
             MoreWatchers:[],
             checked:false,
             loadSuccess:false
-        }
+        };
+        this.showDrawer = this.showDrawer.bind(this);
+        this.onClose = this.onClose.bind(this);
+        this.onChangeReceiver = this.onChangeReceiver.bind(this);
+        this.onChangeWatcher = this.onChangeWatcher.bind(this);
+        this.onConfirm = this.onConfirm.bind(this);
+        this.openWatcherMore = this.openWatcherMore.bind(this);
+        this.closeWatcherMore = this.closeWatcherMore.bind(this);
+        this.pay = this.pay.bind(this);
+        this.addWatcher = this.addWatcher.bind(this);
     }
     componentDidMount() {
         let userId=Cookies.get('userId')
