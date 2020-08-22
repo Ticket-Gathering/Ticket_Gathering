@@ -118,7 +118,7 @@ export default class Page extends Component {
         for(let index in pairs){
             let [key,value]=pairs[index].split('=')
             if(key==='keyword') {
-                keyword = /^%/.test(value)?decodeURI(value):keyword
+                keyword = /^%/.test(value)?decodeURI(value):value
                 this.setState({
                     searchKeyword:value
                 })
