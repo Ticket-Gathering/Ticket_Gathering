@@ -79,11 +79,11 @@ CREATE TABLE `clients_auth`  (
 -- ----------------------------
 -- Records of clients_auth
 -- ----------------------------
-INSERT INTO `clients_auth` VALUES (1, 'sjw', '$2a$10$9GTcO8NvgxRfHlD9EKyJVOqbsE/a2FyOwle2uDrXIWiqhnentu7a.', 0);
-INSERT INTO `clients_auth` VALUES (2, 'cjx', '$2a$10$gtyqNw8tEj1ppiCt8JNH/elZwlA7zrlqFcZAVEvNOHFdWJltiAC26', 0);
-INSERT INTO `clients_auth` VALUES (3, 'jyf', '$2a$10$w5ZJZ0CoT8p4biUQIFovhehIgKdvailVmXnPEAqXz16V/6r5AU8Wa', 0);
-INSERT INTO `clients_auth` VALUES (4, 'zyc', '$2a$10$uua0jqxulwIja2wSs2yWvOeC5bTTQMBKANLuEGvzn9vdRwYxeXoq.', 0);
-INSERT INTO `clients_auth` VALUES (5, 'aaa', '$2a$10$zsUwp7VDGnOkuKYxOA4Bqu8GsNKdckcTzCsCQzKjN9B8KsQtQQFsy', 1);
+INSERT INTO `clients_auth` VALUES (1,'sjw','{FC2LfJDxltzT7+cHDQyulmHbbA4bJ6/Z9AoS7Ond9hE=}adcd6d0bef18ac90ffa6f1827cb3874d',0),
+(2,'cjx','{hl9x40g1ESmWAQM2WM24gCKT9N3Ced93vtk2LPaDHqE=}4c8529212e3078d4fbbef0d68b59e082',0),
+(3,'jyf','{Ya7loILDrnWIH+4Rx4ALGfu/5+1uOtJ9yBRP9SFMPqg=}e9cf2e9b25f1fc174db40dcc97e802cc',0),
+(4,'zyc','{uy8bGCr69G8R7GZyMAc4NWyaNgiRNDJ6cWZcKWJ8WCo=}2e3e8303d5c0e8c0c929588cfb56c819',0),
+(5,'aaa','{sMyL1bDpx7xcxrTafY50hZ4EjPV+RzrcwwfcLh/E2HA=}6a69d87db1ab20513877e71f02718a40',1);
 
 -- ----------------------------
 -- Table structure for indent
