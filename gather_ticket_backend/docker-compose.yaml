@@ -27,7 +27,7 @@ services:
       - demo
 
   backend:
-    image: 152412629927.dkr.ecr.us-east-1.amazonaws.com/my_test_demo:latest
+    image: ticket_gathering_test:latest
     ports:
       - "8080:8080"
     environment:
