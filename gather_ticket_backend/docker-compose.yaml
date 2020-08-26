@@ -5,17 +5,13 @@ services:
     image: mysql:5.7
     volumes:
       - type: bind
-        source: ./data_source
-        target: /opt/data_source
+        source: ./data_source/mysql
+        target: /docker-entrypoint-initdb.d/
     ports:
       - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=ticket_gathering
-    command: bash -c "
-         mysql -uroot -proot -e 'create databases if not exists ticket_gathering;' &&
-         mysql -uroot -proot ticket_gathering < /opt/data_source/ticket_demo.sql
-      "
     networks:
       - demo
 
@@ -23,11 +19,8 @@ services:
     image: mongo:4.2
     volumes:
       - type: bind
-        source: ./data_source
-        target: /opt/data_source
-    command: bash -c "
-         mongoimport --db ticket --collection ticketdetail --file /opt/data_source/detail.json
-      "
+        source: ./data_source/mongo
+        target: /docker-entrypoint-initdb.d/
     ports:
       - "27017:27017"
     networks:

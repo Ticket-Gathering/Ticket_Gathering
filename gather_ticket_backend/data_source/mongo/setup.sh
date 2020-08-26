@@ -1,0 +1,1 @@
+mongoimport --db ticket --collection ticketdetail --file /docker-entrypoint-initdb.d/detail.json
