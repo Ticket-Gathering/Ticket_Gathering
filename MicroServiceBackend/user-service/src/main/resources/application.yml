@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: user-service
+  datasource:
+    url: jdbc:mysql://database:3307/gatherticket?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&autoReconnect=true&failOverReadOnly=false
+    username: root
+    password: 518021911178
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    mongodb:
+      uri:  mongodb://mongodb:27017/ticket
+  jpa:
+    database: mysql
+    show-sql: true
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka
+server:
+  port: 8001
+
