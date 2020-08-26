@@ -13,6 +13,7 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=ticket_gathering
     command: bash -c "
+         mysql -uroot -proot -e 'create databases if not exists ticket_gathering;' &&
          mysql -uroot -proot ticket_gathering < /opt/data_source/ticket_demo.sql
       "
     networks:
