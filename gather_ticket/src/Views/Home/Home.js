@@ -25,11 +25,9 @@ export default class Home extends Component {
         Axios.get(url+"/show/getHomePage/"+fetchTime).then(res=>{
             console.log(res.data);
             let posterData = this.state.posterData;
-            fetchTime = fetchTime + 1;
             res.data.forEach(data => posterData.push(data))
             this.setState({
                 posterData:posterData,
-                fetchTime: fetchTime
             })
         })
     }
@@ -56,15 +54,16 @@ export default class Home extends Component {
         console.log("height: " + height);
 
         if(height <= 400) {
-            let fetchTime = this.state.fetchTime;
+            let fetchTime = this.state.fetchTime + 1;
+            this.setState({
+                fetchTime: fetchTime
+            })
             Axios.get(url+"/show/getHomePage/"+fetchTime).then(res=>{
                 console.log(res.data);
                 let posterData = this.state.posterData;
-                fetchTime = fetchTime + 1;
                 res.data.forEach(data => posterData.push(data))
                 this.setState({
                     posterData: posterData,
-                    fetchTime: fetchTime
                 })
             })
         }
