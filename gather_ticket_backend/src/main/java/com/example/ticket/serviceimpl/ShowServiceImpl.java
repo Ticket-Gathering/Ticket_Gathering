@@ -36,7 +36,7 @@ public class ShowServiceImpl implements ShowService {
         homepageshows.add(showDao.findForHomePageByCategory(id));
 
         return homepageshows;
-    }
+    } 
 
     @Override
     public List<Show> searchShow(String keyword, Integer categoryid, String cityname, Integer subid, Integer pagesize, Integer currentpage) {
