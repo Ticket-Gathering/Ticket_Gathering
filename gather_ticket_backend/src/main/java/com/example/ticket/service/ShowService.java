@@ -8,7 +8,7 @@ public interface ShowService {
 
     List<String> getAllCityWithShowNow();
 
-    List<List<Show>> getHomePage();
+    List<List<Show>> getHomePage(int fetchTime);
 
     List<Show>  searchShow(String keyword,Integer categoryid,String cityname,Integer subid,Integer pagesize,Integer currentsize);
 

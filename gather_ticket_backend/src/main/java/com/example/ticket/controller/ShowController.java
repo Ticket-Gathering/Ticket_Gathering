@@ -32,10 +32,10 @@ public class ShowController {
         return showService.getAllCityWithShowNow();
     }
 
-    @RequestMapping("/show/getHomePage")
-    public List<List<Show>> getHomePage()
+    @RequestMapping("/show/getHomePage/{fetchTime}")
+    public List<List<Show>> getHomePage(@PathVariable("fetchTime") int fetchTime)
     {
-        return showService.getHomePage();
+        return showService.getHomePage(fetchTime);
     }
 
     @RequestMapping("/show/searchShow")
