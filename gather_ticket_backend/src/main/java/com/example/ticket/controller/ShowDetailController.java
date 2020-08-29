@@ -14,7 +14,7 @@ public class ShowDetailController {
     private ShowDetailService showDetailService;
 
     @RequestMapping("/show/getDetail")
-    public ShowDetail getDetail(@RequestParam("id") String id){
-        return showDetailService.getDetail(id);
+    public ShowDetail getDetail(@RequestParam("id") String id, @RequestParam("platform") String platform){
+        return showDetailService.getDetail(id, platform);
     }
 }

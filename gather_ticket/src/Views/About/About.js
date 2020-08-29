@@ -50,7 +50,7 @@ class About extends Component {
 
     render() {
         if(!this.state.success) return (<div>Loading...</div>)
-             else if(this.state.data=="")return (<ErrorPage history={this.props.history}/>)
+             else if(this.state.data==="")return (<ErrorPage history={this.props.history}/>)
         else return (
             <div className={about.about}>
                 <Nav pageIdent="page" history={this.props.history}/>

@@ -5,5 +5,5 @@ import com.example.ticket.repository.ShowDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public interface ShowDetailDao {
-    ShowDetail getDetail(String id);
+    ShowDetail getDetail(String id, String platform);
 }

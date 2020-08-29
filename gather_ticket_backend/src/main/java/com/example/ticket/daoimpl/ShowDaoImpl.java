@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class ShowDaoImpl implements ShowDao {
@@ -57,4 +58,9 @@ public class ShowDaoImpl implements ShowDao {
     public List<Show> recommendByCategory(int subCategory){
         return showRepository.recommendByCategory(subCategory);
     }
+
+    @Override
+    public List<Object[]> getPlatformList(String id) {
+        return showRepository.getPlatformList(id);
+    };
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ShowServiceImpl implements ShowService {
@@ -58,4 +59,7 @@ public class ShowServiceImpl implements ShowService {
     public List<Show> recommendByCategory(int subCategory){
         return showDao.recommendByCategory(subCategory);
     }
+
+    @Override
+    public List<Object[]> getPlatformList(String id) { return  showDao.getPlatformList(id); }
 }

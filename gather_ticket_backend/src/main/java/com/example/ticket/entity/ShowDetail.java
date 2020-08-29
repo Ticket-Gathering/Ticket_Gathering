@@ -18,6 +18,7 @@ public class ShowDetail {
    private List<String> times;
    private String notice0;
    private String notice1;
+   private String platform;
 
    public String getId()
    {
@@ -75,6 +76,10 @@ public class ShowDetail {
    public void setTimes(List<String> times){
       this.times.addAll(times);
    }
+
+   public String getPlatform() { return platform; }
+
+   public void setPlatform(String platform) { this.platform = platform; }
 
    private Show show;
    public Show getShow(){

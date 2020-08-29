@@ -49,4 +49,9 @@ public class ShowController {
     public List<Show> recommendByCategory(@PathVariable("subCategory") int subCategory){
         return showService.recommendByCategory(subCategory);
     }
+
+    @RequestMapping("/show/getPlatformList/{id}")
+    public List<Object[]> getPlatformList(@PathVariable("id") String id){
+        return  showService.getPlatformList(id);
+    }
 }

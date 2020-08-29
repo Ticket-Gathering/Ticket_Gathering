@@ -21,11 +21,11 @@ public class ShowDetailDaoImpl implements ShowDetailDao {
     ShowRepository showRepository;
 
     @Override
-    public ShowDetail getDetail(String id) {
-        Optional<ShowDetail> detail= showDetailRepository.findById(id);
+    public ShowDetail getDetail(String id, String platform) {
+        Optional<ShowDetail> detail= showDetailRepository.findByIdAndPlatform(id, platform);
         if(detail.isPresent()){
             ShowDetail showDetailEntity=detail.get();
-            Show show=showRepository.findByShowIdAndAndPlatform(id,"大麦网");
+            Show show=showRepository.findByShowIdAndPlatform(id,platform);
             showDetailEntity.setShow(show);
             return showDetailEntity;
         }

@@ -12,7 +12,7 @@ public class ShowDetailServiceImpl implements ShowDetailService {
     ShowDetailDao showDetailDao;
 
     @Override
-    public ShowDetail getDetail(String id) {
-        return showDetailDao.getDetail(id);
+    public ShowDetail getDetail(String id, String platform) {
+        return showDetailDao.getDetail(id, platform);
     }
 }
