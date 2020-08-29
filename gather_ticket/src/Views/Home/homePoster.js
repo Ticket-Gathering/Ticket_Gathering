@@ -30,7 +30,8 @@ class HomePoster extends Component {
 
     goAbout(){
         let i = this.state.firstPoster.showId;
-        this.props.history.push({ pathname: "/about" + `/${i}` })
+        let p = this.state.firstPoster.platform;
+        this.props.history.push({ pathname: "/about" + `/${i}` + `/${p}`})
     }
 
     render() {

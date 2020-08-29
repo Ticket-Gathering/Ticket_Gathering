@@ -4,6 +4,7 @@ import Sign from "./Sign";
 import {Divider} from "antd";
 import {InputNumber, Select} from "element-react"
 import {url} from "../../Constants/constants"
+import Axios from "../../Module/Axios";
 
 export default class AboutItem extends Component {
     constructor(props) {
@@ -18,8 +19,10 @@ export default class AboutItem extends Component {
             selectedPlatform:{
                 platform: this.props.aboutitem.show.platform,
                 price: this.props.aboutitem.show.price_low,
-            }
+            },
+            platformList:[]
         };
+        this.getPlatformList = this.getPlatformList.bind(this);
     }
 
     isPreSale(i) {                //判断是否为预售票
@@ -99,6 +102,22 @@ export default class AboutItem extends Component {
         sessionStorage.setItem('orderInfo',orderInfo)
         this.props.history.push({pathname:'/orderConfirm'+`/${this.props.aboutitem.id}`,state:orderInfo})
     }
+    getPlatformList(flag){
+        if(flag === true) {
+            Axios.post(url+"/show/getPlatformList/"+this.props.aboutitem.id
+            ).then((res) => {
+                console.log(res.data)
+                this.setState({
+                    platformList: res.data
+                })
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+    }
+    goAbout(platform){
+        this.props.history.push({ pathname: "/about/" + this.props.aboutitem.id + "/" + platform})    }
+
     componentDidMount(){
         console.log("abouti")
         console.log(this.props.aboutitem)
@@ -139,11 +158,13 @@ export default class AboutItem extends Component {
                     </div>
                     <div className={abouti.showSessions}>
                         <div className={abouti.showSessionTag}>平台</div>
-                        <Select value={this.state.selectedPlatform.platform} className={abouti.showPlatform}>
-                            <Select.Option key={this.props.aboutitem.show.price_low} label={this.props.aboutitem.show.platform} value={this.props.aboutitem.show.platform}>
-                                <span style={{float: 'left'}}>{this.props.aboutitem.show.platform}</span>
-                                <span style={{float: 'right', color: '#ff3366', fontSize: 15}}>{this.props.aboutitem.show.price_low}起</span>
-                            </Select.Option>
+                        <Select value={this.state.selectedPlatform.platform} className={abouti.showPlatform} onVisibleChange={(value) => this.getPlatformList(value)} onChange={(value) => this.goAbout(value)}>
+                            {this.state.platformList.map(platform =>
+                                <Select.Option key={platform[1]} label={platform[0]} value={platform[0]}>
+                                    <span style={{float: 'left'}}>{platform[0]}</span>
+                                    <span style={{float: 'right', color: '#ff3366', fontSize: 15}}>{platform[1]}起</span>
+                                </Select.Option>
+                            )}
                         </Select>
                     </div>
                     <div className={abouti.showSessions}>

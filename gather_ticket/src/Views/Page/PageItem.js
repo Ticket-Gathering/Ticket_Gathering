@@ -12,7 +12,8 @@ class Poster extends Component {
     goAbout() {
         console.log(this.props.poster)
         let i = this.props.poster.showId;
-        this.props.history.push({ pathname: "/about" + `/${i}` })
+        let p = this.props.poster.platform;
+        this.props.history.push({ pathname: "/about" + `/${i}` + `/${p}`})
     }
 
     render() {

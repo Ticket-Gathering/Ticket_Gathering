@@ -22,8 +22,9 @@ export default class Recommend extends Component{
              console.log(err);
          })
     }
-    goAbout(id){
-        this.props.goAbout(id);
+    goAbout(item){
+        console.log(item.platform);
+        this.props.goAbout(item.showId, item.platform);
     }
 
     render() {
@@ -37,7 +38,7 @@ export default class Recommend extends Component{
                 </div>
                 {this.state.recmdList.map((item, index) => {
                     return(
-                        <div className={recommend.itemBox} onClick={this.goAbout.bind(this, item.showId)}>
+                        <div className={recommend.itemBox} onClick={this.goAbout.bind(this, item)}>
                             <div className={recommend.poster}>
                                 <img src={item.img_url}/>
                             </div>
