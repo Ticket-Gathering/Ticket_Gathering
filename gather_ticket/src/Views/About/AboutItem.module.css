@@ -101,6 +101,11 @@
     display: flex;
     flex-wrap: wrap;
 }
+.showPlatform {
+    margin-left:12px;
+    margin-bottom:6px;
+
+}
 .unChosen {
    padding: 10px;
    color: lightgray;

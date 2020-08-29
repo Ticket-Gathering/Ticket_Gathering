@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import abouti from "./AboutItem.module.css";
 import Sign from "./Sign";
 import {Divider} from "antd";
-import {InputNumber} from "element-react"
+import {InputNumber, Select} from "element-react"
 import {url} from "../../Constants/constants"
 
 export default class AboutItem extends Component {
@@ -14,7 +14,11 @@ export default class AboutItem extends Component {
             priceList: [],
             timeList: [],
             success:false,
-            selectedTime:null
+            selectedTime:null,
+            selectedPlatform:{
+                platform: this.props.aboutitem.show.platform,
+                price: this.props.aboutitem.show.price_low,
+            }
         };
     }
 
@@ -125,15 +129,23 @@ export default class AboutItem extends Component {
                         <Divider type={"vertical"} style={{height:'26px'}}/>
                         {this.props.aboutitem.show.venue.venuename}
                     </div>
-                    <div className={abouti.showTime}>平台：{this.props.aboutitem.show.platform}</div>
 
                     {this.isPreSale(this.props.aboutitem.shoptime)}
+
 
                     <div className={abouti.showTip}>
                         <div className={abouti.exclamation}>!</div>
                         <div>场次时间均为演出当地时间</div>
                     </div>
-
+                    <div className={abouti.showSessions}>
+                        <div className={abouti.showSessionTag}>平台</div>
+                        <Select value={this.state.selectedPlatform.platform} className={abouti.showPlatform}>
+                            <Select.Option key={this.props.aboutitem.show.price_low} label={this.props.aboutitem.show.platform} value={this.props.aboutitem.show.platform}>
+                                <span style={{float: 'left'}}>{this.props.aboutitem.show.platform}</span>
+                                <span style={{float: 'right', color: '#ff3366', fontSize: 15}}>{this.props.aboutitem.show.price_low}起</span>
+                            </Select.Option>
+                        </Select>
+                    </div>
                     <div className={abouti.showSessions}>
                         <div className={abouti.showSessionTag}>场次</div>
                         <div className={abouti.showSession}>

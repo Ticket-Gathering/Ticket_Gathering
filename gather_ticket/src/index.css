@@ -11,3 +11,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.el-select-dropdown__item.selected {
+  background-color: white !important;
+  color: black !important;
+  border: 1px solid #ff3366;
+  border-radius: 5px;
+}

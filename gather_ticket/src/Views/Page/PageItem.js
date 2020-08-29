@@ -90,6 +90,8 @@ class Poster extends Component {
                             起
                         </div>
                         <div className={pagePoster.srcWebContainer}>
+                            <img className={pagePoster.srcWebImg+(this.props.poster.platform==='聚橙网'?' '+pagePoster.srcWebImgSelected:'')} src={require('../../ImgAssets/logo-j.png')}/>
+                            <img className={pagePoster.srcWebImg+(this.props.poster.platform==='京东'?' '+pagePoster.srcWebImgSelected:'')} src={require('../../ImgAssets/logo-jd.png')}/>
                             <img className={pagePoster.srcWebImg+(this.props.poster.platform==='永乐票务'?' '+pagePoster.srcWebImgSelected:'')} src={require('../../ImgAssets/logo-y.jpg')}/>
                             <img className={pagePoster.srcWebImg+(this.props.poster.platform==='摩天轮'?' '+pagePoster.srcWebImgSelected:'')} src={require('../../ImgAssets/logo-m.jpg')}/>
                             <img className={pagePoster.srcWebImg+(this.props.poster.platform==='大麦网'?' '+pagePoster.srcWebImgSelected:'')} src={require('../../ImgAssets/logo-d.png')}/>
