@@ -26,7 +26,8 @@ class About extends Component {
      {
         let data = new FormData();
         data.append("id", this.props.match.params.aid);
-
+        data.append("platform", this.props.match.params.platform);
+        console.log(this.props.match.params);
         Axios.post(url+"/show/getDetail", data
         ).then((res) => {
             console.log(res)
@@ -38,8 +39,8 @@ class About extends Component {
                 console.log(err);
         })
     }
-    goAbout(id) {
-        this.props.history.push({pathname: "/about" + `/${id}`})
+    goAbout(id, platform) {
+        this.props.history.push({pathname: "/about" + `/${id}` + `/${platform}`})
         window.onbeforeunload = function(){
             document.documentElement.scrollTop = 0;  //ie下
             document.body.scrollTop = 0;  //非ie
@@ -50,7 +51,7 @@ class About extends Component {
 
     render() {
         if(!this.state.success) return (<div>Loading...</div>)
-             else if(this.state.data={})return (<ErrorPage history={this.props.history}/>)
+             else if(this.state.data==="")return (<ErrorPage history={this.props.history}/>)
         else return (
             <div className={about.about}>
                 <Nav pageIdent="page" history={this.props.history}/>
@@ -120,7 +121,7 @@ class About extends Component {
                         </div>
                     </div>
                 </div>
-                <Recommend subCategory={this.state.data.show.sub_category} goAbout={(id) => this.goAbout(id)}/>
+                <Recommend subCategory={this.state.data.show.sub_category} goAbout={(id, platform) => this.goAbout(id, platform)}/>
                 <Bottom/>
             </div>
         )

@@ -164,7 +164,7 @@ export default class Self extends Component {
         this.unblockUser = this.unblockUser.bind(this)
 
     }
-    componentWillMount() {
+    componentDidMount() {
 
         // if(Cookies.get('userId') !== 'NULL' && Cookies.get('userId') !== null){
         //     this.setState({
@@ -185,10 +185,10 @@ export default class Self extends Component {
             for(let item of response.data.receiverList){
                 item.key=item.receiverId
             }
-
             this.setState({
-                client : response.data
-            },()=>this.setState({loadSuccess:true}))
+                client : response.data,
+                loadSuccess:true
+            })
         }).catch(function (error) {
             console.log(error);
         });
@@ -505,13 +505,13 @@ export default class Self extends Component {
     render() {
         // console.log(Cookies.getJSON('userId'))
         // console.log(Cookies.getJSON('username'))
-        if(!this.state.loadSuccess)return <div>loading</div>
-        else
+        //if(!this.state.loadSuccess)return <div>loading</div>
+        // else
         return (
             <div>
                 <Nav/>
                     <div className={selfstyle.format}>
-                    {this.state.isLogged
+                    {this.state.loadSuccess
                         ?
                             (<Layout style={{background: '#fff'}}>
                                 <Content style={{ padding: '0 50px' }}>

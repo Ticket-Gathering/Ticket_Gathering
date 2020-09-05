@@ -28,7 +28,7 @@ const routes = [
 
     },
     {
-        path: '/about/:aid',
+        path: '/about/:aid/:platform',
         component: About
 
     },

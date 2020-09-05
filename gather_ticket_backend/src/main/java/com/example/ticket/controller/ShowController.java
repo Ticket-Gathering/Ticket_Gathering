@@ -32,10 +32,10 @@ public class ShowController {
         return showService.getAllCityWithShowNow();
     }
 
-    @RequestMapping("/show/getHomePage")
-    public List<List<Show>> getHomePage()
+    @RequestMapping("/show/getHomePage/{fetchTime}")
+    public List<List<Show>> getHomePage(@PathVariable("fetchTime") int fetchTime)
     {
-        return showService.getHomePage();
+        return showService.getHomePage(fetchTime);
     }
 
     @RequestMapping("/show/searchShow")
@@ -48,5 +48,10 @@ public class ShowController {
     @RequestMapping("/show/recommendByCategory/{subCategory}")
     public List<Show> recommendByCategory(@PathVariable("subCategory") int subCategory){
         return showService.recommendByCategory(subCategory);
+    }
+
+    @RequestMapping("/show/getPlatformList/{id}")
+    public List<Object[]> getPlatformList(@PathVariable("id") String id){
+        return  showService.getPlatformList(id);
     }
 }

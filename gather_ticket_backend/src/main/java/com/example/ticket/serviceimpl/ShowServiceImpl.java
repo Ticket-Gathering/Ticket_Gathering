@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ShowServiceImpl implements ShowService {
@@ -25,14 +26,16 @@ public class ShowServiceImpl implements ShowService {
     }
 
     @Override
-    public List<List<Show>> getHomePage() {
+    public List<List<Show>> getHomePage(int fetchTime) {
         List<Category> categories = categoryDao.getAllCategory();
-        List<List<Show>> homepageshows= new ArrayList<List<Show>>();
-        for (Category c : categories) {
-            Category one =c;
-            Integer id=one.getCategoryId();
-            homepageshows.add(showDao.findForHomePageByCategory(id));
-        }
+        List<List<Show>> homepageshows = new ArrayList<List<Show>>();
+
+        Integer id = categories.get(fetchTime * 2).getCategoryId();
+        homepageshows.add(showDao.findForHomePageByCategory(id));
+
+        id = categories.get(fetchTime * 2 + 1).getCategoryId();
+        homepageshows.add(showDao.findForHomePageByCategory(id));
+
         return homepageshows;
     }
 
@@ -56,4 +59,7 @@ public class ShowServiceImpl implements ShowService {
     public List<Show> recommendByCategory(int subCategory){
         return showDao.recommendByCategory(subCategory);
     }
+
+    @Override
+    public List<Object[]> getPlatformList(String id) { return  showDao.getPlatformList(id); }
 }

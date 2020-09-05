@@ -7,5 +7,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.Optional;
 
 public interface ShowDetailRepository extends MongoRepository<ShowDetail, String> {
-    Optional<ShowDetail> findById(String id);
+    Optional<ShowDetail> findByIdAndPlatform(String id, String platform);
 }
