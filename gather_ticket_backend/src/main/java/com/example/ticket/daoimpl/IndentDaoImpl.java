@@ -6,6 +6,8 @@ import com.example.ticket.repository.IndentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class IndentDaoImpl implements IndentDao {
     @Autowired
@@ -41,4 +43,7 @@ public class IndentDaoImpl implements IndentDao {
     public Indent getIndentByID(Integer order_id) {
         return indentRepository.getOne(order_id);
     }
+
+    @Override
+    public List<Indent> getIndentByUser(String username) { return indentRepository.getIndentByUsername(username);}
 }

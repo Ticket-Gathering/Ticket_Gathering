@@ -450,6 +450,7 @@ export default class Self extends Component {
                 </Content>;
                 break;
             case "5":
+                console.log("order")
                 return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
                     <div className={selfstyle.tabBox}>订单管理</div>
                     <div className={selfstyle.line}/>
