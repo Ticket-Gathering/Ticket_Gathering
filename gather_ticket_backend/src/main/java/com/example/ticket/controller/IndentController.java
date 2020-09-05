@@ -28,8 +28,8 @@ public class IndentController {
         return indentService.getIndentByID(order_id);
     }
 
-    @RequestMapping("/getIndentByUserId")
-    public List<Indent> getIndentByUserId(@RequestParam("username") String username){
+    @RequestMapping("/getIndentByUser")
+    public List<Indent> getIndentByUser(@RequestParam("username") String username){
         return indentService.getIndentByUser(username);
     }
 }

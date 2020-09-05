@@ -308,6 +308,14 @@ export default class Self extends Component {
             console.log(error);
         });
     }
+    getOrderList(){
+        Axios.post(url+"/getIndentByUser", data)
+            .then(response => {
+                console.log(response)
+            }).catch(function (error) {
+            console.log(error);
+        });
+    }
 
     SwitchTab(i) {
         switch (i) {
