@@ -17,4 +17,6 @@ public interface ShowService {
     List<Show> recommendByCategory(int subCategory);
 
     List<Object[]> getPlatformList(String id);
+
+    List<Show> recommendByKeyword(String keyword);
 }
