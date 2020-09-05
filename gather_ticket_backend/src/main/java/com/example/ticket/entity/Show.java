@@ -20,7 +20,7 @@ public class Show {
     @Id
     @Column(name="platform")
     private String platform;
-
+    private String keywords;
     private String name;
     private int sub_category;
     private String artists;

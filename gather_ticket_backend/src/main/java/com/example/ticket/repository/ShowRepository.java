@@ -39,7 +39,7 @@ public interface ShowRepository extends JpaRepository<Show,Integer> {
      @Query(nativeQuery = true,value="select * from perform where sub_category=?1 ORDER BY rand() LIMIT 6")
      List<Show> recommendByCategory(Integer subCategory);
 
-     @Query(nativeQuery = true,value="select * from perform where platform = '大麦网' AND keyword LIKE ?1 ORDER BY rand() LIMIT 6")
+     @Query(nativeQuery = true,value="select * from perform where platform = '大麦网' AND keywords LIKE ?1 ORDER BY rand() LIMIT 6")
      List<Show> recommendByKeyword(String keyword);
 
      @Query(nativeQuery = true,value="select platform, price_low from perform where id=?1")
