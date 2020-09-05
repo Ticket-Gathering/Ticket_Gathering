@@ -314,7 +314,7 @@ export default class Self extends Component {
     getOrderList(){
         let data = new FormData();
         data.append("username", Cookies.get("username"));
-        Axios.post(url+"/getIndentByUserId", data)
+        Axios.post(url+"/getIndentByUser", data)
             .then(response => {
                 // console.log(typeof(response.data[0].selected_time));
                 this.setState({

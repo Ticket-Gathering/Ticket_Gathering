@@ -13,11 +13,14 @@ export default class Recommend extends Component{
     }
     componentDidMount()
      {
-         Axios.get(url+"/show/recommendByCategory/"+this.props.subCategory)
+         let data = new FormData();
+         data.append("keyword", "英国");
+         Axios.post(url+"/show/recommondByKeyword/", data)
              .then(response => {
-                 this.setState({
-                     recmdList:response.data
-                 })
+                 console.log(response.data);
+                 // this.setState({
+                 //     recmdList:response.data
+                 // })
              }).catch(err => {
              console.log(err);
          })
