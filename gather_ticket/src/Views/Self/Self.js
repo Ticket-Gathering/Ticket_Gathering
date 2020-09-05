@@ -166,16 +166,16 @@ export default class Self extends Component {
     }
     componentDidMount() {
 
-        // if(Cookies.get('userId') !== 'NULL' && Cookies.get('userId') !== null){
-        //     this.setState({
-        //         isLogged: true
-        //     })
-        // } else {
-        //     this.setState({
-        //         isLogged: false
-        //     })
-        //     return;
-        // }
+        if(Cookies.get('userId') !== 'NULL' && Cookies.get('userId') !== null){
+            this.setState({
+                isLogged: true
+            })
+        } else {
+            this.setState({
+                isLogged: false
+            })
+            return;
+        }
         Axios.get(url+"/getUserById/"+Cookies.get("userId")
         ).then(response => {
             console.log(response);
@@ -230,7 +230,8 @@ export default class Self extends Component {
         },()=>{
             //说明之前为true处于编辑状态
             if(!this.state.isEditing){
-                values.birth=values.birth._i
+                // values.birth=values.birth._i
+                console.log(values)
                 values.userId=Cookies.get('userId')
                 axios.post(url+'/updateUserDetail',JSON.stringify(values),{headers:{'Content-Type':'application/json'}})
                     .then(
