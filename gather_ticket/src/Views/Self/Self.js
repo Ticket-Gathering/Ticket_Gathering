@@ -232,7 +232,9 @@ export default class Self extends Component {
             isEditing:!this.state.isEditing
         },()=>{
             //说明之前为true处于编辑状态
+            console.log(values)
             if(!this.state.isEditing){
+                // console.log(values.birth)
                 values.birth=values.birth._i
                 values.userId=Cookies.get('userId')
                 axios.post(url+'/updateUserDetail',JSON.stringify(values),{headers:{'Content-Type':'application/json'}})
