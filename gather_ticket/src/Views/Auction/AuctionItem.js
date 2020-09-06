@@ -34,7 +34,7 @@ export default class AuctionItem extends Component {
     componentDidMount() {
         var websocket = null;
         if ('WebSocket' in window) {
-            websocket = new WebSocket('ws://18.232.87.97:8080/webSocket');
+            websocket = new WebSocket('ws://localhost:8080/webSocket');
         } else {
             alert('该浏览器不支持websocket!');
         }
