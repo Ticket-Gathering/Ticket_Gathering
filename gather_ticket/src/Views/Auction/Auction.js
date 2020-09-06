@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Nav from "../../Components/Nav";
-import AuctionItem from "./auctionItem";
-import about from "./auction.module.css";
+import AuctionItem from "./AuctionItem";
+import about from "./Auction.module.css";
 import Axios from "../../Module/Axios";
 import Bottom from "../../Components/Bottom";
 import {url} from "../../Constants/constants";
 import ErrorPage from "../Error/ErrorPage";
 import {Button} from "antd";
-import abouti from "./auctionItem.module.css";
+import abouti from "./AuctionItem.module.css";
 
 export default class Auction extends Component {
     constructor(props) {
