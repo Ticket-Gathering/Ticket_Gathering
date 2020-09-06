@@ -33,6 +33,9 @@ public class AuctionDaoImpl implements AuctionDao {
     UserAuthRepository userAuthRepository;
 
     @Autowired
+    ShowRepository showRepository;
+
+    @Autowired
     ShowDetailDao showDetailDao;
 
 
@@ -133,8 +136,8 @@ public class AuctionDaoImpl implements AuctionDao {
         List<Auction> auctionList= auctionRepository.findAll();
         for(Auction auction:auctionList){
             String showid= auction.getShow_id();
-            ShowDetail showDetail=showDetailDao.getDetail(showid,"大麦网");
-            auction.setShowDetail(showDetail);
+            Show show=showRepository.findByShowIdAndPlatform(showid,"大麦网");
+            auction.setShow(show);
         }
         return auctionList;
     }

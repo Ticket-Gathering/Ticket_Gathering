@@ -94,4 +94,13 @@ public class Auction {
         this.showDetail=showDetail;
     }
 
+    @Transient
+    private Show show;
+    public Show getShow(){
+        return show;
+    }
+    public void setShow(Show show){
+        this.show=show;
+    }
+
 }
