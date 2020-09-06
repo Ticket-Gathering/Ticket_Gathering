@@ -16,6 +16,4 @@ public interface UserAuthRepository extends JpaRepository<ClientAuth,Integer>{
 
     @Query(value = "from ClientAuth where userType <> 0")
     List<ClientAuth> getAllUsers();
-
-
 }

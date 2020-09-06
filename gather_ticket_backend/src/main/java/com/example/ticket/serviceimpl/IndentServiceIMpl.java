@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Service
-public class IndentServiceImpl implements IndentService {
+public class IndentServiceIMpl implements IndentService {
     @Autowired
     IndentDao indentDao;
 

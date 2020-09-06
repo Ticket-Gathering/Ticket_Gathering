@@ -73,9 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/show/**").permitAll() // 访问演出页面不需要授权
                 .antMatchers("/addUser").permitAll()    // 注册用户不需要授权
                 .antMatchers("/login").permitAll()  // 登录页面不需要授权
-                .antMatchers("/auction/**").permitAll()
                 .antMatchers("/actuator/**").permitAll()
-                .antMatchers("/webSocket").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")  // 只有管理员能够编写日志
                 .anyRequest().authenticated() // 剩余都需要授权
                 .and()

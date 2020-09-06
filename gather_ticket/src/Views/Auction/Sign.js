@@ -18,6 +18,7 @@ export default class Sign extends Component {
             <div className={sign.sign}>
                 拍卖
             </div>
+
         )
     }
 }
