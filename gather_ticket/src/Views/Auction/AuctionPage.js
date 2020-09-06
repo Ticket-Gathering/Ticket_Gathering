@@ -55,20 +55,23 @@ export default class ActionPage extends Component {
             type : newType,
         })
     }
-
+    goAbout(id, platform) {
+        this.props.history.push({ pathname: "/auction" + `/${id}`})
+    }
     getPageItem(i) {
         console.log(i)
-        // if (i.show.length < 1) {
-        //     return <Result
-        //         className={page.noResult}
-        //         icon={<SmileTwoTone />}
-        //         title="没有找到符合条件的商品。您可以减少筛选条件重新搜索。"
-        //     />
-        // } else {
-        //     return (i.show.map((item, index) => {
-        //         return <PageItem poster={item.show} key={index} data-cy={'pageItem'}/>
-        //     }))
-        // }
+        if (i.length < 1) {
+            return <Result
+                className={page.noResult}
+                icon={<SmileTwoTone />}
+                title="没有找到符合条件的商品。您可以减少筛选条件重新搜索。"
+            />
+        } else {
+            return (i.map((item, index) => {
+                if(!item.show) return ;
+                return <PageItem goAbout={(id, platform)=>this.goAbout(id, platform)} poster={item.show} key={index} data-cy={'pageItem'}/>
+            }))
+        }
     }
     componentDidMount() {
         Axios.get(url+'/show/getAllCityWithShowNow').then(

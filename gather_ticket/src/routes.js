@@ -34,7 +34,7 @@ const routes = [
 
     },
     {
-        path: '/auction',
+        path: '/auctionPage',
         component: ActionPage
     },
     {
