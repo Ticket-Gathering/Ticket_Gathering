@@ -6,6 +6,8 @@ import com.example.ticket.dao.IndentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class IndentServiceIMpl implements IndentService {
@@ -26,4 +28,7 @@ public class IndentServiceIMpl implements IndentService {
     public Indent getIndentByID(Integer order_id) {
         return indentDao.getIndentByID(order_id);
     }
+
+    @Override
+    public List<Indent> getIndentByUser(String username) { return indentDao.getIndentByUser(username); }
 }

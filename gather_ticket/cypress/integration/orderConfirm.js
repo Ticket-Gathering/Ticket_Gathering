@@ -2,16 +2,14 @@
 describe('orderConfirm_test',function () {
     beforeEach(function () {
         cy.fixture('example.json').as('testCase').then(($testCase)=>{
+            cy.visit("/about/1_1_611200540124")
             let user=$testCase.adminUser
             let pwd=$testCase.adminPassword
-            cy.visit("/login")
+            cy.get('[data-cy=buy]').click()
             cy.get('[type="text"]').type(user);
             cy.get('[type="password"]').type(pwd);
-            cy.get('[data-cy=login]').click()
-            cy.wait(1000)
-            cy.visit("/about/1_1_611200540124/京东")
-            cy.wait(1000)
-            cy.get('[data-cy=buy]').click()
+            cy.get('[data-cy=login]').click();
+            cy.wait(500)
         })
     })
     //测试使用账户中的取票人是否可行
