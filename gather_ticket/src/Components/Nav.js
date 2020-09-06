@@ -17,7 +17,7 @@ export default class nav extends Component {
             cityValue:'全国',
             username: 'test',
             isLoggedIn:false,
-            messageCheck: 0,
+            messageChecked: 0,
             AllCity:[]
         }
     };
@@ -29,10 +29,10 @@ export default class nav extends Component {
                 isLoggedIn:true
             })
             Axios.get(url + "/getUserById/" + userId).then(res => {
-                console.log(userId);
+                console.log("user");
                 console.log(res)
                 this.setState({
-                    messageCheck: res.data.messageCheck,
+                    messageChecked: res.data.messageChecked,
                 })
             })
         }else{
@@ -113,14 +113,14 @@ export default class nav extends Component {
                     </div>
                     {this.state.isLoggedIn
                         ?
-                        <div className={navstyle.loginbox}>
-                            <div className={navstyle.logintext}>
-                                欢迎您！
+                        <div className={navstyle.loginbox} >
+                            <div>
+                                <span className={navstyle.logintext}>欢迎您！</span>
                                 {this.state.messageChecked === 1?
-                                    <Badge isDot style={{color: "#ff3366"}}>
-                                        <Link to="/self" data-cy={'self'}>{this.state.username}</Link>
+                                    <Badge isDot>
+                                        <Link to="/self" data-cy={'self'} className={navstyle.logintext}>{this.state.username}</Link>
                                     </Badge>:
-                                    <Link to="/self" data-cy={'self'}>{this.state.username}</Link>
+                                    <Link to="/self" data-cy={'self'} className={navstyle.logintext}>{this.state.username}</Link>
                                 }
 
                             </div>

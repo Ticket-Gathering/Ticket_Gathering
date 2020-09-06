@@ -8,7 +8,7 @@ import Axios from '../../Module/Axios'
 import moment from 'moment';
 import axios from 'axios'
 import {SmileTwoTone,UserOutlined,LaptopOutlined,SettingOutlined,CloseOutlined} from "@ant-design/icons";
-import {Message} from "element-react"
+import {Message, Badge} from "element-react"
 import ShowManage from "./ShowManage";
 import Cookies from 'js-cookie'
 import {identityCheck} from "../../Tool/smallTools";
@@ -153,17 +153,21 @@ export default class Self extends Component {
                 birth: null,
                 idNum:null,
                 tel:null,
+                messageChecked:0,
             },
             userList:[],
             isLogged: false,
             loadSuccess:false,
             orderList:[{},{},{},{},{},{},{},{},{},{}],
+            messageList:[{},{},{}],
         };
         this.changeContent = this.changeContent.bind(this)
         this.logOut = this.logOut.bind(this)
         this.showAllUsers = this.showAllUsers.bind(this)
         this.blockUser = this.blockUser.bind(this)
         this.unblockUser = this.unblockUser.bind(this)
+        this.getOrderList = this.getOrderList.bind(this)
+        this.getMessageList = this.getMessageList.bind(this)
     }
     componentDidMount() {
 
@@ -198,7 +202,7 @@ export default class Self extends Component {
 
         var websocket = null;
         if ('WebSocket' in window) {
-            websocket = new WebSocket('ws://localhost:8080/webSocket');
+            websocket = new WebSocket('ws://18.232.87.97:8080/webSocket');
         } else {
             alert('该浏览器不支持websocket!');
         }
@@ -355,10 +359,27 @@ export default class Self extends Component {
             console.log(error);
         });
     }
+    getMessageList(){
+        let data = new FormData();
+        data.append("userid", this.state.client.messageChecked)
+        Axios.post(url+"/getMessageByUser", data)
+            .then(response => {
+                // console.log(typeof(response.data[0].selected_time));
+                this.setState({
+                    messageList: response.data,
+                })
+                this.changeContent({key: "6"})
+            }).catch(function (error) {
+            console.log(error);
+        });
+    }
     goAbout(record){
         let i = record.showid;
         let p = record.platform;
         this.props.history.push({ pathname: "/about" + `/${i}` + `/${p}`})
+    }
+    goAboutAuction(value){
+        this.props.history.push({ pathname: "/auction" + `/${value}`})
     }
 
     SwitchTab(i) {
@@ -385,7 +406,6 @@ export default class Self extends Component {
                             'email':this.state.client.email,
                             'birth':this.state.client.birth? moment(this.state.client.birth, dateFormat): moment('1970/01/01', dateFormat)
                         }}
-
                     >
                         <Form.Item label={'昵称'} name={'nickname'}>
                             <Input disabled={!this.state.isEditing} placeholder="请输入你的用户昵称" className={selfstyle.input} />
@@ -554,11 +574,32 @@ export default class Self extends Component {
                 </Content>;
                 break;
             case "6":
+                const message = [
+                    { title: '演出ID', dataIndex: 'aucid', key: 'aucid',
+                        render: (value) => {
+                            return <a onClick={() => this.goAboutAuction(value)}>{value}</a>
+                        }},
+                    { title: '消息', dataIndex: 'message', key: 'message' },
+                ]
                 return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
-                    <div className={selfstyle.tabBox}>我的优惠券</div>
+                    <div className={selfstyle.tabBox}>拍卖信息</div>
                     <div className={selfstyle.line}/>
-                    <div>
-                        <Table columns={couponColumns} dataSource={couponData} />
+                    <div style={{height: '600px'}}>
+                        {this.state.messageList.length === 0?
+                            <Result
+                                icon={<SmileTwoTone />}
+                                title="您还没有订单哦~"
+                                extra={<Button type="primary">Next</Button>}
+                            />:
+                            <div>
+                                <Table
+                                    columns={message}
+                                    pagination={false}
+                                    dataSource={this.state.orderList}
+                                />
+                            </div>
+                        }
+
                     </div>
                 </Content>;
                 break;
@@ -629,8 +670,8 @@ export default class Self extends Component {
                                                     <Menu.Item key="4" onClick={this.changeContent} data-cy={'收货地址'}>收货地址</Menu.Item>
                                                 </SubMenu>
                                                 <SubMenu key="sub2" title={<span><LaptopOutlined/>交易中心</span>} data-cy={'交易中心'}>
-                                                <Menu.Item key="5" onClick={this.getOrderList} data-cy={'订单管理'}>订单管理</Menu.Item>
-                                                <Menu.Item key="6" onClick={this.changeContent} data-cy={'我的优惠券'}>我的优惠券</Menu.Item>
+                                                    <Menu.Item key="5" onClick={this.getOrderList} data-cy={'订单管理'}>订单管理</Menu.Item>
+                                                    <Menu.Item key="6" onClick={this.getMessageList} data-cy={'拍卖信息'} style={{overflow:"visible"}}><Badge isDot>拍卖信息</Badge></Menu.Item>
                                                 </SubMenu>
                                             {(Cookies.get("userType") === "0") ?
                                                 (<SubMenu

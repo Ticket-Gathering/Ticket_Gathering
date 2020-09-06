@@ -183,7 +183,7 @@ input::-webkit-input-placeholder {
 .logintext{
    line-height: 30px;
    margin-left: 5px;
-    filter:contrast(10%);
+   filter:contrast(10%);
 }
 .logintext a{
    color:white;
