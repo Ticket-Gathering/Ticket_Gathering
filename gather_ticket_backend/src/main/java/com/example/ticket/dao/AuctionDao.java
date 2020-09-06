@@ -17,4 +17,5 @@ public interface AuctionDao {
     void sendMessage(Integer aucid,Integer userid);
     List<AuctionRecord> findAllRecordByAuctionId(Integer aucid);
     void setMessage_unChecked(Integer userid);
+    List<Auction> getAllAuction();
 }

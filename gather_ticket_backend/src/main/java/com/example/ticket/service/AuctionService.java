@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 public interface AuctionService {
     Auction getAuction(Integer id);
@@ -15,4 +16,5 @@ public interface AuctionService {
     AuctionRecord getRecordByUser(Integer userid,Integer aucid);
     AuctionRecord addNewRecord(Integer userid,Integer aucid);
     Msg check(Integer aucid , Integer userid);
+    List<Auction> getAllAuction();
 }
