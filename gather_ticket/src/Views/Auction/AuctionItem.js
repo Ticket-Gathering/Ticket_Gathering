@@ -34,15 +34,15 @@ export default class AuctionItem extends Component {
     componentDidMount() {
         var websocket = null;
         if ('WebSocket' in window) {
-            websocket = new WebSocket('ws://localhost:8080/webSocket');
+            websocket = new WebSocket('ws://18.232.87.97:8080/webSocket');
         } else {
             alert('该浏览器不支持websocket!');
         }
         websocket.onopen = function (event) {
-            // console.log('建立连接');
+             console.log('建立连接');
         }
         websocket.onclose = function (event) {
-            // console.log('连接关闭');
+            console.log('连接关闭');
         }
         websocket.onmessage = function (event) {
             console.log(JSON.parse(event.data));

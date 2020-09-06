@@ -5,10 +5,12 @@ import com.example.ticket.TicketApplication;
 import com.example.ticket.entity.ShowDetail;
 import com.example.ticket.service.ShowDetailService;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-@SpringBootTest(classes = TicketApplication.class)
+@SpringBootTest(classes = TicketApplication.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ShowDetailServiceTest {
     @Test
     public void contextLoads(){
