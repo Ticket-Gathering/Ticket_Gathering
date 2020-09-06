@@ -84,7 +84,7 @@ export default class ActionPage extends Component {
                 })
             }
         )
-        Axios.get(url+"/getAllAuction").then(res => {
+        Axios.get(url+"/auction/getAllAuction").then(res => {
             console.log(res.data);
             this.setState({
                 data: res.data,
