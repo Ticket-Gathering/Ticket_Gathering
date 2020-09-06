@@ -40,10 +40,7 @@ describe('Home_test', () => {
         let types=this.testCase.types
         let baseUrl=this.testCase.baseUrl
         types.forEach((item,index)=>{
-            if(index>3) return
             cy.visit('/')
-            //使lazyLoad能加载出所有的元素
-            cy.scrollTo('bottom',{ duration: 100})
             cy.get('[data-cy="selectCity"]').click().get('[data-cy="上海"]').click()
             cy.get(`[data-cy="homePoster:${item}"]`).find('[data-cy="more"]').click()
             cy.url().should('equal', baseUrl+'/page')

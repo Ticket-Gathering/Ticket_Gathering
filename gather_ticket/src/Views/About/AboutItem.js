@@ -205,7 +205,7 @@ export default class AboutItem extends Component {
 
                     <div className={abouti.showSessions}>
                         <div className={abouti.showSessionTag}>数量</div>
-                        <InputNumber  defaultValue={1} step="1" min="1" style={{marginLeft: "10px"}} onChange={this.addTicket.bind(this)}  data-cy={'numSelect'}/>
+                        <InputNumber defaultValue={1} step="1" min="1" style={{marginLeft: "10px"}} onChange={this.addTicket.bind(this)}  data-cy={'numSelect'}/>
                     </div>
 
                     <div className={abouti.showSession}>
