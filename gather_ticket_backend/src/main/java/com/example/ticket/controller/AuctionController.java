@@ -1,6 +1,7 @@
 package com.example.ticket.controller;
 
 import com.example.ticket.entity.Auction;
+import com.example.ticket.entity.AuctionMessage;
 import com.example.ticket.entity.AuctionRecord;
 import com.example.ticket.service.AuctionService;
 import com.example.ticket.utils.msgutils.Msg;
@@ -53,5 +54,10 @@ public class AuctionController {
     @RequestMapping("/auction/getAllAuction")
     public List<Auction>  getAllAuction(){
         return auctionService.getAllAuction();
+    }
+
+    @RequestMapping("/auction/getMessageByUser")
+    public List<AuctionMessage> getMessageByUser( @RequestParam("userid") Integer userid){
+        return auctionService.getMessageByUser(userid);
     }
 }

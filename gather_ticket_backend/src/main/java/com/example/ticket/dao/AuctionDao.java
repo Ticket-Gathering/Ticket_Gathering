@@ -1,6 +1,7 @@
 package com.example.ticket.dao;
 
 import com.example.ticket.entity.Auction;
+import com.example.ticket.entity.AuctionMessage;
 import com.example.ticket.entity.AuctionRecord;
 import com.example.ticket.utils.msgutils.Msg;
 
@@ -18,4 +19,5 @@ public interface AuctionDao {
     List<AuctionRecord> findAllRecordByAuctionId(Integer aucid);
     void setMessageUnchecked(Integer userid);
     List<Auction> getAllAuction();
+    List<AuctionMessage> getMessageByUser(Integer userid);
 }
