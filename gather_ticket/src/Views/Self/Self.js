@@ -135,7 +135,7 @@ const couponData = [
     },
 ];
 const { Panel } = Collapse;
-const dateFormat = 'YYYY/MM/DD';
+const dateFormat = 'YYYY-MM-DD';
 const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
 
@@ -164,21 +164,19 @@ export default class Self extends Component {
         this.showAllUsers = this.showAllUsers.bind(this)
         this.blockUser = this.blockUser.bind(this)
         this.unblockUser = this.unblockUser.bind(this)
-        this.getOrderList = this.getOrderList.bind(this)
-        this.goAbout = this.goAbout.bind(this)
     }
     componentDidMount() {
 
-        // if(Cookies.get('userId') !== 'NULL' && Cookies.get('userId') !== null){
-        //     this.setState({
-        //         isLogged: true
-        //     })
-        // } else {
-        //     this.setState({
-        //         isLogged: false
-        //     })
-        //     return;
-        // }
+        if(Cookies.get('userId') !== 'NULL' && Cookies.get('userId') !== null){
+            this.setState({
+                isLogged: true
+            })
+        } else {
+            this.setState({
+                isLogged: false
+            })
+            return;
+        }
         Axios.get(url+"/getUserById/"+Cookies.get("userId")
         ).then(response => {
             console.log(response);
@@ -190,11 +188,38 @@ export default class Self extends Component {
             }
             this.setState({
                 client : response.data,
-                loadSuccess:true
+            },()=>{this.setState({
+                    loadSuccess:true
+                })
             })
         }).catch(function (error) {
             console.log(error);
         });
+
+        var websocket = null;
+        if ('WebSocket' in window) {
+            websocket = new WebSocket('ws://localhost:8080/webSocket');
+        } else {
+            alert('该浏览器不支持websocket!');
+        }
+        websocket.onopen = function (event) {
+            // console.log('建立连接');
+        }
+        websocket.onclose = function (event) {
+            // console.log('连接关闭');
+        }
+        websocket.onmessage = function (event) {
+            console.log(JSON.parse(event.data));
+            var obj = JSON.parse(event.data);
+
+            alert(obj.highest_price);
+
+            this.setState({
+                count:obj.highest_price,
+                nowprice:obj.highest_price,
+                highest_user_id:obj.highest_user_id
+            })
+        }.bind(this)
     }
     onChange(key, e){
         let value = e.target.value;
@@ -234,7 +259,9 @@ export default class Self extends Component {
             //说明之前为true处于编辑状态
             console.log(values)
             if(!this.state.isEditing){
-                values.birth=values.birth._i
+
+                values.birth=values.birth.format(dateFormat)
+                console.log(values)
                 values.userId=Cookies.get('userId')
                 axios.post(url+'/updateUserDetail',JSON.stringify(values),{headers:{'Content-Type':'application/json'}})
                     .then(
@@ -251,7 +278,9 @@ export default class Self extends Component {
         })
     }
     ditchEdition(){
-
+        this.setState({
+            isEditing:false
+        })
     }
 
     blockUser(idx){
@@ -398,9 +427,9 @@ export default class Self extends Component {
                             {this.state.isEditing?
                                 <div><Button
                                     type="primary"
+                                    htmlType="submit"
                                     className={selfstyle.button}
                                     style={{backgroundColor: '#ff3366', marginRight:"20px"}}
-                                    onClick={this.updateUser.bind(this)}
                                 >
                                     保存
                                 </Button>
@@ -411,8 +440,6 @@ export default class Self extends Component {
                                     取消
                                 </Button></div>:
                                 <Button
-                                    type="primary"
-                                    htmlType={"submit"}
                                     className={selfstyle.button}
                                     style={this.state.isEditing?{backgroundColor: '#ff3366'}:{backgroundColor: '#0088D6'}}
                                     onClick={this.editUser.bind(this)}
