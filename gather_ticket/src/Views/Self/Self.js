@@ -362,7 +362,7 @@ export default class Self extends Component {
     getMessageList(){
         let data = new FormData();
         data.append("userid", this.state.client.messageChecked)
-        Axios.post(url+"/getMessageByUser", data)
+        Axios.post(url+"/auction/getMessageByUser", data)
             .then(response => {
                 // console.log(typeof(response.data[0].selected_time));
                 this.setState({
@@ -372,6 +372,10 @@ export default class Self extends Component {
             }).catch(function (error) {
             console.log(error);
         });
+        Axios.get(url+"/auction/setMessageChecked/"+this.state.client.userId).then(() => {
+            console.log("checked")
+        }).catch(function (error) {
+            console.log(error);})
     }
     goAbout(record){
         let i = record.showid;
@@ -588,7 +592,7 @@ export default class Self extends Component {
                         {this.state.messageList.length === 0?
                             <Result
                                 icon={<SmileTwoTone />}
-                                title="您还没有订单哦~"
+                                title="您还没有竞拍哦~"
                                 extra={<Button type="primary">Next</Button>}
                             />:
                             <div>
@@ -671,7 +675,11 @@ export default class Self extends Component {
                                                 </SubMenu>
                                                 <SubMenu key="sub2" title={<span><LaptopOutlined/>交易中心</span>} data-cy={'交易中心'}>
                                                     <Menu.Item key="5" onClick={this.getOrderList} data-cy={'订单管理'}>订单管理</Menu.Item>
-                                                    <Menu.Item key="6" onClick={this.getMessageList} data-cy={'拍卖信息'} style={{overflow:"visible"}}><Badge isDot>拍卖信息</Badge></Menu.Item>
+                                                    <Menu.Item key="6" onClick={this.getMessageList} data-cy={'拍卖信息'} style={{overflow:"visible"}}>
+                                                        {this.state.client.messageChecked === 0?
+                                                            <Badge isDot>拍卖信息</Badge>:<span>拍卖信息</span>
+                                                        }
+                                                    </Menu.Item>
                                                 </SubMenu>
                                             {(Cookies.get("userType") === "0") ?
                                                 (<SubMenu

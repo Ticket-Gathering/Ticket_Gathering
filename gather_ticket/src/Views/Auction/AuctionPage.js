@@ -40,7 +40,7 @@ export default class ActionPage extends Component {
             city : newCity,
         })
     }
-    changeType=(newType)=>{
+    changeType(newType){
         if(newType === "全部"){
             this.setState({
                 data : this.state.preFilteredData,
@@ -48,8 +48,9 @@ export default class ActionPage extends Component {
             })
             return;
         }
+        // console.log(this.state.preFilteredData)
         let filteredData = this.state.preFilteredData;
-        filteredData = filteredData.filter(item => item.show.category === categoryMap.get(newType));
+        filteredData = filteredData.filter(item => item.show.category.categoryId === categoryMap.get(newType));
         this.setState({
             data : filteredData,
             type : newType,
@@ -152,7 +153,7 @@ export default class ActionPage extends Component {
                                         return <div
                                             data-cy={this.state.type === item?'typeSelected':`select:${item}`}
                                             className={page.titleOne + (this.state.type === item ? (' ' + page.titleSelected) : '')}
-                                            onClick={()=>this.changeType(item)}
+                                            onClick={() => this.changeType(item)}
                                         >
                                             {item}
                                         </div>

@@ -6,6 +6,7 @@ import com.example.ticket.entity.AuctionRecord;
 import com.example.ticket.service.AuctionService;
 import com.example.ticket.utils.msgutils.Msg;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,6 +55,11 @@ public class AuctionController {
     @RequestMapping("/auction/getAllAuction")
     public List<Auction>  getAllAuction(){
         return auctionService.getAllAuction();
+    }
+
+    @RequestMapping("/auction/setMessageChecked/{id}")
+    public void setMessageChecked(@PathVariable("id") Integer userid) {
+        auctionService.setMessageChecked(userid);
     }
 
     @RequestMapping("/auction/getMessageByUser")

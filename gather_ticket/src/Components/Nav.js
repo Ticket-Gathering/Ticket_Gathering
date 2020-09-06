@@ -116,7 +116,7 @@ export default class nav extends Component {
                         <div className={navstyle.loginbox} >
                             <div>
                                 <span className={navstyle.logintext}>欢迎您！</span>
-                                {this.state.messageChecked === 1?
+                                {this.state.messageChecked === 0?
                                     <Badge isDot>
                                         <Link to="/self" data-cy={'self'} className={navstyle.logintext}>{this.state.username}</Link>
                                     </Badge>:

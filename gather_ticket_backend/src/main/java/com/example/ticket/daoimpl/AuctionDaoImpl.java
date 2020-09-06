@@ -132,6 +132,13 @@ public class AuctionDaoImpl implements AuctionDao {
     }
 
     @Override
+    public void setMessageChecked(Integer userid) {
+        Client client=userRepository.getOne(userid);
+        client.setMessageChecked(1);
+        userRepository.save(client);
+    }
+
+    @Override
     public List<Auction> getAllAuction() {
         List<Auction> auctionList= auctionRepository.findAll();
         for(Auction auction:auctionList){

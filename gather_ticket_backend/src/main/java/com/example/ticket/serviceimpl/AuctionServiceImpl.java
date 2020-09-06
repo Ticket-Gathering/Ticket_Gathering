@@ -89,6 +89,11 @@ public class AuctionServiceImpl implements AuctionService {
     }
 
     @Override
+    public void setMessageChecked(Integer userid){
+        auctionDao.setMessageChecked(userid);
+    };
+
+    @Override
     public List<Auction> getAllAuction() {
         return auctionDao.getAllAuction();
     }

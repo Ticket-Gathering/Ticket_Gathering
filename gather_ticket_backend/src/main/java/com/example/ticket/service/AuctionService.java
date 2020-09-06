@@ -18,5 +18,6 @@ public interface AuctionService {
     AuctionRecord addNewRecord(Integer userid,Integer aucid);
     Msg check(Integer aucid , Integer userid);
     List<Auction> getAllAuction();
+    void setMessageChecked(Integer userid);
     List<AuctionMessage> getMessageByUser(Integer userid);
 }
