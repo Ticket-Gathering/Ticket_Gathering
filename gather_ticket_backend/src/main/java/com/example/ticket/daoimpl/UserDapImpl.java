@@ -63,6 +63,7 @@ public class UserDapImpl implements UserDao{
         C.setNickname("Anonymous");
         C.setName("Anonymous");
         C.setGender(2);
+        C.setMessageChecked(1);
         userRepository.save(C);
         return C;
     }

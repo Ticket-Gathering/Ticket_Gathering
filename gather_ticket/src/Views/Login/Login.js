@@ -204,6 +204,7 @@ export default class Login extends Component {
                     Cookies.set('userId', response.data.userId)
                     Cookies.set('username', response.data.username)
                     Cookies.set('userType', response.data.userType)
+                    Cookies.set('messageChecked', response.data.message_checked)
                     console.log(window.history)
                     if(typeof (this.props.location.state)!="undefined"&&this.props.location.state.lastUrl){
                         window.history.back(-1)
