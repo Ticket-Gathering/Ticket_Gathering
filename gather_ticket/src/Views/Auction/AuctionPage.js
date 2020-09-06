@@ -57,17 +57,18 @@ export default class ActionPage extends Component {
     }
 
     getPageItem(i) {
-        if (i.length < 1) {
-            return <Result
-                className={page.noResult}
-                icon={<SmileTwoTone />}
-                title="没有找到符合条件的商品。您可以减少筛选条件重新搜索。"
-            />
-        } else {
-            return (i.map((item, index) => {
-                return <PageItem poster={item.show} key={index} data-cy={'pageItem'}/>
-            }))
-        }
+        console.log(i)
+        // if (i.show.length < 1) {
+        //     return <Result
+        //         className={page.noResult}
+        //         icon={<SmileTwoTone />}
+        //         title="没有找到符合条件的商品。您可以减少筛选条件重新搜索。"
+        //     />
+        // } else {
+        //     return (i.show.map((item, index) => {
+        //         return <PageItem poster={item.show} key={index} data-cy={'pageItem'}/>
+        //     }))
+        // }
     }
     componentDidMount() {
         Axios.get(url+'/show/getAllCityWithShowNow').then(
