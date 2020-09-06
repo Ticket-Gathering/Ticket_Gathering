@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.30, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.27, for Win64 (x86_64)
 --
--- Host: localhost    Database: ticket_gathering
+-- Host: localhost    Database: ticket_demo
 -- ------------------------------------------------------
--- Server version	5.7.30-log
+-- Server version	5.7.27-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +14,91 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `auc_message`
+--
+
+DROP TABLE IF EXISTS `auc_message`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auc_message` (
+  `message_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `auction_id` int(11) DEFAULT NULL,
+  `message` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`message_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auc_message`
+--
+
+LOCK TABLES `auc_message` WRITE;
+/*!40000 ALTER TABLE `auc_message` DISABLE KEYS */;
+INSERT INTO `auc_message` VALUES (26,1,1,'拍卖信息已更新，请查看！'),(27,4,1,'拍卖信息已更新，请查看！'),(28,3,1,'拍卖信息已更新，请查看！'),(29,1,1,'拍卖信息已更新，请查看！'),(30,4,1,'拍卖信息已更新，请查看！'),(31,3,1,'拍卖信息已更新，请查看！');
+/*!40000 ALTER TABLE `auc_message` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auc_record`
+--
+
+DROP TABLE IF EXISTS `auc_record`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auc_record` (
+  `record_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `auction_id` int(11) DEFAULT NULL,
+  `record_time` datetime DEFAULT NULL,
+  `record_price` decimal(10,2) DEFAULT NULL,
+  `if_check` int(11) DEFAULT NULL,
+  PRIMARY KEY (`record_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auc_record`
+--
+
+LOCK TABLES `auc_record` WRITE;
+/*!40000 ALTER TABLE `auc_record` DISABLE KEYS */;
+INSERT INTO `auc_record` VALUES (1,1,1,'2020-09-08 16:00:00',700.00,1),(2,2,1,'2020-09-06 16:28:28',1730.00,1),(3,4,1,'2020-09-08 16:00:00',200.00,1),(4,3,1,'2020-09-05 08:00:20',231.00,1);
+/*!40000 ALTER TABLE `auc_record` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auction`
+--
+
+DROP TABLE IF EXISTS `auction`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auction` (
+  `auction_id` int(11) NOT NULL AUTO_INCREMENT,
+  `show_id` varchar(255) DEFAULT NULL,
+  `start_price` double DEFAULT NULL,
+  `step_price` decimal(10,2) DEFAULT NULL,
+  `start_time` varchar(255) DEFAULT NULL,
+  `end_time` varchar(255) DEFAULT NULL,
+  `highest_price` double DEFAULT NULL,
+  `highest_user_id` int(11) DEFAULT NULL,
+  `highest_user_name` int(11) DEFAULT NULL,
+  PRIMARY KEY (`auction_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auction`
+--
+
+LOCK TABLES `auction` WRITE;
+/*!40000 ALTER TABLE `auction` DISABLE KEYS */;
+INSERT INTO `auction` VALUES (1,'1_1_592527005054',100,10.00,'2020-09-01 12:00:00','2020-09-10 13:00:00',1730,2,NULL),(2,'1_1_605015724655',100,10.00,'2020-09-01 12:00:00','2020-09-10 13:00:00',100,NULL,NULL),(3,'1_1_606617772821',100,10.00,'2020-09-01 12:00:00','2020-09-10 13:00:00',100,NULL,NULL),(4,'1_1_620967962521',100,10.00,'2020-09-01 12:00:00','2020-09-10 13:00:00',100,NULL,NULL),(5,'1_1_620996253820',100,10.00,'2020-09-01 12:00:00','2020-09-10 13:00:00',100,NULL,NULL),(6,'1_1_621047508069',100,10.00,'2020-09-01 12:00:00','2020-09-10 13:00:00',100,NULL,NULL),(7,'1_1_621771618665',100,10.00,'2020-09-01 12:00:00','2020-09-10 13:00:00',100,NULL,NULL),(8,'1_1_622078057464',100,10.00,'2020-09-01 12:00:00','2020-09-10 13:00:00',100,NULL,NULL),(9,'1_1_622294069464',100,10.00,'2020-09-01 12:00:00','2020-09-10 13:00:00',100,NULL,NULL),(10,'1_1_622415401822',100,10.00,'2020-09-01 12:00:00','2020-09-10 13:00:00',100,NULL,NULL),(11,'1_1_607255467046',100,10.00,'2020-09-01 12:00:00','2020-09-10 13:00:00',100,NULL,NULL),(12,'1_1_619792315041',100,10.00,'2020-09-01 12:00:00','2020-09-10 13:00:00',100,NULL,NULL),(13,'1_1_620114953331',100,10.00,'2020-09-01 12:00:00','2020-09-10 13:00:00',100,NULL,NULL),(14,'1_1_620140747602',100,10.00,'2020-09-01 12:00:00','2020-09-10 13:00:00',100,NULL,NULL);
+/*!40000 ALTER TABLE `auction` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `category`
@@ -81,6 +166,7 @@ CREATE TABLE `clients_auth` (
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `user_type` int(1) DEFAULT '1',
+  `message_checked` int(11) DEFAULT NULL,
   PRIMARY KEY (`user_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -91,8 +177,30 @@ CREATE TABLE `clients_auth` (
 
 LOCK TABLES `clients_auth` WRITE;
 /*!40000 ALTER TABLE `clients_auth` DISABLE KEYS */;
-INSERT INTO `clients_auth` VALUES (1,'sjw','{FC2LfJDxltzT7+cHDQyulmHbbA4bJ6/Z9AoS7Ond9hE=}adcd6d0bef18ac90ffa6f1827cb3874d',0),(2,'cjx','{hl9x40g1ESmWAQM2WM24gCKT9N3Ced93vtk2LPaDHqE=}4c8529212e3078d4fbbef0d68b59e082',0),(3,'jyf','{Ya7loILDrnWIH+4Rx4ALGfu/5+1uOtJ9yBRP9SFMPqg=}e9cf2e9b25f1fc174db40dcc97e802cc',0),(4,'zyc','{uy8bGCr69G8R7GZyMAc4NWyaNgiRNDJ6cWZcKWJ8WCo=}2e3e8303d5c0e8c0c929588cfb56c819',0),(5,'aaa','{sMyL1bDpx7xcxrTafY50hZ4EjPV+RzrcwwfcLh/E2HA=}6a69d87db1ab20513877e71f02718a40',1);
+INSERT INTO `clients_auth` VALUES (1,'sjw','{FC2LfJDxltzT7+cHDQyulmHbbA4bJ6/Z9AoS7Ond9hE=}adcd6d0bef18ac90ffa6f1827cb3874d',0,NULL),(2,'cjx','{hl9x40g1ESmWAQM2WM24gCKT9N3Ced93vtk2LPaDHqE=}4c8529212e3078d4fbbef0d68b59e082',0,NULL),(3,'jyf','{Ya7loILDrnWIH+4Rx4ALGfu/5+1uOtJ9yBRP9SFMPqg=}e9cf2e9b25f1fc174db40dcc97e802cc',0,NULL),(4,'zyc','{uy8bGCr69G8R7GZyMAc4NWyaNgiRNDJ6cWZcKWJ8WCo=}2e3e8303d5c0e8c0c929588cfb56c819',0,NULL),(5,'aaa','{sMyL1bDpx7xcxrTafY50hZ4EjPV+RzrcwwfcLh/E2HA=}6a69d87db1ab20513877e71f02718a40',1,NULL);
 /*!40000 ALTER TABLE `clients_auth` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hibernate_sequence`
+--
+
+DROP TABLE IF EXISTS `hibernate_sequence`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hibernate_sequence` (
+  `next_val` bigint(20) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hibernate_sequence`
+--
+
+LOCK TABLES `hibernate_sequence` WRITE;
+/*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
+INSERT INTO `hibernate_sequence` VALUES (32),(32);
+/*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -365,4 +473,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-05 16:20:48
+-- Dump completed on 2020-09-06 17:58:25
