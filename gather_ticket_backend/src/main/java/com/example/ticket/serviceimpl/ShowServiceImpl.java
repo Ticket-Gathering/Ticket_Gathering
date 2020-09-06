@@ -61,5 +61,8 @@ public class ShowServiceImpl implements ShowService {
     }
 
     @Override
+    public List<Show> recommendByKeyword(String keyword) { return showDao.recommendByKeyword(keyword);}
+
+    @Override
     public List<Object[]> getPlatformList(String id) { return  showDao.getPlatformList(id); }
 }

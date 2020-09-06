@@ -158,7 +158,7 @@ export default class AboutItem extends Component {
                     </div>
                     <div className={abouti.showSessions}>
                         <div className={abouti.showSessionTag}>平台</div>
-                        <Select value={this.state.selectedPlatform.platform} className={abouti.showPlatform} onVisibleChange={(value) => this.getPlatformList(value)} onChange={(value) => this.goAbout(value)}>
+                        <Select value={this.state.selectedPlatform.platform} placeholder={this.state.selectedPlatform.platform} className={abouti.showPlatform} onVisibleChange={(value) => this.getPlatformList(value)} onChange={(value) => this.goAbout(value)}>
                             {this.state.platformList.map(platform =>
                                 <Select.Option key={platform[1]} label={platform[0]} value={platform[0]}>
                                     <span style={{float: 'left'}}>{platform[0]}</span>
@@ -205,7 +205,7 @@ export default class AboutItem extends Component {
 
                     <div className={abouti.showSessions}>
                         <div className={abouti.showSessionTag}>数量</div>
-                        <InputNumber  defaultValue={1} step="1" min="1" style={{marginLeft: "10px"}} onChange={this.addTicket.bind(this)}  data-cy={'numSelect'}/>
+                        <InputNumber defaultValue={1} step="1" min="1" style={{marginLeft: "10px"}} onChange={this.addTicket.bind(this)}  data-cy={'numSelect'}/>
                     </div>
 
                     <div className={abouti.showSession}>

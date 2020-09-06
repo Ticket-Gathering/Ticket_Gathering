@@ -14,6 +14,7 @@ import Cookies from 'js-cookie'
 import {identityCheck} from "../../Tool/smallTools";
 import {EditableTable} from "../../Components/EditableTable";
 import {url} from "../../Constants/constants"
+import {Link} from "react-router-dom";
 
 const receiverColumns=[
     {
@@ -155,7 +156,8 @@ export default class Self extends Component {
             },
             userList:[],
             isLogged: false,
-            loadSuccess:false
+            loadSuccess:false,
+            orderList:[{},{},{},{},{},{},{},{},{},{}],
         };
         this.changeContent = this.changeContent.bind(this)
         this.logOut = this.logOut.bind(this)
@@ -165,16 +167,16 @@ export default class Self extends Component {
     }
     componentDidMount() {
 
-        if(Cookies.get('userId') !== 'NULL' && Cookies.get('userId') !== null){
-            this.setState({
-                isLogged: true
-            })
-        } else {
-            this.setState({
-                isLogged: false
-            })
-            return;
-        }
+        // if(Cookies.get('userId') !== 'NULL' && Cookies.get('userId') !== null){
+        //     this.setState({
+        //         isLogged: true
+        //     })
+        // } else {
+        //     this.setState({
+        //         isLogged: false
+        //     })
+        //     return;
+        // }
         Axios.get(url+"/getUserById/"+Cookies.get("userId")
         ).then(response => {
             console.log(response);
@@ -312,6 +314,25 @@ export default class Self extends Component {
         ).catch(function (error) {
             console.log(error);
         });
+    }
+    getOrderList(){
+        let data = new FormData();
+        data.append("username", Cookies.get("username"));
+        Axios.post(url+"/getIndentByUser", data)
+            .then(response => {
+                // console.log(typeof(response.data[0].selected_time));
+                this.setState({
+                    orderList: response.data,
+                })
+                this.changeContent({key: "5"})
+            }).catch(function (error) {
+            console.log(error);
+        });
+    }
+    goAbout(record){
+        let i = record.showid;
+        let p = record.platform;
+        this.props.history.push({ pathname: "/about" + `/${i}` + `/${p}`})
     }
 
     SwitchTab(i) {
@@ -453,15 +474,56 @@ export default class Self extends Component {
                 </Content>;
                 break;
             case "5":
+                const columns = [
+                    { title: '演出ID', dataIndex: 'showid', key: 'showid',
+                        render: (value, record) => {
+                            return <a onClick={() => this.goAbout(record)}>{value}</a>
+                        }},
+                    { title: '演出时间', dataIndex: 'selected_time', key: 'selected_time' },
+                    { title: '平台', dataIndex: 'platform', key: 'platform' },
+                    { title: '总价', dataIndex: 'payamount', key: 'payamount' },
+                    { title: '数量', dataIndex: 'num', key: 'num' },
+                    { title: '订单状态', dataIndex: 'order_status', key: 'order_status',
+                        render: (value) => {
+                            switch (value){
+                                case 1:
+                                    return <Tag color="#f50">未支付</Tag>;
+                                case 2:
+                                    return <Tag color="#87d068">已支付</Tag>;
+                                case 3:
+                                    return <Tag color="default">已取消</Tag>;
+                                case 4:
+                                    return <Tag color="default">已超时</Tag>;
+                            }
+                        }
+                    },
+                ]
                 return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
                     <div className={selfstyle.tabBox}>订单管理</div>
                     <div className={selfstyle.line}/>
-                    <div>
-                        <Result
-                            icon={<SmileTwoTone />}
-                            title="您还没有订单哦~"
-                            extra={<Button type="primary">Next</Button>}
-                        />
+                    <div style={{height: '600px'}}>
+                        {this.state.orderList.length === 0?
+                            <Result
+                                icon={<SmileTwoTone />}
+                                title="您还没有订单哦~"
+                                extra={<Button type="primary">Next</Button>}
+                            />:
+                            <div>
+                                <Table
+                                    columns={columns}
+                                    pagination={false}
+                                    expandable={{
+                                        expandedRowRender: record => <div>
+                                            <p style={{ margin: 0 }}>Receiver: {record.receiver_name}</p>
+                                            <p style={{ margin: 0 }}>Tel: {record.receiver_tel}</p>
+                                            <p style={{ margin: 0 }}>Address: {record.receiver_address}</p>
+                                        </div>,
+                                    }}
+                                    dataSource={this.state.orderList}
+                                />
+                            </div>
+                        }
+
                     </div>
                 </Content>;
                 break;
@@ -541,7 +603,7 @@ export default class Self extends Component {
                                                     <Menu.Item key="4" onClick={this.changeContent} data-cy={'收货地址'}>收货地址</Menu.Item>
                                                 </SubMenu>
                                                 <SubMenu key="sub2" title={<span><LaptopOutlined/>交易中心</span>} data-cy={'交易中心'}>
-                                                <Menu.Item key="5" onClick={this.changeContent} data-cy={'订单管理'}>订单管理</Menu.Item>
+                                                <Menu.Item key="5" onClick={this.getOrderList} data-cy={'订单管理'}>订单管理</Menu.Item>
                                                 <Menu.Item key="6" onClick={this.changeContent} data-cy={'我的优惠券'}>我的优惠券</Menu.Item>
                                                 </SubMenu>
                                             {(Cookies.get("userType") === "0") ?

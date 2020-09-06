@@ -2,7 +2,7 @@
 describe('about_Test', function () {
     beforeEach(function () {
         cy.fixture('example.json').as('testCase')
-        cy.visit("/about/1_1_611200540124/京东")
+        cy.visit("/about/1_1_611200540124")
     })
 
     //测试是否能选择票档
@@ -39,7 +39,7 @@ describe('about_Test', function () {
         })
 
         //直接使用数量输入
-        cy.get('.el-input-number > .el-input > .el-input__inner').clear().type('20')
+        cy.get('.el-input__inner').clear().type('20')
         cy.get('[data-cy="price:0"]').then(($el)=>{
             const price=parseInt($el.text().match(/[0-9]+/)[0])
             //dom元素改变有一定延迟
@@ -70,7 +70,7 @@ describe('about_Test', function () {
         cy.get('[data-cy=login]').click();
         //wait防止登录请求被取消
         cy.wait(1000)
-        cy.visit("/about/1_1_611200540124/京东")
+        cy.visit("/about/1_1_611200540124")
         cy.get('[data-cy=buy]').click()
         cy.url().should('include',baseUrl+'/orderConfirm')
     })

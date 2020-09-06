@@ -121,7 +121,7 @@ class About extends Component {
                         </div>
                     </div>
                 </div>
-                <Recommend subCategory={this.state.data.show.sub_category} goAbout={(id, platform) => this.goAbout(id, platform)}/>
+                <Recommend keywords={this.state.data.show.keywords} goAbout={(id, platform) => this.goAbout(id, platform)}/>
                 <Bottom/>
             </div>
         )
