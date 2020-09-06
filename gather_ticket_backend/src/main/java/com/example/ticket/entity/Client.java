@@ -118,7 +118,7 @@ public class Client {
     }
 
     @Basic
-    @Column(name= "messageChecked")
+    @Column(name= "messagechecked")
     public Integer getMessageChecked(){
         return this.messageChecked;
     }
