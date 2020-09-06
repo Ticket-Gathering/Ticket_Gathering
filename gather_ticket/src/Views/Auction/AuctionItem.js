@@ -32,21 +32,6 @@ export default class AuctionItem extends Component {
     };
 
     componentDidMount() {
-        let data = new FormData();
-        if(Cookies.get("userId")!=null){
-        data.append("aucid",1);
-        data.append("userid",Cookies.get("userId"));}
-
-        Axios.post(url+"/auction/check", data
-        ).then((res) => {
-            if(res.data.status===0){
-                this.setState({
-                    ifcheck:1
-                })}
-        }).catch(err => {
-            console.log(err);
-        })
-
         var websocket = null;
         if ('WebSocket' in window) {
             websocket = new WebSocket('ws://localhost:8080/webSocket');
@@ -73,7 +58,6 @@ export default class AuctionItem extends Component {
 
     componentWillReceiveProps(nextProps,nextContext){
         var date = new Date(nextProps.aboutitem.end_time);
-        console.log(date);
         this.setState({
             nowprice:nextProps.aboutitem.highest_Price,
             count:nextProps.aboutitem.highest_Price,
@@ -82,7 +66,22 @@ export default class AuctionItem extends Component {
             step:nextProps.aboutitem.step_price,
             start_price:nextProps.aboutitem.start_price,
             image:nextProps.aboutitem.showDetail.show.img_url,
-            deadline:date
+            deadline:date,
+            aucid:nextProps.aucid,
+        })
+        let data = new FormData();
+        if(Cookies.get("userId")!=null){
+            data.append("aucid",nextProps.aucid);
+            data.append("userid",Cookies.get("userId"));}
+
+        Axios.post(url+"/auction/check", data
+        ).then((res) => {
+            if(res.data.status===0){
+                this.setState({
+                    ifcheck:1
+                })}
+        }).catch(err => {
+            console.log(err);
         })
     };
 
@@ -119,7 +118,7 @@ export default class AuctionItem extends Component {
 
     pay = () => {
         let data = new FormData();
-        data.append("aucid",1);
+        data.append("aucid",this.state.aucid);
         data.append("userid",Cookies.get("userId"));
 
         Axios.post(url+"/auction/addNewRecord", data
@@ -140,7 +139,7 @@ export default class AuctionItem extends Component {
         var str = date.getFullYear().toString()+"-"+(date.getMonth()+1).toString()+"-"+date.getDate().toString()+" "+date.getHours().toString()+":"+date.getMinutes().toString()+":"+date.getMinutes().toString();
         console.log(str);
         if(Cookies.get("userId")!=null){
-            data.append("aucid",1);
+            data.append("aucid",this.state.aucid);
             data.append("userid",Cookies.get("userId"))};
             data.append("price",this.state.count);
             data.append("record_time",str)

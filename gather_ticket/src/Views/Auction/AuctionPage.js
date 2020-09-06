@@ -69,7 +69,7 @@ export default class ActionPage extends Component {
         } else {
             return (i.map((item, index) => {
                 if(!item.show) return ;
-                return <PageItem goAbout={(id, platform)=>this.goAbout(id, platform)} poster={item.show} key={index} data-cy={'pageItem'}/>
+                return <PageItem goAbout={(id, platform)=>this.goAbout(item.aucid, platform)} poster={item.show} key={index} data-cy={'pageItem'}/>
             }))
         }
     }

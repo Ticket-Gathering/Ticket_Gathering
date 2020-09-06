@@ -16,6 +16,6 @@ public interface AuctionDao {
     AuctionRecord updatePrice(Integer aucid, Integer userid, Double price, String record_time) throws ParseException;
     void sendMessage(Integer aucid,Integer userid);
     List<AuctionRecord> findAllRecordByAuctionId(Integer aucid);
-    void setMessage_unChecked(Integer userid);
+    void setMessageUnchecked(Integer userid);
     List<Auction> getAllAuction();
 }

@@ -16,12 +16,13 @@ export default class Auction extends Component {
             data:{},
             detail:{detail:"",images:[],notice0:"",notice1:""},
             introduce: [],
+            aucid:0,
             success:false
         }
     }
     componentDidMount() {
         let data = new FormData();
-        data.append("id",1);
+        data.append("id",this.props.match.params.aid);
 
         Axios.post(url+"/auction/getAuction", data
         ).then((res) => {
@@ -31,6 +32,7 @@ export default class Auction extends Component {
                 detail :res.data.showDetail,
                 start_time:res.data.start_time,
                 end_time:res.data.end_time,
+                aucid:this.props.match.params.aid
             })
         }).catch(err => {
             console.log(err);
@@ -43,7 +45,7 @@ export default class Auction extends Component {
                 <Nav/>
                 <div className={about.base}>
                     <div className={about.briefInfo}>
-                        <AuctionItem aboutitem={this.state.data}/>
+                        <AuctionItem aboutitem={this.state.data} aucid={this.state.aucid}/>
                     </div>
                     <div style={{paddingBottom: "10px"}}>
                         <div className={about.subNavs}>
