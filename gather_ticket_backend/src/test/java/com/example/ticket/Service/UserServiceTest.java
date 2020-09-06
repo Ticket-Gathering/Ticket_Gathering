@@ -102,7 +102,7 @@ public class UserServiceTest {
     @Test
     public void checkUserDuplicate(){
         int status1 = userService.checkUserDuplicate("aaa").getStatus();
-        int status2 = userService.checkUserDuplicate("bbb").getStatus();
+        int status2 = userService.checkUserDuplicate("ccc").getStatus();
 
         assertEquals(0,status2);      //用户名未重复
         assertEquals(-1,status1);     //用户名重复

@@ -66,4 +66,26 @@ public class IndentControllerTest {
                 )
                 .andReturn().getResponse().getContentAsString();   //将相应的数据转换为字符串
     }
+
+    @Test
+    public void getIndentByID() throws Exception{
+        String responseString = mockMvc.perform
+                (
+                        MockMvcRequestBuilders.post("http://localhost/getIndentByID")
+                                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                                .param("order_id","4")
+                )
+                .andReturn().getResponse().getContentAsString();   //将相应的数据转换为字符串
+    }
+
+    @Test
+    public void getIndentByUser() throws Exception{
+        String responseString = mockMvc.perform
+                (
+                        MockMvcRequestBuilders.post("http://localhost/getIndentByUser")
+                                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                                .param("username","sjw")
+                )
+                .andReturn().getResponse().getContentAsString();   //将相应的数据转换为字符串
+    }
 }

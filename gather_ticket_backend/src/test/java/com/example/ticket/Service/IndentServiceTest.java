@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(classes = TicketApplication.class)
@@ -61,5 +63,14 @@ public class IndentServiceTest {
         assertEquals("123",test.getReceiver_tel());
         assertEquals("test",test.getReceiver_address());
         assertEquals(null,test.getSelected_time());
+    }
+
+    @Transactional
+    @Test
+    public void getIndentByUser(){
+        List<Indent> test  = indentService.getIndentByUser("sjw");
+        assertEquals(2,test.size());
+        assertEquals(5,test.get(0).getOrderId());
+        assertEquals(6,test.get(1).getOrderId());
     }
 }

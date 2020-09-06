@@ -40,7 +40,7 @@ public class ShowControllerTest {
     public void getAllCityWithShowNow() throws Exception {
         String responseString = mockMvc.perform
                 (
-                        MockMvcRequestBuilders.get("http://localhost/getAllCityWithShowNow")
+                        MockMvcRequestBuilders.get("http://localhost/show/getAllCityWithShowNow")
                                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 )
                 .andReturn().getResponse().getContentAsString();
@@ -49,7 +49,7 @@ public class ShowControllerTest {
     @Test
     public void getHomepage() throws Exception {
         String responseString = mockMvc.perform(
-                MockMvcRequestBuilders.get("http://localhost/getHomePage")
+                MockMvcRequestBuilders.get("http://localhost/show/getHomePage")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
         )
                 .andReturn().getResponse().getContentAsString();
@@ -59,7 +59,7 @@ public class ShowControllerTest {
     @Test
     public void searchShow() throws Exception {
         String responseString = mockMvc.perform(
-                MockMvcRequestBuilders.get("http://localhost/serchShows")
+                MockMvcRequestBuilders.get("http://localhost/show/serchShows")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("keyword", "上海")
                         .param("category", "1")
@@ -74,11 +74,33 @@ public class ShowControllerTest {
     @Test
     public void recommendByCategory() throws Exception{
         String responseString =mockMvc.perform(
-                MockMvcRequestBuilders.get("http://localhost/recommendByCategory")
+                MockMvcRequestBuilders.get("http://localhost/show/recommendByCategory")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("subCategory","9")
 
         )
         .andReturn().getResponse().getContentAsString();
+    }
+
+    @Test
+    public void recommendByKeyword() throws Exception{
+        String responseString =mockMvc.perform(
+                MockMvcRequestBuilders.get("http://localhost/show/recommendByKeyword")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("keyword","%音乐%")
+
+        )
+                .andReturn().getResponse().getContentAsString();
+    }
+
+    @Test
+    public void getPlatformList() throws Exception{
+        String responseString =mockMvc.perform(
+                MockMvcRequestBuilders.get("http://localhost/show/getPlatformList")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("id","1_1_586941895305")
+
+        )
+                .andReturn().getResponse().getContentAsString();
     }
 }

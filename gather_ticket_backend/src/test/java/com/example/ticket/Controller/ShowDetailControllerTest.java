@@ -40,8 +40,10 @@ public class ShowDetailControllerTest {
     @Test
     public void getDetail() throws  Exception{
         String responseString = mockMvc.perform(
-                MockMvcRequestBuilders.get("http://localhost/getDetail")
+                MockMvcRequestBuilders.get("http://localhost/show/getDetail")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("id", "1_1_607447710935")
+                        .param("platform", "大麦网")
         )
                 .andReturn().getResponse().getContentAsString();
     }
