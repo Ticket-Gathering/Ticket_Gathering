@@ -52,7 +52,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<ClientAuth> getAllUsers(){
+    public List<ClientAuth> getAllUsers()
+    {
         return userDao.getAllUsers();
     }
 

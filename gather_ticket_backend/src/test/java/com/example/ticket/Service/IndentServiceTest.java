@@ -48,8 +48,18 @@ public class IndentServiceTest {
         assertEquals(3,test.getOrder_status());
     }
 
+    @Transactional
     @Test
     public void getIndentByID(){
-
+        Indent test = indentService.getIndentByID(5);
+        assertEquals("sjw",test.getUsername());
+        assertEquals("1_1_180218",test.getShowid());
+        assertEquals(10.0,test.getFacevalue());
+        assertEquals(1,test.getNum());
+        assertEquals(10.0,test.getPayamount());
+        assertEquals("test",test.getReceiver_name());
+        assertEquals("123",test.getReceiver_tel());
+        assertEquals("test",test.getReceiver_address());
+        assertEquals(null,test.getSelected_time());
     }
 }
