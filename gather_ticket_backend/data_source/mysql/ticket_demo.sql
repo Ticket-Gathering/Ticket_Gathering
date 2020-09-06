@@ -50,7 +50,7 @@ CREATE TABLE `clients` (
   `user_id` int(11) NOT NULL,
   `nickname` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `id_num` int(11) DEFAULT NULL,
+  `id_num` varchar(255) DEFAULT NULL,
   `tel` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `birth` date DEFAULT NULL,

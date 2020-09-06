@@ -231,8 +231,9 @@ export default class Self extends Component {
         },()=>{
             //说明之前为true处于编辑状态
             if(!this.state.isEditing){
-                console.log(values.birth.format(dateFormat) )
-                values.birth=values.birth._i
+
+                values.birth=values.birth.format(dateFormat)
+                console.log(values)
                 values.userId=Cookies.get('userId')
                 axios.post(url+'/updateUserDetail',JSON.stringify(values),{headers:{'Content-Type':'application/json'}})
                     .then(
