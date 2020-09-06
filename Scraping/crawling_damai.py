@@ -5,23 +5,17 @@ import csv      # 用于后期文件的保存
 class Spider(object):   # 新式类
     # 构造请求头等   self就是用于存储对象属性的集合，就算没有属性self也是必备的
     def __init__(self,pagenumber):
-        self.url = "https://search.damai.cn/searchajax.html"
+        self.url = "https://search.damai.cn/searchajax.html?order=1&pageSize=30&currPage="+str(pagenumber)
         self.headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36",
-            "cookie": "cna=KlOoFdYAbBwCAXpgKp9obZ4Y; isg=BOTkUmIpZQqUU5HMw-n25G4WteLWfQjnjj6Ltv4FY69yqYRzJo8Zdx9IbUkUcUA_; l=cBLM5Y6uqhvwqAAOBOCZourza779bIRAguPzaNbMi_5pa6L_MmQOkJ_0tFp6cfWd9ELB4VsrWwJ9-etlwIK40mLvCAQF",
-            "referer": "https://search.damai.cn/search.htm?ctl=%20%20%20&order=1&cty="  # 大麦网的分类页面
-        }
-        self.data = {
-            "pageSize": 30,
-            "currPage": pagenumber,
-            "tsg": "0",
-            "order": "1"
+            "cookie": "cna=YUh4F/d5b28CAX1ykESiRMc9; xlly_s=1; XSRF-TOKEN=90624fc6-fb33-4729-83ae-20d99ca7592a; isg=BPv7j-zPIEmBgBy0QsdugUkBit9lUA9SkXpb4u24xfoRTBsudiJLoyDNY-wC02dK; l=eBxC1kIgOOXAYmWiBOfanurza779QIRYsuPzaNbMiOCP_k5p59vdWZPioOT9CnhVh6jD83-WSGYuBeYBq_C-nxv9kdMO8ZHmn; tfstk=citPBIXCa0nPlajIWgsUA2AO1osRZzfh1oWNrex_TOAUWMQliJPdnxNd395tmaf..",
+            "referer": "https://search.damai.cn/search.htm?order=1"  # 大麦网的分类页面
         }
         self.data_key = None
 
     # 请求url获取响应
     def get(self):
-        response = requests.post(url=self.url, headers=self.headers, data=self.data)
+        response = requests.get(url=self.url, headers=self.headers)
         # 测试  print(response.text)
         return response
 
@@ -68,7 +62,7 @@ class Spider(object):   # 新式类
 
 if __name__ == '__main__':
 
-    for num in range(1,48):
+    for num in range(1,2):
        spider = Spider(num)
        spider.parse()
        spider.save()

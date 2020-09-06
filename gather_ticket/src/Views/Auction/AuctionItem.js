@@ -4,28 +4,89 @@ import Sign from "./Sign";
 import { Statistic, Row, Col } from 'antd';
 import { Divider ,Button} from 'antd';
 import { InputNumber, Tag } from 'element-react';
+import Axios from "../../Module/Axios";
+import {url} from "../../Constants/constants";
+import Cookies from "js-cookie"
+import ErrorPage from "../Error/ErrorPage";
+
 
 const { Countdown } = Statistic;
-const deadline = Date.now() + 1000 * 60 * 60;
 
-function onFinish() {
-    console.log('finished!');
-}
-
-export default class auctionItem extends Component {
+export default class AuctionItem extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            count: 1000,     //出价
-            nowprice:1000,   //当前拍卖价
-            step: 10,        //加价幅度
-            ifcheck:0,       //当前用户是否交了保证金
+            count: null,
+            nowprice: null,
+            image:null,
+            step: null,
+            ifcheck: 0,
+            start_time:null,
+            end_time:null,
+            start_price:null,
+            deadline:null,
+
         }
         this.cadd = this.cadd.bind(this);
         this.cmil = this.cmil.bind(this);
+    };
+
+    componentDidMount() {
+        let data = new FormData();
+        if(Cookies.get("userId")!=null){
+        data.append("aucid",1);
+        data.append("userid",Cookies.get("userId"));}
+
+        Axios.post(url+"/auction/check", data
+        ).then((res) => {
+            if(res.data.status===0){
+                this.setState({
+                    ifcheck:1
+                })}
+        }).catch(err => {
+            console.log(err);
+        })
+
+        var websocket = null;
+        if ('WebSocket' in window) {
+            websocket = new WebSocket('ws://localhost:8080/webSocket');
+        } else {
+            alert('该浏览器不支持websocket!');
+        }
+        websocket.onopen = function (event) {
+            // console.log('建立连接');
+        }
+        websocket.onclose = function (event) {
+            // console.log('连接关闭');
+        }
+        websocket.onmessage = function (event) {
+            console.log(JSON.parse(event.data));
+            var obj = JSON.parse(event.data);
+            this.setState({
+                count:obj.highest_price,
+                nowprice:obj.highest_price,
+                highest_user_id:obj.highest_user_id
+            })
+        }.bind(this)
+
     }
 
-    cmil() {
+    componentWillReceiveProps(nextProps,nextContext){
+        var date = new Date(nextProps.aboutitem.end_time);
+        console.log(date);
+        this.setState({
+            nowprice:nextProps.aboutitem.highest_Price,
+            count:nextProps.aboutitem.highest_Price,
+            start_time:nextProps.aboutitem.start_time,
+            end_time:nextProps.aboutitem.end_time,
+            step:nextProps.aboutitem.step_price,
+            start_price:nextProps.aboutitem.start_price,
+            image:nextProps.aboutitem.showDetail.show.img_url,
+            deadline:date
+        })
+    };
+
+    cmil=()=> {
         let n = this.state.count;
         let m = this.state.nowprice;
         let b = this.state.step;
@@ -40,10 +101,11 @@ export default class auctionItem extends Component {
 
     }
 
-    cadd() {
+    cadd=()=> {
+        console.log("+");
         let a = this.state.count;
         let b = this.state.step;
-        a += b;
+        a = a+b;
         this.setState({
                 count: a
             })
@@ -56,13 +118,49 @@ export default class auctionItem extends Component {
     }
 
     pay = () => {
-        console.log('test');
-        this.setState({ifcheck:1})
+        let data = new FormData();
+        data.append("aucid",1);
+        data.append("userid",Cookies.get("userId"));
+
+        Axios.post(url+"/auction/addNewRecord", data
+        ).then((res) => {
+            if(res.data!=null){
+                console.log(res.data);
+                this.setState({
+                    ifcheck:1
+                })}
+        }).catch(err => {
+            console.log(err);
+        })
     };
 
-    bid = (e) => {
-        this.setState({nowprice:e})
-    };
+    bid =()=> {
+        let data = new FormData();
+        var date = new Date();
+        var str = date.getFullYear().toString()+"-"+(date.getMonth()+1).toString()+"-"+date.getDate().toString()+" "+date.getHours().toString()+":"+date.getMinutes().toString()+":"+date.getMinutes().toString();
+        console.log(str);
+        if(Cookies.get("userId")!=null){
+            data.append("aucid",1);
+            data.append("userid",Cookies.get("userId"))};
+            data.append("price",this.state.count);
+            data.append("record_time",str)
+
+        Axios.post(url+"/auction/updatePrice", data
+        ).then((res) => {
+            if(res.data.status===0){
+                this.setState({
+                    ifcheck:1
+                })}
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    change=(e)=>{
+        this.setState({
+            count:e
+        });
+    }
 
     renderButton = () =>  {
         if (!this.state.ifcheck) {
@@ -71,9 +169,20 @@ export default class auctionItem extends Component {
             );
         }
         return (
-            <Button className={abouti.sub} onClick={this.bid(1010)}>出价</Button>
+            <Button className={abouti.sub} onClick={()=>this.bid()}>出价</Button>
         );
     };
+
+    renderButton2=()=>{
+        if (!this.state.ifcheck) {
+            return(
+                <Button className={abouti.sub} onClick={this.pay}>报名交保证金</Button>
+            );
+        }
+        return (
+            <Button className={abouti.sub} disabled>报名交保证金</Button>
+        );
+    }
 
     renderRemind = () =>  {
         if (!this.state.ifcheck) {
@@ -94,7 +203,7 @@ export default class auctionItem extends Component {
                     <div className={abouti.left}>
                         <div className={abouti.righttop}>【杭州】「初夏人生」嘻哈派对</div>
                         <div className={abouti.leftt}>
-                            <img className={abouti.leftti} src={require('./try1.webp')} />
+                            <img className={abouti.leftti} src={this.state.image} />
                             <div className={abouti.leftts}>
                                 <Sign/>
                             </div>
@@ -105,7 +214,7 @@ export default class auctionItem extends Component {
                         <div className={abouti.rightbtime}>
                             <Row gutter={24}>
                                 <Col span={24} style={{ marginTop: 32 }}>
-                                    <Countdown title="拍卖倒计时" value={deadline} format="D 天 H 时 m 分 s 秒" />
+                                    <Countdown title="拍卖倒计时" value={this.state.deadline} format="D 天 H 时 m 分 s 秒" />
                                 </Col>
                             </Row>
                             <Row style={{ marginLeft: 40}}>
@@ -121,18 +230,18 @@ export default class auctionItem extends Component {
                         <div className={abouti.rightbtime}>
                             <div className={abouti.rightbtimel}>当前价</div>
                             <div className={abouti.sum}>
-                                ￥1000
+                                ￥{this.state.nowprice}
                             </div>
-                            <Tag style={{backgroundColor:"#f36", color:"white"}}>出价人:cjx12138</Tag>
+                            <Tag style={{backgroundColor:"#f36", color:"white"}}>出价人:{this.state.highest_user_id}</Tag>
                         </div>
                         <div className={abouti.rightInfo}>
                             <div className={abouti.rightbtimel}>出价</div>
                             <div className={abouti.rightbtimer}>
-                                <InputNumber defaultValue={1000} step="10" min="1000"/>
+                                <InputNumber defaultValue={this.state.nowprice} step={this.state.step} min={this.state.nowprice}  onChange={(value)=>this.change(value)}/>
                             </div>
                         </div>
                         <div className={abouti.rightInfo}>
-                            <Button className={abouti.sub} onClick={this.pay}>报名交保证金</Button>
+                            {this.renderButton2()}
                         </div>
                         <div className={abouti.rightInfo}>
                             {this.renderButton()}
@@ -146,24 +255,16 @@ export default class auctionItem extends Component {
                             <div>大麦拍卖</div>
                             <Divider type="vertical" className={abouti.vertDiv} />
                             <div>当前 18 人 报名</div>
-                            <Divider type="vertical" className={abouti.vertDiv} />
-                            <div> 717 人 设置提醒</div>
-                            <Divider type="vertical" className={abouti.vertDiv} />
-                            <div> 25399 次 围观</div>
                         </div>
                         <div className={abouti.rightbtime}>
-                            <div>起拍价: 1000 元</div>
+                            <div>起拍价: {this.state.start_price} 元</div>
                             <Divider type="vertical" className={abouti.vertDiv}/>
-                            <div>加价幅度： 10 元</div>
-                            <Divider type="vertical" className={abouti.vertDiv} />
-                            <div>类 型： 拍卖</div>
+                            <div>加价幅度： {this.state.step} 元</div>
                         </div>
                         <div className={abouti.rightbtime}>
                             <div>保证金: 200 元</div>
                             <Divider type="vertical" className={abouti.vertDiv} />
                             <div>竞价周期： 3 天</div>
-                            <Divider type="vertical" className={abouti.vertDiv} />
-                            <div>优先购买权人： 无</div>
                         </div>
                         <div className={abouti.rightbtime}>
                             <div>评估价: 1200 元</div>
