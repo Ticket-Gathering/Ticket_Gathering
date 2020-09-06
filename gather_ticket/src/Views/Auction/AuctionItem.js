@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import abouti from "./auctionItem.module.css";
+import abouti from "./AuctionItem.module.css";
 import Sign from "./Sign";
 import { Statistic, Row, Col } from 'antd';
 import { Divider ,Button} from 'antd';
@@ -23,9 +23,63 @@ export default class auctionItem extends Component {
         }
         this.cadd = this.cadd.bind(this);
         this.cmil = this.cmil.bind(this);
+    };
+
+    componentDidMount() {
+        var websocket = null;
+        if ('WebSocket' in window) {
+            websocket = new WebSocket('ws://18.232.87.97:8080/webSocket');
+        } else {
+            alert('该浏览器不支持websocket!');
+        }
+        websocket.onopen = function (event) {
+             console.log('建立连接');
+        }
+        websocket.onclose = function (event) {
+            console.log('连接关闭');
+        }
+        websocket.onmessage = function (event) {
+            console.log(JSON.parse(event.data));
+            var obj = JSON.parse(event.data);
+            this.setState({
+                count:obj.highest_price,
+                nowprice:obj.highest_price,
+                highest_user_id:obj.highest_user_id
+            })
+        }.bind(this)
+
     }
 
-    cmil() {
+    componentWillReceiveProps(nextProps,nextContext){
+        var date = new Date(nextProps.aboutitem.end_time);
+        this.setState({
+            nowprice:nextProps.aboutitem.highest_Price,
+            count:nextProps.aboutitem.highest_Price,
+            start_time:nextProps.aboutitem.start_time,
+            end_time:nextProps.aboutitem.end_time,
+            step:nextProps.aboutitem.step_price,
+            start_price:nextProps.aboutitem.start_price,
+            image:nextProps.aboutitem.showDetail.show.img_url,
+            deadline:date,
+            aucid:nextProps.aucid,
+        })
+        let data = new FormData();
+        if(Cookies.get("userId")!=null){
+            data.append("aucid",nextProps.aucid);
+            data.append("userid",Cookies.get("userId"));}
+
+        Axios.post(url+"/auction/check", data
+        ).then((res) => {
+            if(res.data.status===0){
+                this.setState({
+                    ifcheck:1
+                })}
+        }).catch(err => {
+            console.log(err);
+        })
+    };
+
+    cmil=()=> {
         let n = this.state.count;
         let m = this.state.nowprice;
         let b = this.state.step;
@@ -56,13 +110,49 @@ export default class auctionItem extends Component {
     }
 
     pay = () => {
-        console.log('test');
-        this.setState({ifcheck:1})
+        let data = new FormData();
+        data.append("aucid",this.state.aucid);
+        data.append("userid",Cookies.get("userId"));
+
+        Axios.post(url+"/auction/addNewRecord", data
+        ).then((res) => {
+            if(res.data!=null){
+                console.log(res.data);
+                this.setState({
+                    ifcheck:1
+                })}
+        }).catch(err => {
+            console.log(err);
+        })
     };
 
-    bid = (e) => {
-        this.setState({nowprice:e})
-    };
+    bid =()=> {
+        let data = new FormData();
+        var date = new Date();
+        var str = date.getFullYear().toString()+"-"+(date.getMonth()+1).toString()+"-"+date.getDate().toString()+" "+date.getHours().toString()+":"+date.getMinutes().toString()+":"+date.getMinutes().toString();
+        console.log(str);
+        if(Cookies.get("userId")!=null){
+            data.append("aucid",this.state.aucid);
+            data.append("userid",Cookies.get("userId"))};
+            data.append("price",this.state.count);
+            data.append("record_time",str)
+
+        Axios.post(url+"/auction/updatePrice", data
+        ).then((res) => {
+            if(res.data.status===0){
+                this.setState({
+                    ifcheck:1
+                })}
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    change=(e)=>{
+        this.setState({
+            count:e
+        });
+    }
 
     renderButton = () =>  {
         if (!this.state.ifcheck) {

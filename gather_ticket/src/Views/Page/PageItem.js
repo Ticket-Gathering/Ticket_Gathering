@@ -6,16 +6,11 @@ import {Tag} from "antd";
 class Poster extends Component {
     constructor(props) {
         super(props)
-        this.goAbout = this.goAbout.bind(this);
     }
-
-    goAbout() {
-        console.log(this.props.poster)
-        let i = this.props.poster.showId;
-        let p = this.props.poster.platform;
-        this.props.history.push({ pathname: "/about" + `/${i}` + `/${p}`})
+    goAbout(item){
+        console.log(item.platform);
+        this.props.goAbout(item.showId, item.platform);
     }
-
     render() {
         switch (this.props.poster.show_status) {
             case 1:
@@ -58,8 +53,8 @@ class Poster extends Component {
                 break
         }
         return (
-            <div className={pagePoster.showContainer} data-cy={this.props['data-cy']}>
-                <div className={pagePoster.showImgContainer} onClick={this.goAbout} data-cy={'pageItem-goodsImg'}>
+            <div className={pagePoster.showContainer} onClick={()=>this.goAbout(this.props.poster)} data-cy={this.props['data-cy']}>
+                <div className={pagePoster.showImgContainer} data-cy={'pageItem-goodsImg'}>
                     <img src={this.props.poster.img_url} className={pagePoster.showImg}/>
                     <Tag className={pagePoster.showType} color={'#e62958'} data-cy={'pageItem-type'}>{this.props.poster.category.category}</Tag>
                 </div>

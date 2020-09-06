@@ -1,39 +1,43 @@
 import React, { Component } from 'react';
 import Nav from "../../Components/Nav";
-import AboutItem from "./auctionItem";
-import Paper from "./Paper";
-import about from "./auction.module.css";
-import Poster from "../Home/posterItem";
+import AuctionItem from "./AuctionItem";
+import about from "./Auction.module.css";
 import Axios from "../../Module/Axios";
 import Bottom from "../../Components/Bottom";
-
-const Data = {timelist:['2020.08.02 周六 20:00','2020.08.02 周日 20:00' ],pricelist:['100票面 预售票','120票面 全价票','188票面 双人票'],billtype:{chooice:1,getter:1,type:1}};
+import {url} from "../../Constants/constants";
+import ErrorPage from "../Error/ErrorPage";
+import {Button} from "antd";
+import abouti from "./AuctionItem.module.css";
 
 export default class Auction extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: { timelist: [], pricelist: [], billtype: {} },
-            introduce: []
+            data:{},
+            detail:{detail:"",images:[],notice0:"",notice1:""},
+            introduce: [],
+            aucid:0,
+            success:false
         }
 
     }
     componentDidMount() {
-        // let i = this.props.match.params.aid;
-        // Axios.get("/about/getAbout", { params: { aid: i } }).then((res) => {
-        //     res.data[0].timelist = JSON.parse(res.data[0].timelist);
-        //     res.data[0].pricelist = JSON.parse(res.data[0].pricelist);
-        //     res.data[0].billtype = JSON.parse(res.data[0].billtype);
-        //     console.log(res.data[0]);
-        //     this.setState({
-        //         data: res.data[0]
-        //     });
-        //     this.getIntroduce(res.data[0].address);
-        // })
-        //     .catch(err => {
-        //         console.log(err);
-        //     })
-        this.setState({data:Data});
+        let data = new FormData();
+        data.append("id",this.props.match.params.aid);
+
+        Axios.post(url+"/auction/getAuction", data
+        ).then((res) => {
+            console.log(res.data)
+            this.setState({
+                data : res.data,
+                detail :res.data.showDetail,
+                start_time:res.data.start_time,
+                end_time:res.data.end_time,
+                aucid:this.props.match.params.aid
+            })
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     // getIntroduce() {
@@ -56,21 +60,14 @@ export default class Auction extends Component {
         return (
             <div className={about.about}>
                 <Nav/>
-                <div className={about.format}>
-                    <div className={about.left}>
-
-                        <AboutItem aboutitem={this.state.data}/>
-                        <div className={about.leftb}>
-                            <div className={about.leftbt}>
-                                <div className={about.leftbtb}>
-                                    <a href="#xmxq">项目详情</a>
-                                </div>
-                                <div className={about.leftbtb}>
-                                    <a href="#gpxz">购票须知</a>
-                                </div>
-                                <div className={about.leftbtb}>
-                                    <a href="#gyxz">观演须知</a>
-                                </div>
+                <div className={about.base}>
+                    <div className={about.briefInfo}>
+                        <AuctionItem aboutitem={this.state.data} aucid={this.state.aucid}/>
+                    </div>
+                    <div style={{paddingBottom: "10px"}}>
+                        <div className={about.subNavs}>
+                            <div className={about.subNav}>
+                                <a href="#xmxq">项目详情</a>
                             </div>
                             <div className={about.leftbb} id="xmxq">
                                 <div className={about.subtitle}>温馨提示</div>

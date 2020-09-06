@@ -116,4 +116,15 @@ public class Client {
     public void setTicketHolderList(List<TicketHolder> ticketHolderList) {
         this.ticketHolderList = ticketHolderList;
     }
+
+    @Column(name= "messagechecked")
+    private int messageChecked;
+    public void setMessageChecked(int message_checked){
+        this.messageChecked=message_checked;
+    }
+    public Integer getMessageChecked(){
+        return this.messageChecked;
+    }
 }
+
+
