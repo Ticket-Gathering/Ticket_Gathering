@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Nav from "../../Components/Nav";
-import AboutItem from "./auctionItem";
+import AboutItem from "./AuctionItem";
 import Paper from "./Paper";
-import about from "./auction.module.css";
+import about from "./Auction.module.css";
 import Poster from "../Home/posterItem";
 import Axios from "../../Module/Axios";
 import Bottom from "../../Components/Bottom";
