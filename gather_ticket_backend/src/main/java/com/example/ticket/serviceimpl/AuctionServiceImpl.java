@@ -93,4 +93,9 @@ public class AuctionServiceImpl implements AuctionService {
         return auctionDao.getAllAuction();
     }
 
+    @Override
+    public List<AuctionMessage> getMessageByUser(Integer userid) {
+        return auctionDao.getMessageByUser(userid);
+    }
+
 }

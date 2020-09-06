@@ -141,4 +141,9 @@ public class AuctionDaoImpl implements AuctionDao {
         }
         return auctionList;
     }
+
+    @Override
+    public List<AuctionMessage> getMessageByUser(Integer userid) {
+        return auctionMessageRepository.findAllByUserId(userid);
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.ticket.service;
 
 import com.example.ticket.entity.Auction;
+import com.example.ticket.entity.AuctionMessage;
 import com.example.ticket.entity.AuctionRecord;
 import com.example.ticket.utils.msgutils.Msg;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,4 +18,5 @@ public interface AuctionService {
     AuctionRecord addNewRecord(Integer userid,Integer aucid);
     Msg check(Integer aucid , Integer userid);
     List<Auction> getAllAuction();
+    List<AuctionMessage> getMessageByUser(Integer userid);
 }
