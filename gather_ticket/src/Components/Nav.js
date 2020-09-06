@@ -17,6 +17,7 @@ export default class nav extends Component {
             cityValue:'全国',
             username: 'test',
             isLoggedIn:false,
+            messageCheck: 0,
             AllCity:[]
         }
     };
@@ -26,6 +27,13 @@ export default class nav extends Component {
             this.setState({
                 username: Cookies.get('username'),
                 isLoggedIn:true
+            })
+            Axios.get(url + "/getUserById/" + userId).then(res => {
+                console.log(userId);
+                console.log(res)
+                this.setState({
+                    messageCheck: res.data.messageCheck,
+                })
             })
         }else{
             this.setState({
@@ -108,7 +116,7 @@ export default class nav extends Component {
                         <div className={navstyle.loginbox}>
                             <div className={navstyle.logintext}>
                                 欢迎您！
-                                {Cookies.get("messageChecked") === 1?
+                                {this.state.messageChecked === 1?
                                     <Badge isDot style={{color: "#ff3366"}}>
                                         <Link to="/self" data-cy={'self'}>{this.state.username}</Link>
                                     </Badge>:

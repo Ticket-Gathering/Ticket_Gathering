@@ -31,7 +31,7 @@ public class Client {
     private String email;
     private int gender;
     private String IdNum;
-
+    private int messageChecked;
 //    @JsonFormat(pattern = "yyyy-MM-dd", timezone="GMT+8")
 //    @DateTimeFormat(pattern = "yyyy-MM-dd" )
     private Date birth;
@@ -117,14 +117,15 @@ public class Client {
         this.ticketHolderList = ticketHolderList;
     }
 
+    @Basic
     @Column(name= "messageChecked")
-    private int messageChecked;
-    public void setMessageChecked(int message_checked){
-        this.messageChecked=message_checked;
-    }
     public Integer getMessageChecked(){
         return this.messageChecked;
     }
+    public void setMessageChecked(int message_checked){
+        this.messageChecked=message_checked;
+    }
+
 }
 
 
