@@ -8,19 +8,30 @@ export default class Recommend extends Component{
     constructor(props) {
         super(props)
         this.state = {
-            recmdList:[{venue:{},category:{}}],
+            recmdList:[],
         }
     }
     componentDidMount()
      {
-         Axios.get(url+"/show/recommendByCategory/"+this.props.subCategory)
-             .then(response => {
-                 this.setState({
-                     recmdList:response.data
-                 })
-             }).catch(err => {
-             console.log(err);
-         })
+         let keywords = this.props.keywords.split(" ");
+         let num = keywords.length;
+         let i = 0;
+         console.log(keywords);
+         while( i < keywords.length){
+             if(this.state.recmdList.length >= 6) break;
+             let data = new FormData();
+             data.append("keyword", keywords[i]);
+             Axios.post(url+"/show/recommendByKeyword/", data)
+                 .then(response => {
+                     let tmpList = this.state.recmdList;
+                     this.setState({
+                         recmdList:tmpList.concat(response.data)
+                     })
+                 }).catch(err => {
+                 console.log(err);
+             })
+             i++;
+         }
     }
     goAbout(item){
         console.log(item.platform);
@@ -36,7 +47,7 @@ export default class Recommend extends Component{
                         <div className={about.line}/>
                     </div>
                 </div>
-                {this.state.recmdList.map((item, index) => {
+                {this.state.recmdList.slice(0,6).map((item, index) => {
                     return(
                         <div className={recommend.itemBox} onClick={this.goAbout.bind(this, item)}>
                             <div className={recommend.poster}>

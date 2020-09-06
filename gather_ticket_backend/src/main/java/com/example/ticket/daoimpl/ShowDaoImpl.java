@@ -60,6 +60,9 @@ public class ShowDaoImpl implements ShowDao {
     }
 
     @Override
+    public List<Show> recommendByKeyword(String keyword) { return showRepository.recommendByKeyword(keyword);}
+
+    @Override
     public List<Object[]> getPlatformList(String id) {
         return showRepository.getPlatformList(id);
     };

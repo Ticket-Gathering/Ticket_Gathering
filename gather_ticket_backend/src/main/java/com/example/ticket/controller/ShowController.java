@@ -50,6 +50,11 @@ public class ShowController {
         return showService.recommendByCategory(subCategory);
     }
 
+    @RequestMapping("/show/recommendByKeyword")
+    public List<Show> recommendByKeyword(@RequestParam("keyword") String keyword){
+        return showService.recommendByKeyword("%"+keyword+"%");
+    }
+
     @RequestMapping("/show/getPlatformList/{id}")
     public List<Object[]> getPlatformList(@PathVariable("id") String id){
         return  showService.getPlatformList(id);

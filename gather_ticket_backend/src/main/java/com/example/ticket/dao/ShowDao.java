@@ -16,4 +16,5 @@ public interface ShowDao {
      List<Show> findByAllFactor(String keyword,Integer categoryid,String cityname,Integer subid,Integer pagesize,Integer currentsize);
      List<Show> recommendByCategory(int subCategory);
      List<Object[]> getPlatformList(String id);
+     List<Show> recommendByKeyword(String keyword);
 }
