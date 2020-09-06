@@ -53,7 +53,7 @@ public class AuctionServiceImpl implements AuctionService {
                     System.out.println(aucid);
                     System.out.println(user_id);
                     auctionDao.sendMessage(aucid,user_id);
-                    auctionDao.setMessage_unChecked(user_id);
+                    auctionDao.setMessageUnchecked(user_id);
                 }
             }
 

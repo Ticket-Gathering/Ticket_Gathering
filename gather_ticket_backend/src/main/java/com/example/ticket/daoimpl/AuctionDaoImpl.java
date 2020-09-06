@@ -30,7 +30,7 @@ public class AuctionDaoImpl implements AuctionDao {
     ShowDetailRepository showDetailRepository;
 
     @Autowired
-    UserAuthRepository userAuthRepository;
+    UserRepository userRepository;
 
     @Autowired
     ShowRepository showRepository;
@@ -125,10 +125,10 @@ public class AuctionDaoImpl implements AuctionDao {
     }
 
     @Override
-    public void setMessage_unChecked(Integer userid) {
-        ClientAuth clientAuth=userAuthRepository.getOne(userid);
-        clientAuth.setMessage_checked(0);
-        userAuthRepository.save(clientAuth);
+    public void setMessageUnchecked(Integer userid) {
+        Client client=userRepository.getOne(userid);
+        client.setMessageChecked(0);
+        userRepository.save(client);
     }
 
     @Override
