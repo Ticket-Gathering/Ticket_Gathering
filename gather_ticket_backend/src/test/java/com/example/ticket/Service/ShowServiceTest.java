@@ -22,17 +22,17 @@ public class ShowServiceTest {
     @Autowired
     private ShowService showService;
 
-    @Test
-    public void getHomePageTest(){
-        List<List<Show>> expect = showService.getHomePage();
-        Integer expectCatNumber = expect.size();
-        assertEquals(8,expectCatNumber);
-        for(List<Show> list : expect )
-        {
-            Integer expectNumberPerCat=list.size();
-            assertEquals(7,expectNumberPerCat);
-        }
-    }
+//    @Test
+//    public void getHomePageTest(){
+//        List<List<Show>> expect = showService.getHomePage();
+//        Integer expectCatNumber = expect.size();
+//        assertEquals(8,expectCatNumber);
+//        for(List<Show> list : expect )
+//        {
+//            Integer expectNumberPerCat=list.size();
+//            assertEquals(7,expectNumberPerCat);
+//        }
+//    }
 
     @Test
     public void searchShowTest1(){

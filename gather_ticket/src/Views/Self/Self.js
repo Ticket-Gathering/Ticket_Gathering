@@ -135,7 +135,7 @@ const couponData = [
     },
 ];
 const { Panel } = Collapse;
-const dateFormat = 'YYYY/MM/DD';
+const dateFormat = 'YYYY-MM-DD';
 const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
 
@@ -164,8 +164,6 @@ export default class Self extends Component {
         this.showAllUsers = this.showAllUsers.bind(this)
         this.blockUser = this.blockUser.bind(this)
         this.unblockUser = this.unblockUser.bind(this)
-        this.getOrderList = this.getOrderList.bind(this)
-        this.goAbout = this.goAbout.bind(this)
     }
     componentDidMount() {
 
@@ -190,7 +188,9 @@ export default class Self extends Component {
             }
             this.setState({
                 client : response.data,
-                loadSuccess:true
+            },()=>{this.setState({
+                    loadSuccess:true
+                })
             })
         }).catch(function (error) {
             console.log(error);
@@ -234,8 +234,9 @@ export default class Self extends Component {
             //说明之前为true处于编辑状态
             console.log(values)
             if(!this.state.isEditing){
-                // console.log(values.birth)
-                values.birth=values.birth._i
+
+                values.birth=values.birth.format(dateFormat)
+                console.log(values)
                 values.userId=Cookies.get('userId')
                 axios.post(url+'/updateUserDetail',JSON.stringify(values),{headers:{'Content-Type':'application/json'}})
                     .then(
@@ -252,7 +253,9 @@ export default class Self extends Component {
         })
     }
     ditchEdition(){
-
+        this.setState({
+            isEditing:false
+        })
     }
 
     blockUser(idx){
@@ -399,9 +402,9 @@ export default class Self extends Component {
                             {this.state.isEditing?
                                 <div><Button
                                     type="primary"
+                                    htmlType="submit"
                                     className={selfstyle.button}
                                     style={{backgroundColor: '#ff3366', marginRight:"20px"}}
-                                    onClick={this.updateUser.bind(this)}
                                 >
                                     保存
                                 </Button>
@@ -412,8 +415,6 @@ export default class Self extends Component {
                                     取消
                                 </Button></div>:
                                 <Button
-                                    type="primary"
-                                    htmlType={"submit"}
                                     className={selfstyle.button}
                                     style={this.state.isEditing?{backgroundColor: '#ff3366'}:{backgroundColor: '#0088D6'}}
                                     onClick={this.editUser.bind(this)}
