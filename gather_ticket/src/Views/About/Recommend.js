@@ -9,6 +9,7 @@ export default class Recommend extends Component{
         super(props)
         this.state = {
             recmdList:[],
+            recmdIdList:new Set(),
         }
     }
     componentDidMount()
@@ -17,15 +18,26 @@ export default class Recommend extends Component{
          let num = keywords.length;
          let i = 0;
          console.log(keywords);
-         while( i < keywords.length){
+         while( i < keywords.length ){
              if(this.state.recmdList.length >= 6) break;
              let data = new FormData();
              data.append("keyword", keywords[i]);
              Axios.post(url+"/show/recommendByKeyword/", data)
                  .then(response => {
                      let tmpList = this.state.recmdList;
+                     let tmpIdList = this.state.recmdIdList;
+                     console.log(response.data.length);
+                     response.data.forEach((item) => {
+                         // console.log(item);
+                         if(!tmpIdList.has(item.showId)){
+                             tmpList.push(item);
+                             tmpIdList.add(item.showId);
+                         }
+                     });
+
                      this.setState({
-                         recmdList:tmpList.concat(response.data)
+                         recmdList:tmpList,
+                         recmdIdList:tmpIdList
                      })
                  }).catch(err => {
                  console.log(err);

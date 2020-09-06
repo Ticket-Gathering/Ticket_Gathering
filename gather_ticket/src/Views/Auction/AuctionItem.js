@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import abouti from "./auctionItem.module.css";
+import abouti from "./AuctionItem.module.css";
 import Sign from "./Sign";
 import { Statistic, Row, Col } from 'antd';
 import { Divider ,Button} from 'antd';

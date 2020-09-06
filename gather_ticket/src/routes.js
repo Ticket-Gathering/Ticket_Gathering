@@ -3,9 +3,10 @@ import Login from './Views/Login/Login';
 import Self from './Views/Self/Self';
 import Page from './Views/Page/Page';
 import About from './Views/About/About';
-import Auction from './Views/Auction/auction';
+import Auction from './Views/Auction/Auction';
 import OrderConfirm from "./Views/Order/OrderConfirm";
 import OrderPay from "./Views/Order/OrderPay";
+import ActionPage from "./Views/Auction/AuctionPage";
 
 const routes = [
     {
@@ -31,6 +32,10 @@ const routes = [
         path: '/about/:aid/:platform',
         component: About
 
+    },
+    {
+        path: '/auctionPage',
+        component: ActionPage
     },
     {
         path: '/auction/:aid',

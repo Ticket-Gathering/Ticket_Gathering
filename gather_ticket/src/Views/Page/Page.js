@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Nav from "../../Components/Nav";
 import Bottom from "../../Components/Bottom";
 import page from "./Page.module.css";
@@ -7,7 +7,7 @@ import PageItem from "./PageItem";
 import {categoryMap} from './categoryMap'
 import qs from 'qs'
 import 'antd/dist/antd.css';
-import { Pagination, Result, Button,DatePicker} from 'antd';
+import {Button, DatePicker, Result} from 'antd';
 import {SmileTwoTone} from "@ant-design/icons";
 import LeftOutlined from "@ant-design/icons/lib/icons/LeftOutlined";
 import RightOutlined from "@ant-design/icons/lib/icons/RightOutlined";
@@ -77,6 +77,9 @@ export default class Page extends Component {
             }
         )
     }
+    goAbout(id, platform) {
+        this.props.history.push({ pathname: "/about" + `/${id}` + `/${platform}`})
+    }
     getPageItem(i) {
         if (i.length < 1) {
             return <Result
@@ -86,7 +89,7 @@ export default class Page extends Component {
             />
         } else {
             return (i.map((item, index) => {
-                return <PageItem poster={item} key={index} data-cy={'pageItem'}/>
+                return <PageItem goAbout={(id, platform)=>this.goAbout(id, platform)} poster={item} key={index} data-cy={'pageItem'}/>
             }))
         }
     }

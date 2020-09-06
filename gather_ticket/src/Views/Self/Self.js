@@ -257,6 +257,7 @@ export default class Self extends Component {
             isEditing:!this.state.isEditing
         },()=>{
             //说明之前为true处于编辑状态
+            console.log(values)
             if(!this.state.isEditing){
 
                 values.birth=values.birth.format(dateFormat)
