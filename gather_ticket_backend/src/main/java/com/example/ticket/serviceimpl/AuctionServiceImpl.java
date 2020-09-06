@@ -88,4 +88,9 @@ public class AuctionServiceImpl implements AuctionService {
             return MsgUtil.makeMsg(MsgCode.ERROR, MsgUtil.ERROR_MSG);
     }
 
+    @Override
+    public List<Auction> getAllAuction() {
+        return auctionDao.getAllAuction();
+    }
+
 }

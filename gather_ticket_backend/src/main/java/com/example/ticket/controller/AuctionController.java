@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 public class AuctionController {
@@ -47,5 +48,10 @@ public class AuctionController {
     @RequestMapping("/auction/check")
     public Msg check(@RequestParam("aucid") Integer aucid , @RequestParam("userid") Integer userid){
         return auctionService.check(aucid,userid);
+    }
+
+    @RequestMapping("/auction/getAllAuction")
+    public List<Auction>  getAllAuction(){
+        return auctionService.getAllAuction();
     }
 }

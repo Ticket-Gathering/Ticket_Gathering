@@ -44,7 +44,7 @@ public class AuctionDaoImpl implements AuctionDao {
             Auction auction1=auction.get();
             String showid =auction1.getShow_id();
             Integer user_id=auction1.getHighest_user_id();
-            ShowDetail showDetailEntity =showDetailDao.getDetail(showid);
+            ShowDetail showDetailEntity =showDetailDao.getDetail(showid,"大麦网");
             auction1.setShowDetail(showDetailEntity);
 
             return auction1;
@@ -126,5 +126,16 @@ public class AuctionDaoImpl implements AuctionDao {
         ClientAuth clientAuth=userAuthRepository.getOne(userid);
         clientAuth.setMessage_checked(0);
         userAuthRepository.save(clientAuth);
+    }
+
+    @Override
+    public List<Auction> getAllAuction() {
+        List<Auction> auctionList= auctionRepository.findAll();
+        for(Auction auction:auctionList){
+            String showid= auction.getShow_id();
+            ShowDetail showDetail=showDetailDao.getDetail(showid,"大麦网");
+            auction.setShowDetail(showDetail);
+        }
+        return auctionList;
     }
 }
