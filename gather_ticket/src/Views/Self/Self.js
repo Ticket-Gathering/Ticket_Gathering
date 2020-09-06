@@ -361,14 +361,14 @@ export default class Self extends Component {
     }
     getMessageList(){
         let data = new FormData();
-        data.append("userid", this.state.client.messageChecked)
+        data.append("userid", this.state.client.userId)
         Axios.post(url+"/auction/getMessageByUser", data)
             .then(response => {
-                // console.log(typeof(response.data[0].selected_time));
+                console.log(response);
                 this.setState({
                     messageList: response.data,
+                    content: "6"
                 })
-                this.changeContent({key: "6"})
             }).catch(function (error) {
             console.log(error);
         });
@@ -579,7 +579,7 @@ export default class Self extends Component {
                 break;
             case "6":
                 const message = [
-                    { title: '演出ID', dataIndex: 'aucid', key: 'aucid',
+                    { title: '演出ID', dataIndex: 'auctionId', key: 'auctionId',
                         render: (value) => {
                             return <a onClick={() => this.goAboutAuction(value)}>{value}</a>
                         }},
@@ -599,7 +599,7 @@ export default class Self extends Component {
                                 <Table
                                     columns={message}
                                     pagination={false}
-                                    dataSource={this.state.orderList}
+                                    dataSource={this.state.messageList}
                                 />
                             </div>
                         }

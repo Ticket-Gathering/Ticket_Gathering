@@ -13,7 +13,7 @@ export default class Auction extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data:{},
+            data:{showDetail:{show:{}}},
             detail:{detail:"",images:[],notice0:"",notice1:""},
             introduce: [],
             aucid:0,

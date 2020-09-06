@@ -16,32 +16,32 @@ public class AuctionMessage {
     @Id
     @Column(name="message_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer message_id;
+    private Integer messageId;
 
     public Integer getMessageId() {
-        return message_id;
+        return messageId;
     }
     public void setMessageId(Integer message_id) {
-        this.message_id = message_id;
+        this.messageId = message_id;
     }
 
-    private Integer user_id;
+    private Integer userId;
 
     public Integer getUserId() {
-        return user_id;
+        return userId;
     }
     public void setUserId(Integer user_id) {
-        this.user_id = user_id;
+        this.userId = user_id;
     }
 
-    private Integer auction_id;
+    private Integer auctionId;
 
     public Integer getAuctionId() {
-        return auction_id;
+        return auctionId;
     }
 
     public void setAuctionId(Integer auction_id) {
-        this.auction_id = auction_id;
+        this.auctionId = auction_id;
     }
 
     private String message;

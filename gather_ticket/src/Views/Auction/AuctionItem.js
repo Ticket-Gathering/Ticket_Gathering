@@ -25,7 +25,6 @@ export default class AuctionItem extends Component {
             end_time:null,
             start_price:null,
             deadline:null,
-
         }
         this.cadd = this.cadd.bind(this);
         this.cmil = this.cmil.bind(this);
@@ -200,7 +199,7 @@ export default class AuctionItem extends Component {
             <div className={abouti.format}>
                 <div className={abouti.abouti}>
                     <div className={abouti.left}>
-                        <div className={abouti.righttop}>【杭州】「初夏人生」嘻哈派对</div>
+                        <div className={abouti.righttop}>{this.props.aboutitem.showDetail.show.name}</div>
                         <div className={abouti.leftt}>
                             <img className={abouti.leftti} src={this.state.image} />
                             <div className={abouti.leftts}>
@@ -231,7 +230,7 @@ export default class AuctionItem extends Component {
                             <div className={abouti.sum}>
                                 ￥{this.state.nowprice}
                             </div>
-                            <Tag style={{backgroundColor:"#f36", color:"white"}}>出价人:{this.state.highest_user_id}</Tag>
+                            <Tag style={{backgroundColor:"#f36", color:"white"}}>出价人:{this.props.aboutitem.highest_user_id}</Tag>
                         </div>
                         <div className={abouti.rightInfo}>
                             <div className={abouti.rightbtimel}>出价</div>
