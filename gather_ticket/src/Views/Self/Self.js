@@ -166,16 +166,16 @@ export default class Self extends Component {
     }
     componentWillMount() {
 
-        // if(Cookies.get('userId') !== 'NULL' && Cookies.get('userId') !== null){
-        //     this.setState({
-        //         isLogged: true
-        //     })
-        // } else {
-        //     this.setState({
-        //         isLogged: false
-        //     })
-        //     return;
-        // }
+        if(Cookies.get('userId') !== 'NULL' && Cookies.get('userId') !== null){
+            this.setState({
+                isLogged: true
+            })
+        } else {
+            this.setState({
+                isLogged: false
+            })
+            return;
+        }
         Axios.get(url+"/getUserById/"+Cookies.get("userId")
         ).then(response => {
             console.log(response);
@@ -192,6 +192,31 @@ export default class Self extends Component {
         }).catch(function (error) {
             console.log(error);
         });
+
+        var websocket = null;
+        if ('WebSocket' in window) {
+            websocket = new WebSocket('ws://localhost:8080/webSocket');
+        } else {
+            alert('该浏览器不支持websocket!');
+        }
+        websocket.onopen = function (event) {
+            // console.log('建立连接');
+        }
+        websocket.onclose = function (event) {
+            // console.log('连接关闭');
+        }
+        websocket.onmessage = function (event) {
+            console.log(JSON.parse(event.data));
+            var obj = JSON.parse(event.data);
+
+            alert(obj.highest_price);
+
+            this.setState({
+                count:obj.highest_price,
+                nowprice:obj.highest_price,
+                highest_user_id:obj.highest_user_id
+            })
+        }.bind(this)
     }
     onChange(key, e){
         let value = e.target.value;

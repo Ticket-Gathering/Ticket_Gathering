@@ -58,7 +58,7 @@ def main():
     db=client.ticket
     collection=db.ticketdetail
     data = []
-    for line in open("id.txt", "r"):
+    for line in open("id2.txt", "r"):
         data.append(line.replace("\n",""))
 
     for id in data:

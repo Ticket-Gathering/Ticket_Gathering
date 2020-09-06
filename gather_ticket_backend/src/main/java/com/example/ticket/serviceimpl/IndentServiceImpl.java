@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class IndentServiceIMpl implements IndentService {
+public class IndentServiceImpl implements IndentService {
     @Autowired
     IndentDao indentDao;
 

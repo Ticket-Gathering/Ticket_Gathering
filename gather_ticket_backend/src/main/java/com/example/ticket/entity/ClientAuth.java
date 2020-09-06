@@ -57,4 +57,13 @@ public class ClientAuth{
     public int getUserType() { return userType;}
 
     public void setUserType(int userType) { this.userType = userType;}
+
+    @Column(name= "message_checked")
+    private int message_checked;
+    public void setMessage_checked(int message_checked){
+        this.message_checked=message_checked;
+    }
+    public Integer getMessage_checked(){
+        return this.message_checked;
+    }
 }
