@@ -222,22 +222,6 @@ export default class Page extends Component {
                                 }
                             </div>
                         </div>
-                        <div className={page.line}/>
-                        <div className={page.titleContainer}>
-                            <span>时 间：</span>
-                            <div className={page.titleBox}>
-                                {
-                                    this.state.times.map((item, index) => {
-                                        return <div className={page.titleOne + (this.state.timeID === index ? (' ' + page.titleSelected) : '')} onClick={()=>this.changeTime(index,item)} >{item}</div>
-                                    })
-                                }
-                                <div className={page.datePicker}>
-                                    <DatePicker placeholder={'按日历'} size={'small'}
-                                                onChange={(_,dateString)=>this.changeDate(_,dateString)}
-                                    />
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div className={page.showContainer}>
                         {this.getPageItem(this.state.data)}

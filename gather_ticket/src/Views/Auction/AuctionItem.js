@@ -3,7 +3,7 @@ import abouti from "./AuctionItem.module.css";
 import Sign from "./Sign";
 import { Statistic, Row, Col } from 'antd';
 import { Divider ,Button} from 'antd';
-import { InputNumber, Tag } from 'element-react';
+import {InputNumber, Notification, Tag} from 'element-react';
 import Axios from "../../Module/Axios";
 import {url} from "../../Constants/constants";
 import Cookies from "js-cookie"
@@ -33,7 +33,7 @@ export default class AuctionItem extends Component {
     componentDidMount() {
         var websocket = null;
         if ('WebSocket' in window) {
-            websocket = new WebSocket('ws://localhost:8080/webSocket');
+            websocket = new WebSocket('ws://18.232.87.97:8080/webSocket');
         } else {
             alert('该浏览器不支持websocket!');
         }
@@ -51,6 +51,10 @@ export default class AuctionItem extends Component {
                 nowprice:obj.highest_price,
                 highest_user_id:obj.highest_user_id
             })
+            Notification.info({
+                title: '竞拍信息',
+                message: "竞拍信息已更新，当前最高价： "+obj.highest_price,
+            });
         }.bind(this)
 
     }
@@ -161,7 +165,7 @@ export default class AuctionItem extends Component {
     }
 
     renderButton = () =>  {
-        if (!this.state.ifcheck) {
+        if (!this.state.ifcheck || this.props.aboutitem.highest_user_id.toString() === Cookies.get("userId")) {
             return(
                 <Button className={abouti.sub} disabled>出价</Button>
             );

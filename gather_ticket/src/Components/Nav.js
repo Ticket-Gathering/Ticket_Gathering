@@ -136,10 +136,6 @@ export default class nav extends Component {
                         <img src={require('../Views/Auction/锤子.png')} />
                         <Link to='/auctionPage'><div className={navstyle.logintext}>拍卖</div></Link>
                     </div>
-                    <div className={navstyle.loginbox}>
-                        <img src={require('../ImgAssets/english.png')} />
-                        <div className={navstyle.logintext}>English</div>
-                    </div>
                 </div>
             </div>
         )

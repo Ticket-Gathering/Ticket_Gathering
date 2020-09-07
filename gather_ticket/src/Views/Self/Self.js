@@ -8,7 +8,7 @@ import Axios from '../../Module/Axios'
 import moment from 'moment';
 import axios from 'axios'
 import {SmileTwoTone,UserOutlined,LaptopOutlined,SettingOutlined,CloseOutlined} from "@ant-design/icons";
-import {Message, Badge} from "element-react"
+import {Message, Badge, Notification} from "element-react"
 import ShowManage from "./ShowManage";
 import Cookies from 'js-cookie'
 import {identityCheck} from "../../Tool/smallTools";
@@ -145,7 +145,10 @@ export default class Self extends Component {
             console.log(JSON.parse(event.data));
             var obj = JSON.parse(event.data);
 
-            alert(obj.highest_price);
+            Notification.info({
+                title: '竞拍信息',
+                message: "竞拍信息已更新，当前最高价： "+obj.highest_price,
+            });
 
             this.setState({
                 count:obj.highest_price,
