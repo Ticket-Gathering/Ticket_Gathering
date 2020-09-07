@@ -115,6 +115,9 @@ public class AuctionDaoImpl implements AuctionDao {
         AuctionMessage auctionMessage=new AuctionMessage();
         auctionMessage.setUserId(userid);
         auctionMessage.setAuctionId(aucid);
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String datetime = date.format(new java.util.Date());
+        auctionMessage.setMessageTime(datetime);
         auctionMessage.setMessage("拍卖信息已更新，请查看！");
         auctionMessageRepository.save(auctionMessage);
     }
