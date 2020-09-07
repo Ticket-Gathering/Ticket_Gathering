@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class IndentControllerTest {
     private MockMvc mockMvc;
 
@@ -63,6 +63,28 @@ public class IndentControllerTest {
                                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                                 .param("order_id","4")
                                 .param("status","4")
+                )
+                .andReturn().getResponse().getContentAsString();   //将相应的数据转换为字符串
+    }
+
+    @Test
+    public void getIndentByID() throws Exception{
+        String responseString = mockMvc.perform
+                (
+                        MockMvcRequestBuilders.post("http://localhost/getIndentByID")
+                                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                                .param("order_id","4")
+                )
+                .andReturn().getResponse().getContentAsString();   //将相应的数据转换为字符串
+    }
+
+    @Test
+    public void getIndentByUser() throws Exception{
+        String responseString = mockMvc.perform
+                (
+                        MockMvcRequestBuilders.post("http://localhost/getIndentByUser")
+                                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                                .param("username","sjw")
                 )
                 .andReturn().getResponse().getContentAsString();   //将相应的数据转换为字符串
     }
