@@ -1,52 +1,65 @@
 import React, { Component } from 'react';
 import abouti from "./AboutItem.module.css";
 import Sign from "./Sign";
+import {Divider} from "antd";
+import {InputNumber, Select} from "element-react"
+import {url} from "../../Constants/constants"
+import Axios from "../../Module/Axios";
+import Cookies from 'js-cookie'
 
 export default class AboutItem extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             count: 1,
             num: 0,
-            pricelist: [],
-            timelist: []
-        }
-        this.cadd = this.cadd.bind(this);
-        this.cmil = this.cmil.bind(this)
+            priceList: [],
+            timeList: [],
+            success:false,
+            selectedTime:null,
+            selectedPlatform:{
+                platform: this.props.aboutitem.show.platform,
+                price: this.props.aboutitem.show.price_low,
+            },
+            platformList:[]
+        };
+        this.getPlatformList = this.getPlatformList.bind(this);
     }
 
-    isShop(i) {                //判断是否为预售票
+    isPreSale(i) {                //判断是否为预售票
         let n = Date.now().valueOf();
         let m = new Date(i).valueOf();
         if (n < m) {
-            return <div className={abouti.rightremind}>
-                <div className={abouti.rightremindl}>预售|</div>
-                <div className={abouti.rightremindr}>
-                    <div className={abouti.rightremindrt}>
+            return <div className={abouti.preSaleBox}>
+                <div className={abouti.preSale}>预售</div>
+                <Divider type={'vertical'} style={{height: '100px'}}/>
+                <div className={abouti.preSaleInfo}>
+                    <div>
                         本商品为预售商品，正式开票后将在第一时间为您配送
-                            </div>
-                    <div className={abouti.rightremindrb}>
+                    </div>
+                    <div style={{color:'gray'}}>
                         预售期间，由于主办未正式开票，下单后无法立即配送票品。一般演出前2-6周出票，待正式开票后将在第一时间为您配送，请耐心等待。纸质票购票后可在订单详情页查看物流信息
-                            </div>
+                    </div>
                 </div>
             </div>
         }
     }
 
-    cTime(e) {
-        let n = this.state.timelist;
+    timeSelect(e) {
+        let n = this.state.timeList;
         for (let a = 0; a < n.length; a++) {
             n[a] = 0;
         }
         n[e] = 1;
         this.setState({
-            timelist: n
-        })
+            timeList: n,
+            selectedTime:this.props.aboutitem.times[e]
+        });
         n = "";
     }
 
-    cPrice(e) {
-        let n = this.state.pricelist;
+    priceSelect(e) {
+        let n = this.state.priceList;
         let m = 0;
         for (let a = 0; a < n.length; a++) {
             n[a].state = 0;
@@ -54,133 +67,165 @@ export default class AboutItem extends Component {
         n[e].state = 1;
         m = n[e].price;
         this.setState({
-            pricelist: n,
+            priceList: n,
             num: m
-        })
+        });
         n = "";
         m = "";
     }
-
-    cmil() {
-        let n = this.state.count;
-        if (n > 1) {
-            n--;
-            this.setState({
-                count: n
-            })
-        } else {
-            return;
-        }
-
+    addTicket(e){
+        this.setState({
+            count: e
+        })
     }
-
-    cadd() {
-        let a = this.state.count;
-        let b = this.props.aboutitem.limittic;
-        if (a < b) {
-            a++;
-            this.setState({
-                count: a
-            })
-        } else {
-            alert(`该票每人限制购买${b}张！`)
-            return;
-        }
-    }
-
     sum() {
-        let e = this.state.num;
+        console.log(this.state.num)
+        console.log(this.state.priceList)
+        if(this.state.priceList.length === 0) return 0;
+        let e = this.state.num === 0? this.state.priceList[0].price : this.state.num;
         let n = this.state.count;
         return e * n;
     }
-    
-  
+    buy = ()=>{
+        let orderInfo={
+            time:this.state.time?this.state.selectedTime:this.props.aboutitem.times[0],
+            num:this.state.count,
+            price:this.state.num === 0? parseInt(this.state.priceList[0].price[0]) : parseInt(this.state.num[0]),
+            name:this.props.aboutitem.show.name,
+            showtime:this.props.aboutitem.show.show_time,
+            address:this.props.aboutitem.show.city+' | '+this.props.aboutitem.show.venue.venuename,
+            coupon:20,
+            img_url: this.props.aboutitem.show.img_url,
+            ticketType:'电子票',
+            id:this.props.aboutitem.id,
+            platform:this.props.aboutitem.platform
+        }
+        Cookies.set('orderInfo',orderInfo)
+        console.log(Cookies.get("orderInfo"));
+        this.props.history.push({pathname:'/orderConfirm'+`/${this.props.aboutitem.id}`,state:orderInfo})
+    }
+    getPlatformList(flag){
+        if(flag === true) {
+            Axios.post(url+"/show/getPlatformList/"+this.props.aboutitem.id
+            ).then((res) => {
+                console.log(res.data)
+                this.setState({
+                    platformList: res.data
+                })
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+    }
+    goAbout(platform){
+        this.props.history.push({ pathname: "/about/" + this.props.aboutitem.id + "/" + platform})    }
+
+    componentDidMount(){
+        console.log("abouti")
+        console.log(this.props.aboutitem)
+        this.setState({
+            success:true
+        })
+    }
+
 
     render() {
-        return (
-            <div className={abouti.abouti}>
-                <div className={abouti.left}>
-                    <div className={abouti.leftt}>
-                        <img className={abouti.leftti} src={this.props.aboutitem.imgurl} />
-                        <div className={abouti.leftts}>
-                            <Sign></Sign>
+        if(!this.state.success) return (<div>Loading...</div>)
+        else return (
+            <div className={abouti.abouti} data-cy={'aboutItem'}>
+                <div className={abouti.showPoster}>
+                    <div className={abouti.poster}>
+                        <img src={this.props.aboutitem.show.img_url} />
+                        <div className={abouti.posterSign}>
+                            <Sign/>
                         </div>
-
                     </div>
                 </div>
-
-                <div className={abouti.right}>
-                    <div className={abouti.righttop}>{this.props.aboutitem.name}</div>
-
-                    <div className={abouti.rightmid}>时间：{this.props.aboutitem.showtime}</div>
-
-                    <div className={abouti.rightmidf}>
-                        <div className={abouti.rightmid}>场馆：{this.props.aboutitem.address}|{this.props.aboutitem.addressdetail}</div>
+                <div className={abouti.showInfo}>
+                    {/*<div className={abouti.righttop}>{this.props.aboutitem.name}</div>*/}
+                    <div className={abouti.showName}>{this.props.aboutitem.show.name}</div>
+                    <div className={abouti.showTime}>时间：{this.props.aboutitem.show.show_time}</div>
+                    <div className={abouti.showAvenue}>
+                        场馆：{this.props.aboutitem.show.city}
+                        <Divider type={"vertical"} style={{height:'26px'}}/>
+                        {this.props.aboutitem.show.venue.venuename}
                     </div>
 
-                    {this.isShop(this.props.aboutitem.shoptime)}
+                    {this.isPreSale(this.props.aboutitem.shoptime)}
 
-                    <div className={abouti.rightbremind}>
-                        <div className={abouti.rightbremindl}>!</div>
+
+                    <div className={abouti.showTip}>
+                        <div className={abouti.exclamation}>!</div>
                         <div>场次时间均为演出当地时间</div>
                     </div>
-
-                    <div className={abouti.rightbtime}>
-                        <div className={abouti.rightbtimel}>场次</div>
-                        <div className={abouti.rightbtimer}>
-                            {this.props.aboutitem.timelist.map((t, ind) => {
-                                if (ind == 0) {
-                                    this.state.timelist.push(1);
-                                    return <div key={ind} className={this.state.timelist[ind] ? abouti.rightbtimericli : abouti.rightbtimeri} onClick={this.cTime.bind(this, ind)}>{t}</div>
+                    <div className={abouti.showSessions}>
+                        <div className={abouti.showSessionTag}>平台</div>
+                        <Select value={this.state.selectedPlatform.platform} placeholder={this.state.selectedPlatform.platform} className={abouti.showPlatform} onVisibleChange={(value) => this.getPlatformList(value)} onChange={(value) => this.goAbout(value)}>
+                            {this.state.platformList.map(platform =>
+                                <Select.Option key={platform[1]} label={platform[0]} value={platform[0]}>
+                                    <span style={{float: 'left'}}>{platform[0]}</span>
+                                    <span style={{float: 'right', color: '#ff3366', fontSize: 15}}>{platform[1]}起</span>
+                                </Select.Option>
+                            )}
+                        </Select>
+                    </div>
+                    <div className={abouti.showSessions}>
+                        <div className={abouti.showSessionTag}>场次</div>
+                        <div className={abouti.showSession}>
+                            {
+                                this.props.aboutitem.times.length === 0? <div style={{marginTop:"9px", marginLeft:"10px"}}>暂无场次信息</div> :
+                                this.props.aboutitem.times.map((t, ind) => {
+                                if (ind === 0) {
+                                    this.state.timeList.push(1);
+                                    return <div key={ind} className={this.state.timeList[ind] ? abouti.chosen : abouti.unChosen} onClick={this.timeSelect.bind(this, ind)}>{t}</div>
                                 }
                                 else {
-                                    this.state.timelist.push(0);
-                                    return <div key={ind} className={this.state.timelist[ind] ? abouti.rightbtimericli : abouti.rightbtimeri} onClick={this.cTime.bind(this, ind)}>{t}</div>
+                                    this.state.timeList.push(0);
+                                    return <div key={ind} className={this.state.timeList[ind] ? abouti.chosen : abouti.unChosen} onClick={this.timeSelect.bind(this, ind)}>{t}</div>
                                 }
                             })}
                         </div>
                     </div>
-
-                    <div className={abouti.rightbtime}>
-                        <div className={abouti.rightbtimel}>票档</div>
-                        <div className={abouti.rightbtimer}>
-                            {this.props.aboutitem.pricelist.map((p, ind) => {
-                                if (ind == 0) {
-                                    this.state.pricelist.push({ state: 1, price: p.price });
-                                    return <div key={ind} className={this.state.pricelist[ind].state ? abouti.rightbtimericli : abouti.rightbtimeri} onClick={this.cPrice.bind(this, ind)}>{p.price}</div>
+                    <div className={abouti.showSessions}>
+                        <div className={abouti.showSessionTag}>票档</div>
+                        <div className={abouti.showSession}>
+                            {
+                                this.props.aboutitem.prices.length === 0? <div style={{marginTop:"9px", marginLeft:"10px"}}>暂无票档信息</div> :
+                                this.props.aboutitem.prices.map((p, ind) => {
+                                if (ind === 0) {
+                                    this.state.priceList.push({ state: 1, price: /[0-9]+/.exec(p) });
+                                    return <div key={ind} className={this.state.priceList[ind].state ? abouti.chosen : abouti.unChosen} onClick={this.priceSelect.bind(this, ind)} data-cy={`price:${ind}`}>{p}</div>
                                 }
                                 else {
-                                    this.state.pricelist.push({ state: 0, price: p.price });
-                                    return <div key={ind} className={this.state.pricelist[ind].state ? abouti.rightbtimericli : abouti.rightbtimeri} onClick={this.cPrice.bind(this, ind)}>{p.price}</div>
+                                    this.state.priceList.push({ state: 0, price: /[0-9]+/.exec(p) });
+                                    return <div key={ind} className={this.state.priceList[ind].state ? abouti.chosen : abouti.unChosen} onClick={this.priceSelect.bind(this, ind)} data-cy={`price:${ind}`}>{p}</div>
                                 }
 
                             })}
                         </div>
                     </div>
 
-                    <div className={abouti.rightbtime}>
-                        <div className={abouti.rightbtimel}>数量</div>
-                        <div className={abouti.rightbtimer}>
-                            <div className={abouti.rightnumber}>
-                                <div className={this.state.count <= 1 ? abouti.rightnumberolim : abouti.rightnumbero} onClick={this.cmil}>-</div>
-                                <div className={abouti.rightnumberi}>{this.state.count}</div>
-                                <div className={this.state.count >= this.props.aboutitem.limittic ? abouti.rightnumberolim : abouti.rightnumbero} onClick={this.cadd}>+</div>
-                            </div >
-                        </div>
+                    <div className={abouti.showSessions}>
+                        <div className={abouti.showSessionTag}>数量</div>
+                        <InputNumber defaultValue={1} step="1" min="1" style={{marginLeft: "10px"}} onChange={this.addTicket.bind(this)}  data-cy={'numSelect'}/>
                     </div>
 
-                    <div className={abouti.rightbtime}>
-                        <div className={abouti.rightbtimel}>合计</div>
-                        <div className={abouti.sum}>
+                    <div className={abouti.showSession}>
+                        <div className={abouti.showSessionTag}>合计</div>
+                        <div className={abouti.sum} data-cy={'total'}>
                             ￥{this.sum(this.state.num)}
                         </div>
                     </div>
-
-                    <div className={abouti.sub}>
-                        立即购买
-                    </div>
-
-
+                    {
+                        this.props.aboutitem.prices.length === 0?
+                            <div className={abouti.buyNowDisabled}>
+                                暂时无法购买
+                            </div>
+                            :
+                            <div className={abouti.buyNow} onClick={this.buy} data-cy={'buy'}>
+                                立即购买
+                            </div>
+                    }
                 </div>
             </div>
         )

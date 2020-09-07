@@ -1,0 +1,8 @@
+{
+  "baseUrl":"http://localhost:3000/#",
+  "adminUser": "zyc",
+  "adminPassword": "123",
+  "User": "aaa",
+  "Password": "123",
+  "types":["儿童亲子","演唱会","音乐会","话剧歌剧","舞蹈芭蕾","曲苑杂坛","体育","展览休闲"]
+}

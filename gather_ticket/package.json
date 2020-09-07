@@ -2,21 +2,29 @@
   "name": "xiaomai",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
-    "antd": "^3.20.7",
+    "@ant-design/icons": "^4.2.1",
+    "antd": "^4.4.2",
     "axios": "^0.19.0",
-    "react": "^16.8.6",
+    "element-react": "^1.4.34",
+    "element-theme-default": "^1.4.13",
+    "eslinter": "^3.2.1",
+    "js-cookie": "^2.2.1",
+    "react": "^16.13.1",
     "react-dom": "^16.8.6",
+    "react-hot-loader": "^4.12.21",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1",
+    "react-scripts": "^3.0.1",
     "redux": "^4.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "open": "cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -32,5 +40,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cypress": "^4.11.0",
+    "express": "^4.17.1",
+    "qs": "^6.9.4"
   }
 }

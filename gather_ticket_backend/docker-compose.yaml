@@ -1,0 +1,59 @@
+version: '3.2'
+
+services:
+  database:
+    image: mysql:5.7
+    volumes:
+      - type: bind
+        source: ./data_source/mysql
+        target: /docker-entrypoint-initdb.d/
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=ticket_gathering
+    networks:
+      - demo
+
+  mongodb:
+    image: mongo:4.2
+    volumes:
+      - type: bind
+        source: ./data_source/mongo
+        target: /docker-entrypoint-initdb.d/
+    ports:
+      - "27017:27017"
+    networks:
+      - demo
+
+  backend:
+    image: ticket_gathering_test:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - JVM_OPTS="-Xms128m -Xmx128m -XX:PermSize=128m -XX:MaxPermSize=128m"
+    networks:
+      - demo
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - type: bind
+        source: ./prometheus.yml
+        target: /etc/prometheus/prometheus.yml
+        read_only: true
+    ports:
+      - "9090:9090"
+    networks:
+      - demo
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - demo
+
+networks:
+  demo:
+    driver: bridge

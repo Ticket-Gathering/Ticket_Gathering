@@ -1,151 +1,176 @@
-.firstbox{
+.bg{
+    background: url("../../Assets/images/loginbg3.jpg") no-repeat top center;
+    background-size: cover;
+    background-attachment: fixed;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.bg_mask{
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    left: 0;
+    top: 0;
+    content: "";
+    background-color: rgba(0,0,0,.55);
+}
+.headerBox{
     width: 100%;
     height: 100px;
     padding: 1px;
 }
-.imgbox{
+.imgBox{
     width: 110px;
     height: 50px;
     margin-left: 160px;
     margin-top: 30px;
+    float: top;
+    z-index: 1;
 }
-.imgbox img{
+.imgBox img{
     width: 110px;
     height: 50px;
 }
-.secondbox{
+.mainBox{
     width: 100%;
-    height: 600px;
-    background-color:#17073D;
+    height: 760px;
     display: flex;
 }
-.secondbox img{
-    width: 720px;
-    height: 400px;
-    margin-top: 100px;
-    margin-left: 170px;
-}
-.loginbox{
-    width: 330px;
-    height: 330px;
-    background-color: #FFFFFF;
-    margin-top: 100px;
-    margin-left: 90px;
-}
-.loginboxfirst{ 
+.mainBox img{
     width: 100%;
-    height: 42px;
-    display: flex;
+    height: auto;
+    margin-top: -100px;
+    margin-left: 0;
+    z-index: 1;
 }
-.loginboxfirstson{
-    width: 110px;
-    height: 42px;
+.loginBox{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-bottom: 200px;
+    margin: auto;
     text-align: center;
-    background-color: #E7E7E7;   
-    line-height: 42px;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    z-index: 1;
 }
-.loginboxfirstson1{
-    width: 110px;
-    height: 42px;
-    text-align: center;
-    background-color: #FFFFFF;   
-    line-height: 42px;
-    color: #FF1268;
-    border-top: 2px solid #FF1268;
-    box-sizing: border-box;
-}
-.last{
+.base{
     width: 330px;
     position: relative;
 }
 .input{
-    width: 280px;
-    height: 42px;
+    width: 320px;
+    height: 48px;
     margin-top: 20px;
-    margin-left: 25px;
+
     box-sizing: border-box;
     padding-left: 50px;
     outline: none;
+    border: none;
+    border-radius: 30px;
+    transition: cubic-bezier(0.0, 0, 0.2, 1) 200ms;
+    background-color: hsla(0,0%,100%,.2);
+
+}
+.input::-webkit-input-placeholder{
+    color: hsla(0,0%,100%,.5);
 }
 .input:focus{
-    border: 1px solid #FF1268;
+    border: none;
+    background-color: hsla(0,0%,100%,.3);
 }
 .input::-webkit-input-placeholder {
     font-size: 15px;
 }
-.logo{
+.logoUsr{
     position: absolute;
     width: 40px;
     height: 40px;
-    background-color: #CCCCCC;
-    top: 21px;
-    left: 26px;
+    top: 22px;
+    left: 10px;
 }
-.logo img{
+.logoUsr img{
     width: 20px;
     height: 20px;
     margin-top: 10px;
     margin-left: 10px;
 }
-.logo1{
+.logoLock{
     position: absolute;
     width: 40px;
     height: 40px;
-    background-color: #CCCCCC;
-    top: 83px;
-    left: 26px;
+    top: 90px;
+    left: 10px;
 }
-.logo1 img{
+.logoLock img{
     width: 20px;
     height: 20px;
     margin-top: 10px;
     margin-left: 10px;
 }
-.dl{
-    width: 280px;
-    height: 42px;
-    margin-top: 20px;
-    margin-left: 25px;
-    background:linear-gradient(to right,#F848A9,#FF1D76);
+.logoLock2{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 160px;
+    left: 10px;
+}
+.logoLock2 img{
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.loginBtn{
+    width: 320px;
+    height: 48px;
+    margin-top: 64px;
+    background:linear-gradient(to right,#BF264D,#FF1D76);
     text-align: center;
     line-height: 42px;
     color: #FFFFFF;
-    border: 1px solid #FF1268;
-    border-radius: 5px;
+    border: 1px solid #ff3366;
+    border-radius: 30px;
     font-size: 20px;
 }
-.every{
+.loginBtn:hover{
+    background: #FF1D76;
+}
+.logoPlatforms{
     width: 110px;
     height: 22px;
     margin-top: 15px;
-    margin-left: 25px;
     display: flex;
     justify-content: space-between;
 }
-.everyson{
+.logoPlatform{
     width: 22px;
     height: 22px;
 }
-.everyson img{
+.logoPlatform img{
     width: 22px;
     height: 22px;
-    margin-top: 0px;
-    margin-left: 0px;
+    margin-top: 0;
+    margin-left: 0;
 }
-.bottom{
-    width: 130px;
+.bottomOptions{
+    width: 330px;
     margin-top: 15px;
-    margin-left: 175px;
-    display: flex;
-    justify-content: space-between;
 }
-.bottomson{
+.bottomOption{
     font-size: 15px;
+    float: right;
+    margin-left: 20px;
+    color: #ff3366;
 }
-.bottomson a{
-    text-decoration: none;
-    color: #0088D6;
-}
-.bottomson Link{
+.bottomOption Link{
     text-decoration: none;
 }

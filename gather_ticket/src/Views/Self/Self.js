@@ -1,217 +1,412 @@
 import React, { Component } from 'react'
 import Nav from "../../Components/Nav";
 import Bottom from "../../Components/Bottom";
-import { Layout, Menu, Breadcrumb, Icon, Radio, DatePicker, Input, Button, Collapse, Table, Divider, Tag, List, Avatar, Result } from 'antd';
+import { Layout, Menu, Breadcrumb, Radio, DatePicker, Input, Button, Collapse, Table, Divider, Tag, List, Avatar, Result, Form } from 'antd';
 import 'antd/dist/antd.css';
 import selfstyle from './Self.module.css'
+import Axios from '../../Module/Axios'
 import moment from 'moment';
-const data1 = [
+import axios from 'axios'
+import {SmileTwoTone,UserOutlined,LaptopOutlined,SettingOutlined,CloseOutlined} from "@ant-design/icons";
+import {Message, Badge} from "element-react"
+import ShowManage from "./ShowManage";
+import Cookies from 'js-cookie'
+import {identityCheck} from "../../Tool/smallTools";
+import {EditableTable} from "../../Components/EditableTable";
+import {url} from "../../Constants/constants"
+import {Link} from "react-router-dom";
+
+const receiverColumns=[
     {
-        title: '贺子航 1',
+        title:'姓名',
+        dataIndex:'receiver',
+        key:'receiver',
+        width: '25%',
+        editable: true,
     },
     {
-        title: '贺子航 2',
+        title:'电话号码',
+        dataIndex:'tel',
+        key:'tel',
+        width: '15%',
+        editable: true,
     },
     {
-        title: '贺子航 3',
-    },
-    {
-        title: '贺子航 4',
-    },
-];
-const columns = [
+        title:'地址',
+        dataIndex:'address',
+        key:'address',
+        width: '40%',
+        editable: true,
+    }
+]
+const ticketHolderColumns = [
     {
         title: '姓名',
         dataIndex: 'name',
         key: 'name',
-        render: text => <a href="javascript:;">{text}</a>,
+        width: '25%',
+        editable: true,
     },
     {
-        title: '年龄',
-        dataIndex: 'age',
-        key: 'age',
+        title: '证件类型',
+        dataIndex: 'idType',
+        key: 'idType',
+        width: '15%',
+        editable: true,
     },
     {
-        title: '地址',
-        dataIndex: 'address',
-        key: 'address',
-    },
-    {
-        title: '标签',
-        key: 'tags',
-        dataIndex: 'tags',
-        render: tags => (
-            <span>
-                {tags.map(tag => {
-                    let color = tag.length > 5 ? 'geekblue' : 'green';
-                    if (tag === 'loser') {
-                        color = 'volcano';
-                    }
-                    return (
-                        <Tag color={color} key={tag}>
-                            {tag.toUpperCase()}
-                        </Tag>
-                    );
-                })}
-            </span>
-        ),
-    },
-    {
-        title: '操作',
-        key: 'action',
-        render: (text, record) => (
-            <span>
-                <a href="javascript:;">Invite {record.name}</a>
-                <Divider type="vertical" />
-                <a href="javascript:;">Delete</a>
-            </span>
-        ),
+        title: '证件号码',
+        dataIndex: 'idNum',
+        key: 'idNum',
+        width: '40%',
+        editable: true,
     },
 ];
-const columns1 = [
-    {
-        title: '优惠券号码',
-        dataIndex: 'name',
-        key: 'name',
-        render: text => <a href="javascript:;">{text}</a>,
-    },
-    {
-        title: '名称',
-        dataIndex: 'age',
-        key: 'age',
-    },
-    {
-        title: '优惠说明',
-        dataIndex: 'address',
-        key: 'address',
-    },
-    {
-        title: '使用条件',
-        key: 'tags',
-        dataIndex: 'tags',
-        render: tags => (
-            <span>
-                {tags.map(tag => {
-                    let color = tag.length > 5 ? 'geekblue' : 'green';
-                    if (tag === 'loser') {
-                        color = 'volcano';
-                    }
-                    return (
-                        <Tag color={color} key={tag}>
-                            {tag.toUpperCase()}
-                        </Tag>
-                    );
-                })}
-            </span>
-        ),
-    },
-    {
-        title: '操作',
-        key: 'action',
-        render: (text, record) => (
-            <span>
-                <a href="javascript:;">Invite {record.name}</a>
-                <Divider type="vertical" />
-                <a href="javascript:;">Delete</a>
-            </span>
-        ),
-    },
-];
-const data = [
-    {
-        key: '1',
-        name: '贺子航',
-        age: 23,
-        address: '四川省乐山',
-        tags: ['家', '哈哈'],
-    },
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-];
-const data2 = [
-    {
-        key: '1',
-        name: '贺子航',
-        age: 23,
-        address: '四川省乐山',
-        tags: ['家', '哈哈'],
-    },
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-];
+
 const { Panel } = Collapse;
-const dateFormat = 'YYYY/MM/DD';
+const dateFormat = 'YYYY-MM-DD';
 const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
+
 export default class Self extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            isEditing:false,
             value: 1,
-            cv: "1"
+            content: "1",
+            client: {
+                nickname: "",
+                name: "",
+                gender: 1,
+                birth: null,
+                idNum:null,
+                tel:null,
+                messageChecked:1,
+            },
+            userList:[],
+            isLogged: false,
+            loadSuccess:false,
+            orderList:[{},{},{},{},{},{},{},{},{},{}],
+            messageList:[{},{},{}],
         };
-        this.changecontent = this.changecontent.bind(this)
-
+        this.changeContent = this.changeContent.bind(this)
+        this.logOut = this.logOut.bind(this)
+        this.showAllUsers = this.showAllUsers.bind(this)
+        this.blockUser = this.blockUser.bind(this)
+        this.unblockUser = this.unblockUser.bind(this)
+        this.getOrderList = this.getOrderList.bind(this)
+        this.getMessageList = this.getMessageList.bind(this)
     }
-    onChange = e => {
-        console.log('radio checked', e.target.value);
-        this.setState({
-            value: e.target.value,
+    componentDidMount() {
+
+        if(Cookies.get('userId') !== 'NULL' && Cookies.get('userId') !== null){
+            this.setState({
+                isLogged: true
+            })
+        } else {
+            this.setState({
+                isLogged: false
+            })
+            return;
+        }
+        Axios.get(url+"/getUserById/"+Cookies.get("userId")
+        ).then(response => {
+            console.log(response);
+            for(let item of response.data.ticketHolderList){
+                item.key=item.ticketHolderId
+            }
+            for(let item of response.data.receiverList){
+                item.key=item.receiverId
+            }
+            this.setState({
+                client : response.data,
+            },()=>{this.setState({
+                    loadSuccess:true
+                })
+            })
+        }).catch(function (error) {
+            console.log(error);
         });
-    };
-    changecontent(e) {
-        this.setState({
-            cv: e.key
-        })
 
+        var websocket = null;
+        if ('WebSocket' in window) {
+            websocket = new WebSocket('ws://18.232.87.97:8080/webSocket');
+        } else {
+            alert('该浏览器不支持websocket!');
+        }
+        websocket.onopen = function (event) {
+            // console.log('建立连接');
+        }
+        websocket.onclose = function (event) {
+            // console.log('连接关闭');
+        }
+        websocket.onmessage = function (event) {
+            console.log(JSON.parse(event.data));
+            var obj = JSON.parse(event.data);
+
+            alert(obj.highest_price);
+
+            this.setState({
+                count:obj.highest_price,
+                nowprice:obj.highest_price,
+                highest_user_id:obj.highest_user_id
+            })
+        }.bind(this)
     }
-    changecontent2(i) {
+    onChange(key, e){
+        let value = e.target.value;
+        let tmpForm = this.state.client;
+        tmpForm[key] = value;
+        this.setState({
+            client: tmpForm,
+        })
+    }
+    changeContent(e) {
+        this.setState({
+            content: e.key
+        })
+    }
+    logOut(){
+        Cookies.set("userId", "NULL");
+        Cookies.set("username", "NULL");
+        this.props.history.push('/', null);
+    }
+    showAllUsers(){
+        Axios.get(url+"/admin/getAllUsers")
+            .then(response => {
+
+                console.log(JSON.parse(JSON.stringify(response.data)))
+                this.setState({
+                    userList : response.data
+                })
+                this.changeContent({key:"7"});
+            }).catch(function (error) {
+            console.log(error);
+        });
+    }
+    updateUser=(values)=>{
+        this.setState({
+            isEditing:!this.state.isEditing
+        },()=>{
+            //说明之前为true处于编辑状态
+            console.log(values)
+            if(!this.state.isEditing){
+
+                values.birth=values.birth.format(dateFormat)
+                console.log(values)
+                values.userId=Cookies.get('userId')
+                axios.post(url+'/updateUserDetail',JSON.stringify(values),{headers:{'Content-Type':'application/json'}})
+                    .then(
+                    (response)=>{
+                        console.log(response.data)
+                    }
+                )
+            }
+        })
+    }
+    editUser(){
+        this.setState({
+            isEditing: true
+        })
+    }
+    ditchEdition(){
+        this.setState({
+            isEditing:false
+        })
+    }
+
+    blockUser(idx){
+        Axios.get(url+"/admin/blockUser/"+this.state.userList[idx].userId)
+            .then(response => {
+                if(response.data.status === 0){
+                    Message({
+                        message: response.data.msg,
+                        type: "success"
+                    });
+                    let tmpList = this.state.userList;
+                    tmpList[idx].userType = 2;
+                    this.setState({
+                        userList: tmpList
+                    })
+                }
+            }).then(() => {
+                let data = new FormData();
+                data.append("adminId", Cookies.get("userId"));
+                data.append("operation", "Block user with id:"+this.state.userList[idx].userId)
+                Axios.post(url+"/admin/logOperation", data)
+                    .then(response => {
+                        console.log(response)
+                    }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+        ).catch(function (error) {
+            console.log(error);
+        });
+    }
+    unblockUser(idx){
+        Axios.get(url+"/admin/unblockUser/"+this.state.userList[idx].userId)
+            .then(response => {
+                if(response.data.status === 0){
+                    Message({
+                        message: response.data.msg,
+                        type: "success"
+                    });
+                    let tmpList = this.state.userList;
+                    tmpList[idx].userType = 1;
+                    this.setState({
+                        userList: tmpList
+                    })
+                }
+            }).then(() => {
+                let data = new FormData();
+                data.append("adminId", Cookies.get("userId"));
+                data.append("operation", "Unblock user with id:"+this.state.userList[idx].userId)
+                Axios.post(url+"/admin/logOperation", data)
+                    .then(response => {
+                        console.log(response)
+                    }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+        ).catch(function (error) {
+            console.log(error);
+        });
+    }
+    getOrderList(){
+        let data = new FormData();
+        data.append("username", Cookies.get("username"));
+        Axios.post(url+"/getIndentByUser", data)
+            .then(response => {
+                // console.log(typeof(response.data[0].selected_time));
+                this.setState({
+                    orderList: response.data,
+                })
+                this.changeContent({key: "5"})
+            }).catch(function (error) {
+            console.log(error);
+        });
+    }
+    getMessageList(){
+        let data = new FormData();
+        data.append("userid", this.state.client.userId)
+        Axios.post(url+"/auction/getMessageByUser", data)
+            .then(response => {
+                console.log(response);
+                this.setState({
+                    messageList: response.data,
+                    content: "6"
+                })
+            }).catch(function (error) {
+            console.log(error);
+        });
+        Axios.get(url+"/auction/setMessageChecked/"+this.state.client.userId).then(() => {
+            console.log("checked")
+        }).catch(function (error) {
+            console.log(error);})
+    }
+    goAbout(record){
+        let i = record.showid;
+        let p = record.platform;
+        this.props.history.push({ pathname: "/about" + `/${i}` + `/${p}`})
+    }
+    goAboutAuction(value){
+        this.props.history.push({ pathname: "/auction" + `/${value}`})
+    }
+
+    SwitchTab(i) {
         switch (i) {
             case "1":
-                return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
-                    <div className={selfstyle.box}>基本资料</div>
-                    <div className={selfstyle.line}></div>
-                    <div>
-                        昵称：<Input placeholder="nickname" className={selfstyle.myinput1} /><br />
-                        真实姓名：<Input placeholder="Real name" className={selfstyle.myinput} /><br />
-                        性别： <Radio.Group onChange={this.onChange} value={this.state.value} className={selfstyle.myradio}>
-                            <Radio value={1}>男</Radio>
-                            <Radio value={2}>女</Radio>
-                        </Radio.Group><br />
-                        出生日期： <DatePicker style={{width: '300px'}} defaultValue={moment('2019/08/03', dateFormat)} format={dateFormat} className={selfstyle.mydate} /><br />
-                        身份证号：<Input placeholder="Id number" className={selfstyle.myinput} /><br />
-                        <Button type="primary" className={selfstyle.mybutton}>保存</Button>
-                    </div>
-                </Content>
+                const formItemLayout = {
+                    labelCol: { span: 3 },
+                    wrapperCol: { span: 6 },
+                };
+                return <Content style={{ padding: '0 80px', minHeight: 280 }}>
+                    <div className={selfstyle.tabBox}>基本资料</div>
+                    <div className={selfstyle.line}/>
+                    <Form
+                        onFinish={(values)=>this.updateUser(values)}
+                        className={selfstyle.form}
+                        labelCol={{ span: 2 }}
+                        wrapperCol={{ span: 10 }}
+                        initialValues={{
+                            'nickname':this.state.client.nickname,
+                            'name':this.state.client.name,
+                            'gender':this.state.client.gender,
+                            'IdNum':this.state.client.idNum,
+                            'tel':this.state.client.tel,
+                            'email':this.state.client.email,
+                            'birth':this.state.client.birth? moment(this.state.client.birth, dateFormat): moment('1970/01/01', dateFormat)
+                        }}
+                    >
+                        <Form.Item label={'昵称'} name={'nickname'}>
+                            <Input disabled={!this.state.isEditing} placeholder="请输入你的用户昵称" className={selfstyle.input} />
+                        </Form.Item>
+                        <Form.Item label={'真实姓名'} name={'name'}>
+                            <Input disabled={!this.state.isEditing} placeholder="请输入你的真实姓名" className={selfstyle.input}/>
+                        </Form.Item>
+                        <Form.Item label={'性别'} name={'gender'} >
+                            <Radio.Group disabled={!this.state.isEditing}>
+                                <Radio value={1}>男</Radio>
+                                <Radio value={2}>女</Radio>
+                            </Radio.Group>
+                        </Form.Item>
+                        <Form.Item label={'身份证号'} name={'IdNum'}
+                                   hasFeedback
+                            rules={[{validator:(rules,val,cb)=>identityCheck(rules,val,cb)}]}
+                        >
+                            <Input disabled={!this.state.isEditing} placeholder="请输入你相应的证件号码" className={selfstyle.input}/>
+                        </Form.Item>
+                        <Form.Item label={'出生日期'} name={'birth'}>
+                            <DatePicker
+                                disabled={!this.state.isEditing}
+                                style={{width: '300px'}}
+                                format={dateFormat}
+                                className={selfstyle.datePicker}/>
+                        </Form.Item>
+                        <Form.Item hasFeedback label={'电话号码'} name={'tel'} rules={[{len:11,message:'The input is not valid telephone Number!'}]}>
+                            <Input  disabled={!this.state.isEditing} placeholder="Tel number" className={selfstyle.input} />
+                        </Form.Item>
+                        <Form.Item hasFeedback label={'邮箱地址'} name={'email'} rules={[
+                            {
+                                type: 'email',
+                                message: 'The input is not valid E-mail!',
+                            },
+                        ]}>
+                            <Input  disabled={!this.state.isEditing} placeholder="请输入你的电子邮箱" className={selfstyle.input}/>
+                        </Form.Item>
+                        <Form.Item label={" "} colon={false}>
+                            {this.state.isEditing?
+                                <div><Button
+                                    type="primary"
+                                    htmlType="submit"
+                                    className={selfstyle.button}
+                                    style={{backgroundColor: '#ff3366', marginRight:"20px"}}
+                                >
+                                    保存
+                                </Button>
+                                <Button
+                                    danger
+                                    onClick={this.ditchEdition.bind(this)}
+                                >
+                                    取消
+                                </Button></div>:
+                                <Button
+                                    className={selfstyle.button}
+                                    style={this.state.isEditing?{backgroundColor: '#ff3366'}:{backgroundColor: '#0088D6'}}
+                                    onClick={this.editUser.bind(this)}
+                                >
+                                    编辑
+                                </Button>}
+                        </Form.Item>
+                    </Form>
+                </Content>;
                 break;
             case "2":
                 return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
-                    <div className={selfstyle.box}>账号设置</div>
-                    <div className={selfstyle.line}></div>
+                    <div className={selfstyle.tabBox}>账号设置</div>
+                    <div className={selfstyle.line}/>
                     <div>
                         <Collapse accordion>
                             <Panel header="登录密码" key="1">
@@ -225,119 +420,223 @@ export default class Self extends Component {
                             </Panel>
                         </Collapse>,
                     </div>
-                </Content>
+                </Content>;
                 break;
             case "3":
                 return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
-                    <div className={selfstyle.box}>地址管理</div>
-                    <div className={selfstyle.line}></div>
+                    <div className={selfstyle.tabBox}>观影人管理</div>
+                    <div className={selfstyle.line}/>
                     <div>
-                        <Table columns={columns} dataSource={data} />
+                        <EditableTable
+                            columns={ticketHolderColumns}
+                            dataSource={this.state.client.ticketHolderList}
+                            TableName={'ticketHolder'}
+                            updateUrl={'/updateTicketHolder'}
+                            deleteUrl={'/deleteTicketHolder'}
+                        />
                     </div>
-                </Content>
+                </Content>;
                 break;
             case "4":
                 return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
-                    <div className={selfstyle.box}>常用购票人管理</div>
-                    <div className={selfstyle.line}></div>
+                    <div className={selfstyle.tabBox}>地址管理</div>
+                    <div className={selfstyle.line}/>
                     <div>
+                        <EditableTable
+                            columns={receiverColumns}
+                            dataSource={this.state.client.receiverList}
+                            TableName={'receiver'}
+                            updateUrl={'/updateReceiver'}
+                            deleteUrl={'/deleteReceiver'}
+                        />
+                    </div>
+                </Content>;
+                break;
+            case "5":
+                const columns = [
+                    { title: '演出ID', dataIndex: 'showid', key: 'showid',
+                        render: (value, record) => {
+                            return <a onClick={() => this.goAbout(record)}>{value}</a>
+                        }},
+                    { title: '演出时间', dataIndex: 'selected_time', key: 'selected_time' },
+                    { title: '平台', dataIndex: 'platform', key: 'platform' },
+                    { title: '总价', dataIndex: 'payamount', key: 'payamount' },
+                    { title: '数量', dataIndex: 'num', key: 'num' },
+                    { title: '订单状态', dataIndex: 'order_status', key: 'order_status',
+                        render: (value) => {
+                            switch (value){
+                                case 1:
+                                    return <Tag color="#f50">未支付</Tag>;
+                                case 2:
+                                    return <Tag color="#87d068">已支付</Tag>;
+                                case 3:
+                                    return <Tag color="default">已取消</Tag>;
+                                case 4:
+                                    return <Tag color="default">已超时</Tag>;
+                            }
+                        }
+                    },
+                ]
+                return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
+                    <div className={selfstyle.tabBox}>订单管理</div>
+                    <div className={selfstyle.line}/>
+                    <div style={{height: '600px'}}>
+                        {this.state.orderList.length === 0?
+                            <Result
+                                icon={<SmileTwoTone />}
+                                title="您还没有订单哦~"
+                                extra={<Button type="primary">Next</Button>}
+                            />:
+                            <div>
+                                <Table
+                                    columns={columns}
+                                    pagination={false}
+                                    expandable={{
+                                        expandedRowRender: record => <div>
+                                            <p style={{ margin: 0 }}>Receiver: {record.receiver_name}</p>
+                                            <p style={{ margin: 0 }}>Tel: {record.receiver_tel}</p>
+                                            <p style={{ margin: 0 }}>Address: {record.receiver_address}</p>
+                                        </div>,
+                                    }}
+                                    dataSource={this.state.orderList}
+                                />
+                            </div>
+                        }
+
+                    </div>
+                </Content>;
+                break;
+            case "6":
+                const message = [
+                    { title: '演出ID', dataIndex: 'auctionId', key: 'auctionId',
+                        render: (value) => {
+                            return <a onClick={() => this.goAboutAuction(value)}>{value}</a>
+                        }},
+                    { title: '消息', dataIndex: 'message', key: 'message' },
+                    { title: "时间", dataIndex: 'messageTime', key: 'messageTime'}
+                ]
+                return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
+                    <div className={selfstyle.tabBox}>拍卖信息</div>
+                    <div className={selfstyle.line}/>
+                    <div style={{height: '600px'}}>
+                        {this.state.messageList.length === 0?
+                            <Result
+                                icon={<SmileTwoTone />}
+                                title="您还没有竞拍哦~"
+                                extra={<Button type="primary">Next</Button>}
+                            />:
+                            <div>
+                                <Table
+                                    columns={message}
+                                    pagination={false}
+                                    dataSource={this.state.messageList}
+                                />
+                            </div>
+                        }
+
+                    </div>
+                </Content>;
+                break;
+            case "7":
+                return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
+                    <div className={selfstyle.tabBox}>用户管理</div>
+                    <div className={selfstyle.line}/>
+                    <div style={{height: "300px"}}>
                         <List
                             itemLayout="horizontal"
-                            dataSource={data1}
-                            renderItem={item => (
-                                <List.Item>
+                            dataSource={this.state.userList}
+                            colunm="10"
+                            renderItem={(item,index) => (
+                                <List.Item
+                                    data-cy={'user:'+item.username}
+                                    actions={[item.userType === 1? (<Button type="primary" className={selfstyle.button} style={{backgroundColor: 'red'}} onClick={() => this.blockUser(index)} data-cy={'disable'}>禁用</Button>)
+                                        :(<Button type="primary" className={selfstyle.button} style={{backgroundColor: 'green'}} onClick={() => this.unblockUser(index)} data-cy={'enable'}>解禁</Button>)]}
+                                >
                                     <List.Item.Meta
-                                        avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                                        title={<a href="https://ant.design">{item.title}</a>}
-                                        description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                                        avatar={
+                                            <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                                        }
+                                        title={<span style={{fontSize: "20px"}}>{item.username}</span>}
                                     />
                                 </List.Item>
                             )}
                         />
                     </div>
-                </Content>
+                </Content>;
                 break;
-            case "5":
-                return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
-                    <div className={selfstyle.box}>订单管理</div>
-                    <div className={selfstyle.line}></div>
-                    <div>
-                        <Result
-                            icon={<Icon type="smile" theme="twoTone" />}
-                            title="您还没有订单哦~"
-                            extra={<Button type="primary">Next</Button>}
-                        />
-                    </div>
-                </Content>
-                break;
-            case "6":
-                return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
-                    <div className={selfstyle.box}>我的优惠券</div>
-                    <div className={selfstyle.line}></div>
-                    <div>
-                        <Table columns={columns1} dataSource={data2} />
-                    </div>
-                </Content>
-                break;
+            case "8":
+                return <ShowManage/>
         }
     }
     render() {
+        // console.log(Cookies.getJSON('userId'))
+        // console.log(Cookies.getJSON('username'))
+        //if(!this.state.loadSuccess)return <div>loading</div>
+        // else
         return (
             <div>
-                <Nav></Nav>
-                <div className={selfstyle.format}>
-                    <Layout style={{background: '#fff'}}>
-                        <Content style={{ padding: '0 50px' }}>
-                            <Breadcrumb style={{ margin: '16px 0' }}>
-                                <Breadcrumb.Item>首页</Breadcrumb.Item>
-                                <Breadcrumb.Item>个人中心</Breadcrumb.Item>
-                            </Breadcrumb>
-                            <Layout style={{ padding: '24px 0', background: '#fff' }}>
-                                <Sider width={200} style={{ background: '#fff' }}>
-                                    <Menu
-                                        mode="inline"
-                                        defaultSelectedKeys={['1']}
-                                        defaultOpenKeys={['sub1']}
-                                        style={{ height: '100%' }}
-                                    >
-                                        <SubMenu
-                                            key="sub1"
-                                            title={
-                                                <span>
-                                                    <Icon type="user" />
-                                                    账户中心
-                </span>
+                <Nav/>
+                    <div className={selfstyle.format}>
+                    {this.state.loadSuccess
+                        ?
+                            (<Layout style={{background: '#fff'}}>
+                                <Content style={{ padding: '0 50px' }}>
+                                    <Breadcrumb style={{ margin: '16px 0' }}>
+                                        <Breadcrumb.Item>首页</Breadcrumb.Item>
+                                        <Breadcrumb.Item>个人中心</Breadcrumb.Item>
+                                    </Breadcrumb>
+                                    <Layout style={{ padding: '24px 0', background: '#fff' }}>
+                                        <Sider width={200} style={{ background: '#fff' }}>
+                                            <Menu
+                                                mode="inline"
+                                                defaultSelectedKeys={['1']}
+                                                defaultOpenKeys={['sub1']}
+                                                style={{ height: '100%' }}
+                                            >
+                                                <SubMenu
+                                                    data-cy={'账户中心'}
+                                                    key="sub1"
+                                                    title={<span><UserOutlined/>账户中心</span>}
+                                                >
+                                                    <Menu.Item key="1" onClick={this.changeContent} data-cy={'个人信息'}>个人信息</Menu.Item>
+                                                    <Menu.Item key="2" onClick={this.changeContent} data-cy={'账号设置'}>账号设置</Menu.Item>
+                                                    <Menu.Item key="3" onClick={this.changeContent} data-cy={'常用观影人'}>常用观影人</Menu.Item>
+                                                    <Menu.Item key="4" onClick={this.changeContent} data-cy={'收货地址'}>收货地址</Menu.Item>
+                                                </SubMenu>
+                                                <SubMenu key="sub2" title={<span><LaptopOutlined/>交易中心</span>} data-cy={'交易中心'}>
+                                                    <Menu.Item key="5" onClick={this.getOrderList} data-cy={'订单管理'}>订单管理</Menu.Item>
+                                                    <Menu.Item key="6" onClick={this.getMessageList} data-cy={'拍卖信息'} style={{overflow:"visible"}}>
+                                                        {this.state.client.messageChecked === 0?
+                                                            <Badge isDot>拍卖信息</Badge>:<span>拍卖信息</span>
+                                                        }
+                                                    </Menu.Item>
+                                                </SubMenu>
+                                            {(Cookies.get("userType") === "0") ?
+                                                (<SubMenu
+                                                    key="sub3"
+                                                    title={
+                                                        <span>
+                                                            <SettingOutlined/>
+                                                            网站管理
+                                                        </span>}
+                                                    data-cy={'网站管理'}
+                                                >
+                                                    <Menu.Item key="7" onClick={this.showAllUsers} data-cy={'用户管理'}>用户管理</Menu.Item>
+                                                    <Menu.Item key="8" onClick={this.changeContent} data-cy={'演出管理'}>演出管理</Menu.Item>
+                                                </SubMenu>) :
+                                                (<div/>)
                                             }
-
-                                        >
-                                            <Menu.Item key="1" onClick={this.changecontent}>个人信息</Menu.Item>
-                                            <Menu.Item key="2" onClick={this.changecontent}>账号设置</Menu.Item>
-                                            <Menu.Item key="3" onClick={this.changecontent}>收货地址</Menu.Item>
-                                            <Menu.Item key="4" onClick={this.changecontent}>常用购票人</Menu.Item>
-                                        </SubMenu>
-                                        <SubMenu
-                                            key="sub2"
-                                            title={
-                                                <span>
-                                                    <Icon type="laptop" />
-                                                    交易中心
-                </span>
-                                            }
-                                        >
-                                            <Menu.Item key="5" onClick={this.changecontent}>订单管理</Menu.Item>
-                                            <Menu.Item key="6" onClick={this.changecontent}>我的优惠券</Menu.Item>
-                                        </SubMenu>
-                                    </Menu>
-                                </Sider>
-
-                                {this.changecontent2(this.state.cv)}
-
-                            </Layout>
-                        </Content>
-                        <Footer style={{ textAlign: 'center', background: '#fff' }}>You are very welcome</Footer>
-                    </Layout>
-                </div>
-                <Bottom></Bottom>
+                                            <Menu.Item onClick={this.logOut} data-cy={'logout'}><CloseOutlined/>Log Out</Menu.Item>
+                                        </Menu>
+                                    </Sider>
+                                    {this.SwitchTab(this.state.content)}
+                                </Layout>
+                            </Content>
+                            <Footer style={{ textAlign: 'center', background: '#fff' }}>You are very welcome</Footer>
+                        </Layout>)
+                    : (<Result className={selfstyle.noResult} icon={<SmileTwoTone />} title="您还没有登录，请登录后再操作。"/>)}
+                    </div>
+                <Bottom/>
             </div>
         )
     }

@@ -1,0 +1,101 @@
+.posters {
+   width: 1200px;
+   height: 430px;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+   align-items: center;
+   padding: 10px;
+   border: 1px solid #EBEBEB;
+   margin: 35px auto 35px;
+   border-radius: 6px;
+   box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+.posterTitle{
+   width: 1160px;
+   height: 40px;
+   display: flex;
+   justify-content: space-between;
+   margin-bottom: 5px;
+}
+.pTitleCategory {
+   width: 500px;
+   height: 40px;
+   font-size: 24px;
+   text-align: left;
+   line-height: 40px;
+}
+.pTitleMore {
+    width: 80px;
+    height: 40px;
+    font-size: 14px;
+    text-align: left;
+    line-height: 40px;
+    color: lightgray;
+}
+.pTitleMore a:hover{
+    color: #0088D6;
+}
+.posterBody {
+   width: 1160px;
+   height: 365px;
+   display: flex;
+   justify-content: space-between;
+}
+.firstPosterContainer {
+    width: 270px;
+    height: 365px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.firstPosterImg {
+    width: 270px;
+    height: 365px;
+    box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24),  0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+}
+.firstPosterDetail {
+    width: 270px;
+    height: 140px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color:rgba(0,0,0,0.7);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.firstPosterName {
+    margin-top: 5px;
+    margin-left: 15px;
+    width: 250px;
+    text-align: left;
+    font-size: 16px;
+    color: white;
+}
+.firstPosterAddress{
+    margin-top: 5px;
+    margin-left: 15px;
+    width: 250px;
+    text-align: left;
+    font-size: 12px;
+    color: white;
+}
+.firstPosterTime{
+    margin-top: 5px;
+    margin-left: 15px;
+    width: 250px;
+    text-align: left;
+    font-size: 12px;
+    color: white;
+}
+.posterItem {
+    width: 870px;
+    height: 365px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}

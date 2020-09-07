@@ -1,0 +1,103 @@
+.showContainer {
+    width: 550px;
+    height:200px ;
+    display: flex;
+    margin-left: 20px;
+    margin-top: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    border: 1px solid #E9E9E9;
+    border-radius: 6px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12)
+}
+.showImgContainer {
+    margin-top:10px ;
+    margin-left: 10px;
+    min-width: 140px;
+    height: 200px;
+}
+.showImg {
+    z-index: 0;
+    position:absolute;
+    width: 150px;
+    height: 200px;
+    margin-left: -25px;
+    margin-top: -30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px -8px rgba(0,0,0,.24), 0 8px 10px -5px rgba(0,0,0,.2);
+}
+.showType {
+    float: left;
+    position:relative;
+    left: -13px;
+    top: -20px;
+}
+.infContainer {
+    margin-top: 10px;
+    margin-left: 15px;
+    width: 350px;
+    height: 185px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.detailContainer {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+}
+.name {
+    font-size: 16px;
+    text-align: left;
+    font-weight: 700;
+}
+.horizontal{
+    align-items: center;
+    flex-direction: row;
+    display: flex;
+    margin-top: 10px;
+    vertical-align: middle;
+}
+.showDetail {
+    height: 15px;
+    font-size: 14px;
+    line-height: 15px;
+    color: #999999;
+}
+.smallImg{
+    height: 16px;
+    width: 16px;
+    margin-right: 10px;
+}
+
+.price {
+    font-size: 14px;
+    text-align: left;
+    color: #FF1268;
+    margin-bottom: 0;
+    float: left;
+}
+.srcWebContainer{
+    flex-direction: row;
+    vertical-align: middle;
+    text-align: right;
+}
+.srcWebText{
+    color: #999999;
+    font-size: 12px;
+    width: 110px;
+    float: right;
+}
+.srcWebImg{
+    border: 1px solid #E9E9E9;
+    border-radius: 5px;
+    margin-left: 1px;
+    margin-bottom: 5px;
+    width: 24px;
+    height: 24px;
+    float: right;
+    /*filter: grayscale(0%);*/
+}
+.srcWebImgSelected{
+    border: inset;
+}
