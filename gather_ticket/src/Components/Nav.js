@@ -17,7 +17,7 @@ export default class nav extends Component {
             cityValue:'全国',
             username: 'test',
             isLoggedIn:false,
-            messageChecked: 0,
+            messageChecked: 1,
             AllCity:[]
         }
     };

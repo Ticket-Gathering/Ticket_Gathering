@@ -22,7 +22,7 @@ export default class OrderConfirm extends Component{
             watcherValue:[],        //选取的观影人
             receiverValue:0,        //选取的收票人
             visible:false,
-            data: this.props.location.state?this.props.location.state:JSON.parse(sessionStorage.getItem('orderInfo')),
+            data: this.props.location.state?this.props.location.state:JSON.parse(Cookies.get('orderInfo')),
             total: 0,
             payAmount: 0,
             buyerName: null,

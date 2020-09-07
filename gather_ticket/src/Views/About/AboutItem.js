@@ -5,6 +5,7 @@ import {Divider} from "antd";
 import {InputNumber, Select} from "element-react"
 import {url} from "../../Constants/constants"
 import Axios from "../../Module/Axios";
+import Cookies from 'js-cookie'
 
 export default class AboutItem extends Component {
     constructor(props) {
@@ -99,7 +100,8 @@ export default class AboutItem extends Component {
             id:this.props.aboutitem.id,
             platform:this.props.aboutitem.platform
         }
-        sessionStorage.setItem('orderInfo',orderInfo)
+        Cookies.set('orderInfo',orderInfo)
+        console.log(Cookies.get("orderInfo"));
         this.props.history.push({pathname:'/orderConfirm'+`/${this.props.aboutitem.id}`,state:orderInfo})
     }
     getPlatformList(flag){

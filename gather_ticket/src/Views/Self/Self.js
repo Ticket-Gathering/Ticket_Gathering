@@ -62,78 +62,7 @@ const ticketHolderColumns = [
         editable: true,
     },
 ];
-const couponColumns = [
-    {
-        title: '优惠券号码',
-        dataIndex: 'name',
-        key: 'name',
-        render: text => <a href="javascript:;">{text}</a>,
-    },
-    {
-        title: '名称',
-        dataIndex: 'age',
-        key: 'age',
-    },
-    {
-        title: '优惠说明',
-        dataIndex: 'address',
-        key: 'address',
-    },
-    {
-        title: '使用条件',
-        key: 'tags',
-        dataIndex: 'tags',
-        render: tags => (
-            <span>
-                {tags.map(tag => {
-                    let color = tag.length > 5 ? 'geekblue' : 'green';
-                    if (tag === 'loser') {
-                        color = 'volcano';
-                    }
-                    return (
-                        <Tag color={color} key={tag}>
-                            {tag.toUpperCase()}
-                        </Tag>
-                    );
-                })}
-            </span>
-        ),
-    },
-    {
-        title: '操作',
-        key: 'action',
-        render: (text, record) => (
-            <span>
-                <a href="javascript:;">Invite {record.name}</a>
-                <Divider type="vertical" />
-                <a href="javascript:;">Delete</a>
-            </span>
-        ),
-    },
-];
-const couponData = [
-    {
-        key: '1',
-        name: '贺子航',
-        age: 23,
-        address: '四川省乐山',
-        tags: ['家', '哈哈'],
-    },
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-];
+
 const { Panel } = Collapse;
 const dateFormat = 'YYYY-MM-DD';
 const { SubMenu } = Menu;
@@ -153,7 +82,7 @@ export default class Self extends Component {
                 birth: null,
                 idNum:null,
                 tel:null,
-                messageChecked:0,
+                messageChecked:1,
             },
             userList:[],
             isLogged: false,
