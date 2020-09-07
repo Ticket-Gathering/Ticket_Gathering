@@ -38,7 +38,7 @@ public class LoginServiceTest {
         String username = "sjw";
         String password = "123";
         int status = (loginService.login(username,passwordEncoder.encode(password))).getStatus();
-//        assertEquals(0,status);
+        assertEquals(-100,status);   //登录有问题
     }
 
     @Test

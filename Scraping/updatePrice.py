@@ -6,17 +6,18 @@ def main():
     db = client.ticket
     collection = db.ticketdetail
     data = []
-    for line in open("id.txt", "r"):
+    for line in open("id2.txt", "r"):
         data.append(line.replace("\n", ""))
 
     for id in data:
         condition = {'id': id}
-        result = collection.find_one(condition)
-        if result is None:
+        results = collection.find(condition)
+        for result in results:
+         if result is None:
             continue
-        newTimes = []
-        newPrices = []
-        for time in result['times']:
+         newTimes = []
+         newPrices = []
+         for time in result['times']:
             if time.find('暂不可售') != -1:
                 # 包含暂不可售则删除
                 time = time.replace('暂不可售', '')
@@ -33,15 +34,14 @@ def main():
                     continue
             newTimes.append(time)
 
-        for price in result['prices']:
+         for price in result['prices']:
             if price.find('缺货登记'):
                 price = price.replace('缺货登记', '')
             if price.find('开售提醒'):
                 price = price.replace('开售提醒', '')
             newPrices.append(price)
-        result['times'] = newTimes
-        result['prices'] = newPrices
-        result = collection.update_one(condition, {'$set': result})
-
+         result['times'] = newTimes
+         result['prices'] = newPrices
+        results = collection.update_many(condition, {'$set': results})
 
 main()

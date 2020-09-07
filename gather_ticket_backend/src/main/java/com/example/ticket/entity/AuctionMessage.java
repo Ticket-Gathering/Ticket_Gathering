@@ -44,6 +44,17 @@ public class AuctionMessage {
         this.auctionId = auction_id;
     }
 
+    @Column(name="message_time")
+    private String messageTime;
+
+    public String getMessageTime() {
+        return messageTime;
+    }
+
+    public void setMessageTime(String messageTime) {
+        this.messageTime = messageTime;
+    }
+
     private String message;
 
     public String getMessage() {
