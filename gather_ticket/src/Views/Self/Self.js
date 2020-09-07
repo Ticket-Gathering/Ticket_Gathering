@@ -403,25 +403,6 @@ export default class Self extends Component {
                     </Form>
                 </Content>;
                 break;
-            case "2":
-                return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
-                    <div className={selfstyle.tabBox}>账号设置</div>
-                    <div className={selfstyle.line}/>
-                    <div>
-                        <Collapse accordion>
-                            <Panel header="登录密码" key="1">
-                                <p>您可以登录修改密码</p>
-                            </Panel>
-                            <Panel header="邮箱验证" key="2">
-                                <p>验证邮箱可帮助您快速找回密码，并可接收订单、演出通知、促销活动等提醒立即绑</p>
-                            </Panel>
-                            <Panel header="手机验证" key="3">
-                                <p>认证您的实名信息，提高安全等级</p>
-                            </Panel>
-                        </Collapse>,
-                    </div>
-                </Content>;
-                break;
             case "3":
                 return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
                     <div className={selfstyle.tabBox}>观影人管理</div>
@@ -599,7 +580,6 @@ export default class Self extends Component {
                                                     title={<span><UserOutlined/>账户中心</span>}
                                                 >
                                                     <Menu.Item key="1" onClick={this.changeContent} data-cy={'个人信息'}>个人信息</Menu.Item>
-                                                    <Menu.Item key="2" onClick={this.changeContent} data-cy={'账号设置'}>账号设置</Menu.Item>
                                                     <Menu.Item key="3" onClick={this.changeContent} data-cy={'常用观影人'}>常用观影人</Menu.Item>
                                                     <Menu.Item key="4" onClick={this.changeContent} data-cy={'收货地址'}>收货地址</Menu.Item>
                                                 </SubMenu>
