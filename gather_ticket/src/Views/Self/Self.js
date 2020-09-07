@@ -513,6 +513,7 @@ export default class Self extends Component {
                             return <a onClick={() => this.goAboutAuction(value)}>{value}</a>
                         }},
                     { title: '消息', dataIndex: 'message', key: 'message' },
+                    { title: "时间", dataIndex: 'messageTime', key: 'messageTime'}
                 ]
                 return <Content style={{ padding: '0 80px', minHeight: 280 }} className={selfstyle.content}>
                     <div className={selfstyle.tabBox}>拍卖信息</div>
