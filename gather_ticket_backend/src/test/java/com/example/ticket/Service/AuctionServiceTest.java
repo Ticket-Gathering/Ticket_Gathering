@@ -33,7 +33,7 @@ public class AuctionServiceTest {
         assertEquals("1_1_620996253820",test.getShow_id());
         assertEquals(100,test.getStart_price());
         assertEquals(10.00,test.getStep_price());
-        assertEquals(140,test.getHighest_Price());
+        assertEquals(270,test.getHighest_Price());
         assertEquals("2020-09-01 12:00:00",test.getStart_time());
         assertEquals("2020-09-10 13:00:00",test.getEnd_time());
     }
@@ -71,7 +71,7 @@ public class AuctionServiceTest {
     @Test
     public void getMessageByUser(){
         List<AuctionMessage> test = auctionService.getMessageByUser(4);
-        assertEquals(3,test.size());
+        assertEquals(1,test.size());
     }
 
     @Test
