@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(classes = TicketApplication.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -48,8 +50,27 @@ public class IndentServiceTest {
         assertEquals(3,test.getOrder_status());
     }
 
+    @Transactional
     @Test
     public void getIndentByID(){
+        Indent test = indentService.getIndentByID(5);
+        assertEquals("sjw",test.getUsername());
+        assertEquals("1_1_180218",test.getShowid());
+        assertEquals(10.0,test.getFacevalue());
+        assertEquals(1,test.getNum());
+        assertEquals(10.0,test.getPayamount());
+        assertEquals("test",test.getReceiver_name());
+        assertEquals("123",test.getReceiver_tel());
+        assertEquals("test",test.getReceiver_address());
+        assertEquals(null,test.getSelected_time());
+    }
 
+    @Transactional
+    @Test
+    public void getIndentByUser(){
+        List<Indent> test  = indentService.getIndentByUser("sjw");
+        assertEquals(2,test.size());
+        assertEquals(5,test.get(0).getOrderId());
+        assertEquals(6,test.get(1).getOrderId());
     }
 }

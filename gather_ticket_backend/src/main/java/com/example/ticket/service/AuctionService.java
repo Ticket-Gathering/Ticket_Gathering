@@ -13,7 +13,7 @@ import java.util.List;
 public interface AuctionService {
     Auction getAuction(Integer id);
     Msg updatePrice(Integer aucid, Integer userid, Double price, String record_time) throws ParseException;
-    AuctionRecord getHolderRecord(Integer id);
+    AuctionRecord getHolderRecord(Integer id);  //no
     AuctionRecord getRecordByUser(Integer userid,Integer aucid);
     AuctionRecord addNewRecord(Integer userid,Integer aucid);
     Msg check(Integer aucid , Integer userid);
