@@ -36,7 +36,7 @@ describe('admin_self_test', () => {
         cy.get('[data-cy=用户管理]').click()
 
         //禁用用户aaa
-        cy.get('[data-cy="user:aaa"]').get('[data-cy=disable]').click()
+        cy.get('[data-cy="user:aaa"]').find('[data-cy=disable]').click()
         cy.get('[data-cy=logout]').click();
 
         //使用用户aaa验证
@@ -57,7 +57,7 @@ describe('admin_self_test', () => {
         cy.get('[data-cy=用户管理]').click()
 
         //用户解禁
-        cy.get('[data-cy="user:aaa"]').get('[data-cy=enable]').click()
+        cy.get('[data-cy="user:aaa"]').find('[data-cy=enable]').click()
         cy.get('[data-cy=logout]').click();
 
         //再次使用用户aaa验证

@@ -18,12 +18,12 @@ describe('login_test', () => {
     //注册
     it('register',function (){
         let baseUrl=this.example.baseUrl
-        let registerUser='test'+Math.floor(Math.random()*10000)
+        let registerUser='test'+Math.floor(Math.random()*100000)
         cy.visit('/login')
         cy.get('[data-cy=register]').click()
         cy.get('[data-cy=register-user]').type(registerUser)
-        cy.get('[data-cy=register-password]').type('123')
-        cy.get('[data-cy=register-password-confirm]').type('123')
+        cy.get('[data-cy=register-password]').type('password')
+        cy.get('[data-cy=register-password-confirm]').type('password')
         cy.get('[data-cy=register]').click()
         cy.get('[data-cy=login]').click()
         cy.url().should('equal',baseUrl+'/')
