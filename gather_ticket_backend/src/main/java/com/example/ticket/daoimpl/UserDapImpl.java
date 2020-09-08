@@ -42,7 +42,8 @@ public class UserDapImpl implements UserDao{
 
     @Override
     public Client getUserById(int userId){
-        System.out.println(userId);
+        System.out.println(userRepository.getOne(userId).getReceiverList());
+        System.out.println(userRepository.getOne(userId).getTicketHolderList());
         return userRepository.getOne(userId);
     }
 
