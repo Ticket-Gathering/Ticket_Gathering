@@ -23,8 +23,10 @@ export default class AuctionItem extends Component {
             ifcheck: 0,
             start_time:null,
             end_time:null,
+            duration: new Date(),
             start_price:null,
             deadline:null,
+            highest_user_id:null,
         }
         this.cadd = this.cadd.bind(this);
         this.cmil = this.cmil.bind(this);
@@ -49,7 +51,7 @@ export default class AuctionItem extends Component {
             this.setState({
                 count:obj.highest_price,
                 nowprice:obj.highest_price,
-                highest_user_id:obj.highest_user_id
+                highest_user_id:obj.highest_userid
             })
             Notification.info({
                 title: '竞拍信息',
@@ -64,13 +66,15 @@ export default class AuctionItem extends Component {
         this.setState({
             nowprice:nextProps.aboutitem.highest_Price,
             count:nextProps.aboutitem.highest_Price,
-            start_time:nextProps.aboutitem.start_time,
-            end_time:nextProps.aboutitem.end_time,
+            start_time:new Date(nextProps.aboutitem.start_time),
+            end_time:new Date(nextProps.aboutitem.end_time),
+            duration: new Date(new Date(nextProps.aboutitem.end_time) - new Date(nextProps.aboutitem.start_time)),
             step:nextProps.aboutitem.step_price,
             start_price:nextProps.aboutitem.start_price,
             image:nextProps.aboutitem.showDetail.show.img_url,
             deadline:date,
             aucid:nextProps.aucid,
+            highest_user_id:nextProps.aboutitem.highest_user_id,
         })
         let data = new FormData();
         if(Cookies.get("userId")!=null){
@@ -165,7 +169,7 @@ export default class AuctionItem extends Component {
     }
 
     renderButton = () =>  {
-        if (!this.state.ifcheck || this.props.aboutitem.highest_user_id.toString() === Cookies.get("userId")) {
+        if (!this.state.ifcheck || this.state.highest_user_id.toString() === Cookies.get("userId")) {
             return(
                 <Button className={abouti.sub} disabled>出价</Button>
             );
@@ -234,7 +238,7 @@ export default class AuctionItem extends Component {
                             <div className={abouti.sum}>
                                 ￥{this.state.nowprice}
                             </div>
-                            <Tag style={{backgroundColor:"#f36", color:"white"}}>出价人:{this.props.aboutitem.highest_user_id}</Tag>
+                            <Tag style={{backgroundColor:"#f36", color:"white"}}>出价人:{this.state.highest_user_id}</Tag>
                         </div>
                         <div className={abouti.rightInfo}>
                             <div className={abouti.rightbtimel}>出价</div>
@@ -255,8 +259,6 @@ export default class AuctionItem extends Component {
                         <div className={abouti.rightbtime}>
                             <img className={abouti.chuizi} src={require('./锤子.png')}/>
                             <div>大麦拍卖</div>
-                            <Divider type="vertical" className={abouti.vertDiv} />
-                            <div>当前 18 人 报名</div>
                         </div>
                         <div className={abouti.rightbtime}>
                             <div>起拍价: {this.state.start_price} 元</div>
@@ -266,12 +268,10 @@ export default class AuctionItem extends Component {
                         <div className={abouti.rightbtime}>
                             <div>保证金: 200 元</div>
                             <Divider type="vertical" className={abouti.vertDiv} />
-                            <div>竞价周期： 3 天</div>
+                            <div>竞价周期： {this.state.duration.getDate()} 天</div>
                         </div>
                         <div className={abouti.rightbtime}>
                             <div>评估价: 1200 元</div>
-                            <Divider type="vertical" className={abouti.vertDiv} />
-                            <div>延时周期： 5 分钟</div>
                         </div>
                         <div style={{textAlign: "left", color:"#999"}}>
                             <div>竞价规则： 至少一人报名且出价不低于起拍价，方可成交 </div>
